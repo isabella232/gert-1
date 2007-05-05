@@ -1,0 +1,78 @@
+<project name="bug76685" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="test1.exe" />
+				<include name="test1.xml" />
+				<include name="test2.exe" />
+				<include name="test2.xml" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="compile" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<csc target="exe" output="test1.exe" doc="test1.xml" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test1.cs" />
+			</sources>
+		</csc>
+		<xmlpeek file="test1.xml" property="cref" xpath="/doc/members/member[@name='T:Test']/summary/para[1]/see/@cref" />
+		<fail unless="${cref == 'P:System.Collections.IDictionary.Item(System.Object)'}">Expected 'P:System.Collections.IDictionary.Item(System.Object)' but was '${cref}'.</fail>
+		<xmlpeek file="test1.xml" property="cref" xpath="/doc/members/member[@name='T:Test']/summary/para[2]/see/@cref" />
+		<fail unless="${cref == 'P:Test.B.Item(System.Int32)'}">Expected 'P:Test.B.Item(System.Int32)' but was '${cref}'.</fail>
+		<xmlpeek file="test1.xml" property="cref" xpath="/doc/members/member[@name='T:Test']/summary/para[3]/see/@cref" />
+		<fail unless="${cref == 'P:Test.A.Item(System.String)'}">Expected 'P:Test.A.Item(System.String)' but was '${cref}'.</fail>
+
+		<csc target="exe" output="test2.exe" doc="test2.xml" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0419" />
+			</nowarn>
+			<sources>
+				<include name="test2.cs" />
+			</sources>
+		</csc>
+		<xmlpeek file="test2.xml" property="cref" xpath="/doc/members/member[@name='T:Test']/summary/para/see/@cref" />
+		<!-- Exact implementation differs between Mono and MS.NET -->
+		<if test="${framework::get-family(framework::get-target-framework()) == 'net'}">
+			<fail unless="${cref == 'P:Test.A.Item(System.Int32)'}">Expected 'P:Test.A.Item(System.Int32)' but was '${cref}'.</fail>
+		</if>
+		<if test="${framework::get-family(framework::get-target-framework()) == 'mono'}">
+			<fail unless="${cref == 'P:Test.A.Item(System.String)'}">Expected 'P:Test.A.Item(System.String)' but was '${cref}'.</fail>
+		</if>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
