@@ -1,0 +1,126 @@
+﻿/*
+ * This file contains the default styles for pages, tables, text and such
+ */
+
+/*== Global properties ==*/
+body {
+	background-image: url("../images/bg-sky2.jpg");
+	background-repeat: repeat-y;
+	background-color: #FFFFFF;
+}
+body,
+table.main,
+table.main tr,
+table.main tr td {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border-collapse: collapse;
+}
+form, div {
+	margin:							0px 0px 0px 0px;
+	padding:						0px 0px 0px 0px;
+}
+a img {
+	border: 0;
+}
+
+/*== Link Formatting ==*/
+a:link,
+a:visited,
+a:active {
+	color: #000000;
+}
+a.menulink:link,
+a.menulink:visited,
+a.menulink:active {
+	color: #336699;
+	text-decoration: none;
+}
+
+/*== Global Text formatting ==*/
+body, body div, body form {
+	font-size: 0pt;
+}
+table.main {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	text-decoration: none;
+	color: #000000;
+}
+h1 {
+	font-size: 20pt;
+	color: #B02020;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+h2, h3, h4, h5 {
+	font-weight: bold;
+}
+h2 { 
+	color: #B02020;
+	font-size: 16pt;
+	padding-bottom: 0px;
+	margin-top: 20px
+}
+h3 { 
+	font-size: 14pt;
+	margin-top: 15px;
+	margin-bottom: 2px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+h4 { 
+	font-size: 12pt;
+}
+h5 {
+	font-size: 10pt;
+}
+
+/*== Main table specific ==*/
+table.main {
+	empty-cells: show;
+	border: 0pt;
+	width: 100%;
+}
+/*=== Header specific ===*/
+table.main tr td.header,
+table.main tr td.header2 {
+	font-size: 0pt;
+	line-height: 100%;
+}
+table.main tr td.header {
+	background-color: #B02020;
+	vertical-align: bottom;
+}
+table.main tr td.header2 {
+	vertical-align: top;
+}
+/*=== Menu specific ===*/
+table.main tr td.menu {
+	width: 164pt;
+	vertical-align: top;
+	padding-left: 11pt;
+}
+table.main tr td.menu img.menured {
+	height: 2px;
+	width: 160px;
+}
+/*=== Main specific ===*/
+table.main tr td.main {
+	width: 360pt;
+	padding-left: 13pt;
+	vertical-align: top;
+}
+/*=== Right side specific ===*/
+table.main tr td.rightside {
+	padding-left: 10pt;
+	vertical-align: top;
+}
+
+/*
+.navbar { font-family: Verdana, Helvetica, Arial, sans-serif; color: #FFFFFF; font-size:10pt; font-weight: bold; font-style: normal; text-decoration: none}
+.finstilt { font-family: Verdana, Helvetica, Arial, sans-serif; color: #000000; font-size:8pt; font-style: italic}
+.redlink { color: #B02020; text-decoration: none }
+.little { font-family: Verdana, Helvetica, Arial, sans-serif; color: black; font-size:8pt}
+*/

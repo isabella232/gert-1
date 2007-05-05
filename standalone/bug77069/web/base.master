@@ -1,0 +1,45 @@
+<%@ master language="C#" autoeventwireup="true" inherits="MasterPage, App_Web_base.master.cdcab7d2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="styles/default.css" type="text/css" />
+</head>
+<body>
+<form id="form1" runat="server">    <div><table class="main">
+        <tr><td class="header" colspan="3"><a href="/"><img src="images/cbchead3a.gif" alt="Chalmers Ballong Corps - till f&ouml;rstasidan" /></a></td></tr>
+        <tr><td class="header2" colspan="3"><a href="/"><img src="images/cbchead3b.gif" alt="Chalmers Ballong Corps - till f&ouml;rstasidan" /></a></td></tr>
+        <tr>
+            <td class="menu">
+                <br /><b>CBC</b><br /><div><img src="images/red.gif" class="menured" alt="" /></div>
+                    - <a class="menulink" href='#'>Vad &auml;r CBC?</a><br />
+                    - <a class="menulink" href='#'>Nummer & adresser</a><br />
+                    - <a class="menulink" href='#'>Styrelse</a><br />
+                    - <a class="menulink" href='#'>Piloter</a><br />
+                    - <a class="menulink" href='#'>Medlemsskap</a><br />
+                <br /><b>Ballonger</b><br /><div><img src="images/red.gif" class="menured" alt="" /></div>
+                    - <a class="menulink" href='/ballong/index.php3'>V&aring;ra ballonger</a><br />
+                    - <a class="menulink" href='/ballong/uppvisning.php3'>Uppvisningar</a><br />
+                    - <a class="menulink" href='/ballong/historia.php3'>Ballonghistoria</a><br />
+                    - <a class="menulink" href='/ballong/faq.php3'>Ballong-FAQ</a><br />
+                    - <a class="menulink" href='/ballong/lankar.php3'>Ballongl&auml;nkar</a><br />
+                <br /><b>Aktuellt</b><br /><div><img src="images/red.gif" class="menured" alt="" /></div>
+                    - <a class="menulink" href='/kalender/index.php3'>Kalendarium</a><br />
+                    - <a class="menulink" href='/vader/index.php3'>V&auml;der</a><br />
+                <br /><b>Arkiv</b><br /><div><img src="images/red.gif" class="menured" alt="" /></div>
+                    - <a class="menulink" href='/gallery2/gallery2embedded.php'>Ballongbilder</a><br />
+                    - <a class="menulink" href='/bilder/index.php3'>Gamla bilder</a><br />
+                    - <a class="menulink" href='/riplinan/index.php3'>Riplinan</a><br />
+                <br /><b>Internt</b><br /><div><img src="images/red.gif" class="menured" alt="" /></div>
+                    - <a class="menulink" href=''>Medlemssidor</a><br />
+                    - <a class="menulink" href='/registrering.php'>Registrering medl.sidor</a><br />
+                    - <a class="menulink" href='/webmail/'>Webmail</a><br />
+            </td>
+            <td class="main"><asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" /></td>
+            <td class="rightside">Right side</td>
+        </tr>
+    </table></div>
+</form>
+</body>
+</html>
