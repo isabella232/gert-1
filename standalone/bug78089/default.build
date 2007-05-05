@@ -1,0 +1,48 @@
+<project name="bug78089" default="rebuild">
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="foo.exe" />
+				<include name="libfoo.so" />
+				<include name="out" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<csc target="exe" output="foo.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="foo.cs" />
+			</sources>
+		</csc>
+		<exec program="gcc">
+			<arg line="-o libfoo.so" />
+			<arg value="-shared" />
+			<arg file="crashme.c" />
+			<arg value="-fPIC" />
+		</exec>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="foo.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Home">
+		<value>Home</value>
+	</data>
+	<data name="Hotels">
+		<value>Hotels</value>
+	</data>
+	<data name="Partner Network">
+		<value>Partner Network</value>
+	</data>
+	<data name="Site Map">
+		<value>Site Map</value>
+	</data>
+	<data name="About Us">
+		<value>About Us</value>
+	</data>
+	<data name="Search">
+		<value>Search</value>
+	</data>
+	<data name="Shortlist">
+		<value>Shortlist</value>
+	</data>
+	<data name="User Guide">
+		<value>User Guide</value>
+	</data>
+	<data name="Job Opportunities">
+		<value>Job Opportunities</value>
+	</data>
+	<data name="Add your hotel">
+		<value>Add your hotel</value>
+	</data>
+	<data name="Hotel Admin">
+		<value>Hotel Admin</value>
+	</data>
+	<data name="Introduction">
+		<value>Introduction</value>
+	</data>
+	<data name="Login">
+		<value>Login</value>
+	</data>
+	<data name="Register">
+		<value>Register</value>
+	</data>
+	<data name="YouAreHere">
+		<value>You are here:</value>
+	</data>
+	<data name="HotelsIn">
+		<value>Hotels in</value>
+	</data>
+	<data name="ChangeCurrency">
+		<value>Change Currency</value>
+	</data>
+	<data name="Name">
+		<value>Name</value>
+	</data>
+	<data name="Miles">
+		<value>miles</value>
+	</data>
+	<data name="City">
+		<value>City</value>
+	</data>
+	<data name="Rating">
+		<value>Rating</value>
+	</data>
+	<data name="or">
+		<value>or</value>
+	</data>
+	<data name="Details">
+		<value>details</value>
+	</data>
+	<data name="TownCityPostcode">
+		<value>( Town, City, Postcode etc )
+</value>
+	</data>
+	<data name="ChooseARegion">
+		<value>Choose a region</value>
+	</data>
+	<data name="RoomType">
+		<value>Room Type</value>
+	</data>
+	<data name="Copyright">
+		<value>Copyright © 1996 - 2006 LateRooms Ltd
+</value>
+	</data>
+	<data name="TermsOfUse">
+		<value>Terms of Use</value>
+	</data>
+	<data name="ContactUs">
+		<value>Contact Us</value>
+	</data>
+	<data name="Accessibility">
+		<value>Accessibility Policy</value>
+	</data>
+	<data name="HotelDirectory">
+		<value>Hotel Directory</value>
+	</data>
+	<data name="Make a Booking" mimetype="">
+		<value>Make a Booking</value>
+	</data>
+	<data name="Map of Directions">
+		<value>Map of Directions</value>
+	</data>
+	<data name="Hotel Facilities">
+		<value>Hotel Facilities</value>
+	</data>
+	<data name="Photo Gallery">
+		<value>Photo Gallery</value>
+	</data>
+	<data name="Local Information">
+		<value>Local Information</value>
+	</data>
+	<data name="YouSearchedFor">
+		<value>You searched for a hotel in</value>
+	</data>
+	<data name="on the">
+		<value>on the</value>
+	</data>
+	<data name="WithPricesIn">
+		<value>with prices in</value>
+	</data>
+	<data name="Book">
+		<value>Book</value>
+	</data>
+	<data name="NoOfRooms">
+		<value>No. of rooms:</value>
+	</data>
+	<data name="Directions">
+		<value>Directions</value>
+	</data>
+	<data name="DirectionsTo">
+		<value>Directions to:</value>
+	</data>
+	<data name="Railway">
+		<value>Railway</value>
+	</data>
+	<data name="Attractions">
+		<value>Attractions</value>
+	</data>
+	<data name="Tube">
+		<value>Tube</value>
+	</data>
+	<data name="Airport">
+		<value>Airport</value>
+	</data>
+	<data name="InBrief">
+		<value>In Brief</value>
+	</data>
+	<data name="HoverOver">
+		<value>Hover over images too see larger view </value>
+	</data>
+	<data name="hotels(lower)">
+		<value>hotels</value>
+	</data>
+	<data name="SearchResults">
+		<value>search results</value>
+	</data>
+	<data name="Remove">
+		<value>remove</value>
+	</data>
+	<data name="NormalRate">
+		<value>Normal Rate</value>
+	</data>
+	<data name="BreakfastIncluded">
+		<value>Breakfast included</value>
+	</data>
+	<data name="BreakfastNotIncluded">
+		<value>Breakfast not included</value>
+	</data>
+	<data name="Nights">
+		<value>Nights</value>
+	</data>
+	<data name="Room">
+		<value>Room</value>
+	</data>
+	<data name="Gallery">
+		<value>Gallery</value>
+	</data>
+	<data name="RoomSleeps">
+		<value>Room sleeps</value>
+	</data>
+</root>

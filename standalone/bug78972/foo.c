@@ -1,0 +1,3 @@
+void foo(char *s, ...)
+{
+}

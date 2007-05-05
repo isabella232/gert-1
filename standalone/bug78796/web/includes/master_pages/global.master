@@ -1,0 +1,16 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/includes/master_pages/global.master.cs"
+    Inherits="includes_master_pages_global" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>test</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="content">
+            <h2>WORKS GREAT</h2>
+            <asp:ContentPlaceHolder ID="contentPlaceHolder" runat="server" />
+        </div>
+    </form>
+</body>
+</html>
