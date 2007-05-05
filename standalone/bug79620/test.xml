@@ -1,0 +1,582 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content=
+"HTML Tidy for Linux/x86 (vers 12 April 2005), see www.w3.org" />
+<meta name="robots" content="noindex" />
+<title>ADVFN - News Monitor</title>
+
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+<!--
+  if(window!=top)
+   top.location.href=location.href;
+// -->
+//]]>
+</script>
+<meta http-equiv="Content-Type" content=
+"text/html; charset=us-ascii" />
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+   var winpars = new Array();
+   function openWin(){
+  <!--
+     if(winpars[0]==1)
+     {
+        newWindow=window.open('http://www.advfn.com/p.php?pid=popunder&w='+winpars[3]+'&h='+winpars[4]+'&c='+winpars[2]+'&nomargin=1&title='+winpars[1]+'','popunder','height='+winpars[4]+',width='+winpars[3]+',fullscreen=no,toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,directories=no,location=no');
+        
+        if (newWindow)  {
+            newWindow.blur();
+        }
+        parent.focus();
+    }
+  }
+  -->
+//]]>
+</script>
+<script language='javascript' type="text/javascript">
+//<![CDATA[
+<!--
+function doSubmit() {if(document.forms[0].btn.value == "" ) {return false;} else { return true; } }// -->
+//]]>
+</script>
+<link rel='stylesheet' href=
+'http://images.advfn.com/static/style.css' type="text/css" />
+<link rel='stylesheet' href=
+'http://images.advfn.com/static/style2.css' type="text/css" />
+</head>
+<body leftmargin='7' topmargin='0' rightmargin='7' bottommargin='7'
+bgcolor='white' link='#2B3266' vlink='black'>
+<form name='top' enctype='application/x-www-form-urlencoded'
+method='get' onsubmit='return doSubmit();'><input type='hidden'
+name='pid' value='nmona' /> <input type='hidden' name='btn' value=
+'' />
+<table width='100%' border='0' cellspacing='0' cellpadding='0'
+bgcolor='#FFFFFF'>
+<tr>
+<td colspan='2' cellspacing='0' cellpadding='0'>
+<!-- SERVER: 10.0.1.38 -->
+<!-- MENU START -->
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+<!--
+document.domain='advfn.com';
+// -->
+//]]>
+</script>
+<div><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='1' width='1' /></div>
+<div id='iframeoverlay'>
+<div><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='1' width='1' /></div>
+</div>
+<span id='dmcont'></span> <script language='javascript' type=
+"text/javascript">
+//<![CDATA[
+var a1 = '';
+var a2 = '/p.php?pid=';
+var dmcb = 1160312191;
+var dmsy = '';
+var jlink = false;
+dd_mon = new Array();
+dd_wlnk = new Array();
+dd_wlnk[0] = new Array("U","Web links","/p.php?pid=clicktrack&cb=1160312191&par=MTY0MTY%3D&advfn_par=cHI9ZmluZCZmbj0yJmZ2PWdiJmZsPTE%3D","",1);
+dd_shop = new Array();
+dd_shop[0] = new Array("U","Financial Software","/p.php?pid=clicktrack&par=MTgyMTk%3D&advfn_par=cHI9c2hvcCZmbj0yJmZ2PWdiJmZsPTE%3D","",0);
+dd_pok = new Array();
+dd_pok[0] = new Array("U","ADVFN Poker Club",a2+"clicktrack&par=MTc2NTU=");
+var dd_stf = new Array();
+var staff_id = 'N/A';
+dd_cry = new Array();
+var i = 0;
+dd_cry[i++] = new Array("U","World Overview",a2+"countrysum&cid=0");
+dd_cry[i++] = new Array("U","Australia",a2+"countrysum&cid=1");
+dd_cry[i++] = new Array("U","Brazil",a2+"countrysum&cid=26");
+dd_cry[i++] = new Array("U","Canada",a2+"countrysum&cid=2");
+dd_cry[i++] = new Array("U","Chile",a2+"countrysum&cid=3");
+dd_cry[i++] = new Array("U","Denmark",a2+"countrysum&cid=4");
+dd_cry[i++] = new Array("U","Europe (EURONEXT)",a2+"countrysum&cid=5");
+dd_cry[i++] = new Array("U","Finland",a2+"countrysum&cid=6");
+dd_cry[i++] = new Array("U","France",a2+"countrysum&cid=7");
+dd_cry[i++] = new Array("U","Germany",a2+"countrysum&cid=8");
+dd_cry[i++] = new Array("U","Greece",a2+"countrysum&cid=9");
+dd_cry[i++] = new Array("U","Netherlands",a2+"countrysum&cid=10");
+dd_cry[i++] = new Array("U","India",a2+"countrysum&cid=11");
+dd_cry[i++] = new Array("U","Indonesia",a2+"countrysum&cid=12");
+dd_cry[i++] = new Array("U","Ireland",a2+"countrysum&cid=13");
+dd_cry[i++] = new Array("U","Italy",a2+"countrysum&cid=14");
+dd_cry[i++] = new Array("U","Japan",a2+"countrysum&cid=15");
+dd_cry[i++] = new Array("U","Mexico",a2+"countrysum&cid=16");
+dd_cry[i++] = new Array("U","Poland",a2+"countrysum&cid=17");
+dd_cry[i++] = new Array("U","Portugal",a2+"countrysum&cid=18");
+dd_cry[i++] = new Array("U","Russia",a2+"countrysum&cid=19");
+dd_cry[i++] = new Array("U","Singapore",a2+"countrysum&cid=20");
+dd_cry[i++] = new Array("U","South Africa",a2+"countrysum&cid=21");
+dd_cry[i++] = new Array("U","Spain",a2+"countrysum&cid=22");
+dd_cry[i++] = new Array("U","Sweden",a2+"countrysum&cid=23");
+dd_cry[i++] = new Array("U","United Kingdom",a2+"countrysum&cid=24");
+dd_cry[i++] = new Array("U","USA",a2+"countrysum&cid=25");
+
+//]]>
+</script> <script language='javascript' src=
+'http://images.advfn.com/static/clock.js' type="text/javascript">
+</script> <script language='javascript' src=
+'http://images.advfn.com/static/gb_dmenu.js' type=
+"text/javascript">
+</script> <script language='javascript' src=
+'http://images.advfn.com/static/smenu.js' type="text/javascript">
+</script>
+<table width='100%' border='0' cellpadding='0' cellspacing='0'
+class='nav_bg' style=
+'border-bottom: solid black 1px; background-image: url(http://images.advfn.com/imagesnew/2/gb/nav/news_hdbg.jpg);'>
+<tr>
+<td width='20%' height='116'>
+<table width='100%' height='100%' border='0' cellpadding='0'
+cellspacing='0'>
+<tr>
+<td align='left' height='72' valign='top'><a href='/' title=
+'Home'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/space.gif' width='190'
+height='38' /></a></td>
+</tr>
+<tr>
+<td align='left' valign='bottom'>
+<table border='0' cellpadding='2' cellspacing='0'>
+<tr>
+<td><a href='/p.php?pid=clicktrack&amp;par=MTU0MzM%3D' title=
+'Upgrade your membership'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/nav/upgrade_btn.gif' /></a></td>
+<td><a href='/p.php?pid=front&amp;logout=1' title=
+'Log out of ADVFN'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/nav/logout_btn.gif' /></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td align='center' valign='top'>
+<table height='100%' border='0' cellpadding='0' cellspacing='0'>
+<tr>
+<td align='center' valign='top' height='30' style=
+'padding-right: 7px; padding-bottom: 3px;'>
+<table border='0' cellpadding='0' cellspacing='0'>
+<tr>
+<td class='nav_tl'><img src=
+'http://images.advfn.com/imagesnew/2/gb/space.gif' height='7'
+border='0' /></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=mon&amp;cb=1160312191' title=
+'Multiple streaming real-time quotes for US and other exchanges'
+onclick='openWin();'>Monitor</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=quote&amp;cb=1160312191' title=
+'Quick single quote with prices and charts for US and other exchanges'
+onclick='openWin();'>Quote</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=charts&amp;cb=1160312191' title=
+'Fully featured, interactive real-time charts' onclick=
+'openWin();'>Charts</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=trades&amp;cb=1160312191' title=
+'Complete record of individual trades on a stock' onclick=
+'openWin();'>Trades</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=news&amp;cb=1160312191' title=
+'Real-time AFX and Regulatory UK news' onclick=
+'openWin();'>News</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=ukfinancials&amp;cb=1160312191' title=
+'Detailed company statistics and analysis based upon audited annual reports'
+onclick='openWin();'>Financials</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/cmn/tl/movers.php3?cb=1160312191' title=
+'A wide variety of stock lists sorted by a number of performance criteria'
+onclick='openWin();'>Toplists</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=alerts&amp;cb=1160312191' title=
+'Configurable stock alerts to your e-mail and mobile phone'
+onclick='openWin();'>Alerts</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/p.php?pid=pf&amp;cb=1160312191' title='Track your own portfolio'
+onclick='openWin();'>Portfolio</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/cmn/level2.php?cb=1160312191' title=
+'Market Maker quotes and order book' onclick=
+'openWin();'>Level&nbsp;2</a></td>
+<td class='nav_tb' nowrap="nowrap"><a class='nav_tlnk' href=
+'/cmn/fbb/threads.php3?cb=1160312191' title=
+'One of the UKs busiest financial bulletin boards' onclick=
+'openWin();'>Free&nbsp;BB</a></td>
+<td class='nav_tb0' nowrap="nowrap"><a class='nav_tlnk' href=
+'/cmn/pbb/threads.php3?cb=1160312191' title=
+'A bulletin board for the serious investor' onclick=
+'openWin();'>&nbsp;PBB</a></td>
+<td class='nav_tr'><img src=
+'http://images.advfn.com/imagesnew/2/gb/space.gif' height='7'
+border='0' /></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td height='60'>
+<table width='100%' border='0' cellspacing='0' cellpadding='0'>
+<tr>
+<td width='*'>&nbsp;</td>
+<td width='130' align='center' class='s'><span id='clock_dt' class=
+'nav_wlink'>08/10/2006</span><br />
+<span id='clock_tm' class='nav_wlink'>13:56:31</span><br />
+<a class='nav_wlink' href='/p.php?pid=sitemap&amp;cb=1160312191'
+title='Site map'>Site map</a></td>
+<td width='468' height='60'><iframe id='oasissec531' name=
+'oasissec531' src=
+"http://bt2.advfn.com/oasis/oasisi-i.php?s=531&amp;w=468&amp;h=60&amp;ord=1160312191&amp;t=_blank"
+width="468" height="60" frameborder="no" border="0" marginwidth="0"
+marginheight="0" scrolling="no"><a href=
+"http://bt2.advfn.com/oasis/oasisc.php?s=531&amp;w=468&amp;h=60&amp;ord=1160312191&amp;t=_blank"
+target="_blank"><img src=
+"http://bt2.advfn.com/oasis/oasisi.php?s=531&amp;w=468&amp;h=60&amp;ord=1160312191&amp;t=_blank"
+border="0" width="468" height="60" /></a></iframe></td>
+<td width='25'>&nbsp;</td>
+<td width='92'><a class='nav_wlink' href=
+'/p.php?pid=help&amp;cb=1160312191' title=
+'Get help and support'>Help</a><br />
+<a class='nav_wlink' href='/p.php?pid=sc&amp;cb=1160312191' title=
+'Search for news and stocks'>Search</a><br />
+<a class='nav_wlink' href=
+'/p.php?pid=config&amp;ctxt=nmona&amp;cb=1160312191' title=
+'Configure the new tools'>Config</a><br />
+<a class='nav_wlink' href=
+'/p.php?pid=content_list&amp;cb=1160312191' title=
+'Build your own ADVFN pages'>My Pages</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style='padding: 4px 7px 1px 0px;'>
+<table width='100%' border='0' cellspacing='0' cellpadding='0'>
+<tr>
+<td align='center' valign='middle'><span id='ddcont'></span>
+<script language='javascript' type="text/javascript">
+//<![CDATA[
+var ddhead = new Array();
+ddhead[1] = 'PRICE DATA';
+ddhead[2] = 'CHARTS & RESEARCH';
+ddhead[3] = 'FOREX & DERIVATIVES';
+ddhead[4] = 'WORLD EXCHANGES';
+ddhead[5] = 'ADVFN SERVICES';
+//]]>
+</script></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td width='20%'>&nbsp;</td>
+</tr>
+</table>
+<script language='javascript' type="text/javascript">
+//<![CDATA[
+StartClock('d/m/Y','H:i:s');
+if(!window.dm) window.dm = dd_stf;
+buildSMenu();
+//]]>
+</script> <!-- MENU END -->
+<div><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='1' width='1' /></div>
+</td>
+</tr>
+</table>
+<br />
+<table border='0' width='600' cellpadding='5' cellspacing='0'
+class='d' align='center'>
+<tr>
+<td valign='top'>
+<pre>
+<span id="intelliTxt"></span>
+</pre>
+<h3 class='h1'><span id="intelliTxt">Paulson aims to restore
+Treasury's clout</span></h3>
+<pre>
+
+
+        WASHINGTON (AFX) -     When it comes to treasury secretaries, President Bush
+may find that the third time is the charm. His latest -- former Goldman Sachs
+chief executive Henry Paulson -- has sent a strong signal in his first three
+months that the Treasury Department once again is a player.
+    Paulson has staked out U.S.-China relations as his special prerogative. He
+also plans to tackle the government's biggest budget headaches -- Social
+Security and Medicare.
+    But even with all his Wall Street savvy, it remains to be seen just how much
+success he will have with little more than two years left in the Bush
+presidency.
+    Paulson, sworn in on July 10, wasted no time signaling he planned to follow
+a far different playbook than the one used by Bush's first two treasury chiefs,
+Paul O'Neill and John Snow.
+    O'Neill, the former head of aluminum producer Alcoa Inc., got in trouble for
+his unscripted comments and the view at the White House that he was not a team
+player.
+    Snow was a chief executive at railroad giant CSX Corp. who was brought in to
+fix the O'Neill problem. But his relentless happy talk about the economy harmed
+his credibility and he was seen as a cheerleader with little policy input.
+    Paulson already had plenty of credibility on Wall Street when the
+administration sought him out to head the department.
+    His price for taking the job was to win pledges the administration would
+support his effort to restore the Treasury's former clout and would not ask him
+to make political trips for the administration -- as Snow had done repeatedly
+during the 2004 campaign.
+    
+    
+Copyright 2006 Associated Press. All rights reserved. This material may not be
+published, broadcast, rewritten, or redistributed.
+
+
+
+
+
+</pre></td>
+<td valign='top'>
+<div><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='250' width='250' /></div>
+</td>
+</tr>
+<tr>
+<td align='center' colspan='2'><br />
+<iframe id='oasissec487' name='oasissec487' src=
+"http://bt2.advfn.com/oasis/oasisi-i.php?s=487&amp;w=470&amp;h=62&amp;ord=1160312191&amp;t=_blank"
+width="470" height="62" frameborder="no" border="0" marginwidth="0"
+marginheight="0" scrolling="no"><a href=
+"http://bt2.advfn.com/oasis/oasisc.php?s=487&amp;w=470&amp;h=62&amp;ord=1160312191&amp;t=_blank"
+target="_blank"><img src=
+"http://bt2.advfn.com/oasis/oasisi.php?s=487&amp;w=470&amp;h=62&amp;ord=1160312191&amp;t=_blank"
+border="0" width="470" height="62" /></a></iframe></td>
+</tr>
+</table>
+<input type='hidden' name='article' value='17142441' /><br />
+<br />
+<table border='0' cellpadding='0' cellspacing='10' align='center'>
+<tr valign='top'>
+<td width='171' class='bt_tbl1'>
+<table border='0' cellpadding='0' cellspacing='2' height='100%'
+width='100%' onclick=
+'window.open("http://www.advfn.com/p.php?pid=clicktrack&amp;par=MTk0NDA="); return false;'>
+<tr height='5%' valign='top'>
+<td class='bt_tit1'><u><a class='bt_tit1' href='#' onclick=
+'blur(); return false;'>Property4Wealth</a></u></td>
+</tr>
+<tr height='5%' valign='top'>
+<td class='bt_txt1'>The UK's leading source for high growth
+overseas property investments.</td>
+</tr>
+<tr valign='bottom'>
+<td class='bt_lnk1'><u><a class='bt_lnk1' href='#' onclick=
+'blur(); return false;'>Click here</a></u></td>
+</tr>
+</table>
+</td>
+<td width='171' class='bt_tbl1'>
+<table border='0' cellpadding='0' cellspacing='2' height='100%'
+width='100%' onclick=
+'window.open("http://www.advfn.com/p.php?pid=clicktrack&amp;par=MTk1Njc="); return false;'>
+<tr height='5%' valign='top'>
+<td class='bt_tit1'><u><a class='bt_tit1' href='#' onclick=
+'blur(); return false;'>FREE trial</a></u></td>
+</tr>
+<tr height='5%' valign='top'>
+<td class='bt_txt1'>Test run our new trading and portfolio
+management system. It identifies opportunities and protects gains
+in adverse markets.</td>
+</tr>
+<tr valign='bottom'>
+<td class='bt_lnk1'><u><a class='bt_lnk1' href='#' onclick=
+'blur(); return false;'>Click here</a></u></td>
+</tr>
+</table>
+</td>
+<td width='171' class='bt_tbl1'>
+<table border='0' cellpadding='0' cellspacing='2' height='100%'
+width='100%' onclick=
+'window.open("http://www.advfn.com/p.php?pid=clicktrack&amp;par=MTY3NzA="); return false;'>
+<tr height='5%' valign='top'>
+<td class='bt_tit1'><u><a class='bt_tit1' href='#' onclick=
+'blur(); return false;'>Intelli-trend</a></u></td>
+</tr>
+<tr height='5%' valign='top'>
+<td class='bt_txt1'>Intelli-trend 250 is not just a trend analysis
+tool, it's your complete stock-trading partner</td>
+</tr>
+<tr valign='bottom'>
+<td class='bt_lnk1'><u><a class='bt_lnk1' href='#' onclick=
+'blur(); return false;'>Click here</a></u></td>
+</tr>
+</table>
+</td>
+<td width='171' class='bt_tbl1'>
+<table border='0' cellpadding='0' cellspacing='2' height='100%'
+width='100%' onclick=
+'window.open("http://www.advfn.com/p.php?pid=clicktrack&amp;par=MTg5MjI="); return false;'>
+<tr height='5%' valign='top'>
+<td class='bt_tit1'><u><a class='bt_tit1' href='#' onclick=
+'blur(); return false;'>GFT Global Markets UK</a></u></td>
+</tr>
+<tr height='5%' valign='top'>
+<td class='bt_txt1'>We're here! GFT Global Markets UK. Spot Forex.
+Financial Spread Betting and CFD trading. Get a Free Market
+Trial.</td>
+</tr>
+<tr valign='bottom'>
+<td class='bt_lnk1'><u><a class='bt_lnk1' href='#' onclick=
+'blur(); return false;'>Click here</a></u></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<br />
+<br />
+<br />
+<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+<tr>
+<td><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='5' border='0' /></td>
+</tr>
+<tr align="center" class='s' width='100%'>
+<td nowrap="nowrap">By accessing the services available at ADVFN
+you are agreeing to be bound by ADVFN's <a href=
+'/p.php?pid=tandc_gb&amp;cb=1160312191' class='s' target=
+"top">Terms &amp; Conditions</a> :: <a href=
+'/p.php?pid=help&amp;cb=1160312191&amp;hid=274' class='s' target=
+'top'>Contact Us</a> :: <a class='s' href='#' onclick=
+'window.open("/p.php?pid=requestexchange&amp;cb=1160312191","requestexchange","width=440,height=430");return false'>
+Request an Exchange</a> :: <a href='/advfnpage_affiliate.html'
+target='top'>Affiliate Scheme</a><br />
+Copyright1999-2006 ADVFN PLC. <a href=
+'/p.php?pid=copyright&amp;cb=1160312191' class='s' target=
+"_top">Copyright and limited reproduction</a> :: <a href=
+'/p.php?pid=privacy&amp;cb=1160312191' class='s' target=
+"_top">Privacy Policy</a> :: <a href=
+'/p.php?pid=inv_warning&amp;cb=1160312191' class='s' target=
+"_top">Investment Warning</a> :: <a href=
+'/p.php?pid=advert_op&amp;cb=1160312191' class='s' target=
+"_top">Advertise with us</a> :: <a href=
+'/p.php?pid=accr_list&amp;cb=1160312191' class='s' target=
+"_top">Data accreditations</a> :: <a href=
+'/p.php?pid=ir&amp;cb=1160312191' class='s' target="_top">Investor
+Relations</a></td>
+</tr>
+<tr>
+<td><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='15' border='0' /></td>
+</tr>
+<tr>
+<td>
+<table border='0' align='center'>
+<tr>
+<td><img src=
+'http://images.advfn.com/imagesnew/2/gb/bugicon1.gif' /></td>
+<td class='s'>Report a page problem</td>
+<td><input type='text' name='reportbug_desc' class='s' size='20'
+maxlength='256' onkeypress='reportbug_go.disabled = false;' /></td>
+<td><input type='button' name='reportbug_go' class='sb' value='Go!'
+disabled="disabled" onclick=
+'t=reportbug_desc.value; if (t!="") document.location.href="/p.php?pid=reportbug&amp;pg=nmona&amp;t="+encodeURIComponent(t); else reportbug_go.disabled = true;' /></td>
+</tr>
+<tr align='center'>
+<td class='s' colspan="4">For support related queries please
+<a href='?pid=support_base'>click here.</a></td>
+</tr>
+</table>
+<br />
+<table border='0' cellpadding='4' cellspacing='0' width='100%'
+bgcolor='#CCCCCC' style='border: solid #888888 1px;'>
+<tr>
+<td>
+<table border='0' cellpadding='0' cellspacing='0' bgcolor='#CCCCCC'
+width='680' align='center'>
+<tr>
+<td colspan='5' class='mb' align='center' style=
+'font-family: Arial, Helvetica; font-weight: bold; font-size: 15px;'>
+ADDITIONAL SERVICES AVAILABLE FROM ADVFN</td>
+</tr>
+<tr>
+<td align='center' class='tdft'><a href=
+'http://www.advfn.com/fupgrade' title=
+'upgrade to ADVFN premium investor services'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/footup1.gif' alt=
+'Upgrade - Click here for more information on ADVFN premium services' /></a></td>
+<td align='center' class='tdft'><a href=
+'http://www.advfn.com/money-words_.html' title=
+'Money Words - Glossary of Financial Terms'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/foot_mw1.gif' alt=
+'Money Words - ADVFN Financial Glossary' /></a></td>
+<td align='center' class='tdft'><a href=
+'http://www.advfn.com/training' title=
+'Investor Training &amp; Education'><img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/foot_it1.gif' alt=
+'Investor Training' /></a></td>
+<td align='center' class='tdft'><a href=
+'http://www.advfn.com/bookshop' title=
+'ADVFN Bookshop - financial books, research and analysis for the educated investor'>
+<img border='0' src=
+'http://images.advfn.com/imagesnew/2/gb/foot_bs1.gif' alt=
+'ADVFN Bookshop - Click here' /></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td><img src='http://images.advfn.com/imagesnew/2/gb/space.gif'
+height='15' border='0' /></td>
+</tr>
+<tr>
+<td class='s' align='center'>
+<p>38 site:1 gb (gb) 114a3d5f29fd5e advfnpgsiwiga nmona <a href=
+'http://www.advfn.com/markets_companies_2.html'>stocks</a> ::
+08/10/2006 13:56:31 :: 0.1007 (0.0745 ~74.0) :: 0.0244 ~24.2 - 5 -
+0 - 7 - 0 :: 0.0018 ~1.8 - 1 - 0<br />
+Stock Message Boards : <a title="2001 Stock Market Discussion"
+href="http://www.advfn.com/stock/20010101_1.html">2001</a> |
+<a title="2002 Stock Market Discussion" href=
+"http://www.advfn.com/stock/20020101_1.html">2002</a> | <a title=
+"2003 Stock Market Discussion" href=
+"http://www.advfn.com/stock/20030101_1.html">2003</a> | <a title=
+"2004 Stock Market Discussion" href=
+"http://www.advfn.com/stock/20040101_1.html">2004</a> | <a title=
+"2005 Stock Market Discussion" href=
+"http://www.advfn.com/stock/20050101_1.html">2005</a> | <a title=
+"2006 Stock Market Discussion" href=
+"http://www.advfn.com/stock/20060101_1.html">2006</a> | Latest
+<a title="Latest Stock Message Board Discussion" href=
+"http://www.advfn.com/stock/20061007_1.html">Stock Message
+Board</a> Posts<br />
+&nbsp;&nbsp;&nbsp;<a title="Currency Converter" href=
+"http://www.advfn.com/currency-converter/">Currency
+Converter</a>&nbsp;&nbsp;&nbsp;&nbsp;<a title=
+'Free Real Time Stock Quotes &amp; Share Prices' href=
+'http://www.advfn.com/stock-list_L.html'>Stock Quotes &amp; Share
+Prices</a>&nbsp;&nbsp;&nbsp;<a title=
+"Quotazioni in tempo reale dalla borsa Italiana" href=
+"http://www.advfn.it">Quotazioni azioni
+borsa</a>&nbsp;&nbsp;&nbsp;<a title=
+"Cotations et Graphiques de la bourse de Paris sur ADVFN" href=
+"http://www.advfn.fr">Cours Actions Bourse
+Cotations</a>&nbsp;&nbsp;&nbsp;<a title=
+"Aktienkurse, Optionsscheine f&#252;r &#252;ber 50 Weltm&#228;rkte"
+href="http://www.advfn.de">B&#246;rsenkurse Aktien
+Charts</a>&nbsp;&nbsp;&nbsp;<a title=
+"&#230;&nbsp;&#170;&#228;&#190;&#161; &#230;&nbsp;&#170;&#229;&#188; &#229;&#184;&#8218;&#229;&nbsp;&#180; &#230;&#352;&#8226;&#232;&#179;&#8225;"
+href="http://jp.advfn.com">&#230;&nbsp;&#170;&#228;&#190;&#161;
+&#230;&nbsp;&#170;&#229;&#188;
+&#229;&#184;&#8218;&#229;&nbsp;&#180;
+&#230;&#352;&#8226;&#232;&#179;&#8225;</a></p>
+</td>
+</tr>
+</table>
+<input type='hidden' name='symbol' value='' /></form>
+</body>
+</html>

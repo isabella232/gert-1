@@ -1,0 +1,121 @@
+<project name="bug79203" default="rebuild">
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name=".deps/**" />
+				<include name=".libs/**" />
+				<include name="test.exe" />
+				<include name="libtest.la" />
+				<include name="libtest_la-libtest.lo" />
+				<include name="libtest_la-libtest.o" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" if="${platform::is-unix()}">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir=".deps" />
+		<exec program="libtool">
+			<arg value="--quiet" />
+			<arg value="--tag=CC" />
+			<arg value="--mode=compile" />
+			<arg value="gcc" />
+			<arg value="-g" />
+			<arg value="-DHAVE_CONFIG_H" />
+			<arg value="-I." />
+			<arg value="-I/usr/local/include/glib-2.0" />
+			<arg value="-I/usr/local/lib/glib-2.0/include" />
+			<arg value="-I/usr/local/include" />
+			<arg value="-DWIN32_THREADS" />
+			<arg value="-DFD_SETSIZE=1024" />
+			<arg value="-fno-optimize-sibling-calls" />
+			<arg value="-g" />
+			<arg value="-O2" />
+			<arg value="-fno-strict-aliasing" />
+			<arg value="-Wdeclaration-after-statement" />
+			<arg value="-g" />
+			<arg value="-Wall" />
+			<arg value="-Wunused" />
+			<arg value="-Wmissing-prototypes" />
+			<arg value="-Wmissing-declarations" />
+			<arg value="-Wstrict-prototypes" />
+			<arg value="-Wnested-externs" />
+			<arg value="-Wpointer-arith" />
+			<arg value="-Wno-cast-qual" />
+			<arg value="-Wcast-align" />
+			<arg value="-Wwrite-strings" />
+			<arg value="-mno-tls-direct-seg-refs" />
+			<arg value="-MT" />
+			<arg value="libtest_la-libtest.lo" />
+			<arg value="-MD" />
+			<arg value="-MP" />
+			<arg value="-MF" />
+			<arg value=".deps/libtest_la-libtestTpo" />
+			<arg value="-c" />
+			<arg value="-o" />
+			<arg value="libtest_la-libtest.lo" />
+			<arg value="libtest.c" />
+		</exec>
+		<exec program="libtool">
+			<arg value="--quiet" />
+			<arg value="--tag=CC" />
+			<arg value="--mode=link" />
+			<arg value="gcc" />
+			<arg value="-g" />
+			<arg value="-g" />
+			<arg value="-O2" />
+			<arg value="-fno-strict-aliasing" />
+			<arg value="-Wdeclaration-after-statement" />
+			<arg value="-g" />
+			<arg value="-Wall" />
+			<arg value="-Wunused" />
+			<arg value="-Wmissing-prototypes" />
+			<arg value="-Wmissing-declarations" />
+			<arg value="-Wstrict-prototypes" />
+			<arg value="-Wnested-externs" />
+			<arg value="-Wpointer-arith" />
+			<arg value="-Wno-cast-qual" />
+			<arg value="-Wcast-align" />
+			<arg value="-Wwrite-strings" />
+			<arg value="-mno-tls-direct-seg-refs" />
+			<arg value="-L/usr/local/lib" />
+			<arg value="-o" />
+			<arg value="libtest.la" />
+			<arg value="-no-undefined" />
+			<arg value="-rpath" />
+			<arg dir="." />
+			<arg value="-Wl" />
+			<arg value="libtest_la-libtest.lo" />
+			<arg value="-L/usr/local/lib" />
+			<arg value="-lgthread-2.0" />
+			<arg value="-lglib-2.0" />
+		</exec>
+		<csc target="exe" output="test.exe" warnaserror="true">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="test.exe" managed="true" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
+
