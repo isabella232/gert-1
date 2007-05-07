@@ -1,0 +1,1 @@
+<%@ Page Language="C#" AutoEventWireup="true"%><html><fckeditorv2:whatever runat="server" /></html>

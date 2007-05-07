@@ -1,0 +1,78 @@
+<project name="bug81136" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="expect.error" value="true" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="expect.error" value="false" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="expect.error" value="true" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="expect.error" value="false" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="res.resources" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="run">
+		<record name="out" action="Start" />
+		<resgen input="res.txt" output="res.resources" failonerror="${not(expect.error)}" />
+		<record name="out" action="Close" />
+		<choose>
+			<when test="${expect.error}">
+				<fail if="${file::exists('res.resources')}">#1</fail>
+				<fail unless="${file::exists('out')}">#2</fail>
+				<loadfile file="out" property="out" />
+				<fail unless="${string::index-of(out,'Unsupported escape character') != -1}">#3</fail>
+				<fail unless="${string::index-of(out,'ProbableCause') != -1}">#4</fail>
+			</when>
+			<otherwise>
+				<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+					<sources>
+						<include name="test.cs" />
+					</sources>
+					<resources>
+						<include name="res.resources" />
+					</resources>
+				</csc>
+				<delete file="out" />
+				<exec program="test.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
