@@ -14,7 +14,7 @@ class Program
 		if (!ex2.GetType ().Equals (typeof (ApplicationException)))
 			return 3;
 		if (ex2.Message != "foo")
-			return 4
+			return 4;
 
 		return 0;
 	}
