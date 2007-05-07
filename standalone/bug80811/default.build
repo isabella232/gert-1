@@ -1,4 +1,4 @@
-<project name="bug81553" default="rebuild">
+<project name="bug80811" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>

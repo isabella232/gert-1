@@ -1,4 +1,4 @@
-<project name="bug81553" default="rebuild">
+<project name="bug80998" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
@@ -35,7 +35,6 @@
 	</target>
 
 	<target name="compile">
-		<mkdir dir="web/bin" />
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
@@ -47,9 +46,11 @@
 	</target>
 
 	<target name="run" depends="compile">
+		<mkdir dir="web/bin" />
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
 </project>
+

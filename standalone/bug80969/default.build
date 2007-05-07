@@ -1,4 +1,4 @@
-<project name="bug81553" default="rebuild">
+<project name="bug80969" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
@@ -8,11 +8,10 @@
 	</target>
 
 	<property name="frameworks" value="mono-2.0,net-2.0" />
-	
+
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="web/bin/**" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -35,14 +34,10 @@
 	</target>
 
 	<target name="compile">
-		<mkdir dir="web/bin" />
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
-			<references>
-				<include name="System.Web.dll" />
-			</references>
 		</csc>
 	</target>
 
