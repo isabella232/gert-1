@@ -21,7 +21,8 @@
 		<delete>
 			<fileset>
 				<include name="out" />
-				<include name="test.exe" />
+				<include name="test1.exe" />
+				<include name="test2.exe" />
 			</fileset>
 		</delete>
 	</target>
@@ -42,15 +43,28 @@
 	</target>
 
 	<target name="compile">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" define="${csc.defines}" output="test1.exe" warnaserror="true" warninglevel="4">
 			<sources>
-				<include name="test.cs" />
+				<include name="test1.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test2.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test2.cs" />
 			</sources>
 		</csc>
 	</target>
 
 	<target name="run" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
+		<exec program="test1.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<exec program="test2.exe" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="server" />
+		</exec>
+		<exec program="test2.exe" managed="true" output="out">
+			<arg value="client" />
+		</exec>
+		<waitforexit pid="${server.pid}" />
 		<fail if="${file::exists('out')}" />
 	</target>
 
