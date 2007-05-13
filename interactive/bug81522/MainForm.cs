@@ -163,27 +163,6 @@ public class InstructionsForm : Form
 		_tabPage1.Controls.Add (_bugDescriptionText1);
 		_tabControl.Controls.Add (_tabPage1);
 		// 
-		// _bugDescriptionText2
-		// 
-		_bugDescriptionText2 = new TextBox ();
-		_bugDescriptionText2.Multiline = true;
-		_bugDescriptionText2.Dock = DockStyle.Fill;
-		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
-			"Steps to execute:{0}{0}" +
-			"1. Select the DropDownButton radiobutton.{0}{0}" +
-			"Expected result:{0}{0}" +
-			"1. The second button now has a dropdown arrow.{0}{0}" +
-			"2. The width of the second button matches the width of the " +
-			"other buttons.",
-			Environment.NewLine);
-		// 
-		// _tabPage2
-		// 
-		_tabPage2 = new TabPage ();
-		_tabPage2.Text = "#2";
-		_tabPage2.Controls.Add (_bugDescriptionText2);
-		_tabControl.Controls.Add (_tabPage2);
-		// 
 		// InstructionsForm
 		// 
 		ClientSize = new Size (360, 170);
@@ -193,8 +172,6 @@ public class InstructionsForm : Form
 	}
 
 	private TextBox _bugDescriptionText1;
-	private TextBox _bugDescriptionText2;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
-	private TabPage _tabPage2;
 }
