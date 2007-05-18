@@ -62,7 +62,7 @@ public class InstructionsForm : Form
 			"1. The following text is fully visible (but spread over multiple " +
 			"lines) in the RichTextBox:{0}{0}" +
 			"   Some Text That Should Allow Us To Test The Visual Effect Of{0}" +
-			"   The WordWrap property",
+			"   The WordWrap property.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -84,7 +84,7 @@ public class InstructionsForm : Form
 			"1. The following text remains fully visible at all times (but possibly " +
 			"spread over multiple lines):{0}{0}" +
 			"   Some Text That Should Allow Us To Test The Visual Effect Of{0}" +
-			"   The WordWrap property",
+			"   The WordWrap property.",
 			Environment.NewLine);
 		// 
 		// _tabPage2
