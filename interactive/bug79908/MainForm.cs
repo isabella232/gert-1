@@ -177,12 +177,6 @@ public class ModalForm : Form
 {
 	public ModalForm ()
 	{
-		InitializeComponent ();
-	}
-
-	private void InitializeComponent ()
-	{
-		SuspendLayout ();
 		// 
 		// _overrideResultCheck
 		// 
