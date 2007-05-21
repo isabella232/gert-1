@@ -29,7 +29,7 @@ public class MainForm : Form
 		ClientSize = new Size (304, 280);
 		Location = new Point (250, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #81694";
+		Text = "bug #81695";
 		Load += new EventHandler (MainForm_Load);
 		ResumeLayout (false);
 	}
@@ -81,7 +81,7 @@ public class UserControl1 : UserControl
 		_button1.Size = new Size (75, 23);
 		_button1.TabIndex = 0;
 		_button1.Text = "Button1";
-		_button1.LocationChanged += new EventHandler (Button_LocationChanged);
+		_button1.Click += new EventHandler (Button1_Click);
 		Controls.Add (_button1);
 		// 
 		// _button2
@@ -92,7 +92,7 @@ public class UserControl1 : UserControl
 		_button2.Size = new Size (75, 23);
 		_button2.TabIndex = 1;
 		_button2.Text = "Button2";
-		_button2.LocationChanged += new EventHandler (Button_LocationChanged);
+		_button2.LocationChanged += new EventHandler (Button2_LocationChanged);
 		Controls.Add (_button2);
 		// 
 		// UserControl1
@@ -102,7 +102,19 @@ public class UserControl1 : UserControl
 		ResumeLayout (false);
 	}
 
-	void Button_LocationChanged (object sender, EventArgs e)
+	void Button1_Click (object sender, EventArgs e)
+	{
+		MainForm main = ParentForm as MainForm;
+		if (main != null) {
+			Size originalSize = main.Size;
+			main.Size = new Size (10, 10);
+			main.Size = originalSize;
+		} else {
+			Environment.Exit (1);
+		}
+	}
+
+	void Button2_LocationChanged (object sender, EventArgs e)
 	{
 		MainForm main = ParentForm as MainForm;
 		if (main != null)
@@ -130,13 +142,11 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Location = new Point (8, 8);
 		_bugDescriptionText1.Dock = DockStyle.Fill;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
-			"Expected result on start-up:{0}{0}" +
-			"1. There's a 5 pixel area between the UserControl and both the " +
-			"left and right border of the form.{0}{0}" +
-			"2. Two buttons are displayed inside the UserControl:{0}{0}" +
-			"   * One in the top-left corner.{0}" +
-			"   * One in the bottom-right corner.{0}{0}" +
-			"3. The Location Changed counter in the StatusBar displays 0.",
+			"Steps to execute:{0}{0}" +
+			"1. Click the Button1 button.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. The layout does not change.{0}{0}" +
+			"2. The Location Changed counter in the StatusBar displays 2.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -148,10 +158,10 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (330, 200);
+		ClientSize = new Size (330, 160);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #81694";
+		Text = "Instructions - bug #81695";
 	}
 
 	private TextBox _bugDescriptionText1;
