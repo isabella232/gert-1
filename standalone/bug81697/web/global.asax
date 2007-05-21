@@ -1,0 +1,1 @@
+<object id='doc' class='System.Xml.XmlDocument' scope='application' runat='server' />
