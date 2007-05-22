@@ -63,7 +63,7 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Dock = DockStyle.Fill;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
-			"1. Each row in the ListView contains 5 items.",
+			"1. Each row in the ListView contains 6 items.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
