@@ -35,6 +35,10 @@ class TinyHost : MarshalByRefObject
 			Console.WriteLine (result);
 			return 1;
 		}
+		if (result.IndexOf ("controlbla") == -1) {
+			Console.WriteLine (result);
+			return 1;
+		}
 		return 0;
 	}
 }

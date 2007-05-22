@@ -6,8 +6,11 @@ public class CustomProfile : ProfileBase
 	{
 	}
 
-	public string CustomData
-	{
+	public string CustomData {
 		get { return "blabla"; }
+	}
+
+	public string ControlCustom {
+		get { return "controlbla"; }
 	}
 }

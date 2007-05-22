@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+        <vv:SomeBanner ID="MyBanner" runat="server" />
     </div>
     </form>
 </body>
