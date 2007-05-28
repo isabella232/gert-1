@@ -44,6 +44,7 @@
 				<include name="Form1.vb" />
 			</sources>
 			<references>
+				<include name="System.dll" />
 				<include name="System.Windows.Forms.dll" />
 			</references>
 		</vbc>
@@ -57,6 +58,7 @@
 				<include name="Form1.vb" />
 			</sources>
 			<references>
+				<include name="System.dll" />
 				<include name="System.Windows.Forms.dll" />
 			</references>
 		</vbc>
@@ -64,7 +66,7 @@
 		<fail if="${file::exists('Form1.exe')}">#2</fail>
 		<fail unless="${file::exists('out')}">#3</fail>
 		<loadfile file="out" property="out" />
-		<fail unless="${string::index-of(out,'BC30420') != -1}">#4</fail>
+		<fail unless="${string::index-of(out,'30420:') != -1}">#4</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
