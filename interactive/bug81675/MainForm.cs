@@ -12,7 +12,7 @@ class MainForm : Form
 		// 
 		_tabControl = new TabControl ();
 		_tabControl.Dock = DockStyle.Bottom;
-		_tabControl.Height = 230;
+		_tabControl.Height = 200;
 		Controls.Add (_tabControl);
 		// 
 		// _bugDescriptionText1
@@ -27,9 +27,7 @@ class MainForm : Form
 			"2. Click the arrow on the dropdown button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 1, a menu is dropped down.{0}{0}" +
-			"2. On step 2:{0}{0}" +
-			"   * the menu is closed.{0}" +
-			"   * the button is no longer highlighted.",
+			"2. On step 2, the menu is closed.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -59,7 +57,7 @@ class MainForm : Form
 		// MainForm
 		// 
 		StartPosition = FormStartPosition.CenterScreen;
-		ClientSize = new Size (300, 280);
+		ClientSize = new Size (300, 260);
 		Text = "bug #81675";
 	}
 
