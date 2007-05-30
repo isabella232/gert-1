@@ -42,7 +42,7 @@
 	</target>
 
 	<target name="compile">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" define="${csc.defines}" output="test.exe" unsafe="true" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
