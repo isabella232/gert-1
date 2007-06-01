@@ -8,6 +8,11 @@ class MainForm : Form
 	public MainForm ()
 	{
 		// 
+		// _statusBar
+		// 
+		_statusBar = new StatusBar ();
+		Controls.Add (_statusBar);
+		// 
 		// _tabControl
 		// 
 		_tabControl = new TabControl ();
@@ -23,7 +28,7 @@ class MainForm : Form
 			"Steps to execute:{0}{0}" +
 			"1. Attempt to make this form larger in size.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The form cannot be resized to more than 400 by 500 pixels.",
+			"1. The form cannot be resized to more than 500 by 600 pixels.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -81,10 +86,12 @@ class MainForm : Form
 		// 
 		// MainForm
 		//
-		ClientSize = new Size (350, 250);
-		MaximumSize = new Size (400, 500);
+		ClientSize = new Size (350, 320);
+		MaximumSize = new Size (500, 600);
 		StartPosition = FormStartPosition.CenterScreen;
 		Text = "bug #80021";
+		Load += new EventHandler (MainForm_Load);
+		Resize += new EventHandler (MainForm_Resize);
 	}
 
 	[STAThread]
@@ -93,6 +100,17 @@ class MainForm : Form
 		Application.Run (new MainForm ());
 	}
 
+	void MainForm_Load (object sender, EventArgs e)
+	{
+		_statusBar.Text = this.Size.ToString ();
+	}
+
+	void MainForm_Resize (object sender, EventArgs e)
+	{
+		_statusBar.Text = this.Size.ToString ();
+	}
+
+	private StatusBar _statusBar;
 	private TextBox _bugDescriptionText1;
 	private TextBox _bugDescriptionText2;
 	private TextBox _bugDescriptionText3;
