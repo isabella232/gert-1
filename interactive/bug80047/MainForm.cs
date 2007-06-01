@@ -15,7 +15,7 @@ public class MainForm : Form
 		_dataGrid = new System.Windows.Forms.DataGrid ();
 		_dataGrid.DataMember = "";
 		_dataGrid.Dock = DockStyle.Top;
-		_dataGrid.Size = new Size (292, 273);
+		_dataGrid.Height = 250;
 		_dataGrid.TabIndex = 0;
 		Controls.Add (_dataGrid);
 		// 
@@ -23,7 +23,7 @@ public class MainForm : Form
 		// 
 		_tabControl = new TabControl ();
 		_tabControl.Dock = DockStyle.Bottom;
-		_tabControl.Height = 240;
+		_tabControl.Height = 270;
 		Controls.Add (_tabControl);
 		// 
 		// _bugDescriptionText1
@@ -34,12 +34,15 @@ public class MainForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click inside the \"kood\" cell of the first row.{0}{0}" +
-			"2. Press Tab key 7 times, until you're in the \"timestamp\" cell.{0}{0}" +
+			"2. Press Tab key 7 times.{0}{0}" +
 			"3. Press Del key.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The content of the \"timestamp\" cell is cleared.{0}{0}" +
-			"2. The view does not shift.{0}{0}" +
-			"3. The cursor caret stays in the \"timestamp\" cell.",
+			"1. While pressing the Tab key, the entered cell scrolls into " +
+			"view when necessary.{0}{0}" +
+			"2. On step 3:{0}{0}" +
+			"   * The content of the cell is cleared.{0}" +
+			"   * The view does not shift away from the current cell.{0}" +
+			"   * The cursor caret stays in the cell.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
