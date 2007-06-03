@@ -1,0 +1,2248 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Table>
+    <kood>1           </kood>
+    <nimi>Firma ise, 1. arveldusarve                                            </nimi>
+    <a_a>10052027781007                     </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>12345673    </regnr>
+    <vatpayno>EE400297752    </vatpayno>
+    <piirkond>                       </piirkond>
+    <postiindek>12618     </postiindek>
+    <tanav>Akadeemia 21-G                </tanav>
+    <kontaktisi>Aksel Küngas                  </kontaktisi>
+    <telefon>6654214                  </telefon>
+    <faks>6654215                  </faks>
+    <email>                                          </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr>EE3243453553        </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>Viite numbris tuleb käibedeklaratsiooni ja arvete jaoks ette anda käibemaksukohuslase registri number.</info>
+    <timestamp>20060911165135</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>firma ise, 1. arveldusarve                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>1102        </kood>
+    <nimi>Eurofor                                                               </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr>45645645    </regnr>
+    <vatpayno>FR067513474    </vatpayno>
+    <piirkond>Pariis                        </piirkond>
+    <postiindek>37724     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>282333                   </telefon>
+    <faks>843793                   </faks>
+    <email>Liisa@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>887089004           </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt2>AGNES     </objekt2>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182525</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eurofor                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>132         </kood>
+    <nimi>Valge Lumi OÜ                                                         </nimi>
+    <a_a>1022111809                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>23133825    </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Lääne-Viru                    </piirkond>
+    <postiindek>38063     </postiindek>
+    <tanav>Kulina küla                   </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>104615                   </telefon>
+    <faks>563934                   </faks>
+    <email>Kodar@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>5782183676          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>Kodar OÜ oli</info>
+    <timestamp>20060208182545</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus>Error 24.06.2004 18:45:16                                                                           </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart>9233648000000002</klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>valge lumi oü                                                         </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>14          </kood>
+    <nimi>Kuldnokk OÜ                                                           </nimi>
+    <a_a>1088112593                         </a_a>
+    <p_kood>742       </p_kood>
+    <regnr>7306870     </regnr>
+    <vatpayno>EE353134819    </vatpayno>
+    <piirkond>Võru                          </piirkond>
+    <postiindek>95414     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>357797                   </telefon>
+    <faks>121683                   </faks>
+    <email>Kuldnokk@hotmail.com                                        </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>6459326311          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182537</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>kuldnokk oü                                                           </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>1501        </kood>
+    <nimi>Eurocorps                                                             </nimi>
+    <a_a>1454566666                         </a_a>
+    <p_kood>720       </p_kood>
+    <regnr>BE-1233434  </regnr>
+    <vatpayno>BE349912114    </vatpayno>
+    <piirkond>Brüssel                       </piirkond>
+    <postiindek>21129     </postiindek>
+    <tanav>Calm 1                        </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>19214                    </telefon>
+    <faks>7947                     </faks>
+    <email>Taavi@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>Y03       </liik>
+    <viitenr>9408887075          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182524</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>6</elanikud>
+    <pindala>64.00</pindala>
+    <apindala>50.00</apindala>
+    <kpindala>30.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eurocorps                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>152         </kood>
+    <nimi>KOLGAR OÜ                                                             </nimi>
+    <a_a>3468504                            </a_a>
+    <regnr>34391977    </regnr>
+    <vatpayno>EE217880606    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>57822     </postiindek>
+    <tanav>Varsakabja 4                  </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>6334433                  </telefon>
+    <faks>815140                   </faks>
+    <email>Linnutaja@hotmail.com                                       </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>3367050956          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182531</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>kolgar oü                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>156         </kood>
+    <nimi>Telefonivõrk                                                          </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr>31714717    </regnr>
+    <vatpayno>EE246635702    </vatpayno>
+    <piirkond>Kunda                         </piirkond>
+    <postiindek>33865     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi>Madis Kaasik                  </kontaktisi>
+    <telefon>155801                   </telefon>
+    <faks>955870                   </faks>
+    <email>Telefonivōrk@hotmail.com                                    </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>4061538819          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>1600.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20050825204235</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>telefonivõrk                                                          </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>160         </kood>
+    <nimi>K.k.k AS                                                              </nimi>
+    <a_a>5343645455                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>25580964    </regnr>
+    <vatpayno>EE095834628    </vatpayno>
+    <piirkond>Narva                         </piirkond>
+    <postiindek>45326     </postiindek>
+    <tanav>Kerese 14-4                   </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>363672                   </telefon>
+    <faks>868150                   </faks>
+    <email>K.k.k@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>8038560601          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>10   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182530</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>k.k.k as                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>17          </kood>
+    <nimi>Roheline Nastik AS                                                    </nimi>
+    <a_a>454444545                          </a_a>
+    <regnr>62885484    </regnr>
+    <vatpayno>EE505970096    </vatpayno>
+    <piirkond>Pärnu                         </piirkond>
+    <postiindek>26948     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>594452                   </telefon>
+    <faks>30892                    </faks>
+    <email>Roheline@hotmail.com                                        </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>8817600149          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>40200.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <maksja>18          </maksja>
+    <timestamp>20040425182126</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>roheline nastik as                                                    </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>18          </kood>
+    <nimi>Akantus AS                                                            </nimi>
+    <a_a>543553437                          </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Sürgavere                     </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav>Kivi 4                        </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>SR   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182506</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>akantus as                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>19          </kood>
+    <nimi>Vaskuss OÜ                                                            </nimi>
+    <a_a>2333234                            </a_a>
+    <p_kood>401       </p_kood>
+    <regnr>16271133    </regnr>
+    <vatpayno>EE465160412    </vatpayno>
+    <piirkond>Kallavere                     </piirkond>
+    <postiindek>62942     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi>Karin Kuul                    </kontaktisi>
+    <telefon>371479                   </telefon>
+    <faks>392739                   </faks>
+    <email>Vaskuss@hotmail.com                                         </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>6188458402          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060804170558</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>2</yletahtaja>
+    <_nimi>vaskuss oü                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>22          </kood>
+    <nimi>Kargur OÜ                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>08        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>10   </maksetin>
+    <omakseti>14   </omakseti>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182534</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>C</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>kargur oü                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>286         </kood>
+    <nimi>Tartum AS                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr>17921398    </regnr>
+    <vatpayno>EE254288551    </vatpayno>
+    <piirkond>Kohtla-Järve                  </piirkond>
+    <postiindek>18792     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>319287                   </telefon>
+    <faks>199872                   </faks>
+    <email>Tallinna@hotmail.com                                        </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr>6991706244          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>38300.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20050825204609</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>tartum as                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>287         </kood>
+    <nimi>Tiskre Oja OÜs                                                        </nimi>
+    <a_a>7467517                            </a_a>
+    <regnr>19694419    </regnr>
+    <vatpayno>EE563534985    </vatpayno>
+    <piirkond>Sillamäe                      </piirkond>
+    <postiindek>65460     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>889849                   </telefon>
+    <faks>618928                   </faks>
+    <email>Tarbeklaas@tabvek.com                                       </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr>516228315           </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>30600.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060805125812</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>tiskre oja oüs                                                        </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>296         </kood>
+    <nimi>Täht AS                                                               </nimi>
+    <a_a>1467640444                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>49598820    </regnr>
+    <vatpayno>EE113854031    </vatpayno>
+    <piirkond>Valgejõe                      </piirkond>
+    <postiindek>24180     </postiindek>
+    <tanav>Kivi 3                        </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>77718                    </telefon>
+    <faks>133348                   </faks>
+    <email>Taht@hotmail.com                                            </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>6730920852          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>57800.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20031230213810</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>täht as                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>2ARVELDUSARV</kood>
+    <nimi>2.  Arveldusarve                                                      </nimi>
+    <a_a>1007875671264                      </a_a>
+    <p_kood>401       </p_kood>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>6654215                  </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>xx@hotmail.com                                              </email>
+    <infomail>test                                                        </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr>XXX                 </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182504</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>2.  arveldusarve                                                      </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>313         </kood>
+    <nimi>Vabi AS AS                                                            </nimi>
+    <a_a>1035344667768                      </a_a>
+    <p_kood>742       </p_kood>
+    <regnr>62316438    </regnr>
+    <vatpayno>EE082524405    </vatpayno>
+    <piirkond>Viljandi                      </piirkond>
+    <postiindek>21962     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>562808                   </telefon>
+    <faks>562027                   </faks>
+    <email>Vabariiklik@hotmail.com                                     </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>8047736322          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>SR   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060425200204</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>vabi as as                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>316         </kood>
+    <nimi>Karu Elekter OÜ                                                       </nimi>
+    <a_a>1022434594                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>58605897    </regnr>
+    <vatpayno>EE866347228    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>94089     </postiindek>
+    <tanav>Kivimurru 12a                 </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>404809                   </telefon>
+    <faks>400353                   </faks>
+    <email>West@hotmail.com                                            </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>KAART     </liik>
+    <viitenr>8231979141          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>67300.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060501095148</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>karu elekter oü                                                       </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>32          </kood>
+    <nimi>ORI Elekter AS                                                        </nimi>
+    <a_a>1022110810                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>11158175    </regnr>
+    <vatpayno>EE659239081    </vatpayno>
+    <piirkond>Rapla                         </piirkond>
+    <postiindek>94754     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>303380                   </telefon>
+    <faks>798621                   </faks>
+    <email>fakta@fakta.ee                                              </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>5180552956          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt7>0051      </objekt7>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182513</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>ori elekter as                                                        </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>33          </kood>
+    <nimi>Karu Audit OÜ                                                         </nimi>
+    <a_a>161001                             </a_a>
+    <regnr>53281820    </regnr>
+    <vatpayno>EE616275167    </vatpayno>
+    <piirkond>Ruhnu                         </piirkond>
+    <postiindek>93900     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>920474                   </telefon>
+    <faks>982251                   </faks>
+    <email>Karu@hotmail.com                                            </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>3881981210          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182535</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>karu audit oü                                                         </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>34          </kood>
+    <nimi>Daru Siil  AS                                                         </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Tartu                         </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182511</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>daru siil  as                                                         </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>35          </kood>
+    <nimi>Eraisik                                                               </nimi>
+    <a_a>7878787678                         </a_a>
+    <regnr>47569286    </regnr>
+    <vatpayno>EE573725643    </vatpayno>
+    <piirkond>Põlva                         </piirkond>
+    <postiindek>14548     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>952013                   </telefon>
+    <faks>517087                   </faks>
+    <email>Eraa@hotmail.com                                            </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>7249118192          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt2>KULO      </objekt2>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20061031125503</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eraisik                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>38          </kood>
+    <nimi>Eva Auto                                                              </nimi>
+    <a_a>1022194443                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>81873506    </regnr>
+    <vatpayno>EE946978472    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>28266     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>557500                   </telefon>
+    <faks>991606                   </faks>
+    <email>Eva@hotmail.com                                             </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>3834843046          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182526</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eva auto                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>43          </kood>
+    <nimi>Espur AS                                                              </nimi>
+    <a_a>8467383                            </a_a>
+    <regnr>43865862    </regnr>
+    <vatpayno>EE113357264    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>24355     </postiindek>
+    <tanav>Kuke 4                        </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>6413531                  </telefon>
+    <faks>516623                   </faks>
+    <email>Espur@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>7686129769          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>5    </maksetin>
+    <omakseti>5    </omakseti>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>teine</info>
+    <timestamp>20060208182516</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus>Error 24.06.2004 18:45:15                                                                           </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress>Kivi 3
+Rakvere 34123</aadress>
+    <yletahtaja>0</yletahtaja>
+    <_nimi>espur as                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>54          </kood>
+    <nimi>Firma Narova                                                          </nimi>
+    <a_a>1467204                            </a_a>
+    <regnr>47375949    </regnr>
+    <vatpayno>EE873479205    </vatpayno>
+    <piirkond>Hiiumaa                       </piirkond>
+    <postiindek>11805     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>994491                   </telefon>
+    <faks>32068                    </faks>
+    <email>Firma@hotmail.com                                           </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>3060782808          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt2>AGNES     </objekt2>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182527</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>firma narova                                                          </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>74          </kood>
+    <nimi>Kalur OÜ                                                              </nimi>
+    <a_a>1467927                            </a_a>
+    <p_kood>401       </p_kood>
+    <regnr>75756224    </regnr>
+    <vatpayno>EE663844410    </vatpayno>
+    <piirkond>Tartu                         </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>118050                   </telefon>
+    <faks>573007                   </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>4021140449          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182533</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>kalur oü                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>84          </kood>
+    <nimi>Eesti Asi OÜ                                                          </nimi>
+    <a_a>526102                             </a_a>
+    <p_kood>742       </p_kood>
+    <regnr>33472013    </regnr>
+    <vatpayno>EE403692893    </vatpayno>
+    <piirkond>Paide                         </piirkond>
+    <postiindek>14068     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>812077                   </telefon>
+    <faks>683016                   </faks>
+    <email>Eesti@asi.ee                                                </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>3964296279          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt7>0051      </objekt7>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182512</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eesti asi oü                                                          </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>97          </kood>
+    <nimi>Lingus OÜ                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr>86758962    </regnr>
+    <vatpayno>EE363672308    </vatpayno>
+    <piirkond>Saaremaa                      </piirkond>
+    <postiindek>86786     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>403693                   </telefon>
+    <faks>283761                   </faks>
+    <email>Lingus@hotmail.com                                          </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr>2418042885          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182539</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>lingus oü                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>AAAAAA      </kood>
+    <nimi>A&amp;G kaubandus                                                         </nimi>
+    <a_a>67858778778                        </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060710143627</timestamp>
+    <atimestamp>20050623124957</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>a&amp;g kaubandus                                                         </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>ALMA        </kood>
+    <nimi>Alma OÜ                                                               </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Olustvere                     </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182508</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>alma oü                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>AMISCO      </kood>
+    <nimi>Alumaa OÜ                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Tartu                         </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <hinnak>10%  </hinnak>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182509</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>alumaa oü                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>ARGONAUT    </kood>
+    <nimi>Argonaut OÜ                                                           </nimi>
+    <a_a>10059100001005                     </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno>EE854693926    </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek>24664     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>Argonaut@hotmail.com                                        </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>edee                </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182509</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>argonaut oü                                                           </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>ASEL        </kood>
+    <nimi>Asel AS                                                               </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>asel</info>
+    <timestamp>20060208182510</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>asel as                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>FAAS        </kood>
+    <nimi>Karu OÜ                                                               </nimi>
+    <a_a>1022645333                         </a_a>
+    <p_kood>767       </p_kood>
+    <regnr>29551985    </regnr>
+    <vatpayno>EE669006543    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>76861     </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>6336705                  </telefon>
+    <faks>735374                   </faks>
+    <email>Faas@hotmail.com                                            </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>02        </liik>
+    <viitenr>5577655681          </viitenr>
+    <riik>Eesti               </riik>
+    <riik2>GD</riik2>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>14   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>Faasan oli</info>
+    <timestamp>20060208182536</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus>Error 24.06.2004 18:45:15                                                                           </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress>Kiilu 5
+Vändra 23573</aadress>
+    <yletahtaja>0</yletahtaja>
+    <_nimi>karu oü                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>FFFFFF      </kood>
+    <nimi>hhhhhhhhhh                                                            </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20061008231632</timestamp>
+    <atimestamp>20061008231632</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>hhhhhhhhhh                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>HELMISOE    </kood>
+    <nimi>Helmi Soe                                                             </nimi>
+    <a_a>454343534534                       </a_a>
+    <p_kood>401       </p_kood>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>13268     </postiindek>
+    <tanav>Gonsiori 7-12                 </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>helmi@one.com                                               </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>VÕ   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182528</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>4</elanikud>
+    <pindala>80.00</pindala>
+    <grmaja>GONSIORI7 </grmaja>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>helmi soe                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>JAEOSTJA    </kood>
+    <nimi>Jaeostja                                                              </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav>jaeostja sisestus             </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>SR   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182529</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>jaeostja                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>JKJKKJKJ    </kood>
+    <nimi>jkjkkjkj                                                              </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20061008231607</timestamp>
+    <atimestamp>20061008231607</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>jkjkkjkj                                                              </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KAIBEMAKS   </kood>
+    <nimi>Käibemaks                                                             </nimi>
+    <a_a>4353456564654                      </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>SR   </maksetin>
+    <omakseti>14   </omakseti>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182538</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>käibemaks                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KAKSKOERA   </kood>
+    <nimi>Agu Sieer                                                             </nimi>
+    <a_a>43543436546546                     </a_a>
+    <p_kood>720       </p_kood>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno>EE796971496    </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>13268     </postiindek>
+    <tanav>Gonsiori 7-14                 </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>kagu@kratt.ee                                               </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage>www.eetasoft.ee                                   </wwwpage>
+    <liik>Y01       </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riik2>EE</riik2>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <maksetin>14   </maksetin>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182505</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>2</elanikud>
+    <pindala>30.00</pindala>
+    <grmaja>GONSIORI7 </grmaja>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp>A</kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>agu sieer                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KALMERKRUUS </kood>
+    <nimi>Kalmer Kurg                                                           </nimi>
+    <a_a>54543534535                        </a_a>
+    <p_kood>401       </p_kood>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Kunda                         </piirkond>
+    <postiindek>78788     </postiindek>
+    <tanav>Vilu 12                       </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>kalmer@one.ee                                               </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood>EST</riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182532</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>kalmer kurg                                                           </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KIVIOU      </kood>
+    <nimi>Treiler OÜ                                                            </nimi>
+    <a_a>2467175                            </a_a>
+    <p_kood>401       </p_kood>
+    <regnr>50303800    </regnr>
+    <vatpayno>EE197650172    </vatpayno>
+    <piirkond>Harjumaa                      </piirkond>
+    <postiindek>90878     </postiindek>
+    <tanav>Koera 5                       </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>243546                   </telefon>
+    <faks>97861                    </faks>
+    <email>Kivi@hot.ee                                                 </email>
+    <infomail>test                                                        </infomail>
+    <wwwpage>www.eetasoft.ee                                   </wwwpage>
+    <liik>02        </liik>
+    <viitenr>8331943315          </viitenr>
+    <riik>Eesti               </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt2>KULO      </objekt2>
+    <maksetin>SR   </maksetin>
+    <omakseti>14   </omakseti>
+    <krediit>24300.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>infotest</info>
+    <timestamp>20060805125820</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <idmakett>F0718680-3AF5-11D8-8E50-0000E8D668E8</idmakett>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress>test</aadress>
+    <yletahtaja>0</yletahtaja>
+    <_nimi>treiler oü                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KKKKKK      </kood>
+    <nimi>dgfgddf                                                               </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>01        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20061008231556</timestamp>
+    <atimestamp>20061008231556</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>dgfgddf                                                               </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>KPLHEAASI   </kood>
+    <nimi>Eeva testpood                                                         </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>12618     </postiindek>
+    <tanav>Akadeemia 21-G                </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon>6654214                  </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>09        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060208182514</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>eeva testpood                                                         </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>MEISTERMAILI</kood>
+    <nimi>Meister, Mailis                                                       </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr>654645756756</regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond>Tallinn                       </piirkond>
+    <postiindek>13268     </postiindek>
+    <tanav>Gonsiori 7-15                 </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>Meister@xxlu.ee                                             </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>Y01       </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <objekt7>0050      </objekt7>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info>Palgaline</info>
+    <timestamp>20060208182539</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>2</elanikud>
+    <pindala>40.00</pindala>
+    <grmaja>GONSIORI7 </grmaja>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>meister, mailis                                                       </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>MOKTERAS    </kood>
+    <nimi>Mokter AS                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <hinnak>L10  </hinnak>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20060214110806</timestamp>
+    <atimestamp>20050526174521</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>mokter as                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>SOEJAANI    </kood>
+    <nimi>Soe Riives                                                            </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <email>soe@zone.ee                                                 </email>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <liik>08        </liik>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>80400.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20040926001352</timestamp>
+    <atimestamp>20060401190733</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>soe riives                                                            </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+  <Table>
+    <kood>TEETKIVI    </kood>
+    <nimi>Teet Kivi                                                             </nimi>
+    <a_a xml:space="preserve">                                   </a_a>
+    <regnr xml:space="preserve">            </regnr>
+    <vatpayno xml:space="preserve">               </vatpayno>
+    <piirkond xml:space="preserve">                              </piirkond>
+    <postiindek xml:space="preserve">          </postiindek>
+    <tanav xml:space="preserve">                              </tanav>
+    <kontaktisi xml:space="preserve">                              </kontaktisi>
+    <telefon xml:space="preserve">                         </telefon>
+    <faks xml:space="preserve">                         </faks>
+    <infomail xml:space="preserve">                                                            </infomail>
+    <wwwpage xml:space="preserve">                                                  </wwwpage>
+    <viitenr xml:space="preserve">                    </viitenr>
+    <riik xml:space="preserve">                    </riik>
+    <riigikood xml:space="preserve">   </riigikood>
+    <erihinnak xml:space="preserve">     </erihinnak>
+    <krediit>0.00</krediit>
+    <ostukredii>0.00</ostukredii>
+    <masin xml:space="preserve">     </masin>
+    <info />
+    <timestamp>20051011123825</timestamp>
+    <atimestamp>20051011123825</atimestamp>
+    <elanikud>0</elanikud>
+    <pindala>0.00</pindala>
+    <apindala>0.00</apindala>
+    <kpindala>0.00</kpindala>
+    <tulemus xml:space="preserve">                                                                                                    </tulemus>
+    <omandisuhe xml:space="preserve"> </omandisuhe>
+    <username>ADMIN     </username>
+    <changedby>ADMIN     </changedby>
+    <parool xml:space="preserve">                    </parool>
+    <hinnaale xml:space="preserve">    </hinnaale>
+    <mitteakt>false</mitteakt>
+    <klikaart xml:space="preserve">                </klikaart>
+    <kaibegrupp xml:space="preserve"> </kaibegrupp>
+    <mhprotsent>0.0</mhprotsent>
+    <aadress />
+    <yletahtaja>0</yletahtaja>
+    <_nimi>teet kivi                                                             </_nimi>
+    <ro_x0020_veerg>25</ro_x0020_veerg>
+    <Price>25</Price>
+    <Contact>250</Contact>
+  </Table>
+</NewDataSet>
