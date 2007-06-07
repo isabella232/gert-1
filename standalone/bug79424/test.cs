@@ -30,17 +30,25 @@ public class bug76757Test
 				Console.WriteLine ("FileNotFoundException.FileName is NULL.");
 				return 1;
 			}
-			if (ex.FileName == "library, Version=1.2.3.4, Culture=neutral") {
+			if (ex.FileName == expectedFileName) {
 				return 0;
 			}
 			Console.WriteLine ("FileNotFoundException.FileName does not match.");
-			Console.WriteLine ("expected: library, Version=1.2.3.4, Culture=neutral");
+			Console.WriteLine ("expected: " + expectedFileName);
 			Console.WriteLine ("but was: " + ex.FileName);
 			return 1;
 		} finally {
 			AppDomain.Unload (domain);
 		}
 	}
+
+#if MONO
+	private const string expectedFileName = "library, Version=1.2.3.4, Culture=neutral";
+#elif NET_2_0
+	private const string expectedFileName = "library, Version=1.2.3.4, Culture=neutral, PublicKeyToken=null";
+#else
+	private const string expectedFileName = "library";
+#endif
 
 	[Serializable ()]
 	private class Bug76757Handler1
