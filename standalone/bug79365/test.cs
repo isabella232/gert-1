@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Reflection;
 
 class T
@@ -24,7 +25,7 @@ class T
 		}
 
 		Assembly a = Assembly.Load (names [1]);
-		if (!a.CodeBase.EndsWith ("lib.dll")) {
+		if (!CultureInfo.InvariantCulture.CompareInfo.IsSuffix (a.CodeBase, "lib.dll", CompareOptions.IgnoreCase)) {
 			Console.WriteLine ("#4: " + a.CodeBase);
 			return 1;
 		}
