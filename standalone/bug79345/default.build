@@ -1,4 +1,12 @@
 <project name="bug79345" default="rebuild">
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
 	<property name="frameworks" value="mono-2.0,net-2.0" />
 	
 	<target name="clean">
@@ -26,7 +34,7 @@
 	</target>
 
 	<target name="compile">
-		<csc target="exe" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
