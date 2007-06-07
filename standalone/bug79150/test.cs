@@ -1,6 +1,6 @@
 using System;
 
-public class TypedReferenceTypeCodeTest
+class Program
 {
 	static int Main ()
 	{

@@ -1,5 +1,13 @@
 <project name="bug79088" default="rebuild">
-	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
 
 	<target name="clean">
 		<delete>
@@ -15,6 +23,7 @@
 		<foreach property="framework" item="String" in="${frameworks}" delim=",">
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
 				<call target="compile" />
 				<call target="clean" />
 			</if>
