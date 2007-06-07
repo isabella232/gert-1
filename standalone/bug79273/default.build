@@ -31,6 +31,7 @@
 		<foreach property="framework" item="String" in="${frameworks}" delim=",">
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
 				<call target="compile" />
 				<call target="clean" />
 			</if>
