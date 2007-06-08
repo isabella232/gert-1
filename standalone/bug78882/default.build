@@ -1,0 +1,92 @@
+<project name="bug78882" default="rebuild">
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="Client.exe" />
+				<include name="Server.exe" />
+				<include name="ServerLib.dll" />
+				<include name="Interfaces.exe" />
+				<include name="out" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<csc target="library" define="${csc.defines}" output="ServerLib.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Remoting.cs" />
+				<include name="ServerLib.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Client.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Client.cs" />
+			</sources>
+			<references>
+				<include name="ServerLib.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Server.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Server.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="ServerLib.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Interfaces.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Interfaces.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="Server.exe" managed="true" pidproperty="server.pid" spawn="true" />
+		<trycatch>
+			<try>
+				<exec program="Client.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}">#1</fail>
+			</try>
+			<finally>
+				<kill pid="${server.pid}" />
+			</finally>
+		</trycatch>
+		<exec program="Interfaces.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#2</fail>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
