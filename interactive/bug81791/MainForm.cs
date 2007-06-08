@@ -12,10 +12,9 @@ public class MainForm : Form
 		// _propertyGrid
 		// 
 		_propertyGrid = new PropertyGrid ();
-		_propertyGrid.Dock = DockStyle.Top;
 		_propertyGrid.HelpVisible = false;
-		_propertyGrid.SelectedObject = new Config ();
 		_propertyGrid.Size = new Size (405, 150);
+		_propertyGrid.SelectedObject = new Config ();
 		Controls.Add (_propertyGrid);
 		// 
 		// _tabControl
