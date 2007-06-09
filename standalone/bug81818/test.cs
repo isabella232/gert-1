@@ -1,6 +1,6 @@
 using System;
 
-public class MyClass
+class Program
 {
 	public class A
 	{
@@ -32,7 +32,7 @@ public class MyClass
 		}
 	}
 
-	static public void Main ()
+	static void Main ()
 	{
 		C myclass = new C ();
 		myclass.MouseClick ();
