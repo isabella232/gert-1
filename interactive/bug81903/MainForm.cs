@@ -24,6 +24,12 @@ class MainForm : Form
 		_menu.Dock = DockStyle.Top;
 		_menu.Size = new Size (170, 70);
 		// 
+		// _label
+		// 
+		_label = new ToolStripLabel ();
+		_label.Text = "Mono";
+		_menu.Items.Add (_label);
+		// 
 		// _menuItem
 		// 
 		_menuItem = new ToolStripMenuItem ();
@@ -60,6 +66,7 @@ class MainForm : Form
 
 	private CheckBox _showImageMarginCheckBox;
 	private ContextMenuStrip _menu;
+	private ToolStripLabel _label;
 	private ToolStripMenuItem _menuItem;
 }
 
@@ -84,7 +91,8 @@ public class InstructionsForm : Form
 			"1. Check the ShowImageMargin checkbox.{0}{0}" +
 			"2. Right-click on the form.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The contextmenu has a bar on the left to display images.",
+			"1. The Mono label is left-aligned.{0}{0}" +
+			"2. The contextmenu has a bar on the left to display images.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -104,7 +112,8 @@ public class InstructionsForm : Form
 			"1. Uncheck the ShowImageMargin checkbox.{0}{0}" +
 			"2. Right-click on the form.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The contextmenu does not have a bar on the left to display images.",
+			"1. The Mono label is left-aligned.{0}{0}" +
+			"2. The contextmenu does not have a bar on the left to display images.",
 			Environment.NewLine);
 		// 
 		// _tabPage2
@@ -116,7 +125,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (360, 180);
+		ClientSize = new Size (360, 195);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #81903";
