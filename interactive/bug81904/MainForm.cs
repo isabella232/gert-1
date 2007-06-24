@@ -17,6 +17,7 @@ public class MainForm : Form
 		// 
 		_notifyIcon = new NotifyIcon ();
 		_notifyIcon.ContextMenu = _contextMenu;
+		_notifyIcon.Click += new EventHandler (NotifyIcon_Click);
 		// 
 		// _bringToFrontMenuItem
 		// 
@@ -82,6 +83,27 @@ public class MainForm : Form
 		_tabPage2.Controls.Add (_bugDescriptionText2);
 		_tabControl.Controls.Add (_tabPage2);
 		// 
+		// _bugDescriptionText3
+		// 
+		_bugDescriptionText3 = new TextBox ();
+		_bugDescriptionText3.Dock = DockStyle.Fill;
+		_bugDescriptionText3.Multiline = true;
+		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Ensure another form is displayed on top of this one.{0}{0}" +
+			"2. Left-click the notify icon.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. The form is moved to the top of the z-order.{0}{0}" +
+			"2. The form is activated.",
+			Environment.NewLine);
+		// 
+		// _tabPage3
+		// 
+		_tabPage3 = new TabPage ();
+		_tabPage3.Text = "#3";
+		_tabPage3.Controls.Add (_bugDescriptionText3);
+		_tabControl.Controls.Add (_tabPage3);
+		// 
 		// MainForm
 		// 
 		ClientSize = new Size (300, 220);
@@ -112,6 +134,11 @@ public class MainForm : Form
 		_notifyIcon.Visible = true;
 	}
 
+	void NotifyIcon_Click (object sender, EventArgs e)
+	{
+		Activate ();
+	}
+
 	void BringToFrontMenuItem_Click (object sender, EventArgs e)
 	{
 		BringToFront ();
@@ -128,7 +155,9 @@ public class MainForm : Form
 	private MenuItem _activateMenuItem;
 	private TextBox _bugDescriptionText1;
 	private TextBox _bugDescriptionText2;
+	private TextBox _bugDescriptionText3;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 	private TabPage _tabPage2;
+	private TabPage _tabPage3;
 }
