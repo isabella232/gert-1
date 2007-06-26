@@ -32,19 +32,17 @@ class TinyHost : MarshalByRefObject
 		StringWriter sw = new StringWriter ();
 		h.Execute ("Default.aspx", sw);
 		string result = sw.ToString ();
-		string expected = string.Format (CultureInfo.InvariantCulture,
-			"/test/blah.txt{0}/test/blah.txt{0}/", Environment.NewLine);
+		string expected = "/test/blah.txt||/test/blah.txt||/";
 		if (result != expected) {
 			Console.WriteLine (result);
-			//return 1;
+			return 1;
 		}
 
 #if NET_2_0
 		sw.GetStringBuilder ().Length = 0;
 		h.Execute ("subdir" + Path.DirectorySeparatorChar + "Default.aspx", sw);
 		result = sw.ToString ();
-		expected = string.Format (CultureInfo.InvariantCulture,
-			"/test/blah.txt{0}/subdir/test/blah.txt{0}/subdir", Environment.NewLine);
+		expected = "/test/blah.txt||/subdir/test/blah.txt||/subdir";
 		if (result != expected) {
 			Console.WriteLine (result);
 			return 2;
@@ -55,8 +53,7 @@ class TinyHost : MarshalByRefObject
 		sw.GetStringBuilder ().Length = 0;
 		h.Execute ("Default.aspx", sw);
 		result = sw.ToString ();
-		expected = string.Format (CultureInfo.InvariantCulture,
-			"/sub/test/blah.txt{0}/sub/test/blah.txt{0}/sub", Environment.NewLine);
+		expected = "/sub/test/blah.txt||/sub/test/blah.txt||/sub";
 		if (result != expected) {
 			Console.WriteLine (result);
 			return 3;
@@ -66,8 +63,7 @@ class TinyHost : MarshalByRefObject
 		sw.GetStringBuilder ().Length = 0;
 		h.Execute ("subdir" + Path.DirectorySeparatorChar + "Default.aspx", sw);
 		result = sw.ToString ();
-		expected = string.Format (CultureInfo.InvariantCulture,
-			"/sub/test/blah.txt{0}/sub/subdir/test/blah.txt{0}/sub/subdir", Environment.NewLine);
+		expected = "/sub/test/blah.txt||/sub/subdir/test/blah.txt||/sub/subdir";
 		if (result != expected) {
 			Console.WriteLine (result);
 			return 4;
