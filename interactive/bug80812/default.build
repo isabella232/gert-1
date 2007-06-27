@@ -1,0 +1,26 @@
+<project name="bug80812" default="rebuild">
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean" />
+	
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="run">
+		<exec program="calculator.exe" managed="true" spawn="true" pidproperty="calculator.pid" />
+		<waitforexit pid="${calculator.pid}" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
