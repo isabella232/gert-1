@@ -1,8 +1,4 @@
-<project name="bug81917" default="rebuild">
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-	</target>
-
+<project name="bug81951" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
@@ -11,13 +7,13 @@
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
 	</target>
 
-	<property name="frameworks" value="mono-1.0,mono-2.0,net-2.0" />
+	<property name="frameworks" value="mono-2.0,net-2.0" />
 
 	<target name="clean">
 		<delete>
 			<fileset>
 				<include name="out" />
-				<include name="test.exe" />
+				<include name="test.dll" />
 			</fileset>
 		</delete>
 	</target>
@@ -38,18 +34,11 @@
 	</target>
 
 	<target name="compile">
-		<record name="out" action="Start" />
-		<csc target="exe" define="${csc.defines}" output="test.exe" unsafe="true" warnaserror="true" warninglevel="4" failonerror="false">
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
 		</csc>
-		<record name="out" action="Close" />
-		<fail if="${file::exists('test.exe')}">#1</fail>
-		<fail unless="${file::exists('out')}">#2</fail>
-		<loadfile file="out" property="out" />
-		<fail if="${string::index-of(out,'CS0214') == -1}">#3</fail>
-		<fail unless="${string::index-of(out,'NullReferenceException') == -1}">#4</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
