@@ -17,6 +17,18 @@ class Program
 		Assert.IsFalse (ci.IsReadOnly, "#B1");
 		Assert.IsFalse (ci.NumberFormat.IsReadOnly, "#B2");
 		Assert.IsFalse (ci.DateTimeFormat.IsReadOnly, "#B3");
+
+		ci = Thread.CurrentThread.CurrentUICulture;
+		Assert.IsTrue (ci.IsReadOnly, "#C1");
+		Assert.IsTrue (ci.NumberFormat.IsReadOnly, "#C2");
+		Assert.IsTrue (ci.DateTimeFormat.IsReadOnly, "#C3");
+
+		Thread.CurrentThread.CurrentUICulture = new CultureInfo ("nl-BE");
+
+		ci = Thread.CurrentThread.CurrentUICulture;
+		Assert.IsFalse (ci.IsReadOnly, "#D1");
+		Assert.IsFalse (ci.NumberFormat.IsReadOnly, "#D2");
+		Assert.IsFalse (ci.DateTimeFormat.IsReadOnly, "#D3");
 	}
 }
 
