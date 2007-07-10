@@ -11,6 +11,7 @@
 				<include name="out" />
 				<include name="test.dll" />
 				<include name="test.dll.dll" />
+				<include name="test.dll.so" />
 			</fileset>
 		</delete>
 	</target>
