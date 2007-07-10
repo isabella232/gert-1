@@ -1,0 +1,52 @@
+<project name="bug77886" default="rebuild">
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.dll" />
+				<include name="test.dll.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0649" />
+			</nowarn>
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="${framework::get-runtime-engine(framework::get-target-framework())}">
+			<arg value="--aot" />
+			<arg file="test.dll" />
+		</exec>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
