@@ -4,13 +4,12 @@ namespace Application
 {
 	public class App
 	{
-		public static void Main ()
+		static void Main ()
 		{
 			try {
 				MyClass c = new MyClass ();
 				c.Run ();
-			} catch (Exception ex) {
-				Console.WriteLine ("Got an exception: " + ex.Message);
+			} catch (Exception) {
 			}
 		}
 	}

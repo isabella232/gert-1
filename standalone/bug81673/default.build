@@ -1,18 +1,22 @@
 <project name="bug81673" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="expected.error" value="Unhandled Exception: System.TypeLoadException: Method 'Stop' in type 'Application.MyClass' from assembly 'test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' does not have an implementation." />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="expected.error" value="Unhandled Exception: System.TypeLoadException: Method 'Stop' in type 'Application.MyClass' from assembly 'test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' does not have an implementation." />
 	</target>
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="expected.error" value="Unhandled Exception: System.TypeLoadException: Method Stop in type Application.MyClass from assembly test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null does not have an implementation." />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="expected.error" value="Unhandled Exception: System.TypeLoadException: Method 'Stop' in type 'Application.MyClass' from assembly 'test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' does not have an implementation." />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -69,7 +73,7 @@
 		<fail if="${result == '0'}">#1</fail>
 		<fail unless="${file::exists('out')}">#1</fail>
 		<loadfile file="out" property="out" />
-		<fail if="${string::index-of(out,'Unhandled Exception: System.TypeLoadException: Method ''Stop'' in type ''Application.MyClass'' from assembly ''test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'' does not have an implementation.') == -1}">#2</fail>
+		<fail if="${string::index-of(out,expected.error) == -1}">#2</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
