@@ -65,8 +65,15 @@
 	</target>
 
 	<target name="run" depends="compile">
+		<if test="${framework::get-family(framework::get-target-framework()) == 'mono'}">
+			<exec program="${framework::get-runtime-engine(framework::get-target-framework())}" output="out">
+				<arg value="--optimize=-inline" />
+				<arg file="test.exe" />
+			</exec>
+			<fail if="${file::exists('out')}">#1</fail>
+		</if>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<fail if="${file::exists('out')}">#2</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
