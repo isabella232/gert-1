@@ -1,0 +1,7 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="Customer" type="CustomerType"/>
+    <xsd:complexType name="CustomerType">
+        <xsd:attribute name="name" type="xsd:string" />
+        <xsd:attribute name="address" type="xsd:string" default="-" />
+    </xsd:complexType>
+</xsd:schema> 
