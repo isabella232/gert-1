@@ -1,18 +1,22 @@
 <project name="bug61134" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="csc.ignorewarning" value="0169" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="csc.ignorewarning" value="0414,0169" />
 	</target>
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="csc.ignorewarning" value="0169" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="csc.ignorewarning" value="0414,0169" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -44,7 +48,7 @@
 	<target name="compile">
 		<csc target="exe" define="${csc.defines}" output="test.exe" unsafe="true" warnaserror="true" warninglevel="4">
 			<nowarn>
-				<warning number="0169" />
+				<warning number="${csc.ignorewarning}" />
 			</nowarn>
 			<sources>
 				<include name="test.cs" />
