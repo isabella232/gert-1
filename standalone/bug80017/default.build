@@ -1,4 +1,4 @@
-<project name="bug80944" default="rebuild">
+<project name="bug80017" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
 	</target>
@@ -44,8 +44,6 @@
 	<target name="compile">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
-				<include name="Assert.cs" />
-				<include name="SocketResponder.cs" />
 				<include name="test.cs" />
 			</sources>
 		</csc>
