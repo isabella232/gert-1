@@ -90,9 +90,9 @@ public class InstructionsForm : Form
 			"3. Click the icon of the Modal form in the taskbar.{0}{0}" +
 			"4. Click the icon of the Modal form in the taskbar.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 3, only the Modal form minimizes.{0}{0}" +
-			"2. On step 4, the Modal form is displayed again and remains the " +
-			"active form.",
+			"1. On step 3, the Modal and Owner forms minimize.{0}{0}" +
+			"2. On step 4, both forms are displayed again and the Modal form " +
+			"remains the active form.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
