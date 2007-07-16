@@ -44,7 +44,7 @@
 	<target name="compile">
 		<csc target="winexe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
-				<include name="MainForm	.cs" />
+				<include name="MainForm.cs" />
 			</sources>
 			<references>
 				<include name="System.Drawing.dll" />
