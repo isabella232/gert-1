@@ -11,10 +11,10 @@ public class RemotingClient
 		IDictionary channelProperties = new Hashtable ();
 		channelProperties ["typeFilterLevel"] = "Full";
 		m_sinkObj = (IRemoteLoggingSink) Activator.GetObject (typeof (IRemoteLoggingSink), "tcp://localhost:8085/LoggingSink", channelProperties);
-
 		LoggingEvent [] events = { new LoggingEvent ("whatever") };
+		m_sinkObj.LogEvents (events);
 
-		// Send the events
+		m_sinkObj = (IRemoteLoggingSink) Activator.GetObject (typeof (IRemoteLoggingSink), "tcp://localhost:8085/LoggingSink");
 		m_sinkObj.LogEvents (events);
 	}
 }
