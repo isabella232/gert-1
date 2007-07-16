@@ -20,6 +20,7 @@
 	<target name="clean">
 		<delete>
 			<fileset>
+				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
 		</delete>
@@ -53,6 +54,7 @@
 
 	<target name="run" depends="compile">
 		<exec program="test.exe" managed="true" />
+		<fail if="${file::exists('out')}" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
