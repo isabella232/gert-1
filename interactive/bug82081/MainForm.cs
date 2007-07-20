@@ -7,12 +7,18 @@ public class MainForm : Form
 {
 	public MainForm ()
 	{
-		_flatButton = new Button ();
-		_flatButton.FlatAppearance.BorderSize = 0;
-		_flatButton.FlatStyle = FlatStyle.Flat;
-		_flatButton.Location = new Point (120, 20);
-		_flatButton.Text = "OK";
-		Controls.Add (_flatButton);
+		_okButton = new Button ();
+		_okButton.FlatAppearance.BorderSize = 0;
+		_okButton.FlatStyle = FlatStyle.Flat;
+		_okButton.Location = new Point (60, 20);
+		_okButton.Text = "OK";
+		Controls.Add (_okButton);
+		_cancelButton = new Button ();
+		_cancelButton.FlatAppearance.BorderSize = 0;
+		_cancelButton.FlatStyle = FlatStyle.Flat;
+		_cancelButton.Location = new Point (180, 20);
+		_cancelButton.Text = "Cancel";
+		Controls.Add (_cancelButton);
 		// 
 		// MainForm
 		// 
@@ -35,7 +41,8 @@ public class MainForm : Form
 		instructionsForm.Show ();
 	}
 
-	private Button _flatButton;
+	private Button _okButton;
+	private Button _cancelButton;
 }
 
 public class InstructionsForm : Form
@@ -56,9 +63,9 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
-			"1. The button is flat.{0}{0}" +
-			"2. The button has no border.{0}{0}" +
-			"3. The button highlights on mouseover.",
+			"1. The Cancel button is flat.{0}{0}" +
+			"2. The Cancel button has no border.{0}{0}" +
+			"3. The Cancel button highlights on mouseover.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -68,15 +75,38 @@ public class InstructionsForm : Form
 		_tabPage1.Controls.Add (_bugDescriptionText1);
 		_tabControl.Controls.Add (_tabPage1);
 		// 
+		// _bugDescriptionText2
+		// 
+		_bugDescriptionText2 = new TextBox ();
+		_bugDescriptionText2.Dock = DockStyle.Fill;
+		_bugDescriptionText2.Multiline = true;
+		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Click on the OK button.{0}{0}" +
+			"2. Press Tab key.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. Focus rectangle is drawn around the Cancel button.{0}{0}" +
+			"2. The Cancel button highlights on mouseover.",
+			Environment.NewLine);
+		// 
+		// _tabPage2
+		// 
+		_tabPage2 = new TabPage ();
+		_tabPage2.Text = "#2";
+		_tabPage2.Controls.Add (_bugDescriptionText2);
+		_tabControl.Controls.Add (_tabPage2);
+		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (360, 150);
+		ClientSize = new Size (360, 190);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82081";
 	}
 
 	private TextBox _bugDescriptionText1;
+	private TextBox _bugDescriptionText2;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
+	private TabPage _tabPage2;
 }

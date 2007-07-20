@@ -9,25 +9,24 @@ public class MainForm : Form
 	{
 		_treeView = new TreeView ();
 		_treeView.Dock = DockStyle.Top;
-		_treeView.Height = 150;
-		_treeView.TabIndex = 0;
-		_treeView.MouseClick += new MouseEventHandler (TreeView_MouseClick);
+		_treeView.Height = 100;
 		Controls.Add (_treeView);
 		// 
-		// _eventsText
+		// _expandButton
 		// 
-		_eventsText = new TextBox ();
-		_eventsText.Dock = DockStyle.Bottom;
-		_eventsText.Height = 150;
-		_eventsText.Multiline = true;
-		Controls.Add (_eventsText);
+		_expandButton = new Button ();
+		_expandButton.Location = new Point (100, 110);
+		_expandButton.Size = new Size (70, 20);
+		_expandButton.Text = "Expand";
+		_expandButton.Click += new EventHandler (ResetButton_Click);
+		Controls.Add (_expandButton);
 		// 
 		// MainForm
 		// 
-		ClientSize = new Size (292, 310);
+		ClientSize = new Size (292, 140);
 		Location = new Point (250, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #81739";
+		Text = "bug #82154";
 		Load += new EventHandler (MainForm_Load);
 	}
 
@@ -39,22 +38,27 @@ public class MainForm : Form
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
-		TreeNode treeNode1 = new TreeNode ("Node1");
-		TreeNode treeNode0 = new TreeNode ("Node0", new TreeNode [] { treeNode1 });
-		_treeView.Nodes.Add (treeNode0);
-
+		Init ();
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
 	}
 
-	void TreeView_MouseClick (object sender, MouseEventArgs e)
+	void ResetButton_Click (object sender, EventArgs e)
 	{
-		_eventsText.AppendText ("TreeView => MouseClick (" + e.Button + ")"
-			+ Environment.NewLine);
+		_treeView.Nodes.Clear ();
+		Init ();
+		_treeView.ExpandAll ();
+	}
+
+	void Init ()
+	{
+		TreeNode treeNode1 = new TreeNode ("Node1");
+		TreeNode treeNode0 = new TreeNode ("Node0", new TreeNode [] { treeNode1 });
+		_treeView.Nodes.Add (treeNode0);
 	}
 
 	private TreeView _treeView;
-	private TextBox _eventsText;
+	private Button _expandButton;
 }
 
 public class InstructionsForm : Form
@@ -76,12 +80,9 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Dock = DockStyle.Fill;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
-			"1. Expand Node0.{0}{0}" +
-			"2. Right-click Node1.{0}{0}" +
+			"1. Click the Expand button.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The following events have fired:{0}{0}" +
-			"   TreeView => MouseClick (Left){0}" +
-			"   TreeView => MouseClick (Right)",
+			"1. Node0 is expanded.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -93,10 +94,10 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (330, 200);
+		ClientSize = new Size (330, 140);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #81739";
+		Text = "Instructions - bug #82154";
 	}
 
 	private TextBox _bugDescriptionText1;
