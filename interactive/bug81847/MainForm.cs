@@ -208,14 +208,12 @@ public class InstructionsForm : Form
 			"1. Click the Reset button.{0}{0}" +
 			"2. Check the LabelEdit checkbox.{0}{0}" +
 			"3. Click the text of Node1 (2x).{0}{0}" +
-			"4. Press Right-Arrow key.{0}{0}" +
-			"5. Press E key.{0}{0}" +
-			"6. Press Backspace key.{0}{0}" +
-			"7. Press Enter key.{0}{0}" +
+			"4. Change the label to \"New\".{0}{0}" +
+			"5. Press Esc key.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The following events have fired:{0}{0}" +
 			"   TreeView => BeforeLabelEdit (Node1 => null){0}" +
-			"   TreeView => AfterLabelEdit (Node1 => Node1){0}{0}" +
+			"   TreeView => AfterLabelEdit (Node1 => null){0}{0}" +
 			"2. The label of the node has not changed.",
 			Environment.NewLine);
 		// 
@@ -235,12 +233,16 @@ public class InstructionsForm : Form
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
 			"2. Check the LabelEdit checkbox.{0}{0}" +
-			"3. Check the Before cancel checkbox.{0}{0}" +
-			"4. Click the text of Node1 (2x).{0}{0}" +
+			"3. Click the text of Node1 (2x).{0}{0}" +
+			"4. Press Right-Arrow key.{0}{0}" +
+			"5. Press E key.{0}{0}" +
+			"6. Press Backspace key.{0}{0}" +
+			"7. Press Enter key.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The following events have fired:{0}{0}" +
-			"   TreeView => BeforeLabelEdit (Node1 => null){0}{0}" +
-			"2. The label of the node cannot be edited.",
+			"   TreeView => BeforeLabelEdit (Node1 => null){0}" +
+			"   TreeView => AfterLabelEdit (Node1 => Node1){0}{0}" +
+			"2. The label of the node has not changed.",
 			Environment.NewLine);
 		// 
 		// _tabPage4
@@ -259,15 +261,12 @@ public class InstructionsForm : Form
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
 			"2. Check the LabelEdit checkbox.{0}{0}" +
-			"3. Check the After cancel checkbox.{0}{0}" +
-			"4. Click text of Node1.{0}{0}" +
-			"5. Change the label to \"New\".{0}{0}" +
-			"6. Press Enter key.{0}{0}" +
+			"3. Check the Before cancel checkbox.{0}{0}" +
+			"4. Click the text of Node1 (2x).{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The following events have fired:{0}{0}" +
-			"   TreeView => BeforeLabelEdit (Node1 => null){0}" +
-			"   TreeView => AfterLabelEdit (Node1 => New){0}{0}" +
-			"2. The label of the node has not changed.",
+			"   TreeView => BeforeLabelEdit (Node1 => null){0}{0}" +
+			"2. The label of the node cannot be edited.",
 			Environment.NewLine);
 		// 
 		// _tabPage5
@@ -285,10 +284,16 @@ public class InstructionsForm : Form
 		_bugDescriptionText6.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Click text of Node1.{0}{0}" +
+			"2. Check the LabelEdit checkbox.{0}{0}" +
+			"3. Check the After cancel checkbox.{0}{0}" +
+			"4. Click text of Node1.{0}{0}" +
+			"5. Change the label to \"New\".{0}{0}" +
+			"6. Press Enter key.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. No events have fired.{0}{0}" +
-			"2. The label of the node cannot be edited.",
+			"1. The following events have fired:{0}{0}" +
+			"   TreeView => BeforeLabelEdit (Node1 => null){0}" +
+			"   TreeView => AfterLabelEdit (Node1 => New){0}{0}" +
+			"2. The label of the node has not changed.",
 			Environment.NewLine);
 		// 
 		// _tabPage6
@@ -297,6 +302,27 @@ public class InstructionsForm : Form
 		_tabPage6.Text = "#6";
 		_tabPage6.Controls.Add (_bugDescriptionText6);
 		_tabControl.Controls.Add (_tabPage6);
+		// 
+		// _bugDescriptionText7
+		// 
+		_bugDescriptionText7 = new TextBox ();
+		_bugDescriptionText7.Dock = DockStyle.Fill;
+		_bugDescriptionText7.Multiline = true;
+		_bugDescriptionText7.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Click the Reset button.{0}{0}" +
+			"2. Click text of Node1.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. No events have fired.{0}{0}" +
+			"2. The label of the node cannot be edited.",
+			Environment.NewLine);
+		// 
+		// _tabPage7
+		// 
+		_tabPage7 = new TabPage ();
+		_tabPage7.Text = "#7";
+		_tabPage7.Controls.Add (_bugDescriptionText7);
+		_tabControl.Controls.Add (_tabPage7);
 		// 
 		// InstructionsForm
 		// 
@@ -312,6 +338,7 @@ public class InstructionsForm : Form
 	private TextBox _bugDescriptionText4;
 	private TextBox _bugDescriptionText5;
 	private TextBox _bugDescriptionText6;
+	private TextBox _bugDescriptionText7;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 	private TabPage _tabPage2;
@@ -319,4 +346,5 @@ public class InstructionsForm : Form
 	private TabPage _tabPage4;
 	private TabPage _tabPage5;
 	private TabPage _tabPage6;
+	private TabPage _tabPage7;
 }
