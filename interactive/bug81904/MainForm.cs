@@ -17,6 +17,7 @@ public class MainForm : Form
 		// 
 		_notifyIcon = new NotifyIcon ();
 		_notifyIcon.ContextMenu = _contextMenu;
+		_notifyIcon.Click += new EventHandler (NotifyIcon_Click);
 		// 
 		// _bringToFrontMenuItem
 		// 
@@ -49,8 +50,10 @@ public class MainForm : Form
 			"2. Right-click the notify icon.{0}{0}" +
 			"3. Click the \"Bring to front...\" menu item.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The form is moved to the top of the z-order.{0}{0}" +
-			"2. The form is activated.",
+			"1. On step 2, the form is not moved to the top of the z-order.{0}{0}" +
+			"2. On step 3:{0}{0}" +
+			"   * The form is moved to the top of the z-order.{0}" +
+			"   * The form is activated.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -71,8 +74,10 @@ public class MainForm : Form
 			"2. Right-click the notify icon.{0}{0}" +
 			"3. Click the \"Activate...\" menu item.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The form is moved to the top of the z-order.{0}{0}" +
-			"2. The form is activated.",
+			"1. On step 2, the form is not moved to the top of the z-order.{0}{0}" +
+			"2. On step 3:{0}{0}" +
+			"   * The form is moved to the top of the z-order.{0}" +
+			"   * The form is activated.",
 			Environment.NewLine);
 		// 
 		// _tabPage2
@@ -105,7 +110,7 @@ public class MainForm : Form
 		// 
 		// MainForm
 		// 
-		ClientSize = new Size (300, 220);
+		ClientSize = new Size (300, 255);
 		StartPosition = FormStartPosition.CenterScreen;
 		Text = "bug #81904";
 		Load += new EventHandler (MainForm_Load);
@@ -131,6 +136,11 @@ public class MainForm : Form
 	{
 		_notifyIcon.Icon = Icon;
 		_notifyIcon.Visible = true;
+	}
+
+	void NotifyIcon_Click (object sender, EventArgs e)
+	{
+		Activate ();
 	}
 
 	void BringToFrontMenuItem_Click (object sender, EventArgs e)
