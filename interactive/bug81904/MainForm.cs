@@ -17,7 +17,6 @@ public class MainForm : Form
 		// 
 		_notifyIcon = new NotifyIcon ();
 		_notifyIcon.ContextMenu = _contextMenu;
-		_notifyIcon.Click += new EventHandler (NotifyIcon_Click);
 		// 
 		// _bringToFrontMenuItem
 		// 
@@ -132,11 +131,6 @@ public class MainForm : Form
 	{
 		_notifyIcon.Icon = Icon;
 		_notifyIcon.Visible = true;
-	}
-
-	void NotifyIcon_Click (object sender, EventArgs e)
-	{
-		Activate ();
 	}
 
 	void BringToFrontMenuItem_Click (object sender, EventArgs e)
