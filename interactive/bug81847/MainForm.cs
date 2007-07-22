@@ -286,7 +286,7 @@ public class InstructionsForm : Form
 			"1. Click the Reset button.{0}{0}" +
 			"2. Check the LabelEdit checkbox.{0}{0}" +
 			"3. Check the After cancel checkbox.{0}{0}" +
-			"4. Click text of Node1.{0}{0}" +
+			"4. Click the text of Node1 (2x).{0}{0}" +
 			"5. Change the label to \"New\".{0}{0}" +
 			"6. Press Enter key.{0}{0}" +
 			"Expected result:{0}{0}" +
@@ -311,7 +311,7 @@ public class InstructionsForm : Form
 		_bugDescriptionText7.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Click text of Node1.{0}{0}" +
+			"2. Click the text of Node1 (2x).{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. No events have fired.{0}{0}" +
 			"2. The label of the node cannot be edited.",
