@@ -33,6 +33,19 @@ public class MainForm : Form
 		_activateMenuItem.Click += new EventHandler (ActivateMenuItem_Click);
 		_contextMenu.MenuItems.Add (_activateMenuItem);
 		// 
+		// _separatorMenuItem
+		// 
+		_separatorMenuItem = new MenuItem ();
+		_separatorMenuItem.Text = "-";
+		_contextMenu.MenuItems.Add (_separatorMenuItem);
+		// 
+		// _activateOnClickMenuItem
+		// 
+		_activateOnClickMenuItem = new MenuItem ();
+		_activateOnClickMenuItem.Text = "Activate on Click";
+		_activateOnClickMenuItem.Click += new EventHandler (ActivateOnClickMenuItem_Click);
+		_contextMenu.MenuItems.Add (_activateOnClickMenuItem);
+		// 
 		// _tabControl
 		// 
 		_tabControl = new TabControl ();
@@ -94,8 +107,10 @@ public class MainForm : Form
 		_bugDescriptionText3.Multiline = true;
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
-			"1. Ensure another form is displayed on top of this one.{0}{0}" +
-			"2. Left-click the notify icon.{0}{0}" +
+			"1. Right-click the notify icon.{0}{0}" +
+			"2. Click the Activate on Click menu item.{0}{0}" +
+			"3. Ensure another form is displayed on top of this one.{0}{0}" +
+			"4. Left-click the notify icon.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The form is moved to the top of the z-order.{0}{0}" +
 			"2. The form is activated.",
@@ -133,14 +148,15 @@ public class MainForm : Form
 	}
 
 	void MainForm_Load (object sender, EventArgs e)
-	{
-		_notifyIcon.Icon = Icon;
+		{
+			_notifyIcon.Icon = Icon;
 		_notifyIcon.Visible = true;
 	}
 
 	void NotifyIcon_Click (object sender, EventArgs e)
 	{
-		Activate ();
+		if (_activateOnClickMenuItem.Checked)
+			Activate ();
 	}
 
 	void BringToFrontMenuItem_Click (object sender, EventArgs e)
@@ -153,10 +169,17 @@ public class MainForm : Form
 		Activate ();
 	}
 
+	void ActivateOnClickMenuItem_Click (object sender, EventArgs e)
+	{
+		_activateOnClickMenuItem.Checked = !_activateOnClickMenuItem.Checked;
+	}
+
 	private NotifyIcon _notifyIcon;
 	private ContextMenu _contextMenu;
 	private MenuItem _bringToFrontMenuItem;
 	private MenuItem _activateMenuItem;
+	private MenuItem _activateOnClickMenuItem;
+	private MenuItem _separatorMenuItem;
 	private TextBox _bugDescriptionText1;
 	private TextBox _bugDescriptionText2;
 	private TextBox _bugDescriptionText3;
