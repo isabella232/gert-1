@@ -18,7 +18,7 @@ public class MainForm : Form
 		// 
 		_addExtensionLabel = new Label ();
 		_addExtensionLabel.Location = new Point (8, 8);
-		_addExtensionLabel.Size = new Size (80, 20);
+		_addExtensionLabel.Size = new Size (100, 20);
 		_addExtensionLabel.Text = "Add Extension:";
 		Controls.Add (_addExtensionLabel);
 		// 
@@ -120,7 +120,7 @@ public class MainForm : Form
 		// _resetButton
 		// 
 		_resetButton = new Button ();
-		_resetButton.Location = new Point (180, 180);
+		_resetButton.Location = new Point (295, 180);
 		_resetButton.Size = new Size (60, 20);
 		_resetButton.Text = "Reset";
 		_resetButton.Click += new EventHandler (ResetButton_Click);
