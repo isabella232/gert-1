@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://microsoft.com/webReference/" elementFormDefault="qualified" targetNamespace="http://microsoft.com/webReference/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="options">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="properties" />
+          <xs:enumeration value="newAsync" />
+          <xs:enumeration value="oldAsync" />
+          <xs:enumeration value="order" />
+          <xs:enumeration value="enableDataBinding" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="style">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="client" />
+      <xs:enumeration value="server" />
+      <xs:enumeration value="serverInterface" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="webReferenceOptions">
+    <xs:all>
+      <xs:element minOccurs="0" default="oldAsync" name="codeGenerationOptions" type="tns:options" />
+      <xs:element minOccurs="0" default="client" name="style" type="tns:style" />
+      <xs:element minOccurs="0" default="false" name="verbose" type="xs:boolean" />
+      <xs:element minOccurs="0" name="schemaImporterExtensions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="type" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="webReferenceOptions" type="tns:webReferenceOptions" />
+  <xs:complexType name="wsdlParameters">
+    <xs:all>
+      <xs:element minOccurs="0" name="appSettingBaseUrl" type="xs:string" />
+      <xs:element minOccurs="0" name="appSettingUrlKey" type="xs:string" />
+      <xs:element minOccurs="0" name="domain" type="xs:string" />
+      <xs:element minOccurs="0" name="out" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="proxy" type="xs:string" />
+      <xs:element minOccurs="0" name="proxydomain" type="xs:string" />
+      <xs:element minOccurs="0" name="proxypassword" type="xs:string" />
+      <xs:element minOccurs="0" name="proxyusername" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="namespace" type="xs:string" />
+      <xs:element minOccurs="0" name="language" type="xs:string" />
+      <xs:element minOccurs="0" name="protocol" type="xs:string" />
+      <xs:element minOccurs="0" name="nologo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="parsableerrors" type="xs:boolean" />
+      <xs:element minOccurs="0" name="sharetypes" type="xs:boolean" />
+      <xs:element minOccurs="0" name="webReferenceOptions" type="tns:webReferenceOptions" />
+      <xs:element minOccurs="0" name="documents">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="document" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="wsdlParameters" type="tns:wsdlParameters" />
+</xs:schema>
