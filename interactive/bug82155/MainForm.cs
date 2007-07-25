@@ -55,9 +55,8 @@ public class InstructionsForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
-		_bugDescriptionText1.Location = new Point (8, 8);
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
 			"1. Node0 is expanded.{0}{0}" +
