@@ -53,7 +53,6 @@ public class MainForm : Form
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
-
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
 	}
@@ -167,7 +166,7 @@ public class InstructionsForm : Form
 		ClientSize = new Size (300, 300);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #79777";
+		Text = "Instructions - bug #79829";
 	}
 
 	private TextBox _bugDescriptionText1;
