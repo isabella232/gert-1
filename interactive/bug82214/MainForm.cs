@@ -8,11 +8,11 @@ public class MainForm : Form
 	public MainForm ()
 	{
 		// 
-		// _sfd
+		// _ofd
 		// 
-		_sfd = new SaveFileDialog ();
-		_sfd.Filter = DefaultFilter;
-		_sfd.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+		_ofd = new OpenFileDialog ();
+		_ofd.Filter = DefaultFilter;
+		_ofd.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
 		// 
 		// _addExtensionLabel
 		// 
@@ -25,7 +25,7 @@ public class MainForm : Form
 		// _addExtensionCheckBox
 		// 
 		_addExtensionCheckBox = new CheckBox ();
-		_addExtensionCheckBox.Checked = _sfd.AddExtension;
+		_addExtensionCheckBox.Checked = _ofd.AddExtension;
 		_addExtensionCheckBox.Location = new Point (115, 8);
 		_addExtensionCheckBox.Size = new Size (100, 20);
 		Controls.Add (_addExtensionCheckBox);
@@ -41,31 +41,15 @@ public class MainForm : Form
 		// _checkFileExistsCheckBox
 		// 
 		_checkFileExistsCheckBox = new CheckBox ();
-		_checkFileExistsCheckBox.Checked = _sfd.CheckFileExists;
+		_checkFileExistsCheckBox.Checked = _ofd.CheckFileExists;
 		_checkFileExistsCheckBox.Location = new Point (115, 35);
 		_checkFileExistsCheckBox.Size = new Size (100, 20);
 		Controls.Add (_checkFileExistsCheckBox);
 		// 
-		// _createPromptLabel
-		// 
-		_createPromptLabel = new Label ();
-		_createPromptLabel.Location = new Point (8, 62);
-		_createPromptLabel.Size = new Size (100, 20);
-		_createPromptLabel.Text = "CreatePrompt:";
-		Controls.Add (_createPromptLabel);
-		// 
-		// _createPromptCheckBox
-		// 
-		_createPromptCheckBox = new CheckBox ();
-		_createPromptCheckBox.Checked = _sfd.CreatePrompt;
-		_createPromptCheckBox.Location = new Point (115, 62);
-		_createPromptCheckBox.Size = new Size (100, 20);
-		Controls.Add (_createPromptCheckBox);
-		// 
 		// _defaultExtensionLabel
 		// 
 		_defaultExtensionLabel = new Label ();
-		_defaultExtensionLabel.Location = new Point (8, 92);
+		_defaultExtensionLabel.Location = new Point (8, 62);
 		_defaultExtensionLabel.Size = new Size (80, 20);
 		_defaultExtensionLabel.Text = "DefaultExt:";
 		Controls.Add (_defaultExtensionLabel);
@@ -73,14 +57,14 @@ public class MainForm : Form
 		// _defaultExtensionText
 		// 
 		_defaultExtensionText = new TextBox ();
-		_defaultExtensionText.Location = new Point (115, 92);
+		_defaultExtensionText.Location = new Point (115, 62);
 		_defaultExtensionText.Size = new Size (100, 20);
 		Controls.Add (_defaultExtensionText);
 		// 
 		// _filterIndexLabel
 		// 
 		_filterIndexLabel = new Label ();
-		_filterIndexLabel.Location = new Point (8, 119);
+		_filterIndexLabel.Location = new Point (8, 92);
 		_filterIndexLabel.Size = new Size (80, 20);
 		_filterIndexLabel.Text = "FilterIndex:";
 		Controls.Add (_filterIndexLabel);
@@ -88,7 +72,7 @@ public class MainForm : Form
 		// _filterIndexValue
 		// 
 		_filterIndexValue = new NumericUpDown ();
-		_filterIndexValue.Location = new Point (115, 119);
+		_filterIndexValue.Location = new Point (115, 92);
 		_filterIndexValue.Minimum = -5;
 		_filterIndexValue.Maximum = int.MaxValue;
 		Controls.Add (_filterIndexValue);
@@ -96,7 +80,7 @@ public class MainForm : Form
 		// _filterLabel
 		// 
 		_filterLabel = new Label ();
-		_filterLabel.Location = new Point (8, 146);
+		_filterLabel.Location = new Point (8, 119);
 		_filterLabel.Size = new Size (80, 20);
 		_filterLabel.Text = "Filter:";
 		Controls.Add (_filterLabel);
@@ -104,14 +88,14 @@ public class MainForm : Form
 		// _filterText
 		// 
 		_filterText = new TextBox ();
-		_filterText.Location = new Point (115, 146);
+		_filterText.Location = new Point (115, 119);
 		_filterText.Size = new Size (320, 20);
 		Controls.Add (_filterText);
 		// 
 		// _fileNameLabel
 		// 
 		_fileNameLabel = new Label ();
-		_fileNameLabel.Location = new Point (8, 173);
+		_fileNameLabel.Location = new Point (8, 146);
 		_fileNameLabel.Size = new Size (80, 20);
 		_fileNameLabel.Text = "FileName:";
 		Controls.Add (_fileNameLabel);
@@ -119,41 +103,25 @@ public class MainForm : Form
 		// _fileNameText
 		// 
 		_fileNameText = new TextBox ();
-		_fileNameText.Location = new Point (115, 173);
+		_fileNameText.Location = new Point (115, 146);
 		_fileNameText.ReadOnly = true;
 		_fileNameText.Size = new Size (320, 20);
 		_fileNameText.TextAlign = HorizontalAlignment.Right;
 		Controls.Add (_fileNameText);
 		// 
-		// _overwritePromptLabel
+		// _openFileButton
 		// 
-		_overwritePromptLabel = new Label ();
-		_overwritePromptLabel.Location = new Point (8, 200);
-		_overwritePromptLabel.Size = new Size (100, 20);
-		_overwritePromptLabel.Text = "OverwritePrompt:";
-		Controls.Add (_overwritePromptLabel);
-		// 
-		// _overwritePromptCheckBox
-		// 
-		_overwritePromptCheckBox = new CheckBox ();
-		_overwritePromptCheckBox.Checked = _sfd.OverwritePrompt;
-		_overwritePromptCheckBox.Location = new Point (115, 200);
-		_overwritePromptCheckBox.Size = new Size (100, 20);
-		Controls.Add (_overwritePromptCheckBox);
-		// 
-		// _saveFileButton
-		// 
-		_saveFileButton = new Button ();
-		_saveFileButton.Location = new Point (60, 230);
-		_saveFileButton.Size = new Size (80, 20);
-		_saveFileButton.Text = "Save File";
-		_saveFileButton.Click += new EventHandler (SaveFileButton_Click);
-		Controls.Add (_saveFileButton);
+		_openFileButton = new Button ();
+		_openFileButton.Location = new Point (60, 180);
+		_openFileButton.Size = new Size (80, 20);
+		_openFileButton.Text = "Open File";
+		_openFileButton.Click += new EventHandler (OpenFileButton_Click);
+		Controls.Add (_openFileButton);
 		// 
 		// _resetButton
 		// 
 		_resetButton = new Button ();
-		_resetButton.Location = new Point (295, 230);
+		_resetButton.Location = new Point (295, 180);
 		_resetButton.Size = new Size (60, 20);
 		_resetButton.Text = "Reset";
 		_resetButton.Click += new EventHandler (ResetButton_Click);
@@ -161,10 +129,10 @@ public class MainForm : Form
 		// 
 		// MainForm
 		// 
-		ClientSize = new Size (445, 260);
+		ClientSize = new Size (445, 210);
 		Location = new Point (150, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #82184";
+		Text = "bug #82214";
 		Load += new EventHandler (MainForm_Load);
 	}
 
@@ -185,50 +153,42 @@ public class MainForm : Form
 	void ResetButton_Click (object sender, EventArgs e)
 	{
 		_addExtensionCheckBox.Checked = true;
-		_checkFileExistsCheckBox.Checked = false;
-		_createPromptCheckBox.Checked = false;
+		_checkFileExistsCheckBox.Checked = true;
 		_defaultExtensionText.Text = string.Empty;
 		_filterIndexValue.Value = 1;
 		_filterText.Text = DefaultFilter;
 		_fileNameText.Text = string.Empty;
-		_overwritePromptCheckBox.Checked = true;
-		_sfd.FileName = string.Empty;
+		_ofd.FileName = string.Empty;
 	}
 
-	void SaveFileButton_Click (object sender, EventArgs e)
+	void OpenFileButton_Click (object sender, EventArgs e)
 	{
-		_sfd.AddExtension = _addExtensionCheckBox.Checked;
-		_sfd.CheckFileExists = _checkFileExistsCheckBox.Checked;
-		_sfd.CreatePrompt = _createPromptCheckBox.Checked;
-		_sfd.DefaultExt = _defaultExtensionText.Text;
-		_sfd.Filter = _filterText.Text;
-		_sfd.FilterIndex = (int) _filterIndexValue.Value;
-		_sfd.OverwritePrompt = _overwritePromptCheckBox.Checked;
-		_sfd.ShowDialog ();
+		_ofd.AddExtension = _addExtensionCheckBox.Checked;
+		_ofd.CheckFileExists = _checkFileExistsCheckBox.Checked;
+		_ofd.DefaultExt = _defaultExtensionText.Text;
+		_ofd.Filter = _filterText.Text;
+		_ofd.FilterIndex = (int) _filterIndexValue.Value;
+		_ofd.ShowDialog ();
 
 		Init ();
 	}
 
 	void Init ()
 	{
-		_addExtensionCheckBox.Checked = _sfd.AddExtension;
-		_checkFileExistsCheckBox.Checked = _sfd.CheckFileExists;
-		_createPromptCheckBox.Checked = _sfd.CreatePrompt;
-		_defaultExtensionText.Text = _sfd.DefaultExt;
-		_filterIndexValue.Value = _sfd.FilterIndex;
-		_filterText.Text = _sfd.Filter;
-		_fileNameText.Text = _sfd.FileName;
+		_addExtensionCheckBox.Checked = _ofd.AddExtension;
+		_checkFileExistsCheckBox.Checked = _ofd.CheckFileExists;
+		_defaultExtensionText.Text = _ofd.DefaultExt;
+		_filterIndexValue.Value = _ofd.FilterIndex;
+		_filterText.Text = _ofd.Filter;
+		_fileNameText.Text = _ofd.FileName;
 		_fileNameText.SelectionStart = _fileNameText.Text.Length;
-		_overwritePromptCheckBox.Checked = _sfd.OverwritePrompt;
 	}
 
-	private SaveFileDialog _sfd;
+	private OpenFileDialog _ofd;
 	private Label _addExtensionLabel;
 	private CheckBox _addExtensionCheckBox;
 	private Label _checkFileExistsLabel;
 	private CheckBox _checkFileExistsCheckBox;
-	private Label _createPromptLabel;
-	private CheckBox _createPromptCheckBox;
 	private Label _defaultExtensionLabel;
 	private TextBox _defaultExtensionText;
 	private Label _filterIndexLabel;
@@ -237,10 +197,8 @@ public class MainForm : Form
 	private TextBox _filterText;
 	private Label _fileNameLabel;
 	private TextBox _fileNameText;
-	private Label _overwritePromptLabel;
-	private CheckBox _overwritePromptCheckBox;
 	private Button _resetButton;
-	private Button _saveFileButton;
+	private Button _openFileButton;
 
 	private const string DefaultFilter = "Executables|*.dll;*.exe|Build Scripts|*.cmd;*.build|XML Files|*.xml|All Files|*";
 }
@@ -264,11 +222,12 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of FilterIndex to 6.{0}{0}" +
-			"3. Clear the value of Filter textbox.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"6. Click the Cancel button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of FilterIndex to 6.{0}{0}" +
+			"4. Clear the value of Filter textbox.{0}{0}" +
+			"5. Click the Open File button.{0}{0}" +
+			"6. Enter \"abc\" in the File name combobox.{0}{0}" +
+			"7. Click the Cancel button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 6.{0}{0}" +
 			"2. The FileName is empty.",
@@ -289,12 +248,13 @@ public class InstructionsForm : Form
 		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Change the value of FilterIndex to 6.{0}{0}" +
-			"4. Clear the value of Filter textbox.{0}{0}" +
-			"5. Click the Save File button.{0}{0}" +
-			"6. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"7. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"4. Change the value of FilterIndex to 6.{0}{0}" +
+			"5. Clear the value of Filter textbox.{0}{0}" +
+			"6. Click the Open File button.{0}{0}" +
+			"7. Enter \"abc\" in the File name combobox.{0}{0}" +
+			"8. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 0.{0}{0}" +
 			"2. The file name part of FileName is \"abc.doc\".",
@@ -315,11 +275,12 @@ public class InstructionsForm : Form
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Change the value of FilterIndex to 6.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"4. Change the value of FilterIndex to 6.{0}{0}" +
+			"5. Click the Open File button.{0}{0}" +
+			"6. Enter \"abc\" in the File name combobox.{0}{0}" +
+			"7. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 1.{0}{0}" +
 			"2. The file name part of FileName is \"abc.dll\".",
@@ -340,10 +301,11 @@ public class InstructionsForm : Form
 		_bugDescriptionText4.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of FilterIndex to 4.{0}{0}" +
-			"3. Click the Save File button.{0}{0}" +
-			"4. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"5. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of FilterIndex to 4.{0}{0}" +
+			"4. Click the Open File button.{0}{0}" +
+			"5. Enter \"abc\" in the File name combobox.{0}{0}" +
+			"6. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 4.{0}{0}" +
 			"2. The file name part of FileName is \"abc\".",
@@ -364,11 +326,12 @@ public class InstructionsForm : Form
 		_bugDescriptionText5.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Change the value of FilterIndex to 4.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"4. Change the value of FilterIndex to 4.{0}{0}" +
+			"5. Click the Open File button.{0}{0}" +
+			"6. Enter \"abc\" in the File name combobox.{0}{0}" +
+			"7. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 4.{0}{0}" +
 			"2. The file name part of FileName is \"abc.doc\".",
@@ -389,13 +352,14 @@ public class InstructionsForm : Form
 		_bugDescriptionText6.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Click the Save File button.{0}{0}" +
-			"4. Enter \"test\" in the File name combobox.{0}{0}" +
-			"5. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"txt\".{0}{0}" +
+			"4. Click the Open File button.{0}{0}" +
+			"5. Enter \"test\" in the File name combobox.{0}{0}" +
+			"6. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 1.{0}{0}" +
-			"2. The file name part of FileName is \"test.dll\".",
+			"2. The file name part of FileName is \"test.txt\".",
 			Environment.NewLine);
 		// 
 		// _tabPage6
@@ -413,14 +377,13 @@ public class InstructionsForm : Form
 		_bugDescriptionText7.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Check the CheckFileExists checkbox.{0}{0}" +
-			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"test\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"3. Click the Open File button.{0}{0}" +
+			"4. Enter \"test\" in the File name combobox.{0}{0}" +
+			"5. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. A dialog box is displayed stating that \"test.dll\" does not " +
-			"exist.",
+			"1. The value of FilterIndex is 1.{0}{0}" +
+			"2. The file name part of FileName is \"test.doc\".",
 			Environment.NewLine);
 		// 
 		// _tabPage7
@@ -438,14 +401,13 @@ public class InstructionsForm : Form
 		_bugDescriptionText8.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Check the CheckFileExists checkbox.{0}{0}" +
-			"3. Click the Save File button.{0}{0}" +
+			"2. Change the value of DefaultExt to \"txt\".{0}{0}" +
+			"3. Click the Open File button.{0}{0}" +
 			"4. Enter \"test\" in the File name combobox.{0}{0}" +
-			"5. Click the Save button.{0}{0}" +
+			"5. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. An \"overwrite\" confirmation dialog box is displayed.{0}{0}" +
-			"2. The value of FilterIndex is 1.{0}{0}" +
-			"3. The file name part of FileName is \"test.exe\".",
+			"1. The value of FilterIndex is 1.{0}{0}" +
+			"2. The file name part of FileName is \"test.exe\".",
 			Environment.NewLine);
 		// 
 		// _tabPage8
@@ -463,14 +425,15 @@ public class InstructionsForm : Form
 		_bugDescriptionText9.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Change the value of FilterIndex to 3.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"abc\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"4. Change the value of FilterIndex to 3.{0}{0}" +
+			"5. Click the Open File button.{0}{0}" +
+			"6. Enter \"abc.txt\" in the File name combobox.{0}{0}" +
+			"7. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 3.{0}{0}" +
-			"2. The file name part of FileName is \"abc.xml\".",
+			"2. The file name part of FileName is \"abc.txt\".",
 			Environment.NewLine);
 		// 
 		// _tabPage9
@@ -488,14 +451,15 @@ public class InstructionsForm : Form
 		_bugDescriptionText10.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Reset button.{0}{0}" +
-			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"3. Change the value of FilterIndex to 3.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
-			"5. Enter \"abc.txt\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"2. Uncheck the CheckFileExists checkbox.{0}{0}" +
+			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
+			"4. Change the value of FilterIndex to 3.{0}{0}" +
+			"5. Click the Open File button.{0}{0}" +
+			"6. Enter \"tempfile\" in the File name combobox.{0}{0}" +
+			"7. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 3.{0}{0}" +
-			"2. The file name part of FileName is \"abc.txt\".",
+			"2. The file name part of FileName is \"tempfile.doc\".",
 			Environment.NewLine);
 		// 
 		// _tabPage10
@@ -515,12 +479,12 @@ public class InstructionsForm : Form
 			"1. Click the Reset button.{0}{0}" +
 			"2. Change the value of DefaultExt to \"doc\".{0}{0}" +
 			"3. Change the value of FilterIndex to 3.{0}{0}" +
-			"4. Click the Save File button.{0}{0}" +
+			"4. Click the Open File button.{0}{0}" +
 			"5. Enter \"tempfile\" in the File name combobox.{0}{0}" +
-			"6. Click the Save button.{0}{0}" +
+			"6. Click the Open button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The value of FilterIndex is 3.{0}{0}" +
-			"2. The file name part of FileName is \"tempfile.xml\".",
+			"2. The file name part of FileName is \"tempfile\".",
 			Environment.NewLine);
 		// 
 		// _tabPage11
@@ -530,89 +494,12 @@ public class InstructionsForm : Form
 		_tabPage11.Controls.Add (_bugDescriptionText11);
 		_tabControl.Controls.Add (_tabPage11);
 		// 
-		// _bugDescriptionText12
-		// 
-		_bugDescriptionText12 = new TextBox ();
-		_bugDescriptionText12.Dock = DockStyle.Fill;
-		_bugDescriptionText12.Multiline = true;
-		_bugDescriptionText12.Text = string.Format (CultureInfo.InvariantCulture,
-			"Steps to execute:{0}{0}" +
-			"1. Click the Reset button.{0}{0}" +
-			"2. Check the Check File Exists checkbox.{0}{0}" +
-			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"4. Change the value of FilterIndex to 3.{0}{0}" +
-			"5. Click the Save File button.{0}{0}" +
-			"6. Enter \"tempfile\" in the File name combobox.{0}{0}" +
-			"7. Click the Save button.{0}{0}" +
-			"Expected result:{0}{0}" +
-			"1. A dialog box is displayed stating that \"tempfile.xml\" does " +
-			"not exist.",
-			Environment.NewLine);
-		// 
-		// _tabPage12
-		// 
-		_tabPage12 = new TabPage ();
-		_tabPage12.Text = "#12";
-		_tabPage12.Controls.Add (_bugDescriptionText12);
-		_tabControl.Controls.Add (_tabPage12);
-		// 
-		// _bugDescriptionText13
-		// 
-		_bugDescriptionText13 = new TextBox ();
-		_bugDescriptionText13.Dock = DockStyle.Fill;
-		_bugDescriptionText13.Multiline = true;
-		_bugDescriptionText13.Text = string.Format (CultureInfo.InvariantCulture,
-			"Steps to execute:{0}{0}" +
-			"1. Click the Reset button.{0}{0}" +
-			"2. Check the Check File Exists checkbox.{0}{0}" +
-			"3. Change the value of DefaultExt to \"doc\".{0}{0}" +
-			"4. Change the value of FilterIndex to 4.{0}{0}" +
-			"5. Click the Save File button.{0}{0}" +
-			"6. Enter \"tempfile\" in the File name combobox.{0}{0}" +
-			"7. Click the Save button.{0}{0}" +
-			"Expected result:{0}{0}" +
-			"1. A dialog box is displayed stating that \"tempfile.doc\" does " +
-			"not exist.",
-			Environment.NewLine);
-		// 
-		// _tabPage13
-		// 
-		_tabPage13 = new TabPage ();
-		_tabPage13.Text = "#13";
-		_tabPage13.Controls.Add (_bugDescriptionText13);
-		_tabControl.Controls.Add (_tabPage13);
-		// 
-		// _bugDescriptionText14
-		// 
-		_bugDescriptionText14 = new TextBox ();
-		_bugDescriptionText14.Dock = DockStyle.Fill;
-		_bugDescriptionText14.Multiline = true;
-		_bugDescriptionText14.Text = string.Format (CultureInfo.InvariantCulture,
-			"Steps to execute:{0}{0}" +
-			"1. Click the Reset button.{0}{0}" +
-			"2. Check the Check File Exists checkbox.{0}{0}" +
-			"3. Click the Save File button.{0}{0}" +
-			"4. Enter \"tempfile\" in the File name combobox.{0}{0}" +
-			"5. Click the Save button.{0}{0}" +
-			"Expected result:{0}{0}" +
-			"1. An \"overwrite\" confirmation dialog box is displayed.{0}{0}" +
-			"2. The value of FilterIndex is 1.{0}{0}" +
-			"3. The file name part of FileName is \"tempfile\".",
-			Environment.NewLine);
-		// 
-		// _tabPage14
-		// 
-		_tabPage14 = new TabPage ();
-		_tabPage14.Text = "#14";
-		_tabPage14.Controls.Add (_bugDescriptionText14);
-		_tabControl.Controls.Add (_tabPage14);
-		// 
 		// InstructionsForm
 		// 
 		ClientSize = new Size (360, 345);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #82184";
+		Text = "Instructions - bug #82214";
 	}
 
 	private TextBox _bugDescriptionText1;
@@ -626,9 +513,6 @@ public class InstructionsForm : Form
 	private TextBox _bugDescriptionText9;
 	private TextBox _bugDescriptionText10;
 	private TextBox _bugDescriptionText11;
-	private TextBox _bugDescriptionText12;
-	private TextBox _bugDescriptionText13;
-	private TextBox _bugDescriptionText14;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 	private TabPage _tabPage2;
@@ -641,7 +525,4 @@ public class InstructionsForm : Form
 	private TabPage _tabPage9;
 	private TabPage _tabPage10;
 	private TabPage _tabPage11;
-	private TabPage _tabPage12;
-	private TabPage _tabPage13;
-	private TabPage _tabPage14;
 }

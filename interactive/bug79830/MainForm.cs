@@ -63,9 +63,9 @@ public class MainForm : Form
 	void ShowPreviewDialogButton_Click (object sender, EventArgs e)
 	{
 		PrintPreviewDialog ppd = new PrintPreviewDialog ();
-		ppd.ClientSize = new System.Drawing.Size (400, 300);
-		ppd.Location = new System.Drawing.Point (29, 29);
-		ppd.MinimumSize = new System.Drawing.Size (375, 250);
+		ppd.ClientSize = new Size (400, 300);
+		ppd.Location = new Point (29, 29);
+		ppd.MinimumSize = new Size (375, 250);
 		ppd.UseAntiAlias = true;
 
 		ppd.Document = new MyPrintDocument ();

@@ -1,4 +1,4 @@
-<project name="bug82184" default="rebuild">
+<project name="bug82214" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
 	</target>
@@ -22,6 +22,7 @@
 			<fileset>
 				<include name="out" />
 				<include name="tempfile" />
+				<include name="test" />
 				<include name="test.doc" />
 				<include name="test.exe" />
 			</fileset>
@@ -57,6 +58,7 @@
 
 	<target name="run" depends="compile">
 		<touch file="tempfile" />
+		<touch file="test" />
 		<touch file="test.doc" />
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />

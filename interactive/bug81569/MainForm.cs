@@ -105,8 +105,8 @@ public class InstructionsForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Ensure the ListView has focus.{0}{0}" +
