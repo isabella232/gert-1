@@ -60,7 +60,9 @@
 
 	<target name="run" depends="compile">
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<fail unless="${file::exists('out')}">#1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::starts-with(out, '0END')}">#2</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
