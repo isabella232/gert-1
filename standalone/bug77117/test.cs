@@ -133,10 +133,6 @@ class Program
 		return exitCode;
 	}
 
-	public class SimpleClass
-	{
-	}
-
 	public class Assert
 	{
 		public static int AreEqual (string a, string b, string comment)
@@ -149,4 +145,8 @@ class Program
 			return 0;
 		}
 	}
+}
+
+public class SimpleClass
+{
 }
