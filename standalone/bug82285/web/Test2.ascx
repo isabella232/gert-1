@@ -1,0 +1,1 @@
+<% @Control Language="C#" %><asp:Label id="Label2" runat="server">ASP.NET</asp:Label>
