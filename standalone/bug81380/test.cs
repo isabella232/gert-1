@@ -10,11 +10,6 @@ class Program
 		Bar bar = null;
 		if (bar is Bar)
 			Console.WriteLine ("got a bar");
-#if NET_2_0
-		int? num = null;
-		if (num is int)
-			Console.WriteLine ("got a nullable int");
-#endif
 	}
 }
 
