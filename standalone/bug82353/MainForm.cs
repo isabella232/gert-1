@@ -7,16 +7,15 @@ public class MainForm : Form
 {
 	public MainForm ()
 	{
-		_dataGrid = new DataGridView ();
-		_column = new DataGridViewTextBoxColumn ();
+		_dataGrid = new DataGrid ();
+		_column = new DataGridTextBoxColumn ();
 		SuspendLayout ();
 		((ISupportInitialize) (_dataGrid)).BeginInit ();
 		// 
 		// _dataGrid
 		// 
-		_dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-		_dataGrid.Columns.Add (_column);
-		_dataGrid.RowTemplate.Height = 21;
+		_dataGrid.TableStyles.Add (new DataGridTableStyle ());
+		_dataGrid.TableStyles [0].GridColumnStyles.Add (_column);
 		_dataGrid.Location = new Point (12, 115);
 		_dataGrid.Size = new Size (268, 146);
 		_dataGrid.TabIndex = 0;
@@ -46,6 +45,6 @@ public class MainForm : Form
 		Close ();
 	}
 
-	private DataGridView _dataGrid;
-	private DataGridViewTextBoxColumn _column;
+	private DataGrid _dataGrid;
+	private DataGridTextBoxColumn _column;
 }
