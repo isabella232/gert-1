@@ -70,14 +70,9 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Add a ComboBox button.{0}{0}" +
-			"2. Press the Tab key.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 1:{0}{0}" +
-			"   * a ComboBox is added at the top of the form.{0}" +
-			"   * the text of the ComboBox is \"Test b\".{0}" +
-			"   * the text is highlighted.{0}{0}" +
-			"2. On step 2, the cursor is blinking at the end of the text in " +
-			"the ComboBox.",
+			"1. A ComboBox is added at the top of the form.{0}{0}" +
+			"2. The text of the ComboBox is \"Test b\".",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -89,7 +84,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (360, 260);
+		ClientSize = new Size (300, 165);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82344";
