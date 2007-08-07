@@ -1,19 +1,27 @@
-<project name="bug79397" default="rebuild">
+<project name="bug77127" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	</target>
+
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
 	</target>
 
-	<property name="frameworks" value="mono-2.0,net-2.0" />
+	<property name="frameworks" value="mono-1.0,net-1.1,mono-2.0,net-2.0" />
 
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="a.dll" />
-				<include name="b.exe" />
+				<include name="out" />
+				<include name="test.exe" />
 			</fileset>
 		</delete>
 	</target>
@@ -34,31 +42,16 @@
 	</target>
 
 	<target name="compile">
-		<csc target="library" define="${csc.defines}" output="a.dll" warnaserror="true" warninglevel="4">
-			<nowarn>
-				<warning number="0168" />
-			</nowarn>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
-				<include name="a.cs" />
+				<include name="test.cs" />
 			</sources>
-		</csc>
-		<csc target="exe" define="${csc.defines}" output="b.exe" warnaserror="true" warninglevel="4">
-			<nowarn>
-				<warning number="0168" />
-			</nowarn>
-			<sources>
-				<include name="b.cs" />
-			</sources>
-			<references>
-				<include name="a.dll" />
-			</references>
 		</csc>
 	</target>
 
 	<target name="run" depends="compile">
-		<exec program="b.exe" managed="true" />
-		<
-		<exec program="ms/b.exe" managed="true" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
