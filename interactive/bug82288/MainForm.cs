@@ -77,11 +77,12 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
 			"1. Move the mouse cursor over button A.{0}{0}" +
-			"2. Move the mouse cursor over button B.{0}{0}" +
+			"2. Wait until the tooltip is displayed.{0}{0}" +
+			"3. Move the mouse cursor over button B.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 1, the tooltip for button A is displayed after 1 " +
 			"second.{0}{0}" +
-			"2. On step 2, the tooltip for button B is displayed immediately.",
+			"2. On step 3, the tooltip for button B is displayed immediately.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -93,7 +94,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 210);
+		ClientSize = new Size (300, 240);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82288";
