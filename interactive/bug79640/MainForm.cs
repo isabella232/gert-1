@@ -26,7 +26,7 @@ class MainForm : Form
 		_bugDescriptionText1.Dock = DockStyle.Fill;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result at start-up:{0}{0}" +
-			"1. The toolbar buttons do not displayed any mnemonic characters.{0}{0}" +
+			"1. The toolbar buttons do not display any mnemonic characters.{0}{0}" +
 			"2. The text of the toolbar buttons does not contain amperstants.",
 			Environment.NewLine);
 		// 

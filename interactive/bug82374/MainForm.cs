@@ -113,7 +113,7 @@ public class MainForm : Form
 		Location = new Point (200, 100);
 		MainMenuStrip = menuStrip;
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #81689";
+		Text = "bug #82374";
 		Load += new EventHandler (MainForm_Load);
 	}
 
@@ -210,14 +210,16 @@ public class InstructionsForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. In the File menu, click the Open menu item.{0}{0}" +
 			"2. Maximize the child form.{0}{0}" +
+			"3. Click on the child form.{0}{0}" +
+			"4. Press the Alt-D key.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The menu strip folds into the title bar of the child form.",
+			"1. The File menu is highlighted.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -227,36 +229,15 @@ public class InstructionsForm : Form
 		_tabPage1.Controls.Add (_bugDescriptionText1);
 		_tabControl.Controls.Add (_tabPage1);
 		// 
-		// _bugDescriptionText2
-		// 
-		_bugDescriptionText2 = new TextBox ();
-		_bugDescriptionText2.Multiline = true;
-		_bugDescriptionText2.Dock = DockStyle.Fill;
-		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
-			"Steps to execute:{0}{0}" +
-			"1. Restore the child form to its original size and position.{0}{0}" +
-			"Expected result:{0}{0}" +
-			"1. The menu strip unfolds from the title bar of the child form.",
-			Environment.NewLine);
-		// 
-		// _tabPage2
-		// 
-		_tabPage2 = new TabPage ();
-		_tabPage2.Text = "#2";
-		_tabPage2.Controls.Add (_bugDescriptionText2);
-		_tabControl.Controls.Add (_tabPage2);
-		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 170);
+		ClientSize = new Size (300, 220);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #81689";
+		Text = "Instructions - bug #82374";
 	}
 
 	private TextBox _bugDescriptionText1;
-	private TextBox _bugDescriptionText2;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
-	private TabPage _tabPage2;
 }
