@@ -261,11 +261,11 @@ public class InstructionsForm : Form
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Press the Alt+W key.{0}{0}" +
-			"3. Close the Windows menu.{0}{0}" +
+			"2. Close the Windows menu.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 1, the mnemonic characters in the toplevel and the " +
 			"non-toplevel menu items are underlined.{0}{0}" +
-			"2. On step 3, the mnemonic characters are {1} underlined.",
+			"2. On step 2, the mnemonic characters are {1} underlined.",
 			Environment.NewLine,
 			!SystemInformation.MenuAccessKeysUnderlined ? "no longer" : "still");
 		// 
