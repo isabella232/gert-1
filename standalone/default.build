@@ -8,6 +8,18 @@
 				<exclude name="${project::get-buildfile-path()}" />
 				<!-- exclude known issues -->
 				<excludesfile name="known-issues" />
+				<!-- exclude local tests -->
+				<excludesfile name="local-tests" />
+			</buildfiles>
+		</nant>
+	</target>
+
+	<target name="local-tests">
+		<nant target="rebuild">
+			<buildfiles>
+				<includesfile name="local-tests" />
+				<!-- exclude known issues -->
+				<excludesfile name="known-issues" />
 			</buildfiles>
 		</nant>
 	</target>
