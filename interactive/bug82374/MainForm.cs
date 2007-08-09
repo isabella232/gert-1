@@ -217,7 +217,7 @@ public class InstructionsForm : Form
 			"1. In the File menu, click the Open menu item.{0}{0}" +
 			"2. Maximize the child form.{0}{0}" +
 			"3. Click on the child form.{0}{0}" +
-			"4. Press the Alt-D key.{0}{0}" +
+			"4. Press the Alt+D key.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The File menu is highlighted.",
 			Environment.NewLine);
