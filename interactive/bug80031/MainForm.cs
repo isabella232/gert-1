@@ -34,7 +34,7 @@ public class MainForm : Form
 		// 
 		_tabControl = new TabControl ();
 		_tabControl.Dock = DockStyle.Bottom;
-		_tabControl.Height = 250;
+		_tabControl.Height = 265;
 		Controls.Add (_tabControl);
 		// 
 		// _statusBar
@@ -148,7 +148,7 @@ public class MainForm : Form
 		// MainForm
 		// 
 		AutoScaleBaseSize = new Size (5, 13);
-		ClientSize = new Size (456, 315);
+		ClientSize = new Size (456, 325);
 		StartPosition = FormStartPosition.CenterScreen;
 		Text = "bug #80031";
 		((ISupportInitialize) (_statusBarPanel2)).EndInit ();
