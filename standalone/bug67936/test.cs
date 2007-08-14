@@ -2,13 +2,13 @@ using System;
 using System.Drawing;
 using System.Globalization;
 
-class Program
-{
-	[STAThread]
-	static int Main ()
-	{
-		using (Image image = Image.FromFile ("peace.jpg")) {
-			return (image.HorizontalResolution > 0) ? 0 : 1;
-		}
-	}
+public class EntryPoint {
+    [STAThread]
+    static void Main(string[] args) {
+        using (Image image = Image.FromFile("peace.jpg")) {
+            Console.WriteLine(image.HorizontalResolution.ToString(
+                CultureInfo.InvariantCulture));
+        }
+    }
 }
+
