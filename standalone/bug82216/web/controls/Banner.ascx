@@ -10,7 +10,7 @@
             return Label1.Text;
         }
         set {
-            Label1.Text = value;
+            Label1.Text = "Custom" + value;
         }
     }
 </script>

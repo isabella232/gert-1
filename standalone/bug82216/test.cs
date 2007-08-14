@@ -43,9 +43,13 @@ class TinyHost : MarshalByRefObject
 			Console.WriteLine (result);
 			return 2;
 		}
-		if (!result.Contains ("<span id=\"MyBanner_Label1\">OK</span>")) {
+		if (!result.Contains ("<span id=\"MyLabel_Label1\">CustomFINE</span>")) {
 			Console.WriteLine (result);
 			return 3;
+		}
+		if (!result.Contains ("<span id=\"MyBanner_Label1\">CustomOK</span>")) {
+			Console.WriteLine (result);
+			return 4;
 		}
 #if MONO
 		if (!result.Contains ("<input id=\"TextBox2\" type=\"text\" value=\"Another TextBox\" name=\"TextBox2\" />")) {
@@ -53,7 +57,7 @@ class TinyHost : MarshalByRefObject
 		if (!result.Contains ("<input name=\"TextBox2\" type=\"text\" value=\"Another TextBox\" id=\"TextBox2\" />")) {
 #endif
 			Console.WriteLine (result);
-			return 4;
+			return 5;
 		}
 		return 0;
 	}
