@@ -41,10 +41,8 @@ public class MainForm : Form
 		// 
 		_statusBar = new StatusBar ();
 		_statusBar.Dock = DockStyle.Bottom;
-		//_statusBar.Location = new Point (0, 229);
 		_statusBar.Name = "_statusBar";
 		_statusBar.ShowPanels = true;
-		//_statusBar.Size = new Size (456, 22);
 		_statusBar.TabIndex = 0;
 		_statusBar.Text = "_statusBar";
 		Controls.Add (_statusBar);
@@ -79,9 +77,8 @@ public class MainForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
-		_bugDescriptionText1.Location = new Point (8, 8);
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
 			"1. The first panel shows the text \"Bye\".{0}{0}" +
@@ -102,9 +99,8 @@ public class MainForm : Form
 		// _bugDescriptionText2
 		// 
 		_bugDescriptionText2 = new TextBox ();
-		_bugDescriptionText2.Multiline = true;
-		_bugDescriptionText2.Location = new Point (8, 8);
 		_bugDescriptionText2.Dock = DockStyle.Fill;
+		_bugDescriptionText2.Multiline = true;
 		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to reproduce:{0}{0}" +
 			"1. Check the Large Text checkbox.{0}{0}" +
@@ -127,9 +123,8 @@ public class MainForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText3 = new TextBox ();
-		_bugDescriptionText3.Multiline = true;
-		_bugDescriptionText3.Location = new Point (8, 8);
 		_bugDescriptionText3.Dock = DockStyle.Fill;
+		_bugDescriptionText3.Multiline = true;
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to reproduce:{0}{0}" +
 			"1. Check the Large Text checkbox.{0}{0}" +
