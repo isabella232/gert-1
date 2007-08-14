@@ -1,4 +1,4 @@
-<project name="bug79988" default="rebuild">
+<project name="bug82441" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
 	</target>
@@ -42,16 +42,13 @@
 	</target>
 
 	<target name="compile">
-		<call target="${nant.settings.currentframework}" />
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0618" />
+			</nowarn>
 			<sources>
-				<include name="Assert.cs" />
-				<include name="SocketResponder.cs" />
 				<include name="test.cs" />
 			</sources>
-			<references>
-				<include name="System.Web.Services.dll" />
-			</references>
 		</csc>
 	</target>
 

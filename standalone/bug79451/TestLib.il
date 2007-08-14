@@ -6,20 +6,18 @@
 .file alignment 512
 .corflags 0x00000001
 
-.class public auto ansi beforefieldinit TestLib
-       extends [mscorlib]System.Object
+.class public auto ansi beforefieldinit TestLib extends [mscorlib]System.Object
 {
-  .field static privatescope int32 FOO
+	.field static privatescope int32 FOO
 
-  .method public hidebysig specialname static int32
-          get_FOO() cil managed
-  {
-    ldsfld      int32 TestLib::FOO
-    ret
-  }
+	.method public hidebysig specialname static int32 get_FOO() cil managed
+	{
+		ldsfld int32 TestLib::FOO
+		ret
+	}
 
-  .property int32 FOO()
-  {
-    .get int32 TestLib::get_FOO()
-  }
+	.property int32 FOO()
+	{
+		.get int32 TestLib::get_FOO()
+	}
 }
