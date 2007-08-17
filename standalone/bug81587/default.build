@@ -1,22 +1,26 @@
-<project name="bug81587" default="rebuild">
+<project name="bug82416" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
 		<property name="expect.failure" value="false" />
+		<property name="policy.supported" value="false" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 		<property name="expect.failure" value="true" />
+		<property name="policy.supported" value="true" />
 	</target>
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
 		<property name="expect.failure" value="false" />
+		<property name="policy.supported" value="false" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
 		<property name="expect.failure" value="true" />
+		<property name="policy.supported" value="true" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -25,6 +29,7 @@
 		<delete>
 			<fileset>
 				<include name="test.exe" />
+				<include name="test.exe.config" />
 			</fileset>
 		</delete>
 	</target>
@@ -53,8 +58,19 @@
 	</target>
 
 	<target name="run" depends="compile">
-		<exec program="test.exe" managed="true" resultproperty="exitcode" failonerror="${not(expect.failure)}" />
-		<fail if="${expect.failure and int::parse(exitcode) == 0}" />
+		<exec program="test.exe" managed="true" resultproperty="exitcode" failonerror="${not(expect.failure)}" output="out" />
+		<fail if="${expect.failure and int::parse(exitcode) == 0}">#A1</fail>
+		<fail unless="${file::exists('out')}">#A2</fail>
+		<loadfile file="out" property="out" />
+		<fail if="${string::index-of(out, 'Unhandled Exception: System.Exception: Exception from thread') == -1}">#A3</fail>
+		<delete file="out" />
+		<if test="${policy.supported}">
+			<copy file="policy.exe.config" tofile="test.exe.config" />
+			<exec program="test.exe" managed="true" output="out" />
+			<fail unless="${file::exists('out')}">#B1</fail>
+			<loadfile file="out" property="out" />
+			<fail if="${string::index-of(out, 'Unhandled Exception: System.Exception: Exception from thread') == -1}">#B2</fail>
+		</if>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />

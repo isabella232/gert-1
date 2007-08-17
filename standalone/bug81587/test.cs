@@ -5,7 +5,7 @@ class Program
 {
 	static void MyThreadStart ()
 	{
-		throw new Exception ();
+		throw new Exception ("Exception from thread");
 	}
 
 	static void Main ()
