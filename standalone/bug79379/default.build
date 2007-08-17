@@ -25,7 +25,9 @@
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
 				<call target="${nant.settings.currentframework}" />
-				<call target="run" />
+				<call target="run-compile" />
+				<call target="clean" />
+				<call target="run-assemble" />
 				<call target="clean" />
 			</if>
 		</foreach>
@@ -55,10 +57,25 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="assemble">
+		<ilasm target="dll" output="a.dll">
+			<sources>
+				<include name="a.il" />
+			</sources>
+		</ilasm>
+		<ilasm target="exe" output="b.exe">
+			<sources>
+				<include name="b.il" />
+			</sources>
+		</ilasm>
+	</target>
+
+	<target name="run-compile" depends="compile">
+			<exec program="b.exe" managed="true" />
+	</target>
+
+	<target name="run-assemble" depends="assemble">
 		<exec program="b.exe" managed="true" />
-		<
-		<exec program="ms/b.exe" managed="true" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
