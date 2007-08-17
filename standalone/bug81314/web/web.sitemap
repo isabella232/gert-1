@@ -1,0 +1,9 @@
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" enableLocalization="true">
+	<siteMapNode url="~/Index.aspx" title="$resources:SiteMapLocalizations,HomePageTitle">
+		<siteMapNode url="~/About.aspx" title="About" description="$resources:SiteMapLocalizations,AboutDescription" />
+		<siteMapNode url="~/Admin/Default.aspx" title="Admins" resourceKey="Admins" />
+		<siteMapNode url="~/Tester/Default.aspx" title="Tester" description="$resources:SiteMapLocalizations,TesterDescription,Default Tester description" />
+		<siteMapNode url="~/AuthUsers/Default.aspx" title="Auth Users Only" description="$resources:SiteMapLocalizations,AuthUsersDescription,AuthUserDefaultDescription!" />
+		<siteMapNode url="http://www.scottonwriting.net/sowBlog/" title="My Blog" roles="*" />
+	</siteMapNode>
+</siteMap>

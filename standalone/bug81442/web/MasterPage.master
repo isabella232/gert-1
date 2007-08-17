@@ -1,0 +1,27 @@
+<%@ Master Language="C#"%>
+<script runat="server">
+	public void Init ()
+	{
+		txtBx1.Text = "Mono Power!";
+	}
+
+	public void testingMethod()
+	{
+		txtBx1.Text = "Hello World";
+	}
+</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>MasterPage</title>
+</head>
+<body>
+<h1>Testing...</h1>
+<div id="container">
+<form runat="server">
+<asp:TextBox id="txtBx1" runat="server"/>
+    <asp:contentplaceholder id="contentPlaceHolder" runat="server" /> 
+</form>
+</div>
+</body>
+</html>
