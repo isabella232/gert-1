@@ -31,7 +31,11 @@ class TinyHost : MarshalByRefObject
 		StringWriter sw = new StringWriter ();
 		h.Execute ("Default.aspx", sw);
 		string result = sw.ToString ();
-		if (result.IndexOf ("Cannot find ContentPlaceHoldder 'ContentPlaceHolder2' in the master page '/MasterPage.master'") == -1) {
+#if MONO
+		if (result.IndexOf ("Cannot find ContentPlaceHolder 'ContentPlaceHolder2' in the master page '~/MasterPage.master'") == -1) {
+#else
+		if (result.IndexOf ("Cannot find ContentPlaceHolder 'ContentPlaceHolder2' in the master page '/MasterPage.master'") == -1) {
+#endif
 			Console.WriteLine (result);
 			return 1;
 		}
