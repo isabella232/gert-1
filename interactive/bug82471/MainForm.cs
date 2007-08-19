@@ -35,12 +35,12 @@ public class MainForm : Form
 		_tabNetwork.Text = "Network";
 		_tabControl.Controls.Add (_tabNetwork);
 		// 
-		// _tabAlerts
+		// _tabMyComputer
 		// 
-		_tabAlerts = new TabPage ();
-		_tabAlerts.TabIndex = 1;
-		_tabAlerts.Text = "Alerts";
-		_tabControl.Controls.Add (_tabAlerts);
+		_tabMyComputer = new TabPage ();
+		_tabMyComputer.TabIndex = 1;
+		_tabMyComputer.Text = "My Computer";
+		_tabControl.Controls.Add (_tabMyComputer);
 		// 
 		// _tabUpdates
 		// 
@@ -48,13 +48,6 @@ public class MainForm : Form
 		_tabUpdates.TabIndex = 3;
 		_tabUpdates.Text = "Updates";
 		_tabControl.Controls.Add (_tabUpdates);
-		// 
-		// _tabCalendar
-		// 
-		_tabCalendar = new TabPage ();
-		_tabCalendar.TabIndex = 5;
-		_tabCalendar.Text = "Calendar";
-		_tabControl.Controls.Add (_tabCalendar);
 		// 
 		// MainForm
 		// 
@@ -79,11 +72,10 @@ public class MainForm : Form
 
 	private System.Windows.Forms.TabControl _tabControl;
 	private System.Windows.Forms.TabPage _tabGeneral;
-	private System.Windows.Forms.TabPage _tabAlerts;
+	private System.Windows.Forms.TabPage _tabMyComputer;
 	private System.Windows.Forms.TabPage _tabNetwork;
 	private System.Windows.Forms.TabPage _tabUpdates;
 	private System.Windows.Forms.TabPage _tabLookAndFeel;
-	private System.Windows.Forms.TabPage _tabCalendar;
 }
 
 public class ChildForm : Form
@@ -128,9 +120,8 @@ public class InstructionsForm : Form
 			"   * General{0}" +
 			"   * Look And Feel{0}" +
 			"   * Network{0}" +
-			"   * Alerts{0}" +
-			"   * Updates{0}" +
-			"   * Calendar{0}{0}" +
+			"   * My Computer{0}" +
+			"   * Updates{0}{0}" +
 			"2. The text on each leaf is fully visible.",
 			Environment.NewLine);
 		// 
