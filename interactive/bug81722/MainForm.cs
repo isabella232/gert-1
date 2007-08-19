@@ -50,13 +50,15 @@ public class MainForm : Form
 			"Expected result:{0}{0}" +
 			"1. On step 2, a icon for this form is displayed in the window " +
 			"list.{0}{0}" +
-			"2. On step 3, this form is active again.",
+			"2. On step 3, this form is active again.{0}{0}" +
+			"Note:{0}" +
+			"On X11, this may not work.",
 			Environment.NewLine);
 		_tabPage2.Controls.Add (_bugDescriptionText2);
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (330, 220);
+		ClientSize = new Size (330, 255);
 		ShowInTaskbar = false;
 		StartPosition = FormStartPosition.CenterScreen;
 		Text = "bug #81722";
