@@ -13,6 +13,7 @@
 		<delete>
 			<fileset>
 				<include name="web/bin/**" />
+				<include name="web/libraries/**" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -36,7 +37,8 @@
 
 	<target name="compile">
 		<mkdir dir="web/bin" />
-		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.Security.dll" warnaserror="true" warninglevel="4">
+		<mkdir dir="web/libraries" />
+		<csc target="library" define="${csc.defines}" output="web/libraries/Mono.Web.Security.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="PasswordBox.cs" />
 				<include name="SecuredPanel.cs" />
