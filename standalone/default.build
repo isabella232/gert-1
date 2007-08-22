@@ -10,6 +10,8 @@
 				<excludesfile name="known-issues" />
 				<!-- exclude local tests -->
 				<excludesfile name="local-tests" />
+				<!-- exclude longrunning tests -->
+				<excludesfile name="longrunning-tests" />
 			</buildfiles>
 		</nant>
 	</target>
@@ -18,6 +20,16 @@
 		<nant target="rebuild">
 			<buildfiles>
 				<includesfile name="local-tests" />
+				<!-- exclude known issues -->
+				<excludesfile name="known-issues" />
+			</buildfiles>
+		</nant>
+	</target>
+
+	<target name="longrunning-tests">
+		<nant target="rebuild">
+			<buildfiles>
+				<includesfile name="longrunning-tests" />
 				<!-- exclude known issues -->
 				<excludesfile name="known-issues" />
 			</buildfiles>
