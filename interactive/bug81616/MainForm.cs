@@ -42,10 +42,19 @@ public class MainForm : Form
 		_checkBox3.TabIndex = 3;
 		_checkBox3.Text = "&Search it";
 		Controls.Add (_checkBox3);
+		//
+		// _listView
+		//
+		_listView = new ListView ();
+		_listView.Dock = DockStyle.Bottom;
+		_listView.Height = 50;
+		_listView.View = System.Windows.Forms.View.Details;
+		_listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+		Controls.Add (_listView);
 		// 
 		// MainForm
 		// 
-		ClientSize = new Size (170, 130);
+		ClientSize = new Size (170, 190);
 		Location = new Point (300, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "bug #81616";
@@ -61,6 +70,12 @@ public class MainForm : Form
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
+		ColumnHeader nameColumn = new ColumnHeader ();
+		nameColumn.Text = "Name";
+		_listView.Columns.Add (nameColumn);
+
+		_listView.Items.Add (new ListViewItem ("Rolf"));
+
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
 	}
@@ -69,6 +84,7 @@ public class MainForm : Form
 	private CheckBox _checkBox1;
 	private CheckBox _checkBox2;
 	private CheckBox _checkBox3;
+	private ListView _listView;
 }
 
 public class InstructionsForm : Form
@@ -85,8 +101,8 @@ public class InstructionsForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click in the textbox.{0}{0}" +
@@ -107,8 +123,8 @@ public class InstructionsForm : Form
 		// _bugDescriptionText2
 		// 
 		_bugDescriptionText2 = new TextBox ();
-		_bugDescriptionText2.Multiline = true;
 		_bugDescriptionText2.Dock = DockStyle.Fill;
+		_bugDescriptionText2.Multiline = true;
 		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click in the textbox.{0}{0}" +
@@ -125,6 +141,27 @@ public class InstructionsForm : Form
 		_tabPage2.Controls.Add (_bugDescriptionText2);
 		_tabControl.Controls.Add (_tabPage2);
 		// 
+		// _bugDescriptionText3
+		// 
+		_bugDescriptionText3 = new TextBox ();
+		_bugDescriptionText3.Dock = DockStyle.Fill;
+		_bugDescriptionText3.Multiline = true;
+		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Click the Rolf item in the ListView.{0}{0}" +
+			"2. Press the keys E, I and S.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. Focus stays in the ListView.{0}{0}" +
+			"2. The checked state of the checkboxes does not change.",
+			Environment.NewLine);
+		// 
+		// _tabPage3
+		// 
+		_tabPage3 = new TabPage ();
+		_tabPage3.Text = "#3";
+		_tabPage3.Controls.Add (_bugDescriptionText3);
+		_tabControl.Controls.Add (_tabPage3);
+		// 
 		// InstructionsForm
 		// 
 		ClientSize = new Size (300, 215);
@@ -135,7 +172,9 @@ public class InstructionsForm : Form
 
 	private TextBox _bugDescriptionText1;
 	private TextBox _bugDescriptionText2;
+	private TextBox _bugDescriptionText3;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 	private TabPage _tabPage2;
+	private TabPage _tabPage3;
 }
