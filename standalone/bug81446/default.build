@@ -60,6 +60,16 @@
 				<include name="System.Configuration.dll" />
 			</references>
 		</csc>
+		<csc target="library" define="${csc.defines}" output="web/libraries/Mono.Web1.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Index1.aspx.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web2.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Index2.aspx.cs" />
+			</sources>
+		</csc>
 		<csc target="library" define="${csc.defines}" output="web/bin/test.web.dll" warnaserror="true" warninglevel="4">
 			<nowarn>
 				<warning number="0618" />

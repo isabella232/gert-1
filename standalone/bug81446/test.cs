@@ -61,6 +61,26 @@ class TinyHost : MarshalByRefObject
 		}
 #endif
 
+		sw.GetStringBuilder ().Length = 0;
+		h.Execute ("Index1.aspx", sw);
+		result = sw.ToString ();
+		if (result.IndexOf ("Index1-OK") != -1) {
+			Console.WriteLine (result);
+			return 4;
+		}
+		if (result.IndexOf ("Could not load type 'Index1'") == -1) {
+			Console.WriteLine (result);
+			return 5;
+		}
+
+		sw.GetStringBuilder ().Length = 0;
+		h.Execute ("Index2.aspx", sw);
+		result = sw.ToString ();
+		if (result.IndexOf ("Index2-OK") == -1) {
+			Console.WriteLine (result);
+			return 6;
+		}
+
 		return 0;
 	}
 }
