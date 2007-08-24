@@ -130,6 +130,7 @@ public class InstructionsForm : Form
 			"1. Select the My Computer node.{0}{0}" +
 			"2. Click the Add Node button.{0}{0}" +
 			"3. Enter REFUSE as label.{0}{0}" +
+			"4. Press the Enter key.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The label changes back to \"New Node\".{0}{0}" +
 			"2. The label remains editable.",
@@ -144,7 +145,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 220);
+		ClientSize = new Size (300, 240);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82577";
