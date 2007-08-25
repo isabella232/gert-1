@@ -171,8 +171,8 @@ public class InstructionsForm : Form
 			"7. Click the OK button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 5:{0}{0}" +
-			"   * A dialog box is display stating that the folder " +
-			"could not be renamed.{0}" +
+			"   * A dialog box is displayed stating that the folder " +
+			"cannot be renamed.{0}" +
 			"   * The original label of the node is restored.{0}" +
 			"   * The label can still be edited.{0}{0}" + 
 			"2. On step 6:{0}{0}" +
