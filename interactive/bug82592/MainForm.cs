@@ -145,6 +145,7 @@ public class InstructionsForm : Form
 			"4. Press the Enter key.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 2:{0}{0}" +
+			"   * A new node is added below the \"Q:\\\" node.{0}" +
 			"   * The new node is scrolled into view.{0}" +
 			"   * The label of the new node can be edited.{0}" +
 			"   * The edit box has focus.{0}{0}" +
@@ -162,15 +163,49 @@ public class InstructionsForm : Form
 		_tabPage1.Controls.Add (_bugDescriptionText1);
 		_tabControl.Controls.Add (_tabPage1);
 		// 
+		// _bugDescriptionText2
+		// 
+		_bugDescriptionText2 = new TextBox ();
+		_bugDescriptionText2.Dock = DockStyle.Fill;
+		_bugDescriptionText2.Multiline = true;
+		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Expand the My Computer node.{0}{0}" +
+			"2. Select the My Computer node.{0}{0}" +
+			"3. Click the Add Node button.{0}{0}" +
+			"4. Enter \"MWF\" as label.{0}{0}" +
+			"5. Press the Enter key.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. On step 3:{0}{0}" +
+			"   * A new node is added below the \"Mono\" node.{0}" +
+			"   * The new node is scrolled into view.{0}" +
+			"   * The label of the new node can be edited.{0}" +
+			"   * The edit box has focus.{0}{0}" +
+			"2. On step 5:{0}{0}" +
+			"   * The label of the new node is \"Mono\".{0}" +
+			"   * The new node remains visible.{0}" +
+			"   * The My Computer node is highlighted.{0}" +
+			"   * The TreeView has focus.",
+			Environment.NewLine);
+		// 
+		// _tabPage2
+		// 
+		_tabPage2 = new TabPage ();
+		_tabPage2.Text = "#2";
+		_tabPage2.Controls.Add (_bugDescriptionText2);
+		_tabControl.Controls.Add (_tabPage2);
+		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 360);
+		ClientSize = new Size (300, 400);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82592";
 	}
 
 	private TextBox _bugDescriptionText1;
+	private TextBox _bugDescriptionText2;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
+	private TabPage _tabPage2;
 }
