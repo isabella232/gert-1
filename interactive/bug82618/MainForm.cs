@@ -93,6 +93,7 @@ public class MainForm : Form
 
 	void SelectFolderButton_Click (object sender, EventArgs e)
 	{
+		_fbd.SelectedPath = null;
 		DialogResult result = _fbd.ShowDialog (this);
 		_dialogResultText.Text = result.ToString ();
 
@@ -153,6 +154,33 @@ public class InstructionsForm : Form
 		_tabPage1.Controls.Add (_bugDescriptionText1);
 		_tabControl.Controls.Add (_tabPage1);
 		// 
+		// _bugDescriptionText2
+		// 
+		_bugDescriptionText2 = new TextBox ();
+		_bugDescriptionText2.Dock = DockStyle.Fill;
+		_bugDescriptionText2.Multiline = true;
+		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Click the Select button.{0}{0}" +
+			"2. Select the Desktop node.{0}{0}" +
+			"3. Click the Make New Folder button.{0}{0}" +
+			"4. Press the Esc key.{0}{0}" +
+			"5. Click the Make New Folder button.{0}{0}" +
+			"6. Enter Mono as label.{0}{0}" +
+			"7. Press the Enter key.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. DialogResult is OK.{0}{0}" +
+			"2. SelectedPath is the full path of the Mono folder.{0}{0}" +
+			"3. The Exists checkbox is checked.",
+			Environment.NewLine);
+		// 
+		// _tabPage2
+		// 
+		_tabPage2 = new TabPage ();
+		_tabPage2.Text = "#2";
+		_tabPage2.Controls.Add (_bugDescriptionText2);
+		_tabControl.Controls.Add (_tabPage2);
+		// 
 		// InstructionsForm
 		// 
 		ClientSize = new Size (360, 375);
@@ -162,6 +190,8 @@ public class InstructionsForm : Form
 	}
 
 	private TextBox _bugDescriptionText1;
+	private TextBox _bugDescriptionText2;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
+	private TabPage _tabPage2;
 }
