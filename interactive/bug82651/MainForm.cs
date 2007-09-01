@@ -15,7 +15,6 @@ public class MainForm : Form
 		// 
 		_toolStrip = new ToolStrip ();
 		_toolStrip.Location = new Point (0, 24);
-		_toolStrip.Name = "_toolStrip";
 		_toolStrip.Size = new Size (632, 25);
 		_toolStrip.TabIndex = 1;
 		_toolStrip.Text = "ToolStrip";
@@ -120,13 +119,13 @@ public class InstructionsForm : Form
 		// _bugDescriptionText1
 		// 
 		_bugDescriptionText1 = new TextBox ();
-		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Dock = DockStyle.Fill;
+		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Uncheck the Enabled checkbox.{0}{0}" +
 			"Expected result:{0}{0}" +
-				"1. The buttons in the ToolStrip are grayed out.",
+			"1. The buttons in the ToolStrip are grayed out.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
