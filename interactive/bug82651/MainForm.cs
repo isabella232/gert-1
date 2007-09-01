@@ -60,7 +60,7 @@ public class MainForm : Form
 		_toolStripEnabledCheckBox = new CheckBox ();
 		_toolStripEnabledCheckBox.Checked = true;
 		_toolStripEnabledCheckBox.Location = new Point (8, 75);
-		_toolStripEnabledCheckBox.Size = new Size (60, 20);
+		_toolStripEnabledCheckBox.Size = new Size (70, 20);
 		_toolStripEnabledCheckBox.Text = "Enabled";
 		_toolStripEnabledCheckBox.CheckedChanged += new EventHandler (ToolStripEnabledCheckBox_CheckedChanged);
 		Controls.Add (_toolStripEnabledCheckBox);
