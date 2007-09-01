@@ -95,32 +95,6 @@ class MainForm : Form
 	private Button _addNodeButton;
 }
 
-class MyControl : Control
-{
-	public MyControl ()
-	{
-		this.SuspendLayout ();
-		// 
-		// _textBox
-		// 
-		_textBox = new TextBox ();
-		_textBox.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-		_textBox.Location = new Point (0, 0);
-		_textBox.Multiline = true;
-		_textBox.Size = new Size (60, 60);
-		Controls.Add (_textBox);
-		// 
-		// MyControl
-		// 
-		BackColor = Color.Red;
-		Size = new Size (292, 271);
-		ResumeLayout (false);
-		PerformLayout ();
-	}
-
-	private TextBox _textBox;
-}
-
 public class InstructionsForm : Form
 {
 	public InstructionsForm ()
