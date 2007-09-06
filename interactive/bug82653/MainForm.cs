@@ -150,11 +150,14 @@ public class InstructionsForm : Form
 			"3. Move the mouse cursor away from the textbox.{0}{0}" +
 			"4. Click inside the textbox.{0}{0}" +
 			"5. Move the mouse cursor away from the textbox.{0}{0}" +
+			"6. Click the Fixed3D radiobutton.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. On step 1, the textbox has no border.{0}{0}" +
 			"2. On step 2, the textbox has a single-line border.{0}{0}" +
 			"3. On step 3, the textbox has no border.{0}{0}" +
-			"4. On steps 4 and 5, the textbox has a single-line border.",
+			"4. On steps 4 and 5, the textbox has a single-line " +
+			"border.{0}{0}" +
+			"5. On step 6, the textbox has no border.",
 			Environment.NewLine);
 		// 
 		// _tabPage2
@@ -176,6 +179,7 @@ public class InstructionsForm : Form
 			"3. Move the mouse cursor away from the textbox.{0}{0}" +
 			"4. Click inside the textbox.{0}{0}" +
 			"5. Move the mouse cursor away from the textbox.{0}{0}" +
+			"6. Click the FixedSingle radiobutton.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The textbox at all times has a single-line border.",
 			Environment.NewLine);
@@ -199,6 +203,7 @@ public class InstructionsForm : Form
 			"3. Move the mouse cursor away from the textbox.{0}{0}" +
 			"4. Click inside the textbox.{0}{0}" +
 			"5. Move the mouse cursor away from the textbox.{0}{0}" +
+			"6. Click the None radiobutton.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The textbox never has a border.",
 			Environment.NewLine);
@@ -212,7 +217,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (330, 330);
+		ClientSize = new Size (330, 375);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #82653";
