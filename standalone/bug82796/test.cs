@@ -29,7 +29,6 @@ class Program
 		proc.Start ();
 		while (!proc.HasExited)
 			Thread.Sleep (100);
-		proc.WaitForExit ();
 		if (proc.ExitCode != expected)
 			throw new Exception (string.Format (CultureInfo.InvariantCulture,
 				"Exit status was {0}, expected {1}. {2}",
