@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk12BQAAAAAAADYEAAAoAAAAEgAAABAAAAABAAgAAAAAAAAAAAAgHAAAIBwAAAABAAAAAQAAAAAA/wAA
+        M/8AAGb/AACZ/wAAzP8AAP//ADMA/wAzM/8AM2b/ADOZ/wAzzP8AM///AGYA/wBmM/8AZmb/AGaZ/wBm
+        zP8AZv//AJkA/wCZM/8AmWb/AJmZ/wCZzP8Amf//AMwA/wDMM/8AzGb/AMyZ/wDMzP8AzP//AP8A/wD/
+        M/8A/2b/AP+Z/wD/zP8A////MwAA/zMAM/8zAGb/MwCZ/zMAzP8zAP//MzMA/zMzM/8zM2b/MzOZ/zMz
+        zP8zM///M2YA/zNmM/8zZmb/M2aZ/zNmzP8zZv//M5kA/zOZM/8zmWb/M5mZ/zOZzP8zmf//M8wA/zPM
+        M/8zzGb/M8yZ/zPMzP8zzP//M/8A/zP/M/8z/2b/M/+Z/zP/zP8z////ZgAA/2YAM/9mAGb/ZgCZ/2YA
+        zP9mAP//ZjMA/2YzM/9mM2b/ZjOZ/2YzzP9mM///ZmYA/2ZmM/9mZmb/ZmaZ/2ZmzP9mZv//ZpkA/2aZ
+        M/9mmWb/ZpmZ/2aZzP9mmf//ZswA/2bMM/9mzGb/ZsyZ/2bMzP9mzP//Zv8A/2b/M/9m/2b/Zv+Z/2b/
+        zP9m////mQAA/5kAM/+ZAGb/mQCZ/5kAzP+ZAP//mTMA/5kzM/+ZM2b/mTOZ/5kzzP+ZM///mWYA/5lm
+        M/+ZZmb/mWaZ/5lmzP+ZZv//mZkA/5mZM/+ZmWb/mZmZ/5mZzP+Zmf//mcwA/5nMM/+ZzGb/mcyZ/5nM
+        zP+ZzP//mf8A/5n/M/+Z/2b/mf+Z/5n/zP+Z////zAAA/8wAM//MAGb/zACZ/8wAzP/MAP//zDMA/8wz
+        M//MM2b/zDOZ/8wzzP/MM///zGYA/8xmM//MZmb/zGaZ/8xmzP/MZv//zJkA/8yZM//MmWb/zJmZ/8yZ
+        zP/Mmf//zMwA/8zMM//MzGb/zMyZ/8zMzP/MzP//zP8A/8z/M//M/2b/zP+Z/8z/zP/M/////wAA//8A
+        M///AGb//wCZ//8AzP//AP///zMA//8zM///M2b//zOZ//8zzP//M////2YA//9mM///Zmb//2aZ//9m
+        zP//Zv///5kA//+ZM///mWb//5mZ//+ZzP//mf///8wA///MM///zGb//8yZ///MzP//zP////8A////
+        M////2b///+Z////zP//////AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AAAAAAAAAAwMDAwAAAAAAAAAAAAAAAAAAAAAAAwMDAwAAAAAAAAAAAAAAAAAAAAAAAwMDAAAAAAAAAAA
+        AAAAAAAAAAAAAAwMDAAAAAAAAAAAAAAAAAAAAAAADAwMAAAAAAAAAAAADAAAAAAAAAAMDA0AAAAAAAAA
+        AAwMDQAAABMTExMTExMTNwAAAAAMDAwMDQAAABMTExMTExMAAAAANzc3Nzc3NwAAAD4+Pj4+AAAAAD4+
+        Pj4+Pj4+PgAAAGJiYgAAAAAAAAAAYmJiAAAAAAAAAGIAAAAAAAAAAABiYmIAAAAAAAAAAAAAAAAAAAAA
+        AGJiYgAAAAAAAAAAAAAAAAAAAAAAAGJiYgAAAAAAAAAAAAAAAAAAAAAAAGJiYgAAAAAAAAAAAAAAAAAA
+        AAAAAGJiYgAAAAAAAAAAAAAA
+	</value>
+  </data>
+  <data name="$this.Company">
+    <value>OSF</value>
+  </data>
+  <data name="$this.Interval" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </data>
+  <data name="$this.name">
+    <value>Mono Component</value>
+  </data>
+  <data name="$this.Text">
+    <value>Form1</value>
+  </data>
+  <data name="$this.Zone" type="System.EventArgs, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+</root>

@@ -254,8 +254,6 @@ class Program
 	}
 }
 
-
-
 class Assert
 {
 	public static void AreEqual (int x, int y, string msg)

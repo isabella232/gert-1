@@ -1,0 +1,245 @@
+<project name="bug82674" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="de/**" />
+				<include name="en-GB/**" />
+				<include name="fr/**" />
+				<include name="fr-FR/**" />
+				<include name="nl-BE/**" />
+				<include name="nl-NL/**" />
+				<include name="MyComponent.resources" />
+				<include name="MyComponent.ja-JP.resources" />
+				<include name="MyComponent.nl-BE.resources" />
+				<include name="Mono.Tests.MyComponent.resources" />
+				<include name="Mono.Tests.MyComponent.fr-FR.resources" />
+				<include name="Mono.Tests.MyComponent.ja-JP.resources" />
+				<include name="Mono.Tests.MyComponent.nl-BE.resources" />
+				<include name="out" />
+				<include name="test1.exe" />
+				<include name="test1.resources.dll" />
+				<include name="test2.exe" />
+				<include name="test2.resources.dll" />
+				<include name="test3.exe" />
+				<include name="test4.exe" />
+				<include name="test4-Mono.Tests.MyComponent.fr-FR.resources" />
+				<include name="test5.exe" />
+				<include name="test6.exe" />
+				<include name="test6-MyComponent.ja-JP.resources" />
+				<include name="test6-MyComponent.nl-BE.resources" />
+				<include name="test6-Mono.Tests.MyComponent.ja-JP.resources" />
+				<include name="test6-Mono.Tests.MyComponent.nl-BE.resources" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile-test1">
+		<csc target="exe" define="${csc.defines}" output="test1.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test1.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+			<resources dynamicprefix="true">
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<resgen input="MyComponent.fr.resx" output="MyComponent.resources" />
+		<resgen input="MyComponent.fr.resx" output="Mono.Tests.MyComponent.resources" />
+		<al target="lib" output="test1.resources.dll" template="test1.exe">
+			<sources>
+				<include name="MyComponent.resources" />
+			</sources>
+		</al>
+	</target>
+
+	<target name="compile-test2">
+		<csc target="exe" define="${csc.defines}" output="test2.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test2.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+		</csc>
+		<resgen input="MyComponent.fr.resx" output="MyComponent.resources" />
+		<resgen input="MyComponent.de.resx" output="Mono.Tests.MyComponent.resources" />
+		<al target="lib" output="test2.resources.dll" template="test2.exe">
+			<sources>
+				<include name="MyComponent.resources" />
+				<include name="Mono.Tests.MyComponent.resources" />
+			</sources>
+		</al>
+	</target>
+
+	<target name="compile-test3">
+		<resgen input="MyComponent.nl-NL.resx" output="MyComponent.nl-BE.resources" />
+		<resgen input="MyComponent.nl-NL.resx" output="Mono.Tests.MyComponent.nl-BE.resources" />
+		<csc target="exe" define="${csc.defines}" output="test3.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test3.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+			<resources>
+				<include name="*.resx" />
+			</resources>
+		</csc>
+	</target>
+
+	<target name="compile-test4">
+		<resgen input="MyComponent.nl-BE.resx" output="test4-Mono.Tests.MyComponent.fr-FR.resources" />
+		<csc target="exe" define="${csc.defines}" output="test4.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test4.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+			<resources>
+				<include name="*.resx" />
+			</resources>
+			<arg value="/resource:${path::get-full-path('test4-Mono.Tests.MyComponent.fr-FR.resources')},Mono.Tests.MyComponent.fr-FR.resources" />
+		</csc>
+	</target>
+
+	<target name="compile-test5">
+		<resgen input="MyComponent.nl-NL.resx" output="MyComponent.nl-BE.resources" />
+		<resgen input="MyComponent.nl-NL.resx" output="Mono.Tests.MyComponent.nl-BE.resources" />
+		<csc target="exe" define="${csc.defines}" output="test5.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test3.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+			<resources>
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<resgen input="MyComponent.fr.resx" output="MyComponent.resources" />
+		<resgen input="MyComponent.de.resx" output="Mono.Tests.MyComponent.resources" />
+	</target>
+
+	<target name="compile-test6">
+		<resgen input="MyComponent.fr-FR.resx" output="test6-MyComponent.nl-BE.resources" />
+		<resgen input="MyComponent.nl-NL.resx" output="test6-Mono.Tests.MyComponent.nl-BE.resources" />
+		<resgen input="MyComponent.fr-FR.resx" output="test6-MyComponent.ja-JP.resources" />
+		<resgen input="MyComponent.nl-NL.resx" output="test6-Mono.Tests.MyComponent.ja-JP.resources" />
+		<csc target="exe" define="${csc.defines}" output="test6.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Assert.cs" />
+				<include name="MyComponent.cs" />
+				<include name="test6.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+			<resources>
+				<include name="*.resx" />
+			</resources>
+			<arg value="/resource:${path::get-full-path('test6-MyComponent.nl-BE.resources')},MyComponent.nl-BE.resources" />
+			<arg value="/resource:${path::get-full-path('test6-Mono.Tests.MyComponent.nl-BE.resources')},Mono.Tests.MyComponent.nl-BE.resources" />
+			<arg value="/resource:${path::get-full-path('test6-MyComponent.ja-JP.resources')},MyComponent.ja-JP.resources" />
+			<arg value="/resource:${path::get-full-path('test6-Mono.Tests.MyComponent.ja-JP.resources')},Mono.Tests.MyComponent.ja-JP.resources" />
+		</csc>
+	</target>
+
+	<target name="run-test1" depends="compile-test1">
+		<exec program="test1.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run-test2" depends="compile-test2">
+		<exec program="test2.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run-test3" depends="compile-test3">
+		<exec program="test3.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run-test4" depends="compile-test4">
+		<exec program="test4.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run-test5" depends="compile-test5">
+		<exec program="test5.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run-test6" depends="compile-test6">
+		<exec program="test6.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="run">
+		<call target="clean" />
+		<call target="run-test1" />
+		<call target="clean" />
+		<call target="run-test2" />
+		<call target="clean" />
+		<call target="run-test3" />
+		<call target="clean" />
+		<call target="run-test4" />
+		<call target="clean" />
+		<call target="run-test5" />
+		<call target="clean" />
+		<call target="run-test6" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
