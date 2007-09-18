@@ -116,7 +116,7 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
-			"1. Two toolstrip are displayed with the same size.{0}{0}" +
+			"1. Two toolstrips are displayed with the same size.{0}{0}" +
 			"2. A textbox containing a number fills each toolstrip " +
 			"(with a small margin).{0}{0}" +
 			"3. The textbox 2 has focus.",
@@ -141,7 +141,7 @@ public class InstructionsForm : Form
 			"Expected result:{0}{0}" +
 			"1. The textboxes are no longer displayed.{0}{0}" +
 			"2. Each toolstrip now features a dropdown button which " +
-			"can be used to displayed the textbox in a separate " +
+			"can be used to display the textbox in a separate " +
 			"window.{0}{0}" +
 			"3. After increasing the width of the form, the " +
 			"textboxes are displayed in the toolstrips again (with " +
