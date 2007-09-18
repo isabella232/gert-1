@@ -1,0 +1,13 @@
+/* Foglio di stile CSS predefinito per un nuovo progetto di applicazione Web */
+
+BODY
+{
+    BACKGROUND-COLOR: white;
+    FONT-FAMILY: Verdana, Helvetica, sans-serif;
+    FONT-SIZE: .8em;
+    FONT-WEIGHT: normal;
+    LETTER-SPACING: normal;
+    TEXT-TRANSFORM: none;
+    WORD-SPACING: normal
+}
+
