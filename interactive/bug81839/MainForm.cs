@@ -142,12 +142,12 @@ public class InstructionsForm : Form
 			"3. Click the Child 4 node.{0}{0}" +
 			"3. Click the Child 3 node.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 3, the full row of the Child 4_1 node (except for " +
-			"the icon) is highlighted.{0}{0}" +
-			"1. On step 4, the full row of the Child 4 node (except for the " +
-			"icon) is highlighted.{0}{0}"+
-			"1. On step 5, the full row of the Child 3 node (except for the " +
-			"icon) is highlighted.",
+			"1. On step 3, the full row of the Child 4_1 node is " +
+			"highlighted.{0}{0}" +
+			"1. On step 4, the full row of the Child 4 node (" +
+			"except for the icon) is highlighted.{0}{0}"+
+			"1. On step 5, the full row of the Child 3 node is " +
+			"highlighted.",
 			Environment.NewLine);
 		// 
 		// _tabPage2
