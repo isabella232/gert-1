@@ -180,33 +180,32 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Check the TreeView radiobutton.{0}{0}" +
-			"2. Click the Reset button.{0}{0}" +
-			"3. Click the Personal Folders radiobutton.{0}{0}" +
+			"2. Click the Personal Folders node.{0}{0}" +
+			"3. Click the Reset button.{0}{0}" +
 			"4. Right-click the Inbox node.{0}{0}" +
 			"5. Release the mouse button.{0}{0}" +
 			"6. Click the Close menuitem in the contextmenu.{0}{0}" +
-			"7. Click the Inbox radiobutton.{0}{0}" +
+			"7. Click the Inbox node.{0}{0}" +
 			"8. Right-click the Personal Folders node.{0}{0}" +
 			"9. Release the mouse button.{0}{0}" +
 			"10. Click the Close menuitem in the contextmenu.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 3:{0}{0}" +
-			"   * The Personal Folders node is selected.{0}" +
-			"   * The following events have fired:{0}{0}" +
-			"       TreeView => BeforeSelect{0}" +
-			"       TreeView => AfterSelect{0}{0}" +
-			"2. On step 4 and 5, the Inbox node is highlighted.{0}{0}" +
-			"3. On step 6:{0}{0}" +
+			"1. On step 4 and 5:{0}{0}" +
+			"   * The Inbox node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
+			"2. On step 6:{0}{0}" +
 			"   * The Personal Folders node is highlighted.{0}" +
 			"   * No events have fired.{0}{0}" +
-			"4. On step 7:{0}{0}" +
+			"3. On step 7:{0}{0}" +
 			"   * The Inbox node is selected.{0}" +
 			"   * The following events have fired:{0}{0}" +
 			"       TreeView => BeforeSelect{0}" +
 			"       TreeView => AfterSelect{0}{0}" +
-			"5. On step 8 and 9, the Personal Folders node is highlighted.{0}{0}" +
-			"6. On step 10:{0}{0}" +
+			"4. On step 8 and 9:{0}{0}" +
 			"   * The Personal Folders node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
+			"5. On step 10:{0}{0}" +
+			"   * The Inbox node is highlighted.{0}" +
 			"   * No events have fired.",
 			Environment.NewLine);
 		// 
@@ -225,30 +224,29 @@ public class InstructionsForm : Form
 		_bugDescriptionText2.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Check the None radiobutton.{0}{0}" +
-			"2. Click the reset button.{0}{0}" +
-			"3. Click the Personal Folders radiobutton.{0}{0}" +
+			"2. Click the Personal Folders node.{0}{0}" +
+			"3. Click the Reset button.{0}{0}" +
 			"4. Right-click the Inbox node.{0}{0}" +
 			"5. Release the mouse button.{0}{0}" +
-			"6. Click the Inbox radiobutton.{0}{0}" +
+			"6. Click the Inbox node.{0}{0}" +
 			"7. Right-click the Personal Folders node.{0}{0}" +
 			"8. Release the mouse button.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 3:{0}{0}" +
-			"   * The Personal Folders node is selected.{0}" +
-			"   * The following events have fired:{0}{0}" +
-			"       TreeView => BeforeSelect{0}" +
-			"       TreeView => AfterSelect{0}{0}" +
-			"2. On step 4, the Inbox node is highlighted.{0}{0}" +
-			"3. On step 5:{0}{0}" +
+			"1. On step 4 and 5:{0}{0}" +
+			"   * The Inbox node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
+			"2. On step 5:{0}{0}" +
 			"   * The Personal Folders node is highlighted.{0}" +
 			"   * No events have fired.{0}{0}" +
-			"4. On step 6:{0}{0}" +
+			"3. On step 6:{0}{0}" +
 			"   * The Inbox node is selected.{0}" +
 			"   * The following events have fired:{0}{0}" +
 			"       TreeView => BeforeSelect{0}" +
 			"       TreeView => AfterSelect{0}{0}" +
-			"5. On step 7, the Personal Folders node is highlighted.{0}{0}" +
-			"6. On step 8:{0}{0}" + 
+			"4. On step 7:{0}{0}" +
+			"   * the Personal Folders node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
+			"5. On step 8:{0}{0}" + 
 			"   * The Inbox node is highlighted.{0}" +
 			"   * No events have fired.",
 			Environment.NewLine);
@@ -269,28 +267,31 @@ public class InstructionsForm : Form
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Check the TreeNode radiobutton.{0}{0}" +
-			"2. Click the Reset button.{0}{0}" +
-			"3. Click the Personal Folders radiobutton.{0}{0}" +
+			"2. Click the Personal Folders node.{0}{0}" +
+			"3. Click the Reset button.{0}{0}" +
 			"4. Right-click the Inbox node.{0}{0}" +
 			"5. Release the mouse button.{0}{0}" +
-			"6. Click the Inbox radiobutton.{0}{0}" +
+			"6. Click the Inbox node.{0}{0}" +
 			"7. Right-click the Personal Folders node.{0}{0}" +
 			"8. Release the mouse button.{0}{0}" +
 			"9. Click the Close menuitem in the contextmenu.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. On step 3, the Personal Folders node is selected.{0}{0}" +
-			"2. On step 4, the Inbox node is highlighted.{0}{0}" +
+			"1. On step 4:{0}{0}" +
+			"   * The Inbox node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
 			"2. On step 5:{0}{0}" +
 			"   * The Personal Folders node is highlighted.{0}" +
 			"   * No events have fired.{0}{0}" +
-			"4. On step 6:{0}{0}" +
+			"3. On step 6:{0}{0}" +
 			"   * The Inbox node is selected.{0}" +
 			"   * The following events have fired:{0}{0}" +
 			"       TreeView => BeforeSelect{0}" +
 			"       TreeView => AfterSelect{0}{0}" +
-			"5. On step 7 and 8, the Personal Folders node is selected.{0}{0}" +
-			"6. On step 9:{0}{0}" +
-			"   * The Inbox node is selected.{0}" +
+			"4. On step 7 and 8:{0}{0}" +
+			"   * The Personal Folders node is highlighted.{0}" +
+			"   * No events have fired.{0}{0}" +
+			"5. On step 9:{0}{0}" +
+			"   * The Inbox node is highlighted.{0}" +
 			"   * No events have fired.",
 			Environment.NewLine);
 		// 
