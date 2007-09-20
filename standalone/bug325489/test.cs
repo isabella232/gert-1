@@ -31,17 +31,9 @@ class TinyHost : MarshalByRefObject
 		StringWriter sw = new StringWriter ();
 		h.Execute ("Default.aspx", sw);
 		string result = sw.ToString ();
-		if (result.IndexOf ("id=\"ItemsGrid\"") == -1) {
+		if (result.IndexOf ("style=\"background-color:#316AC5;\"") == -1) {
 			Console.WriteLine (result);
 			return 1;
-		}
-		if (result.IndexOf ("<td>Item 0</td>") == -1) {
-			Console.WriteLine (result);
-			return 2;
-		}
-		if (result.IndexOf ("<td>Item 8</td>") == -1) {
-			Console.WriteLine (result);
-			return 3;
 		}
 		return 0;
 	}

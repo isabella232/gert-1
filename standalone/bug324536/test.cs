@@ -29,17 +29,17 @@ class TinyHost : MarshalByRefObject
 	{
 		TinyHost h = CreateHost ();
 		StringWriter sw = new StringWriter ();
-		h.Execute ("Default.aspx", sw);
+		h.Execute ("Index.aspx", sw);
 		string result = sw.ToString ();
-		if (result.IndexOf ("id=\"ItemsGrid\"") == -1) {
+		if (result.IndexOf ("<p>This is inc2.aspx</p>") == -1) {
 			Console.WriteLine (result);
 			return 1;
 		}
-		if (result.IndexOf ("<td>Item 0</td>") == -1) {
+		if (result.IndexOf ("<p>This is inc1.aspx</p>") == -1) {
 			Console.WriteLine (result);
 			return 2;
 		}
-		if (result.IndexOf ("<td>Item 8</td>") == -1) {
+		if (result.IndexOf ("<p>This is index.aspx</p>") == -1) {
 			Console.WriteLine (result);
 			return 3;
 		}
