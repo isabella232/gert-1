@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<system.diagnostics>
+		<switches>
+			<add name="testSwitch1" value="4" />
+			<add name="testSwitch2" value="0" />
+			<add name="testSwitch3" value="2" />
+			<add name="testSwitch4" value="3" />
+			<add name="testSwitch5" value="666" />
+			<add name="testSwitch6" value="-666" />
+			<add name="boolSwitch1" value="0" />
+			<add name="boolSwitch2" value="1" />
+			<add name="boolSwitch3" value="666" />
+		</switches>
+	</system.diagnostics>
+</configuration>
