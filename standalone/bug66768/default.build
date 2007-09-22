@@ -76,6 +76,7 @@
 		<fail unless="${file::exists('log')}">#2</fail>
 		<loadfile file="log" property="log" />
 		<fail if="${string::index-of(log,'whatever') == -1}">#3</fail>
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
