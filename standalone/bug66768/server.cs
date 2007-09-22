@@ -9,7 +9,7 @@ public class RemoteLoggingServer
 	{
 		RemoteLoggingSinkImpl sink = new RemoteLoggingSinkImpl ();
 
-#if NET_2_0 && !MONO
+#if NET_2_0
 		RemotingConfiguration.Configure (AppDomain.CurrentDomain.SetupInformation.ConfigurationFile, false);
 #else
 		RemotingConfiguration.Configure (AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
