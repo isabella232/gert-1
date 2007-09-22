@@ -156,7 +156,7 @@ public class InstructionsForm : Form
 			"   * The label of the new node can be edited.{0}" +
 			"   * The edit box has focus.{0}{0}" +
 			"2. On step 5:{0}{0}" +
-			"   * The label of the new node is \"Mono\".{0}" +
+			"   * The label of the new node is \"MWF\".{0}" +
 			"   * The new node remains visible.{0}" +
 			"   * The My Computer node is highlighted.{0}" +
 			"   * The TreeView has focus.",
