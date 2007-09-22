@@ -1,9 +1,14 @@
 using System;
+using System.Globalization;
+using System.Threading;
 
 class Program
 {
 	static int Main()
 	{
+		Thread.CurrentThread.CurrentCulture = new 
+			CultureInfo ("nl-BE");
+
 		try {
 			DateTime.Parse("1");
 			Console.WriteLine("#1");
