@@ -1,9 +1,15 @@
 <project name="bug67892" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="xsp.executable" value="xsp.exe" />
 	</target>
 
-	<property name="frameworks" value="mono-1.0" />
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="xsp.executable" value="xsp2.exe" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0" />
 
 	<target name="clean">
 		<delete>
@@ -50,9 +56,16 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="run" depends="compile" if="${platform::is-unix()}">
+		<exec program="${framework::get-assembly-directory(framework::get-target-framework())}/${xsp.executable}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
