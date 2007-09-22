@@ -84,7 +84,11 @@ namespace MonoRemotingBug
 			try {
 				int port = FindFreePort ();
 				Console.WriteLine (port);
+#if NET_2_0
+				ChannelServices.RegisterChannel (new TcpChannel (port), false);
+#else
 				ChannelServices.RegisterChannel (new TcpChannel (port));
+#endif
 				RemotedClass remotedClass = new RemotedClass ();
 				RemotingServices.Marshal (remotedClass, "Root");
 				try {
