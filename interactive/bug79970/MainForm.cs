@@ -83,7 +83,7 @@ public class MainForm : Form
 		// MainForm
 		// 
 		AutoScaleBaseSize = new Size (5, 13);
-		ClientSize = new Size (365, 195);
+		ClientSize = new Size (365, 200);
 		Location = new Point (250, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "bug #79970";
