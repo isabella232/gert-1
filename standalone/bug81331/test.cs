@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 
@@ -27,6 +29,10 @@ class TinyHost : MarshalByRefObject
 
 	static int Main ()
 	{
+		// ensure the exception messages are not localized
+		Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+		Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
+
 		string result;
 
 		TinyHost h = CreateHost ();
