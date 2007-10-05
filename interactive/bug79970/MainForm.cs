@@ -254,7 +254,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 250);
+		ClientSize = new Size (330, 250);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #79970";
