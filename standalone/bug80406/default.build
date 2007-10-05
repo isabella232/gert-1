@@ -59,6 +59,7 @@
 			<arg value="client" />
 		</exec>
 		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
