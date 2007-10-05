@@ -66,6 +66,7 @@
 		</exec>
 		<waitforexit pid="${server.pid}" />
 		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
