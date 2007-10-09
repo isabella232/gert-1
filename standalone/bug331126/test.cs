@@ -11,7 +11,6 @@ class Program
 
 		ParameterInfo piA = mi.GetParameters () [0];
 		ParameterInfo piB = mi.GetParameters () [1];
-		/*
 		ParameterInfo piC = mi.GetParameters () [2];
 		ParameterInfo piD = mi.GetParameters () [3];
 		ParameterInfo piE = mi.GetParameters () [4];
@@ -21,7 +20,7 @@ class Program
 		Assert.IsFalse (piB.ParameterType.IsAssignableFrom (piC.ParameterType), "#A3");
 		Assert.IsFalse (piC.ParameterType.IsAssignableFrom (piB.ParameterType), "#A4");
 		Assert.IsTrue (piD.ParameterType.IsAssignableFrom (piE.ParameterType), "#A5");
-		Assert.IsTrue (piE.ParameterType.IsAssignableFrom (piD.ParameterType), "#A6");*/
+		Assert.IsTrue (piE.ParameterType.IsAssignableFrom (piD.ParameterType), "#A6");
 
 #if NET_2_0
 		GenericRunner <CultureInfo> runner = new GenericRunner <CultureInfo> ();
