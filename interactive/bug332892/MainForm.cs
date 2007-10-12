@@ -30,7 +30,7 @@ public class MainForm : Form
 		AutoScaleDimensions = new SizeF (6F, 13F);
 		AutoScaleMode = AutoScaleMode.Font;
 		ClientSize = new Size (401, 368);
-		Location = new Point (250, 100);
+		Location = new Point (200, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "bug #332892";
 		Load += new EventHandler (MainForm_Load);
@@ -43,15 +43,15 @@ public class MainForm : Form
 		Application.EnableVisualStyles ();
 		Application.SetCompatibleTextRenderingDefault (false);
 		Application.Run (new MainForm ());
-
-		InstructionsForm instructionsForm = new InstructionsForm ();
-		instructionsForm.Show ();
 	}
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
 		for (int i = 1; i <= 5; i++)
 			AddButton (i);
+
+		InstructionsForm instructionsForm = new InstructionsForm ();
+		instructionsForm.Show ();
 	}
 
 	void AddButton (int row)
@@ -124,8 +124,8 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 90);
-		Location = new Point (600, 100);
+		ClientSize = new Size (300, 200);
+		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #332892";
 	}
