@@ -4,7 +4,7 @@ using System.Net;
 using System.Globalization;
 using System.Text;
 
-class TinyHost : MarshalByRefObject
+class Program
 {
 	static int Main ()
 	{

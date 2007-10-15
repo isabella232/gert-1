@@ -1,15 +1,25 @@
 <project name="bug82709" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-		<property name="xsp.executable" value="xsp.exe" />
+		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-		<property name="xsp.executable" value="xsp2.exe" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
-	<property name="frameworks" value="mono-1.0,mono-2.0" />
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="xsp.package" value="xsp" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
 	<target name="clean">
 		<delete>
@@ -47,8 +57,8 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile" if="${platform::is-unix()}">
-		<exec program="${framework::get-assembly-directory(framework::get-target-framework())}/${xsp.executable}" managed="true" spawn="true" pidproperty="server.pid">
+	<target name="run" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
 			<arg value="--root" />
 			<arg dir="web" />
 			<arg value="--port" />
