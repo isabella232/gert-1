@@ -101,11 +101,3 @@ class Program
 		INSERT INTO whatever VALUES (N'de Icaza', N'Miguel');
 		INSERT INTO whatever VALUES (N'Pobst', N'Jonathan');";
 }
-
-public enum UserAccountStatus
-{
-	ApprovalPending = 0,
-	Approved = 1,
-	Banned = 2,
-	Disapproved = 3
-}
