@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading;
 
 class Program
@@ -15,6 +16,6 @@ class Program
 	static void tmrThreadingTimer_TimerCallback (object state)
 	{
 		_counter++;
-		throw new Exception ("Booom");
+		throw new Exception ("Booom" + _counter.ToString (CultureInfo.InvariantCulture));
 	}
 }
