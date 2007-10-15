@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-static class Program
+class Program
 {
 	private const BindingFlags BINDING_FLAGS
 		= BindingFlags.Public | BindingFlags.NonPublic
