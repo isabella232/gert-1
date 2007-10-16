@@ -52,8 +52,8 @@
 		<fail if="${file::exists('test.exe')}">#1</fail>
 		<fail unless="${file::exists('out')}">#2</fail>
 		<loadfile file="out" property="out" />
-		<fail if="${string::index-of(out,'error CS0029: Cannot implicitly convert type ''void'' to ''object''') == -1}">#3</fail>
-		<fail if="${string::index-of(out,'error CS0127: Since ''Test.Run(string)'' returns void, a return keyword must not be followed by an object expression') == -1}">#4</fail>
+		<fail if="${string::index-of(out,'error CS0029') == -1}">#3</fail>
+		<fail if="${string::index-of(out,'error CS0127') == -1}">#4</fail>
 		<fail if="${string::index-of(out,'NullReferenceException') != -1}">#5</fail>
 		<fail if="${string::index-of(out,'Mono') != -1}">#6</fail>
 	</target>
