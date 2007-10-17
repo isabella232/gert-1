@@ -49,7 +49,7 @@
 
 	<target name="run" depends="compile">
 		<exec program="async.exe" managed="true" output="out">
-			<arg value="127.0.0.1" />
+			<arg value="www.google.com" />
 		</exec>
 		<fail unless="${file::exists('out')}">#A1</fail>
 		<loadfile file="out" property="out" />
@@ -58,7 +58,7 @@
 		<delete file="out" />
 
 		<exec program="sync.exe" managed="true" output="out">
-			<arg value="127.0.0.1" />
+			<arg value="www.google.com" />
 		</exec>
 		<fail unless="${file::exists('out')}">#B1</fail>
 		<loadfile file="out" property="out" />
