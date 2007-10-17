@@ -1,0 +1,87 @@
+<project name="bug334453" default="rebuild">
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="async.exe" />
+				<include name="out" />
+				<include name="sync.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<csc target="exe" define="${csc.defines}" output="async.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="async.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="sync.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="sync.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="async.exe" managed="true" output="out">
+			<arg value="127.0.0.1" />
+		</exec>
+		<fail unless="${file::exists('out')}">#A1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Status: Success') != -1}">#A2</fail>
+
+		<delete file="out" />
+
+		<exec program="async.exe" managed="true" output="out">
+			<arg value="localhost" />
+		</exec>
+		<fail unless="${file::exists('out')}">#B1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Status: Success') != -1}">#B2</fail>
+
+		<delete file="out" />
+
+		<exec program="sync.exe" managed="true" output="out">
+			<arg value="127.0.0.1" />
+		</exec>
+		<fail unless="${file::exists('out')}">#C1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Status: Success') != -1}">#C2</fail>
+
+		<delete file="out" />
+		
+		<exec program="sync.exe" managed="true" output="out">
+			<arg value="localhost" />
+		</exec>
+		<fail unless="${file::exists('out')}">#D1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Status: Success') != -1}">#D2</fail>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
