@@ -7,7 +7,7 @@ class Program
 {
 	static ArrayList _assemblyBuilders = new ArrayList ();
 
-	static void Main ()
+	static int Main ()
 	{
 		AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler (
 			AppDomain_AssemblyResolve);
@@ -21,10 +21,14 @@ class Program
 		object p1 = Create (ab, "A", typeof (MyClass));
 
 		Type t1 = ab.GetType (p1.GetType ().FullName, true);
-		Console.WriteLine (t1.AssemblyQualifiedName);
+		if (t1 == null)
+			return 1;
 
 		Type t2 = Type.GetType (p1.GetType ().AssemblyQualifiedName, true, false);
-		Console.WriteLine (t2.AssemblyQualifiedName);
+		if (t2 == null)
+			return 2;
+
+		return 0;
 	}
 
 	static AssemblyName CreateAssemblyName (string name)
