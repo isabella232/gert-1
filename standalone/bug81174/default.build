@@ -1,20 +1,22 @@
 <project name="bug81174" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<property name="frameworks" value="mono-2.0,net-2.0" />
-	
+
 	<target name="clean">
 		<delete>
 			<fileset>
+				<include name="web/bin/**" />
 				<include name="out" />
 				<include name="test.exe" />
-				<include name="web/bin/**" />
 			</fileset>
 		</delete>
 	</target>
@@ -46,8 +48,17 @@
 	</target>
 
 	<target name="run" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
