@@ -47,7 +47,8 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<!-- ping requires root access on unix -->
+	<target name="run" depends="compile" unless="${platform::is-unix()}">
 		<exec program="async.exe" managed="true" output="out">
 			<arg value="www.google.com" />
 		</exec>
