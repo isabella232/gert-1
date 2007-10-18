@@ -70,6 +70,7 @@
 
 	<target name="run" depends="compile">
 		<exec program="server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="1000" />
 		<exec program="client.exe" managed="true" output="out" />
 		<kill pid="${server.pid}" />
 		<fail if="${file::exists('out')}">#1</fail>
