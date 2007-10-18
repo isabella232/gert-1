@@ -9,6 +9,9 @@ class Program
 	[STAThread]
 	static int Main ()
 	{
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
+			return 0;
+
 		SqlConnection conn = new SqlConnection (CreateConnectionString ());
 		conn.Open ();
 

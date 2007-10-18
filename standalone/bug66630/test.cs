@@ -8,6 +8,9 @@ class Program
 	[STAThread]
 	static int Main ()
 	{
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
+			return 0;
+
 		using (SqlConnection myConnection = new SqlConnection (CreateConnectionString ())) {
 			SqlCommand command = new SqlCommand (drop_stored_procedure, myConnection);
 			myConnection.Open ();
@@ -16,7 +19,7 @@ class Program
 			command = new SqlCommand (create_stored_procedure, myConnection);
 			command.ExecuteNonQuery ();
 
-			command = new SqlCommand ("whatever", myConnection);
+			command = new SqlCommand ("bug66630", myConnection);
 			command.CommandType = CommandType.StoredProcedure;
 			command.Parameters.Add ("@UserAccountStatus", SqlDbType.SmallInt).Value = UserAccountStatus.ApprovalPending;
 			command.Prepare ();
@@ -38,11 +41,11 @@ class Program
 	}
 
 	const string drop_stored_procedure = @"
-		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[whatever]') AND type in (N'P', N'PC'))
-			DROP PROCEDURE [dbo].[whatever]";
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug66630]') AND type in (N'P', N'PC'))
+			DROP PROCEDURE [dbo].[bug66630]";
 
 	const string create_stored_procedure = @"
-			CREATE PROCEDURE whatever
+			CREATE PROCEDURE bug66630
 			(
 				@UserAccountStatus smallint = 1
 			)

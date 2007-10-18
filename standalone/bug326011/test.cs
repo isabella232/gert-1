@@ -8,7 +8,10 @@ class Program
 	[STAThread]
 	static void Main ()
 	{
-		SqlConnection conn;
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
+			return;
+
+		SqlConnection conn = null;
 		SqlCommand cmd;
 
 		try {
@@ -24,12 +27,17 @@ class Program
 			cmd = new SqlCommand (insert_data, conn);
 			cmd.ExecuteNonQuery ();
 
-			cmd = new SqlCommand ("SELECT Name, FirstName FROM [Whatever]", conn);
+			cmd = new SqlCommand ("SELECT Name, FirstName FROM [bug326011]", conn);
 
 			SqlDataAdapter adapter = new SqlDataAdapter (cmd);
 			DataSet ds = new DataSet ();
 			adapter.Fill (ds);
 		} finally {
+			cmd = new SqlCommand (drop_table, conn);
+			cmd.ExecuteNonQuery ();
+
+			if (conn != null)
+				conn.Dispose ();
 		}
 
 		try {
@@ -45,7 +53,7 @@ class Program
 			cmd = new SqlCommand (insert_data, conn);
 			cmd.ExecuteNonQuery ();
 
-			cmd = new SqlCommand ("SELECT Name, FirstName FROM [Whatever]", conn);
+			cmd = new SqlCommand ("SELECT Name, FirstName FROM [bug326011]", conn);
 
 			SqlDataAdapter adapter = new SqlDataAdapter (cmd);
 			DataSet ds = new DataSet ();
@@ -54,6 +62,11 @@ class Program
 			cmd = new SqlCommand (drop_table, conn);
 			cmd.ExecuteNonQuery ();
 		} finally {
+			cmd = new SqlCommand (drop_table, conn);
+			cmd.ExecuteNonQuery ();
+
+			if (conn != null)
+				conn.Dispose ();
 		}
 	}
 
@@ -87,17 +100,17 @@ class Program
 	}
 
 	const string drop_table = @"
-		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[whatever]') AND type = N'U')
-			DROP TABLE [dbo].[whatever]";
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug326011]') AND type = N'U')
+			DROP TABLE [dbo].[bug326011]";
 
 	const string create_table = @"
-		CREATE TABLE whatever
+		CREATE TABLE bug326011
 		(
 			Name varchar(20),
 			FirstName varchar (10)
 		)";
 
 	const string insert_data = @"
-		INSERT INTO whatever VALUES (N'de Icaza', N'Miguel');
-		INSERT INTO whatever VALUES (N'Pobst', N'Jonathan');";
+		INSERT INTO bug326011 VALUES (N'de Icaza', N'Miguel');
+		INSERT INTO bug326011 VALUES (N'Pobst', N'Jonathan');";
 }
