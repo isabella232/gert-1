@@ -71,9 +71,11 @@
 
 	<target name="run" depends="compile">
 		<exec program="server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="1000" />
 		<exec program="client.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
