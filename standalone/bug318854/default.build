@@ -52,7 +52,7 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="run" depends="compile" unless="${platform::is-unix()}">
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 	</target>
