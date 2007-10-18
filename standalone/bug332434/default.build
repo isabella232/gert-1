@@ -64,11 +64,11 @@
 			<arg value="--port" />
 			<arg value="8081" />
 		</exec>
-		<sleep milliseconds="200" />
+		<sleep milliseconds="1000" />
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 		<kill pid="${server.pid}" />
-		<sleep milliseconds="200" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
