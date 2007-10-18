@@ -20,7 +20,6 @@ class Program
 			AppDomain.CurrentDomain.BaseDirectory);
 		_assemblyBuilders.Add (ab1);
 
-		Console.WriteLine ("A");
 		object p1 = Create (ab1, "A", typeof (MyClass));
 		Serialize (p1);
 
@@ -30,11 +29,9 @@ class Program
 			AppDomain.CurrentDomain.BaseDirectory);
 		_assemblyBuilders.Add (ab2);
 
-		Console.WriteLine ("B");
 		object p2 = Create (ab2, "B", p1.GetType ());
 		Serialize (p2);
 
-		Console.WriteLine ("C");
 		object q1 = Save ("C", p2.GetType ());
 		Serialize (q1);
 	}
