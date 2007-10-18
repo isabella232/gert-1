@@ -19,7 +19,7 @@
 		<property name="xsp.package" value="xsp-2" />
 	</target>
 
-	<!-- fails on .NET 2.0 -->
+	<!-- fails on .NET 2.0: bug #334931 -->
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1" />
 
 	<target name="clean">
