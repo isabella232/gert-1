@@ -42,8 +42,9 @@
 	</target>
 
 	<target name="compile">
-		<csc target="exe" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
 			<sources>
+				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
 			<references>
