@@ -27,7 +27,7 @@ class Program
 		Assert.AreEqual (0, comp.Interval, "#A4");
 		Assert.IsTrue (comp.Localizable, "#A5");
 		Assert.IsNull (comp.Name, "#A6");
-		Assert.IsNotNull (comp.Text, "#A8");	
+		Assert.IsNotNull (comp.Text, "#A8");
 		Assert.AreEqual ("Mono", comp.Text, "#A9");
 		Assert.IsNotNull (comp.Title, "#A10");
 		Assert.AreEqual ("Welcome", comp.Title, "#A11");
