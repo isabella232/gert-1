@@ -24,8 +24,8 @@ class Program
 			if (ex.Response != null) {
 				StreamReader sr = new StreamReader (ex.Response.GetResponseStream ());
 				Console.WriteLine (sr.ReadToEnd ());
-				return 1;
 			}
+			return 2;
 		}
 
 		return 0;
