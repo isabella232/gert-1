@@ -24,6 +24,7 @@
 				<include name="resources.resources" />
 				<include name="FileComponentA.resources" />
 				<include name="FileComponentB.resources.resources" />
+				<include name="FileComponentC.ReSourCes.resources" />
 				<include name="MyComponent.resources.resources" />
 				<include name="out" />
 				<include name="test.exe" />
@@ -61,6 +62,7 @@
 		</csc>
 		<resgen input="MyComponent.resources.resx" output="FileComponentA.resources" />
 		<resgen input="MyComponent.resources.resx" output="FileComponentB.resources.resources" />
+		<resgen input="MyComponent.resources.resx" output="FileComponentC.ReSourCes.resources" />
 		<resgen input="MyComponent.resources.resx" output="resources.resources" />
 	</target>
 

@@ -70,7 +70,7 @@ class Program
 			AppDomain.CurrentDomain.BaseDirectory, typeof (ResourceSet));
 		Assert.AreEqual ("Mono Component", rm.GetString ("$this.name"), "#E");
 
-		rm = ResourceManager.CreateFileBasedResourceManager ("FileComponentB.ResOurces",
+		rm = ResourceManager.CreateFileBasedResourceManager ("FileComponentC.ReSourCes",
 			AppDomain.CurrentDomain.BaseDirectory, typeof (ResourceSet));
 		Assert.AreEqual ("Mono Component", rm.GetString ("$this.name"), "#F");
 
