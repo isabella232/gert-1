@@ -31,11 +31,19 @@ class TinyHost : MarshalByRefObject
 		StringWriter sw = new StringWriter ();
 		h.Execute ("Default.aspx", sw);
 		string result = sw.ToString ();
+#if ONLY_1_1 && !MONO
+		if (result.IndexOf ("<option value=\"1\">janvier</option>") == -1) {
+#else
 		if (result.IndexOf ("<option value=\"1\" title=\"tooltip of 1\">janvier</option>") == -1) {
+#endif
 			Console.WriteLine (result);
 			return 1;
 		}
+#if ONLY_1_1 && !MONO
+		if (result.IndexOf ("<option value=\"12\">d&#233;cembre</option>") == -1) {
+#else
 		if (result.IndexOf ("<option value=\"12\" title=\"tooltip of 12\">d&#233;cembre</option>") == -1) {
+#endif
 			Console.WriteLine (result);
 			return 2;
 		}
