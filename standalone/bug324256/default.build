@@ -69,7 +69,7 @@
 				<include name="System.Web.Services.dll" />
 			</references>
 		</csc>
-		<exec program="${wsdl.tool}">
+		<exec program="${wsdl.tool}" managed="true">
 			<arg value="http://127.0.0.1:8081/Service.asmx?WSDL" />
 			<arg value="/nologo" />
 		</exec>
