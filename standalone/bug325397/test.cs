@@ -12,9 +12,6 @@ class Program
 	[STAThread]
 	static int Main ()
 	{
-		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
-			return 0;
-
 		Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 		Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
@@ -29,6 +26,9 @@ class Program
 
 	static void RunSqlTest ()
 	{
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
+			return;
+
 		SqlConnection conn = new SqlConnection (CreateSqlConnectionString ());
 		conn.Open ();
 
@@ -330,6 +330,9 @@ class Program
 
 	static void RunOdbcTest ()
 	{
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_ODBC") == null)
+			return;
+
 		OdbcConnection conn = new OdbcConnection (CreateOdbcConnectionString ());
 		conn.Open ();
 
@@ -530,6 +533,9 @@ class Program
 #if !MONO
 	static void RunOleDbTest ()
 	{
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_OLEDB") == null)
+			return;
+
 		OleDbConnection conn = new OleDbConnection (CreateOleDbConnectionString ());
 		conn.Open ();
 
