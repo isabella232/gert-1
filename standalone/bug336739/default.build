@@ -55,7 +55,9 @@
 			<arg file="events.xsd" />
 			<arg file="methods.xsd" />
 			<arg file="types.xsd" />
+			<!--
 			<arg file="groupwise.wsdl" />
+			-->
 			<arg value="/nologo" />
 		</exec>
 		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
