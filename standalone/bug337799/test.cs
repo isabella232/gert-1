@@ -21,22 +21,16 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
-#if MONO
-				if (result.IndexOf ("<script src=\"/WebResource.axd?a=Mono.Web.Security%2c+Version%3d0.0.0.0%2c+Culture%3dneutral;r=Mono.Web.Security.UI.MyResources.Test.js;t=") == -1) {
-#else
+#if !MONO
 				if (result.IndexOf ("<script src=\"/WebResource.axd?d=Us9ckR5btm8lMMu0RQjwPXcda3w5uEBRwV0doPyQf08iZQHZVkFdjYzM9XD8dfq79jPt0yvp0EIolN3REA6hjQ2&amp;t=") == -1) {
-#endif
 					Console.WriteLine (result);
 					return 1;
 				}
-#if MONO
-				if (result.IndexOf ("<link rel='stylesheet' type='text/css' href='/WebResource.axd?a=Mono.Web.Security%2c+Version%3d0.0.0.0%2c+Culture%3dneutral;r=Mono.Web.Security.UI.MyResources.Test.css;t=") == -1) {
-#else
 				if (result.IndexOf ("<link rel='stylesheet' type='text/css' href='/WebResource.axd?d=Us9ckR5btm8lMMu0RQjwPXcda3w5uEBRwV0doPyQf08iZQHZVkFdjYzM9XD8dfq7_xG3t6VDAGM_m1oWVOQd-A2&t=") == -1) {
-#endif
 					Console.WriteLine (result);
 					return 2;
 				}
+#endif
 
 				int startIndex = result.IndexOf ("<script src=\"");
 				int endIndex = result.IndexOf ("\" />", startIndex + 13);
