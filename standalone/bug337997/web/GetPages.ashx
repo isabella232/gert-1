@@ -1,1 +1,1 @@
-<<%@ WebHandler Language="C#" Class="OfflinePages.GetPages" %>
+<%@ WebHandler Language="C#" Class="OfflinePages.GetPages" %>
