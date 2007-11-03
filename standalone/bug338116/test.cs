@@ -17,7 +17,7 @@ class Program
 			"web");
 
 		string binDir = args [0];
-		if (!IsRunningOnUnix)
+		if (!IsCaseSensitive)
 			binDir = args [0].ToLower (CultureInfo.InvariantCulture);
 		string fullBinDir = Path.Combine (webDir, binDir);
 
@@ -27,17 +27,37 @@ class Program
 		HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 		using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 			string result = sr.ReadToEnd ();
-#if NET_2_0
-			if (result.IndexOf ("<p>PrivateBinPath=" + fullBinDir + "</p>") == -1) {
-#else
-			if (result.IndexOf ("<p>PrivateBinPath=" + binDir + "</p>") == -1) {
-#endif
+
+			string [] privateBinPaths = ExtractPath ("PrivateBinPath", result);
+			if (privateBinPaths == null) {
 				Console.WriteLine (result);
 				return 1;
 			}
-			if (result.IndexOf ("<p>BinDirectory=" + fullBinDir + Path.DirectorySeparatorChar + "</p>") == -1) {
+			if (!IsCaseSensitive && privateBinPaths.Length != 1) {
 				Console.WriteLine (result);
 				return 2;
+			}
+#if NET_2_0
+			if (!ContainsPath (privateBinPaths, fullBinDir)) {
+#else
+			if (!ContainsPath (privateBinPaths, binDir)) {
+#endif
+				Console.WriteLine (result);
+				return 3;
+			}
+
+			string [] binDirectories = ExtractPath ("BinDirectory", result);
+			if (binDirectories == null) {
+				Console.WriteLine (result);
+				return 4;
+			}
+			if (binDirectories.Length != 1) {
+				Console.WriteLine (result);
+				return 5;
+			}
+			if (binDirectories [0] != (fullBinDir + Path.DirectorySeparatorChar)) {
+				Console.WriteLine (result);
+				return 6;
 			}
 		}
 		response.Close ();
@@ -45,9 +65,40 @@ class Program
 		return 0;
 	}
 
+	static string [] ExtractPath (string name, string output)
+	{
+		string search = "<p>" + name + "=";
+
+		int start = output.IndexOf (search);
+		if (start != -1) {
+			int end = output.IndexOf ("</p>", start + search.Length);
+			if (end != -1) {
+				string paths = output.Substring (start + search.Length,
+					end - (start + search.Length));
+				return paths.Split (';');
+			}
+		}
+		return null;
+	}
+
+	static bool ContainsPath (string [] paths, string search)
+	{
+		for (int i = 0; i < paths.Length; i++) {
+			if (paths [i] == search)
+				return true;
+		}
+		return false;
+	}
+
+	static bool IsCaseSensitive
+	{
+		get {
+			return (Environment.GetEnvironmentVariable ("MONO_IOMAP") == null || !IsRunningOnUnix);
+		}
+	}
+
 	static bool IsRunningOnUnix {
-		get
-		{
+		get {
 			PlatformID pid = Environment.OSVersion.Platform;
 #if NET_2_0
 			return pid == PlatformID.Unix;
