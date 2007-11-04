@@ -33,7 +33,7 @@ class Program
 #endif
 
 				int startIndex = result.IndexOf ("<script src=\"");
-				int endIndex = result.IndexOf ("\" />", startIndex + 13);
+				int endIndex = result.IndexOf ("\"", startIndex + 13);
 				scriptResourceURL = result.Substring (startIndex + 13, endIndex - (startIndex + 13));
 				scriptResourceURL = scriptResourceURL.Replace ("&amp;", "&");
 
@@ -81,9 +81,9 @@ class Program
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
 #if MONO
-				if (result.IndexOf ("background-image: url(/WebResource.axd?a=Mono.Web.Security%2c+Version%3d0.0.0.0%2c+Culture%3dneutral;r=Mono.Web.Security.UI.MyResources.Test.gif;t=") == -1) {
+				if (result.IndexOf ("background-image: url(" + scriptResourceURL + ")") == -1) {
 #else
-				if (result.IndexOf ("background-image: url(WebResource.axd?d=Us9ckR5btm8lMMu0RQjwPXcda3w5uEBRwV0doPyQf08iZQHZVkFdjYzM9XD8dfq7ii6pp_DNCwc5_76oiFFgYA2&t=") == -1) {
+				if (result.IndexOf ("background-image: url(" + scriptResourceURL.Substring (1) + ")") == -1) {
 #endif
 					Console.WriteLine (result);
 					return 6;
