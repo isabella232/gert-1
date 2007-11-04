@@ -23,11 +23,28 @@ class Program
 		} catch (WebException ex) {
 			if (ex.Response != null) {
 				StreamReader sr = new StreamReader (ex.Response.GetResponseStream ());
-				Console.WriteLine (sr.ReadToEnd ());
+				string result = sr.ReadToEnd ();
+#if NET_2_0
+#if MONO
+				if (result.IndexOf ("System.Web.HttpException: Transfer may only be called from within a Page instance") == -1) {
+#else
+				if (result.IndexOf ("HttpException") == -1) {
+#endif
+					Console.WriteLine (result);
+					return 2;
+				}
+				return 0;
+#else
+				Console.WriteLine (result);
+#endif
 			}
-			return 1;
+			return 3;
 		}
 
+#if NET_2_0
+		return 1;
+#else
 		return 0;
+#endif
 	}
 }
