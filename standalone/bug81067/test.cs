@@ -7,7 +7,7 @@ public class Test
 	static int Main ()
 	{
 		WebClient wc = new WebClient ();
-		wc.Credentials = new NetworkCredential ("anonymous", "password");
+		wc.Credentials = new NetworkCredential ("anonymous", "password@domain-is-needed-for-anonymous.com");
 		string filename = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
 			"download.bin");
 		File.Delete (filename);
