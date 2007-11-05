@@ -1,18 +1,22 @@
 <project name="bug81815" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="compiler.version" value="MCS" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="compiler.version" value="MCS" />
 	</target>
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="compiler.version" value="CSC-1.0" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="compiler.version" value="CSC-2.0" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -52,7 +56,17 @@
 		<fail if="${file::exists('test.exe')}">#1</fail>
 		<fail unless="${file::exists('out')}">#2</fail>
 		<loadfile file="out" property="out" />
-		<fail if="${string::index-of(out,'CS0407') == -1}">#3</fail>
+		<choose>
+			<when test="${compiler.version == 'CSC-1.0'}">
+				<fail if="${string::index-of(out,'error CS0123: Method ''int.Parse(string)'' does not match delegate ''object Program.Conv(string)''') == -1}">#3</fail>
+			</when>
+			<when test="${compiler.version == 'CSC-2.0'}">
+				<fail if="${string::index-of(out,'error CS0407: ''int int.Parse(string)'' has the wrong return type') == -1}">#3</fail>
+			</when>
+			<when test="${compiler.version == 'MCS'}">
+				<fail if="${string::index-of(out,'error CS0407: The method `Parse'' return type does not match delegate `object Program.Conv(string)'' return type') == -1}">#3</fail>
+			</when>
+		</choose>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
