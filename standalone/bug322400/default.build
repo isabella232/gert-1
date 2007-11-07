@@ -89,7 +89,7 @@
 	</target>
 
 	<target name="run" depends="compile">
-		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" pidproperty="server.pid">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
 			<arg value="--root" />
 			<arg dir="web" />
 			<arg value="--port" />
