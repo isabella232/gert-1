@@ -47,6 +47,16 @@ class MainForm : Form
 		_syncCheckBox.Text = "Synchronous";
 		Controls.Add (_syncCheckBox);
 		// 
+		// _defaultSoundCheckBox
+		// 
+		_defaultSoundCheckBox = new CheckBox ();
+		_defaultSoundCheckBox.Checked = true;
+		_defaultSoundCheckBox.Location = new Point (200, 65);
+		_defaultSoundCheckBox.Size = new Size (120, 20);
+		_defaultSoundCheckBox.Text = "Default Sound";
+		_defaultSoundCheckBox.CheckedChanged += new EventHandler (DefaultSoundCheckBox_CheckedChanged);
+		Controls.Add (_defaultSoundCheckBox);
+		// 
 		// MainForm
 		// 
 		ClientSize = new Size (300, 90);
@@ -77,9 +87,8 @@ class MainForm : Form
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
-		string dir = AppDomain.CurrentDomain.BaseDirectory;
-		FileStream fs = File.OpenRead (Path.Combine (dir, "Asterisk.wav"));
-		_player = new SoundPlayer (fs);
+		_player = new SoundPlayer ();
+		_defaultSoundCheckBox.Checked = false;
 
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
@@ -111,11 +120,23 @@ class MainForm : Form
 		_syncCheckBox.Enabled = !_loopingCheckBox.Checked;
 	}
 
+	void DefaultSoundCheckBox_CheckedChanged (object sender, EventArgs e)
+	{
+		if (_defaultSoundCheckBox.Checked) {
+			_player.Stream = null;
+		} else {
+			string dir = AppDomain.CurrentDomain.BaseDirectory;
+			FileStream fs = File.OpenRead (Path.Combine (dir, "Asterisk.wav"));
+			_player.Stream = fs;
+		}
+	}
+
 	private SoundPlayer _player;
 	private Button _playButton;
 	private Button _stopButton;
 	private CheckBox _loopingCheckBox;
 	private CheckBox _syncCheckBox;
+	private CheckBox _defaultSoundCheckBox;
 }
 
 public class InstructionsForm : Form
@@ -138,7 +159,8 @@ public class InstructionsForm : Form
 			"Steps to execute:{0}{0}" +
 			"1. Uncheck the Looping checkbox.{0}{0}" +
 			"2. Uncheck the Synchronous checkbox.{0}{0}" +
-			"3. Click the Play button.{0}{0}" +
+			"3. Uncheck the Default Sound checkbox.{0}{0}" +
+			"4. Click the Play button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The sound immediately plays one time.{0}{0}" +
 			"2. The Play button immediately renders invisible " +
@@ -161,7 +183,8 @@ public class InstructionsForm : Form
 			"Steps to execute:{0}{0}" +
 			"1. Uncheck the Looping checkbox.{0}{0}" +
 			"2. Check the Synchronous checkbox.{0}{0}" +
-			"3. Click the Play button.{0}{0}" +
+			"3. Uncheck the Default Sound checkbox.{0}{0}" +
+			"4. Click the Play button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The sound immediately plays one time.{0}{0}" +
 			"2. The Play button renders invisible for a second " +
@@ -183,7 +206,8 @@ public class InstructionsForm : Form
 		_bugDescriptionText3.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Check the Looping checkbox.{0}{0}" +
-			"2. Click the Play button.{0}{0}" +
+			"2. Uncheck the Default Sound checkbox.{0}{0}" +
+			"3. Click the Play button.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. The Play button immediately renders invisible " +
 			"for a second.{0}{0}" +
@@ -197,9 +221,80 @@ public class InstructionsForm : Form
 		_tabPage3.Controls.Add (_bugDescriptionText3);
 		_tabControl.Controls.Add (_tabPage3);
 		// 
+		// _bugDescriptionText4
+		// 
+		_bugDescriptionText4 = new TextBox ();
+		_bugDescriptionText4.Dock = DockStyle.Fill;
+		_bugDescriptionText4.Multiline = true;
+		_bugDescriptionText4.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Uncheck the Looping checkbox.{0}{0}" +
+			"2. Uncheck the Synchronous checkbox.{0}{0}" +
+			"3. Check the Default Sound checkbox.{0}{0}" +
+			"4. Click the Play button.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. The beep sound immediately plays one time.{0}{0}" +
+			"2. The Play button immediately renders invisible " +
+			"for a second.",
+			Environment.NewLine);
+		// 
+		// _tabPage4
+		// 
+		_tabPage4 = new TabPage ();
+		_tabPage4.Text = "#4";
+		_tabPage4.Controls.Add (_bugDescriptionText4);
+		_tabControl.Controls.Add (_tabPage4);
+		// 
+		// _bugDescriptionText5
+		// 
+		_bugDescriptionText5 = new TextBox ();
+		_bugDescriptionText5.Dock = DockStyle.Fill;
+		_bugDescriptionText5.Multiline = true;
+		_bugDescriptionText5.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Uncheck the Looping checkbox.{0}{0}" +
+			"2. Check the Synchronous checkbox.{0}{0}" +
+			"3. Check the Default Sound checkbox.{0}{0}" +
+			"4. Click the Play button.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. The beep sound immediately plays one time.{0}{0}" +
+			"2. The Play button immediately renders invisible " +
+			"for a second.",
+			Environment.NewLine);
+		// 
+		// _tabPage5
+		// 
+		_tabPage5 = new TabPage ();
+		_tabPage5.Text = "#5";
+		_tabPage5.Controls.Add (_bugDescriptionText5);
+		_tabControl.Controls.Add (_tabPage5);
+		// 
+		// _bugDescriptionText6
+		// 
+		_bugDescriptionText6 = new TextBox ();
+		_bugDescriptionText6.Dock = DockStyle.Fill;
+		_bugDescriptionText6.Multiline = true;
+		_bugDescriptionText6.Text = string.Format (CultureInfo.InvariantCulture,
+			"Steps to execute:{0}{0}" +
+			"1. Check the Looping checkbox.{0}{0}" +
+			"2. Check the Default Sound checkbox.{0}{0}" +
+			"3. Click the Play button.{0}{0}" +
+			"Expected result:{0}{0}" +
+			"1. The beep sound immediately plays one time.{0}{0}" +
+			"2. The Play button immediately renders invisible " +
+			"for a second.",
+			Environment.NewLine);
+		// 
+		// _tabPage6
+		// 
+		_tabPage6 = new TabPage ();
+		_tabPage6.Text = "#6";
+		_tabPage6.Controls.Add (_bugDescriptionText6);
+		_tabControl.Controls.Add (_tabPage6);
+		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 240);
+		ClientSize = new Size (300, 260);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #338991";
@@ -208,8 +303,14 @@ public class InstructionsForm : Form
 	private TextBox _bugDescriptionText1;
 	private TextBox _bugDescriptionText2;
 	private TextBox _bugDescriptionText3;
+	private TextBox _bugDescriptionText4;
+	private TextBox _bugDescriptionText5;
+	private TextBox _bugDescriptionText6;
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 	private TabPage _tabPage2;
 	private TabPage _tabPage3;
+	private TabPage _tabPage4;
+	private TabPage _tabPage5;
+	private TabPage _tabPage6;
 }
