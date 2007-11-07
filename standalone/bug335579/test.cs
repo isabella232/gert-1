@@ -14,7 +14,7 @@ class Program
 		ThreadPool.QueueUserWorkItem (AnotherThread);
 		ThreadPool.QueueUserWorkItem (AnotherThread);
 		ThreadPool.QueueUserWorkItem (AnotherThread);
-		Thread.Sleep (100);
+		Thread.Sleep (300);
 
 		if (_threads.Count != 3)
 			return 2;
