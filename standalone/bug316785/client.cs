@@ -12,7 +12,11 @@ public class Client
 
 	internal Client ()
 	{
+#if NET_2_0
+		ChannelServices.RegisterChannel (new TcpChannel (), false);
+#else
 		ChannelServices.RegisterChannel (new TcpChannel ());
+#endif
 
 		WellKnownClientTypeEntry remotetype =
 			new WellKnownClientTypeEntry (typeof (Service), "tcp://localhost:8082/TcpService");
