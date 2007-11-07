@@ -31,6 +31,12 @@ class Program
 		Thread.Sleep (200);
 		Assert.IsTrue (server.Callback, "#B");
 
+		server.Reset ();
+
+		client.SendRequest (true, true);
+		Thread.Sleep (200);
+		Assert.IsTrue (server.Callback, "#C");
+
 		server.Stop ();
 	}
 }
