@@ -1,14 +1,17 @@
 <project name="bug81748" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="csc.compiler" value="MCS" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="csc.compiler" value="MCS" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="csc.compiler" value="CSC" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-2.0" />
@@ -48,7 +51,15 @@
 		<fail if="${file::exists('test.exe')}">#1</fail>
 		<fail unless="${file::exists('out')}">#2</fail>
 		<loadfile file="out" property="out" />
-		<fail if="${string::index-of(out,'CS1644: Feature ''namespace alias qualifier'' cannot be used because it is not part of the standardized ISO C# language specification') == -1}">#3</fail>
+		<choose>
+			<when test="${csc.compiler=='MCS'}">
+				<fail if="${string::index-of(out,'CS1644: Feature `namespace alias qualifier'' cannot be used because it is not part of the C# 1.0 language specification') == -1}">#3</fail>
+			</when>
+			<otherwise>
+				<fail if="${string::index-of(out,'CS1644: Feature ''namespace alias qualifier'' cannot be used because it is not part of the standardized ISO C# language specification') == -1}">#3</fail>
+			</otherwise>
+
+		</choose>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
