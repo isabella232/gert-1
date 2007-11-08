@@ -23,6 +23,7 @@
 				<include name="out" />
 				<include name="test1.exe" />
 				<include name="test2.exe" />
+				<include name="test3.exe" />
 			</fileset>
 		</delete>
 	</target>
@@ -59,6 +60,14 @@
 				<include name="System.Windows.Forms.dll" />
 			</references>
 		</csc>
+		<csc target="exe" define="${csc.defines}" output="test3.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test3.cs" />
+			</sources>
+			<references>
+				<include name="System.Windows.Forms.dll" />
+			</references>
+		</csc>
 	</target>
 
 	<target name="run" depends="compile">
@@ -66,6 +75,8 @@
 		<fail if="${file::exists('out')}">#1</fail>
 		<exec program="test2.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}">#2</fail>
+		<exec program="test3.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#3</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
