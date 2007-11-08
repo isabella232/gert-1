@@ -61,6 +61,7 @@
 		<exec program="test2.exe" managed="true" spawn="true" pidproperty="server.pid">
 			<arg value="server" />
 		</exec>
+		<sleep milliseconds="1000" />
 		<exec program="test2.exe" managed="true" output="out">
 			<arg value="client" />
 		</exec>
