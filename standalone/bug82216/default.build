@@ -38,7 +38,8 @@
 	<target name="compile">
 		<mkdir dir="web/bin" />
 		<mkdir dir="web/libraries" />
-		<csc target="library" define="${csc.defines}" output="web/libraries/Mono.Web.Security.dll" warnaserror="true" warninglevel="4">
+		<!-- compile assembly in web/libraries once privatebinpath is working -->
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.Security.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="PasswordBox.cs" />
 				<include name="SecuredPanel.cs" />

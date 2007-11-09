@@ -32,7 +32,7 @@ class TinyHost : MarshalByRefObject
 		h.Execute ("Default.aspx", sw);
 		string result = sw.ToString ();
 #if MONO
-		if (!result.Contains ("<input id=\"TextBox1\" type=\"text\" value=\"Normal TextBox\" name=\"TextBox1\" />")) {
+		if (!result.Contains ("<input type=\"text\" value=\"Normal TextBox\" name=\"TextBox1\" id=\"TextBox1\" />")) {
 #else
 		if (!result.Contains ("<input name=\"TextBox1\" type=\"text\" value=\"Normal TextBox\" id=\"TextBox1\" />")) {
 #endif
@@ -52,7 +52,7 @@ class TinyHost : MarshalByRefObject
 			return 4;
 		}
 #if MONO
-		if (!result.Contains ("<input id=\"TextBox2\" type=\"text\" value=\"Another TextBox\" name=\"TextBox2\" />")) {
+		if (!result.Contains ("<input type=\"text\" value=\"Another TextBox\" name=\"TextBox2\" id=\"TextBox2\" />")) {
 #else
 		if (!result.Contains ("<input name=\"TextBox2\" type=\"text\" value=\"Another TextBox\" id=\"TextBox2\" />")) {
 #endif
