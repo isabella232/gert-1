@@ -1,14 +1,6 @@
-<project name="bug81662" default="rebuild">
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-	</target>
-
+<project name="bug81653" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-	</target>
-
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
 	</target>
 
 	<target name="net-2.0">
@@ -71,9 +63,11 @@
 
 	<target name="run" depends="compile">
 		<exec program="server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="1000" />
 		<exec program="client.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
