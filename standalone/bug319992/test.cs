@@ -17,8 +17,9 @@ class Program
 		String line = Process.Start (info).StandardOutput.ReadLine ();
 		int pid = Int32.Parse (line);
 		Process p = Process.GetProcessById (pid);
-		Console.WriteLine (p.ProcessName);
 		if (p != null) {
+			if (p.ProcessName == null)
+				throw new Exception ("process name was null");
 			p.Kill ();
 		} else {
 			throw new Exception ("process was null");
