@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="mydocument">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="myfield1" type="myunionedenumeration"/>
+				<xs:element name="myfield2" type="myunionedenumeration"/>
+				<xs:element name="myfield3" type="myunionedenumeration"/>
+				<xs:element name="myfield4" type="myunionedenumerationbackwards"/>
+				<xs:element name="myfield5" type="myunionedenumerationbackwards"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="myunionedenumeration">
+		<xs:union memberTypes="myenumeration1 myenumeration2"/>
+	</xs:simpleType>
+	<xs:simpleType name="myunionedenumerationbackwards">
+		<xs:union memberTypes="myenumeration2 myenumeration1"/>
+	</xs:simpleType>
+	<xs:simpleType name="myenumeration1">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="this is in the first enumeration"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="myenumeration2">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="this is in the second enumeration"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

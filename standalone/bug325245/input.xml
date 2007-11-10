@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mydocument>
+	<myfield1>this is in the first enumeration</myfield1>
+	<myfield2>this is in the second enumeration</myfield2>
+	<myfield3>this isn't in an enumeration</myfield3>
+	<myfield4>this is in the first enumeration</myfield4>
+	<myfield5>this is in the second enumeration</myfield5>
+</mydocument>
