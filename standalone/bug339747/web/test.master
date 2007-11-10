@@ -1,0 +1,8 @@
+<%@ Master %>
+<html>
+<body>
+	<form runat="server">
+		<asp:ContentPlaceHolder id="Content" runat="server" />
+	</form>
+</body>
+</html>
