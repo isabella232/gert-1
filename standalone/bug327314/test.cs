@@ -7,8 +7,6 @@ class Program
 {
 	static int Main ()
 	{
-	
-
 		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("https://localhost:4443/Default.aspx");
 		request.Method = "POST";
 		request.KeepAlive = true;
