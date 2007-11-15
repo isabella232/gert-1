@@ -65,8 +65,14 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
 			"1. The TextBox contains the following lines:{0}{0}" +
+#if MONO
+			"   Line One{0}" +
+			"   Line Two{0}" +
+			"   LineThreeLineFourLineFive",
+#else
 			"   Line OneLine Two{0}" +
 			"   LineThreeLineFourLineFive",
+#endif
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -78,7 +84,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 120);
+		ClientSize = new Size (300, 140);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #81598";
