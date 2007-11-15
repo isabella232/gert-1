@@ -8,6 +8,13 @@ public class ParentObject : MarshalByRefObject
 {
 	static int Main ()
 	{
+		string dir = AppDomain.CurrentDomain.BaseDirectory;
+		if (dir.EndsWith (Path.DirectorySeparatorChar.ToString ()))
+			dir = dir.Substring (0, dir.Length - 1);
+
+		Assert.AreEqual (dir, Application.StartupPath, "#A1");
+		Assert.AreEqual (Path.Combine (dir, "apptest.exe"), Application.ExecutablePath, "#A2");
+
 		AppDomainSetup domainsetup = new AppDomainSetup ();
 		domainsetup.ShadowCopyFiles = "true";
 		AppDomain plugindomain = AppDomain.CreateDomain ("BugTest", null, domainsetup);
@@ -16,14 +23,9 @@ public class ParentObject : MarshalByRefObject
 			typeof (RemotingObject).Assembly.FullName,
 			typeof (RemotingObject).FullName);
 
-		string dir = AppDomain.CurrentDomain.BaseDirectory;
-		if (dir.EndsWith (Path.DirectorySeparatorChar.ToString ()))
-			dir = dir.Substring (0, dir.Length - 1);
+		Assert.AreEqual (dir, assldr.StartupPath, "#B1");
+		Assert.AreEqual (Path.Combine (dir, "apptest.exe"), assldr.ExecutablePath, "#B2");
 
-		if (assldr.StartupPath != dir)
-			return 1;
-		if (assldr.ExecutablePath != Path.Combine (dir, "test.exe"))
-			return 2;
 		return 0;
 	}
 }
