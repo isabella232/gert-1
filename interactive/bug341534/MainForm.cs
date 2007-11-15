@@ -63,14 +63,6 @@ class MainForm : Form
 	private CheckBox _largeFontCheckBox;
 }
 
-public class NonSelectableButon : Button
-{
-	public NonSelectableButon ()
-	{
-		SetStyle (ControlStyles.Selectable, false);
-	}
-}
-
 public class InstructionsForm : Form
 {
 	public InstructionsForm ()
