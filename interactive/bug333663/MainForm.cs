@@ -19,7 +19,7 @@ class MainForm : Form
 		// 
 		// _selectButton
 		// 
-		_selectButton = new NonSelectableButon ();
+		_selectButton = new NonSelectableButton ();
 		_selectButton.FlatStyle = FlatStyle.Flat;
 		_selectButton.Location = new Point (10, 100);
 		_selectButton.Text = "Select";
@@ -28,7 +28,7 @@ class MainForm : Form
 		// 
 		// _refreshButton
 		// 
-		_refreshButton = new NonSelectableButon ();
+		_refreshButton = new NonSelectableButton ();
 		_refreshButton.FlatStyle = FlatStyle.Flat;
 		_refreshButton.Location = new Point (115, 100);
 		_refreshButton.Text = "Refresh";
@@ -146,9 +146,9 @@ class MainForm : Form
 	private Label _selectionLengthValue;
 }
 
-public class NonSelectableButon : Button
+public class NonSelectableButton : Button
 {
-	public NonSelectableButon ()
+	public NonSelectableButton ()
 	{
 		SetStyle (ControlStyles.Selectable, false);
 	}
