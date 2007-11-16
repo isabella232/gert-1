@@ -9,7 +9,7 @@
 			}
 
 			if (Request.ContentLength != 0) {
-				Response.Write ("B");
+				Response.Write ("B:" + Request.ContentLength);
 				return;
 			}
 
@@ -23,30 +23,25 @@
 			}
 
 			if (input != 0) {
-				Response.Write ("C");
+				Response.Write ("C:" + input);
 				return;
 			}
 
 			if (Request.TotalBytes != 0) {
-				Response.Write ("D");
+				Response.Write ("D:" + Request.TotalBytes);
 				return;
 			}
 
 			if (Request.ContentType != "application/x-www-form-urlencoded") {
-				Response.Write ("E");
+				Response.Write ("E:" + Request.ContentType);
 				return;
 			}
 
 			if (Request.HttpMethod != "GET") {
-				Response.Write ("F");
+				Response.Write ("F:" + Request.HttpMethod);
 				return;
 			}
 			
-			if (Request.Headers ["Content-Length"] != null) {
-				Response.Write ("G");
-				return;
-			}
-
 			Response.Write ("<p>OK</p>");
 		}
 	</script>
