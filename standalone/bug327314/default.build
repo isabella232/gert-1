@@ -14,7 +14,9 @@
 				[Function("get-hash")]
 				public string GetHash (string file)
 				{
-					using (FileStream fs = File.OpenRead (file)) {
+					string absolute = Project.GetFullPath (file);
+
+					using (FileStream fs = File.OpenRead (absolute)) {
 						byte[] data = new byte [fs.Length];
 						fs.Read (data, 0, data.Length);
 						X509Certificate x509 = new X509Certificate (data);
