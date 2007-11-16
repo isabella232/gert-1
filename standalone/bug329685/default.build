@@ -33,7 +33,7 @@
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
 				<call target="${nant.settings.currentframework}" />
-				<call target="compile" />
+				<call target="run" />
 				<call target="clean" />
 			</if>
 		</foreach>
@@ -50,6 +50,11 @@
 				<include name="mscorlib.dll" />
 			</references>
 		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="test.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
