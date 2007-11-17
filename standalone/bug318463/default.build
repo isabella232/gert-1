@@ -1,0 +1,41 @@
+<project name="bug318463" default="rebuild">
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile">
+		<jsc target="exe" output="test.exe" warninglevel="4">
+			<sources>
+				<include name="test.js" />
+			</sources>
+		</jsc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
