@@ -67,10 +67,11 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Save button.{0}{0}" +
-			"2. Click the dropdown array of the \"Save as type\" " +
+			"2. Click the dropdown arrow of the \"Save as type\" " +
 			"combobox.{0}{0}" +
-			"3. Click the Save button.{0}{0}" +
-			"4. Click the dropdown array of the \"Save as type\" " +
+			"3. Click Cancel in the Save As dialog.{0}{0}" +
+			"4. Click the Save button.{0}{0}" +
+			"5. Click the dropdown arrow of the \"Save as type\" " +
 			"combobox.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. A listbox is dropped down (as in step 2).",
@@ -85,7 +86,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 260);
+		ClientSize = new Size (300, 280);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #333617";
