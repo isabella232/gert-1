@@ -47,7 +47,7 @@ public class MainForm : Form
 
 	void MainForm_Load (object sender, EventArgs e)
 	{
-		for (int i = 1; i <= 5; i++)
+		for (int i = 0; i <= 4; i++)
 			AddButton (i);
 
 		InstructionsForm instructionsForm = new InstructionsForm ();
@@ -90,7 +90,8 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Expected result on start-up:{0}{0}" +
-			"1. Five numbered buttons are added to the TableLayoutPanel.{0}{0}" +
+			"1. Five numbered buttons (0 - 4) are added to the " +
+			"TableLayoutPanel.{0}{0}" +
 			"2. The buttons are added in order.",
 			Environment.NewLine);
 		// 
