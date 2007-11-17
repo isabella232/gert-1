@@ -146,7 +146,7 @@ public class InstructionsForm : Form
 			"3. Enter \"abc\" in the \"File name\" combobox.{0}{0}" +
 			"4. Click the Save button.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The listbox contains an entry with file name \"...{1}abc.doc.foo\".",
+			"1. The listbox contains an entry with file name \"...{1}abc.foo.doc\".",
 			Environment.NewLine, Path.DirectorySeparatorChar);
 		// 
 		// _tabPage2
