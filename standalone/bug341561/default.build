@@ -1,0 +1,89 @@
+<project name="bug341561" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
+		<property name="xsp.package" value="xsp" />
+		<property name="xsp.library" value="Mono.WebServer.dll" />
+		<property name="mono.framework" value="mono-1.0" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="wsdl.tool" value="${framework::get-assembly-directory(framework::get-target-framework())}/wsdl.exe" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="xsp.library" value="Mono.WebServer2.dll" />
+		<property name="mono.framework" value="mono-2.0" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
+		<property name="xsp.package" value="xsp" />
+		<property name="xsp.library" value="Mono.WebServer.dll" />
+		<property name="mono.framework" value="mono-1.0" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="xsp.library" value="Mono.WebServer2.dll" />
+		<property name="mono.framework" value="mono-2.0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="Mono.Security.dll" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<if test="${framework::exists(mono.framework)}">
+					<call target="copy-references" />
+				</if>
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="copy-references">
+		<copy todir=".">
+			<fileset basedir="${framework::get-assembly-directory(mono.framework)}">
+				<include name="Mono.Security.dll" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+			<references basedir="${pkg-config::get-variable(xsp.package,'assemblies_dir')}">
+				<include name="${xsp.library}" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<exec program="test.exe" managed="true" spawn="true" pidproperty="pid" />
+		<waitforexit pid="${pid}" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
