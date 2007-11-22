@@ -14,11 +14,11 @@ class Program
 	{
 		ThreadPool.QueueUserWorkItem (StartAspNetHost, "foo1");
 
-		System.Threading.Thread.Sleep (2000);
+		Thread.Sleep (2000);
 
 		ThreadPool.QueueUserWorkItem (StartAspNetHost, "foo2");
 
-		System.Threading.Thread.Sleep (2000);
+		Thread.Sleep (2000);
 
 		HttpWebRequest request;
 
