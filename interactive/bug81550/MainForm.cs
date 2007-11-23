@@ -28,7 +28,8 @@ public class MainForm : Form
 		_bugDescriptionText1.Dock = DockStyle.Fill;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
-			"1. However over the notify icon in the task bar.{0}{0}" +
+			"1. Move the mouse pointer over the notify icon in " +
+			"the task bar.{0}{0}" +
 			"Expected result:{0}{0}" +
 			"1. A tooltip containing the following text is displayed:{0}{0}" +
 			"   Rank: 10{0}" +
