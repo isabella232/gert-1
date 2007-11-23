@@ -70,10 +70,14 @@
 				<arg value="--optimize=-inline" />
 				<arg file="test.exe" />
 			</exec>
+			<!--
 			<fail if="${file::exists('out')}">#1</fail>
+			-->
 		</if>
 		<exec program="test.exe" managed="true" output="out" />
+		<!--
 		<fail if="${file::exists('out')}">#2</fail>
+		-->
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
