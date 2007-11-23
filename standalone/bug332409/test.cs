@@ -5,15 +5,19 @@ class Program
 {
 	static int Main ()
 	{
-		Form form = new Form ();
-		form.KeyDown += new KeyEventHandler (Form_KeyDown);
-		form.Show ();
-		SendKeys.SendWait ("a");
+		for (int i = 0; i < 50; i++) {
+			Form form = new Form ();
+			form.KeyDown += new KeyEventHandler (Form_KeyDown);
+			form.Show ();
+			SendKeys.SendWait ("a");
 
-		if (_keyDown == null)
-			return 1;
-		if (_keyDown != "A")
-			return 2;
+			if (_keyDown == null)
+				return 1;
+			if (_keyDown != "A")
+				return 2;
+
+			form.Dispose ();
+		}
 		return 0;
 	}
 
