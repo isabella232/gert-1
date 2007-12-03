@@ -1,0 +1,82 @@
+<project name="bug345627" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="init">
+		<if test="${not target::exists(nant.settings.currentframework)}">
+			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
+		</if>
+		<call target="${nant.settings.currentframework}" />
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="main/nl-BE/**" />
+				<include name="main/main.exe" />
+				<include name="localized/ca/**" />
+				<include name="localized/nl-BE/**" />
+				<include name="localized/localized.dll" />
+				<include name="out" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="run" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="localized/localized.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="localized">
+				<include name="MyClass.cs" />
+			</sources>
+			<resources basedir="localized">
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="main/main.exe" warnaserror="true" warninglevel="4">
+			<sources basedir="main">
+				<include name="../../../build/common/Assert.cs" />
+				<include name="Program.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run" depends="compile">
+		<move todir="main">
+			<fileset basedir="localized">
+				<include name="nl-BE/**" />
+			</fileset>
+		</move>
+		<exec program="main/main.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
