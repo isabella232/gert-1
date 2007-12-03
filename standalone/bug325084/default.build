@@ -1,20 +1,21 @@
-<project name="bug344163" default="rebuild">
+<project name="bug325084" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	</target>
+
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
 	</target>
 
-	<target name="init">
-		<if test="${not target::exists(nant.settings.currentframework)}">
-			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
-		</if>
-		<call target="${nant.settings.currentframework}" />
-	</target>
-	
-	<property name="frameworks" value="mono-2.0,net-2.0" />
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
 	<target name="clean">
 		<delete>
@@ -31,7 +32,8 @@
 		<foreach property="framework" item="String" in="${frameworks}" delim=",">
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="run" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="compile" />
 				<call target="clean" />
 			</if>
 		</foreach>
@@ -39,18 +41,19 @@
 		<property name="nant.settings.currentframework" value="${original.targetframework}" />
 	</target>
 
-	<target name="compile" depends="init">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+	<target name="compile">
+		<record name="out" action="Start" />
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4" failonerror="false">
 			<sources>
-				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
 		</csc>
-	</target>
-
-	<target name="run" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<record name="out" action="Close" />
+		<fail if="${file::exists('test.exe')}">#1</fail>
+		<fail unless="${file::exists('out')}">#2</fail>
+		<loadfile file="out" property="out" />
+		<fail if="${string::index-of(out,'error CS0103') == -1}">#3</fail>
+		<fail if="${string::index-of(out,'Exception') != -1 }">#4</fail>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />

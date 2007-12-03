@@ -1,4 +1,4 @@
-<project name="bug344163" default="rebuild">
+<project name="bug345467" default="rebuild">
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
@@ -20,7 +20,8 @@
 		<delete>
 			<fileset>
 				<include name="out" />
-				<include name="test.exe" />
+				<include name="test1.dll" />
+				<include name="test2.dll" />
 			</fileset>
 		</delete>
 	</target>
@@ -31,7 +32,7 @@
 		<foreach property="framework" item="String" in="${frameworks}" delim=",">
 			<if test="${framework::exists(framework)}">
 				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="run" />
+				<call target="compile" />
 				<call target="clean" />
 			</if>
 		</foreach>
@@ -40,17 +41,16 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="library" define="${csc.defines}" output="test1.dll" warnaserror="true" warninglevel="4">
 			<sources>
-				<include name="../../build/common/Assert.cs" />
-				<include name="test.cs" />
+				<include name="test1.cs" />
 			</sources>
 		</csc>
-	</target>
-
-	<target name="run" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<csc target="library" define="${csc.defines}" output="test2.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test2.cs" />
+			</sources>
+		</csc>
 	</target>
 
 	<target name="rebuild" depends="clean, build" />
