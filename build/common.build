@@ -36,7 +36,5 @@
 		<property name="nant.settings.currentframework" value="${original.targetframework}" />
 	</target>
 
-	<target name="run-test" depends="init, run" />
-
 	<target name="rebuild" depends="clean, build" />
 </project>
