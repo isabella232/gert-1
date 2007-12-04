@@ -52,13 +52,31 @@ public class MainForm : Form
 		Application.Run (new MainForm ());
 	}
 
+	static bool RunningOnUnix {
+		get {
+			PlatformID platform = Environment.OSVersion.Platform;
+#if NET_2_0
+			return platform == PlatformID.Unix;
+#else
+			return ((int) platform) == 128;
+#endif
+		}
+	}
+
 	void MainForm_Load (object sender, EventArgs e)
 	{
+		if (RunningOnUnix) {
+			MessageBox.Show ("This test only applies to Windows.",
+				"bug #345883");
+			Close ();
+		}
+
 		Array values = Enum.GetValues (typeof (ProcessWindowStyle));
 		_windowStyleListBox.DataSource = values;
 
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
+
 	}
 
 	void LaunchProcessButton_Click (object sender, EventArgs e)
