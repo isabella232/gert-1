@@ -9,7 +9,7 @@ class BaseObject
 	{
 	}
 
-	static List<T> Query<T> () where T : BaseObject
+	public static List<T> Query<T> () where T : BaseObject
 	{
 		List<T> results = new List<T> ();
 		Closure (delegate { results.Add (MakeSomething<T> ()); });

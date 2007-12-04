@@ -9,7 +9,7 @@ class BaseObject
 	{
 	}
 
-	static List<T> Query<T> (out int? count) where T : BaseObject
+	public static List<T> Query<T> (out int? count) where T : BaseObject
 	{
 		count = 0;
 		List<T> results = new List<T> ();
