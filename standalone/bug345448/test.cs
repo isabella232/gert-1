@@ -21,7 +21,7 @@ class Program
 			Assert.AreEqual ("TestWebServiceSoap", sd.Bindings [0].Name, "#A2");
 			Assert.AreEqual ("http://tempuri.org/:TestWebServiceSoap", sd.Bindings [0].Type.ToString (), "#A3");
 			Assert.AreEqual ("TestWebServiceSoap12", sd.Bindings [1].Name, "#A4");
-			Assert.AreEqual ("http://tempuri.org/:TestWebServiceSoap", sd.Bindings [0].Type.ToString (), "#A5");
+			Assert.AreEqual ("http://tempuri.org/:TestWebServiceSoap", sd.Bindings [1].Type.ToString (), "#A5");
 #else
 			Assert.AreEqual (1, sd.Bindings.Count, "#A1");
 			Assert.AreEqual ("TestWebServiceSoap", sd.Bindings [0].Name, "#A2");
