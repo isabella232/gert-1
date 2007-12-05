@@ -41,6 +41,29 @@ class Program
 			Assert.AreEqual ("AnotherBinding", sd.PortTypes [0].Name, "#B2");
 			Assert.AreEqual ("TestWebServiceHttpGet", sd.PortTypes [1].Name, "#B3");
 			Assert.AreEqual ("TestWebServiceHttpPost", sd.PortTypes [2].Name, "#B4");
+
+			Assert.AreEqual (1, sd.Services.Count, "#C1");
+			Service service = sd.Services [0];
+			Assert.AreEqual ("TestWebService", service.Name, "#C2");
+#if NET_2_0
+			Assert.AreEqual (4, service.Ports.Count, "#C3");
+			Assert.AreEqual ("http://tempuri.org/:AnotherBinding", service.Ports [0].Binding.ToString (), "#C4");
+			Assert.AreEqual ("AnotherBinding", service.Ports [0].Name, "#C5");
+			Assert.AreEqual ("http://tempuri.org/:AnotherBinding1", service.Ports [1].Binding.ToString (), "#C6");
+			Assert.AreEqual ("AnotherBinding1", service.Ports [1].Name, "#C7");
+			Assert.AreEqual ("http://tempuri.org/:TestWebServiceHttpGet", service.Ports [2].Binding.ToString (), "#C8");
+			Assert.AreEqual ("TestWebServiceHttpGet", service.Ports [2].Name, "#C9");
+			Assert.AreEqual ("http://tempuri.org/:TestWebServiceHttpPost", service.Ports [3].Binding.ToString (), "#C10");
+			Assert.AreEqual ("TestWebServiceHttpPost", service.Ports [3].Name, "#C11");
+#else
+			Assert.AreEqual (3, service.Ports.Count, "#C3");
+			Assert.AreEqual ("http://tempuri.org/:AnotherBinding", service.Ports [0].Binding.ToString (), "#C4");
+			Assert.AreEqual ("AnotherBinding", service.Ports [0].Name, "#C5");
+			Assert.AreEqual ("http://tempuri.org/:TestWebServiceHttpGet", service.Ports [1].Binding.ToString (), "#C6");
+			Assert.AreEqual ("TestWebServiceHttpGet", service.Ports [1].Name, "#C7");
+			Assert.AreEqual ("http://tempuri.org/:TestWebServiceHttpPost", service.Ports [2].Binding.ToString (), "#C8");
+			Assert.AreEqual ("TestWebServiceHttpPost", service.Ports [2].Name, "#C9");
+#endif
 		}
 	}
 }
