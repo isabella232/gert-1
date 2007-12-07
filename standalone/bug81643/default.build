@@ -23,9 +23,8 @@
 	<target name="verify" depends="compile">
 		<property name="local.targetframework" value="${nant.settings.currentframework}" />
 
-		<if test="${framework::sdk-exists('net-2.0')}">
+		<if test="${framework::exists('net-2.0') and framework::sdk-exists('net-2.0')}">
 			<property name="nant.settings.currentframework" value="net-2.0" />
-			<call target="init" />
 			<exec program="${framework::get-tool-path('peverify.exe')}">
 				<arg file="test.exe" />
 				<arg value="/NOLOGO" />
