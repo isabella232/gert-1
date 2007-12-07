@@ -47,7 +47,7 @@
 	</target>
 
 	<target name="verify">
-		<exec program="${framework::get-sdk-directory(framework::get-target-framework())}/peverify.exe" managed="true">
+		<exec program="${framework::get-tool-path('peverify.exe')}" managed="true">
 			<arg value="/NOLOGO" />
 			<arg file="test.exe" />
 		</exec>
