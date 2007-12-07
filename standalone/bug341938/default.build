@@ -7,23 +7,33 @@
 		<delete>
 			<fileset>
 				<include name="out" />
+				<include name="mscorlib.dll" />
+				<include name="System.dll" />
 				<include name="test.exe" />
 			</fileset>
 		</delete>
 	</target>
 
-	<target name="compile">
+	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
 			<references>
 				<include name="mscorlib.dll" />
+				<include name="System.dll" />
 			</references>
 		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
+		<!-- silverlight needs these assemblies locally to allow the runtime to load them -->
+		<copy todir=".">
+			<fileset basedir="${framework::get-assembly-directory(framework::get-target-framework())}">
+				<include name="mscorlib.dll" />
+				<include name="System.dll" />
+			</fileset>
+		</copy>
 		<exec program="test.exe" managed="strict" output="out" />
 		<fail if="${file::exists('out')}" />
 	</target>
