@@ -21,7 +21,7 @@
 	</target>
 
 	<target name="verify" depends="compile">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+		<property name="local.targetframework" value="${nant.settings.currentframework}" />
 
 		<if test="${framework::sdk-exists('net-2.0')}">
 			<property name="nant.settings.currentframework" value="net-2.0" />
@@ -32,7 +32,7 @@
 			</exec>
 		</if>
 
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+		<property name="nant.settings.currentframework" value="${local.targetframework}" />
 	</target>
 	
 	<target name="run-test" depends="verify">
