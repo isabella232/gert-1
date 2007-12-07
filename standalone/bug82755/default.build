@@ -1,19 +1,5 @@
 <project name="bug82755" default="rebuild">
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-	</target>
-
-	<target name="mono-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-	</target>
-
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
-	</target>
-
-	<target name="net-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
-	</target>
+	<include buildfile="../../build/common.build" />
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
@@ -26,26 +12,7 @@
 		</delete>
 	</target>
 
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="${nant.settings.currentframework}" />
-				<call target="run" />
-				<if test="${framework::exists('net-2.0')}">
-					<property name="nant.settings.currentframework" value="net-2.0" />
-					<call target="verify" />
-				</if>
-				<call target="clean" />
-			</if>
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
-	</target>
-
-	<target name="compile">
+	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
@@ -56,17 +23,22 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="verify" depends="compile">
+		<property name="local.targetframework" value="${nant.settings.currentframework}" />
+
+		<if test="${framework::exists('net-2.0') and framework::sdk-exists('net-2.0')}">
+			<property name="nant.settings.currentframework" value="net-2.0" />
+			<exec program="${framework::get-tool-path('peverify.exe')}">
+				<arg value="/NOLOGO" />
+				<arg file="test.exe" />
+			</exec>
+		</if>
+
+		<property name="nant.settings.currentframework" value="${local.targetframework}" />
+	</target>
+
+	<target name="run-test" depends="verify">
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 	</target>
-
-	<target name="verify">
-		<exec program="${framework::get-sdk-directory(framework::get-target-framework())}/peverify.exe" managed="true">
-			<arg value="/NOLOGO" />
-			<arg file="test.exe" />
-		</exec>
-	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>
