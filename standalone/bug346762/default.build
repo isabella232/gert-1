@@ -1,0 +1,81 @@
+<project name="bug346762" default="rebuild">
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="xsp.package" value="xsp" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="xsp.package" value="xsp" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="init">
+		<if test="${not target::exists(nant.settings.currentframework)}">
+			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
+		</if>
+		<call target="${nant.settings.currentframework}" />
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="web/bin/**" />
+				<include name="out" />
+				<include name="TestWebService.cs" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run-test" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
