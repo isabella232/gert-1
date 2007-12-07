@@ -7,12 +7,20 @@
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
 
+	<target name="moonlight-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_2_1,ONLY_2_1,MONO" />
+	</target>
+
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	</target>
+
+	<target name="silverlight-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_2_1,ONLY_2_1" />
 	</target>
 
 	<target name="init">
