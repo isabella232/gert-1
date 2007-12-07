@@ -1,25 +1,21 @@
 <project name="bug322400" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
 		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-		<property name="wsdl.tool" value="${framework::get-assembly-directory(framework::get-target-framework())}/wsdl.exe" />
 		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
-		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
 		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
-		<property name="wsdl.tool" value="${framework::get-sdk-directory(framework::get-target-framework())}/wsdl.exe" />
 		<property name="xsp.package" value="xsp-2" />
 	</target>
 
@@ -69,7 +65,7 @@
 				<include name="System.Web.Services.dll" />
 			</references>
 		</csc>
-		<exec program="${wsdl.tool}" managed="true">
+		<exec program="${framework::get-tool-path('wsdl.exe')}" managed="true">
 			<arg value="http://127.0.0.1:8081/MyTestService.asmx?WSDL" />
 			<arg value="/nologo" />
 		</exec>
