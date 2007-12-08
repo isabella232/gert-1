@@ -10,14 +10,13 @@ class Program
 	static int Main ()
 	{
 		for (int i = 0; i < 10; i++) {
-			if (!RunTest ())
-				return 1;
+			RunTest ();
 		}
 
 		return 0;
 	}
 
-	static bool RunTest ()
+	static void RunTest ()
 	{
 		// Start the server thread
 		ServerThread serverThread = new ServerThread ();
@@ -46,7 +45,8 @@ class Program
 			result.Append (enc.GetString (bytearr));
 		}
 
-		return (result.ToString () == "012345670123456789abcdefabcdefghijklmnopqrstuvwxyz");
+		Assert.AreEqual ("012345670123456789abcdefabcdefghijklmnopqrstuvwxyz",
+			result.ToString (), "#1");
 	}
 }
 
