@@ -1,0 +1,61 @@
+	<project name="bug347174" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="nl/**" />
+				<include name="Lang.dll" />
+				<include name="Locale.dll" />
+				<include name="NonLocale.dll" />
+				<include name="NonSigned.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="nl" />
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="Lang.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Lang.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="nl/Locale.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Locale.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="NonLocale.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="NonLocale.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="NonSigned.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="NonSigned.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" keyfile="test.snk" output="test.exe" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="1607" />
+			</nowarn>
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="nl/Locale.dll" />
+				<include name="NonLocale.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
