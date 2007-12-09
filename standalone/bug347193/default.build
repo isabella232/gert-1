@@ -1,0 +1,51 @@
+	<project name="bug347174" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="en-US/**" />
+				<include name="en/**" />
+				<include name="Lang.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="Lang.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Lang.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" keyfile="test.snk" output="test.exe" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="1607" />
+			</nowarn>
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="Lang.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<copy todir="en-US" file="Lang.dll" />
+		<copy todir="en" file="Lang.dll" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#A1</fail>
+
+		<delete dir="en-US" />
+		<exec program="test.exe" managed="true" output="out" resultproperty="exitcode" failonerror="false" />
+		<fail if="${int::parse(exitcode)==0}">#B1</fail>
+		<fail unless="${file::exists('out')}">#B2</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'FileNotFoundException') != -1}">#B3</fail>
+	</target>
+</project>
