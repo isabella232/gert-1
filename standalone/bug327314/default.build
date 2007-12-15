@@ -96,7 +96,7 @@
 		<call target="${nant.settings.currentframework}" />
 
 		<!-- create private key for CA -->
-		<exec program="${sdk.dir}/makecert.exe" managed="true">
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
 			<arg value="-r" />
 			<arg value="-n" />
 			<arg value="CN=Mono Test CA" />
@@ -105,7 +105,7 @@
 			<arg file="root.cer" />
 		</exec>
 		<!-- create private key and certifate signed by CA -->
-		<exec program="${sdk.dir}/makecert.exe" managed="true">
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
 			<arg value="-iv" />
 			<arg file="root.key" />
 			<arg value="-ic" />
@@ -133,7 +133,7 @@
 				</exec>
 			</when>
 			<otherwise>
-				<exec program="${framework::get-sdk-directory(framework::get-target-framework())}/certmgr.exe" managed="true">
+				<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 					<arg value="-add" />
 					<arg file="root.cer" />
 					<arg value="-s" />
@@ -154,7 +154,7 @@
 				</exec>
 			</when>
 			<otherwise>
-				<exec program="${framework::get-sdk-directory(framework::get-target-framework())}/certmgr.exe" managed="true">
+				<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 					<arg value="-del" />
 					<arg value="-s" />
 					<arg value="root" />
