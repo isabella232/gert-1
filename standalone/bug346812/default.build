@@ -1,0 +1,255 @@
+<project name="bug346812" default="rebuild">
+	<script language="C#" prefix="x509">
+		<references basedir="${framework::get-assembly-directory('mono-1.0')}">
+			<include name="Mono.Security.dll" />
+		</references>
+		<imports>
+			<import namespace="System.Net" />
+			<import namespace="System.Globalization" />
+			<import namespace="System.IO" />
+			<import namespace="System.Text" />
+			<import namespace="Mono.Security.X509" />
+		</imports>
+		<code>
+			<![CDATA[
+				[Function("get-hash")]
+				public string GetHash (string file)
+				{
+					string absolute = Project.GetFullPath (file);
+
+					using (FileStream fs = File.OpenRead (absolute)) {
+						byte[] data = new byte [fs.Length];
+						fs.Read (data, 0, data.Length);
+						X509Certificate x509 = new X509Certificate (data);
+
+						byte [] input = x509.Hash;
+						StringBuilder sb = new StringBuilder (input.Length * 2);
+						foreach (byte b in input)
+							sb.Append (b.ToString ("X2", CultureInfo.InvariantCulture));
+						return sb.ToString ();
+					}
+				}
+
+				[Function("create-common-name")]
+				public string CreateCommonName ()
+				{
+					string hostName = Environment.GetEnvironmentVariable ("MONO_TESTS_HOSTNAME");
+					if (hostName == null)
+						throw new ArgumentException("The MONO_TESTS_HOSTNAME "
+							+ "environment variable is not set.");
+
+					int index = hostName.IndexOf (".");
+					if (index == -1)
+						throw new ArgumentException ("The MONO_TESTS_HOSTNAME "
+							+ "environment variable does not contain a FQDN.");
+
+					return hostName.Substring (0, 2) + "*" +
+						hostName.Substring (index, hostName.Length - index);
+				}
+				
+			]]>
+		</code>
+	</script>
+	
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory(framework::get-target-framework())}" />
+		<property name="xsp.package" value="xsp" />
+		<property name="certmgr" value="Mono" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="certmgr" value="Mono" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp" />
+		<property name="certmgr" value="MS" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="certmgr" value="MS" />
+	</target>
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="init">
+		<if test="${not target::exists(nant.settings.currentframework)}">
+			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
+		</if>
+		<call target="${nant.settings.currentframework}" />
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="localhost.p12" />
+				<include name="out" />
+				<include name="root.cer" />
+				<include name="root.key" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run-test" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="keygen">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<property name="nant.settings.currentframework" value="mono-1.0" />
+		<call target="${nant.settings.currentframework}" />
+
+		<!-- create private key for CA -->
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
+			<arg value="-r" />
+			<arg value="-n" />
+			<arg value="CN=Mono Test CA" />
+			<arg value="-sv" />
+			<arg file="root.key" />
+			<arg file="root.cer" />
+		</exec>
+
+		<property name="hostname" value="${x509::create-common-name()}" />
+		<echo>${hostname}</echo>
+		
+		<!-- create private key and certifate signed by CA -->
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
+			<arg value="-iv" />
+			<arg file="root.key" />
+			<arg value="-ic" />
+			<arg file="root.cer" />
+			<arg value="-eku" />
+			<arg value="1.3.6.1.5.5.7.3.1" />
+			<arg value="-n" />
+			<arg value="CN=${hostname}" />
+			<arg value="-p12" />
+			<arg file="localhost.p12" />
+			<arg value="s3kr3t" />
+		</exec>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+		<call target="${nant.settings.currentframework}" />
+
+		<!-- trust CA -->
+		<choose>
+			<when test="${certmgr=='Mono'}">
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-add" />
+					<arg value="-c" />
+					<arg value="Trust" />
+					<arg file="root.cer" />
+				</exec>
+			</when>
+			<otherwise>
+				<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
+					<arg value="-add" />
+					<arg file="root.cer" />
+					<arg value="-s" />
+					<arg value="root" />
+				</exec>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="remove-trust">
+		<choose>
+			<when test="${certmgr=='Mono'}">
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-del" />
+					<arg value="-c" />
+					<arg value="Trust" />
+					<arg value="${x509::get-hash('root.cer')}" />
+				</exec>
+			</when>
+			<otherwise>
+				<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
+					<arg value="-del" />
+					<arg value="-s" />
+					<arg value="root" />
+					<arg value="-c" />
+					<arg value="-n" />
+					<arg value="Mono Test CA" />
+				</exec>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+		-->
+	</target>
+
+	<target name="xsp">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="4443" />
+			<arg value="--https" />
+			<arg value="--p12file" />
+			<arg file="localhost.p12" />
+			<arg value="--pkpwd" />
+			<arg value="s3kr3t" />
+		</exec>
+	</target>
+	
+	<target name="run-test" depends="compile">
+		<trycatch>
+			<try>
+				<call target="keygen" />
+				<sleep milliseconds="5000" />
+				<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+					<arg value="--root" />
+					<arg dir="web" />
+					<arg value="--port" />
+					<arg value="4443" />
+					<arg value="--https" />
+					<arg value="--p12file" />
+					<arg file="localhost.p12" />
+					<arg value="--pkpwd" />
+					<arg value="s3kr3t" />
+				</exec>
+				<sleep milliseconds="5000" />
+				<!-- run test app -->
+				<exec program="test.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</try>
+			<finally>
+				<if test="${property::exists('server.pid')}">
+					<kill pid="${server.pid}" failonerror="false" if="${property::exists('server.pid')}" />
+				</if>
+				<sleep milliseconds="1000" />
+				<call target="remove-trust" />
+			</finally>
+		</trycatch>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
