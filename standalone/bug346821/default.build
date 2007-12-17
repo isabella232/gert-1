@@ -1,0 +1,261 @@
+<project name="bug346812" default="rebuild">
+	<script language="C#" prefix="x509">
+		<references basedir="${framework::get-assembly-directory('mono-1.0')}">
+			<include name="Mono.Security.dll" />
+		</references>
+		<imports>
+			<import namespace="System.Net" />
+			<import namespace="System.Globalization" />
+			<import namespace="System.IO" />
+			<import namespace="System.Text" />
+			<import namespace="Mono.Security.X509" />
+		</imports>
+		<code>
+			<![CDATA[
+				[Function("get-cert-hash")]
+				public string GetCertHash (string file)
+				{
+					string absolute = Project.GetFullPath (file);
+
+					using (FileStream fs = File.OpenRead (absolute)) {
+						byte[] data = new byte [fs.Length];
+						fs.Read (data, 0, data.Length);
+						X509Certificate x509 = new X509Certificate (data);
+
+						byte [] input = x509.Hash;
+						StringBuilder sb = new StringBuilder (input.Length * 2);
+						foreach (byte b in input)
+							sb.Append (b.ToString ("X2", CultureInfo.InvariantCulture));
+						return sb.ToString ();
+					}
+				}
+
+				[Function("get-crl-hash")]
+				public string GetCrlHash (string file)
+				{
+					string absolute = Project.GetFullPath (file);
+
+					using (FileStream fs = File.OpenRead (absolute)) {
+						byte[] data = new byte [fs.Length];
+						fs.Read (data, 0, data.Length);
+						X509Crl crl = new X509Crl (data);
+
+						byte [] input = crl.Hash;
+						StringBuilder sb = new StringBuilder (input.Length * 2);
+						foreach (byte b in input)
+							sb.Append (b.ToString ("X2", CultureInfo.InvariantCulture));
+						return sb.ToString ();
+					}
+				}
+			]]>
+		</code>
+	</script>
+	
+	<target name="mono-1.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory(framework::get-target-framework())}" />
+		<property name="xsp.package" value="xsp" />
+		<property name="certmgr" value="Mono" />
+	</target>
+
+	<target name="mono-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="certmgr" value="Mono" />
+	</target>
+
+	<target name="net-1.1">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp" />
+		<property name="certmgr" value="MS" />
+	</target>
+
+	<target name="net-2.0">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+		<property name="xsp.package" value="xsp-2" />
+		<property name="certmgr" value="MS" />
+	</target>
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0" />
+
+	<target name="init">
+		<if test="${not target::exists(nant.settings.currentframework)}">
+			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
+		</if>
+		<call target="${nant.settings.currentframework}" />
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="crl/**" />
+				<include name="chain/**" />
+				<include name="ct_root.crt" />
+				<include name="Mono.Security.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="www.microsoft.com.crt" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build">
+		<property name="original.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<call target="${nant.settings.currentframework}" />
+				<call target="run-test" />
+				<call target="clean" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.targetframework}" />
+	</target>
+
+	<target name="add-trust" depends="compile">
+		<!-- download root CA certificate -->
+		<get src="http://secure.globalsign.net/cacert/ct_root.crt" dest="ct_root.crt" />
+
+		<!-- download intermediate CA certificates -->
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="save-chain" />
+		</exec>
+
+		<!-- install root CA certificate into Trust store -->
+		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+			<arg value="-add" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg file="ct_root.crt" />
+		</exec>
+
+		<!-- install intermediate CA certificates into CA store -->
+		<foreach item="File" property="cert.file">
+			<in>
+				<items basedir="chain">
+					<include name="**/*" />
+				</items>
+			</in>
+			<do>
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-add" />
+					<arg value="-c" />
+					<arg value="CA" />
+					<arg file="${cert.file}" />
+				</exec>
+			</do>
+		</foreach>
+
+		<sleep milliseconds="5000" />
+
+		<!-- download CRLs -->
+		<mkdir dir="crl" />
+		<get src="http://www.public-trust.com/cgi-bin/CRL/2018/cdp.crl" dest="crl/cdp.crl" />
+		<get src="http://crl.microsoft.com/pki/mscorp/crl/mswww(3).crl" dest="crl/mswww(3).crl" />
+		<get src="http://crl.microsoft.com/pki/mscorp/crl/Microsoft%20Secure%20Server%20Authority(3).crl"
+			 dest="crl/Microsoft Secure Server Authority(3).crl" />
+
+		<!-- add CRLs to CA store -->
+		<foreach item="File" property="crl.file">
+			<in>
+				<items basedir="crl">
+					<include name="**/*" />
+				</items>
+			</in>
+			<do>
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-add" />
+					<arg value="-crl" />
+					<arg value="CA" />
+					<arg file="${crl.file}" />
+				</exec>
+			</do>
+		</foreach>
+	</target>
+
+	<target name="remove-trust">
+		<!-- remove root CA certificate from Trust store -->
+		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+			<arg value="-del" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg value="${x509::get-cert-hash('ct_root.crt')}" />
+		</exec>
+
+		<!-- remove intermediate CA certificates from CA store -->
+		<foreach item="File" property="cert.file">
+			<in>
+				<items basedir="chain">
+					<include name="**/*" />
+				</items>
+			</in>
+			<do>
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-del" />
+					<arg value="-c" />
+					<arg value="CA" />
+					<arg value="${x509::get-cert-hash(cert.file)}" />
+				</exec>
+			</do>
+		</foreach>
+
+		<!-- remove CRLs from CA store -->
+		<foreach item="File" property="crl.file">
+			<in>
+				<items basedir="crl">
+					<include name="**/*" />
+				</items>
+			</in>
+			<do>
+				<exec program="${sdk.dir}/certmgr.exe" managed="true">
+					<arg value="-del" />
+					<arg value="-crl" />
+					<arg value="CA" />
+					<arg value="${x509::get-crl-hash(crl.file)}" />
+				</exec>
+			</do>
+		</foreach>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="Mono.Security.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<mkdir dir="crl" />
+		<mkdir dir="chain" />
+		<copy todir=".">
+			<fileset basedir="${framework::get-assembly-directory(framework::get-target-framework())}">
+				<include name="Mono.Security.dll" />
+			</fileset>
+		</copy>
+		<trycatch>
+			<try>
+				<call target="add-trust" />
+				<exec program="test.exe" managed="true" output="out">
+					<arg value="test" />
+				</exec>
+				<fail if="${file::exists('out')}" />
+			</try>
+			<finally>
+				<sleep milliseconds="1000" />
+				<call target="remove-trust" />
+			</finally>
+		</trycatch>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+</project>
