@@ -7,6 +7,10 @@
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
 	</target>
 
+	<target name="mono-3.5">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_3_5,ONLY_3_5,MONO" />
+	</target>
+
 	<target name="moonlight-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_2_1,ONLY_2_1,MONO" />
 	</target>
@@ -19,6 +23,10 @@
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
 	</target>
 
+	<target name="net-3.5">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_3_5,ONLY_3_5" />
+	</target>
+
 	<target name="silverlight-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_2_1,ONLY_2_1" />
 	</target>
@@ -28,6 +36,8 @@
 			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
 		</if>
 		<call target="${nant.settings.currentframework}" />
+		<call target="${nant.settings.currentframework}-init"
+			if="${target::exists(nant.settings.currentframework+'-init')}" />
 	</target>
 
 	<target name="build">
