@@ -37,6 +37,11 @@ class Program
 		Assert.AreEqual ("2.0", fvi.ProductVersion, "#A3");
 		Assert.AreEqual ("DDD", fvi.LegalCopyright, "#A4");
 		Assert.AreEqual ("EEE", fvi.LegalTrademarks, "#A5");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#A6");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#A7");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#A8");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#A9");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#A10");
 
 		File.Delete (assemblyFile);
 	}
@@ -66,6 +71,11 @@ class Program
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#B8");
 		Assert.IsNotNull (fvi.LegalTrademarks, "#B9");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#B10");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#B11");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#B12");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#B13");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#B14");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#B15");
 
 		File.Delete (assemblyFile);
 	}
@@ -130,6 +140,11 @@ class Program
 		Assert.AreEqual (" ", fvi.ProductVersion, "#C3");
 		Assert.AreEqual ("Copyright 2007 Mono Hackers", fvi.LegalCopyright, "#C4");
 		Assert.AreEqual ("Registered to All", fvi.LegalTrademarks, "#C5");
+		Assert.AreEqual ("2.4.6.8", fvi.FileVersion, "#C6");
+		Assert.AreEqual (6, fvi.FileBuildPart, "#C7");
+		Assert.AreEqual (2, fvi.FileMajorPart, "#C8");
+		Assert.AreEqual (4, fvi.FileMinorPart, "#C9");
+		Assert.AreEqual (8, fvi.FilePrivatePart, "#C10");
 
 		File.Delete (assemblyFile);
 	}
@@ -194,6 +209,11 @@ class Program
 		Assert.AreEqual ("2.0", fvi.ProductVersion, "#D3");
 		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D4");
 		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D5");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#D6");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#D7");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#D8");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#D9");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#D10");
 
 		File.Delete (assemblyFile);
 	}
@@ -223,6 +243,11 @@ class Program
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#E8");
 		Assert.IsNotNull (fvi.LegalTrademarks, "#E9");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#E10");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#E11");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#E12");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#E13");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#E14");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#E15");
 
 		File.Delete (assemblyFile);
 	}
@@ -251,61 +276,5 @@ class Program
 		}
 
 		File.Delete (assemblyFile);
-	}
-}
-
-class Assert
-{
-	public static void AreEqual (int x, int y, string msg)
-	{
-		if (x != y)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected: {0}, but was: {1}. {2}",
-				x, y, msg));
-	}
-
-	public static void AreEqual (string x, string y, string msg)
-	{
-		if (x != y)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected: {0}, but was: {1}. {2}",
-				x, y, msg));
-	}
-
-	public static void AreEqual (object x, object y, string msg)
-	{
-		if (x != y)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected: {0}, but was: {1}. {2}",
-				x, y, msg));
-	}
-
-	public static void Fail (string msg)
-	{
-		throw new Exception (msg);
-	}
-
-	public static void IsNotNull (object value, string msg)
-	{
-		if (value == null)
-			throw new Exception (msg);
-	}
-
-	public static void IsNull (object value, string msg)
-	{
-		if (value != null)
-			throw new Exception (msg);
-	}
-
-	public static void IsFalse (bool value, string msg)
-	{
-		if (value)
-			throw new Exception (msg);
-	}
-
-	public static void IsTrue (bool value, string msg)
-	{
-		if (!value)
-			throw new Exception (msg);
 	}
 }
