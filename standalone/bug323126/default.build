@@ -1,0 +1,28 @@
+<project name="bug323126" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-2.0,mono-3.5,net-1.0,net-1.1,net-2.0,net-3.5" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<record name="out" action="Start" />
+		<vbc target="exe" output="test.exe" warnaserror="true" failonerror="false">
+			<sources>
+				<include name="test.vb" />
+			</sources>
+		</vbc>
+		<record name="out" action="Close" />
+		<fail if="${file::exists('test.exe')}">#1</fail>
+		<fail unless="${file::exists('out')}">#2</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'30420:')!=-1}">#3</fail>
+	</target>
+</project>
