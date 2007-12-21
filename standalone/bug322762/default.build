@@ -1,0 +1,51 @@
+<project name="bug322762" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.0,net-1.1,net-2.0" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="libA.dll" />
+				<include name="libB.dll" />
+				<include name="libC.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<ilasm target="dll" output="libA.dll">
+			<sources>
+				<include name="libA.il" />
+			</sources>
+		</ilasm>
+		<csc target="library" define="${csc.defines}" output="libB.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="libB.cs" />
+			</sources>
+		</csc>
+		<ilasm target="dll" output="libC.dll">
+			<sources>
+				<include name="libC.il" />
+			</sources>
+		</ilasm>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="libA.dll" />
+				<include name="libB.dll" />
+				<include name="libC.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
