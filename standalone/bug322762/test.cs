@@ -46,7 +46,13 @@ class Program
 		GetFieldNestedTest (typeof (libC.Bar.Child));
 
 		GetConstructorsTest (typeof (Bar), false);
+#if MONO
+		// Mono's ilasm does not retain the order of the constructors
+		// see bug #350517
+		GetConstructorsILTest (typeof (libA.Bar));
+#else
 		GetConstructorsTest (typeof (libA.Bar), true);
+#endif
 		GetConstructorsTest (typeof (libB.Bar), false);
 		GetConstructorsTest (typeof (libC.Bar), false);
 	}
@@ -4736,7 +4742,7 @@ class Program
 		ctors = type.GetConstructors (flags);
 
 		Assert.AreEqual (5, ctors.Length, "#A1");
-		Assert.IsFalse (ctors [0].IsAssembly, "#A2");
+		Assert.IsFalse (ctors [0].IsAssembly, "#A2:" + type.FullName);
 		Assert.IsFalse (ctors [0].IsFamily, "#A3");
 		Assert.IsFalse (ctors [0].IsFamilyAndAssembly, "#A4");
 		Assert.IsFalse (ctors [0].IsFamilyOrAssembly, "#A5");
@@ -5028,6 +5034,151 @@ class Program
 		Assert.IsFalse (ctors [0].IsPublic, "#N7");
 		Assert.IsTrue (ctors [0].IsStatic, "#N8");
 	}
+
+#if MONO
+	static void GetConstructorsILTest (Type type)
+	{
+		BindingFlags flags;
+		ConstructorInfo [] ctors;
+
+		flags = BindingFlags.Instance | BindingFlags.NonPublic;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (5, ctors.Length, "#A1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, false, "#A2"), "#A2");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Family, false, "#A3"), "#A3");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamANDAssem, false, "#A4"), "#A4");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamORAssem, false, "#A5"), "#A5");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Assembly, false, "#A6"), "#A6");
+
+		flags = BindingFlags.Instance | BindingFlags.Public;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#B1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Public, false, "#B2"), "#B2");
+
+		flags = BindingFlags.Static | BindingFlags.Public;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (0, ctors.Length, "#C1");
+
+		flags = BindingFlags.Static | BindingFlags.NonPublic;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#D1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, true, "#D2"), "#D2");
+
+		flags = BindingFlags.Instance | BindingFlags.NonPublic |
+			BindingFlags.FlattenHierarchy;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (5, ctors.Length, "#E1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, false, "#E2"), "#E2");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Family, false, "#E3"), "#E3");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamANDAssem, false, "#E4"), "#E4");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamORAssem, false, "#E5"), "#E5");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Assembly, false, "#E6"), "#E6");
+
+		flags = BindingFlags.Instance | BindingFlags.Public |
+			BindingFlags.FlattenHierarchy;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#F1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Public, false, "#F2"), "#F2");
+
+		flags = BindingFlags.Static | BindingFlags.Public |
+			BindingFlags.FlattenHierarchy;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (0, ctors.Length, "#G1");
+
+		flags = BindingFlags.Static | BindingFlags.NonPublic |
+			BindingFlags.FlattenHierarchy;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#H1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, true, "#H2"), "#H2");
+
+		flags = BindingFlags.Instance | BindingFlags.NonPublic |
+			BindingFlags.DeclaredOnly;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (5, ctors.Length, "#I1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, false, "#I2"), "#I2");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Family, false, "#I3"), "#I3");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamANDAssem, false, "#I4"), "#I4");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamORAssem, false, "#I5"), "#I5");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Assembly, false, "#I6"), "#I6");
+
+		flags = BindingFlags.Instance | BindingFlags.Public |
+			BindingFlags.DeclaredOnly;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#J1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Public, false, "#J2"), "#J2");
+
+		flags = BindingFlags.Static | BindingFlags.Public |
+			BindingFlags.DeclaredOnly;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (0, ctors.Length, "#K1");
+
+		flags = BindingFlags.Static | BindingFlags.NonPublic |
+			BindingFlags.DeclaredOnly;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#L1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, true, "#L2"), "#L2");
+
+		flags = BindingFlags.Instance | BindingFlags.NonPublic |
+			BindingFlags.Public;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (6, ctors.Length, "#M1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, false, "#M2"), "#M2");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Family, false, "#M3"), "#M3");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamANDAssem, false, "#M4"), "#M4");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.FamORAssem, false, "#M5"), "#M5");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Assembly, false, "#M6"), "#M6");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Public, false, "#M7"), "#M7");
+
+		flags = BindingFlags.Static | BindingFlags.NonPublic |
+			BindingFlags.Public;
+		ctors = type.GetConstructors (flags);
+
+		Assert.AreEqual (1, ctors.Length, "#N1");
+		Assert.IsTrue (ContainsConstructor (ctors, MethodAttributes.Private, true, "#N2"), "#N2");
+	}
+
+	static bool ContainsConstructor (ConstructorInfo [] ctors, MethodAttributes access, bool isStatic, string msg)
+	{
+		foreach (ConstructorInfo c in ctors) {
+			if ((c.Attributes & MethodAttributes.MemberAccessMask) != access)
+				continue;
+
+			if (c.IsStatic != isStatic)
+				continue;
+
+			bool isAssembly = (access == MethodAttributes.Assembly);
+			bool IsFamily = (access == MethodAttributes.Family);
+			bool isFamilyAndAssembly = (access == MethodAttributes.FamANDAssem);
+			bool isFamilyOrAssembly = (access == MethodAttributes.FamORAssem);
+			bool isPrivate = (access == MethodAttributes.Private);
+			bool isPublic = (access == MethodAttributes.Public);
+
+			Assert.AreEqual (isAssembly, c.IsAssembly, msg + "1");
+			Assert.AreEqual (IsFamily, c.IsFamily, msg + "2");
+			Assert.AreEqual (isFamilyAndAssembly, c.IsFamilyAndAssembly, msg + "3");
+			Assert.AreEqual (isFamilyOrAssembly, c.IsFamilyOrAssembly, msg + "4");
+			Assert.AreEqual (isPrivate, c.IsPrivate, msg + "5");
+			Assert.AreEqual (isPublic, c.IsPublic, msg + "6");
+
+			return true;
+		}
+
+		return false;
+	}
+#endif
 
 	static bool ContainsMethod (MethodInfo [] methods, string name)
 	{
