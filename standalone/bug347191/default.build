@@ -1,0 +1,827 @@
+<project name="bug345627" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-2.0,net-3.5" />
+
+	<target name="clean" depends="init">
+		<delete>
+			<fileset>
+				<include name="tempV1/**" />
+				<include name="tempV2/**" />
+				<include name="test.exe" />
+				<include name="out" />
+			</fileset>
+		</delete>
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Lang" culture="neutral" />
+				<assembly name="Lang.resources" culture="en" />
+				<assembly name="Lang.resources" culture="en-US" />
+				<assembly name="Lang.resources" culture="fr-FR" />
+			</assemblies>
+		</gac-uninstall>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="tempV1" />
+		<csc target="library" define="${csc.defines},V1" keyfile="lang.snk" output="tempV1/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Lang">
+				<include name="Lang.cs" />
+			</sources>
+			<resources basedir="Lang" prefix="Lang">
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<mkdir dir="tempV2" />
+		<csc target="library" define="${csc.defines},V2" keyfile="locale.snk" output="tempV2/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Lang">
+				<include name="Lang.cs" />
+			</sources>
+			<resources basedir="Lang" prefix="Lang">
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="tempV1/Lang.dll" />
+				<include name="tempV2/Lang.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test">
+		<call target="run-test1" />
+		<call target="run-test2" />
+		<call target="run-test3" />
+		<call target="run-test4" />
+		<call target="run-test5" />
+		<call target="run-test6" />
+		<call target="run-test7" />
+		<call target="run-test8" />
+		<call target="run-test9" />
+	</target>
+
+	<target name="run-test1" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/nologo" />
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+		<fail unless="${file::exists('out')}">#A1</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Assembly successfully added to the cache') != -1}">#A2</fail>
+				<fail unless="${string::index-of(out, 'Lang.dll') == -1}">#A3</fail>
+				<fail unless="${string::index-of(out, 'Lang') == -1}">#A4</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed') == -1}">#A5</fail>
+				<fail unless="${string::index-of(out, 'Number of failures') == -1}">#A6</fail>
+			</when>
+			<otherwise>
+				<property name="dir" value="${path::combine(project::get-base-directory(),'tempV1')}" />
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(dir,'Lang.dll') + ' into the gac') != -1}">#A2</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed') == -1}">#A3</fail>
+				<fail unless="${string::index-of(out, 'Failures') == -1}">#A4</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test2" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="DoesNotExist" />
+		</exec>
+		<fail unless="${file::exists('out')}">#B1</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'No assemblies found matching: DoesNotExist') != -1}">#B2</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#B3</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#B4</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#B5</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: DoesNotExist') != -1}">#B2</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 0') != -1}">#B3</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#B4</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#B5</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/silent" />
+			<arg value="/u" />
+			<arg value="DoesNotExist" />
+		</exec>
+		<fail if="${file::exists('out')}">#B6</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/nologo" />
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang,Version=7.0" />
+		</exec>
+		<fail unless="${file::exists('out')}">#B7</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang') == -1}">#B8</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#B9</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#B10</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#B11</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: Lang') == -1}">#B8</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 0') != -1}">#B9</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#B10</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#B11</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test3" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/il" />
+			<arg value="list/install-list2" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#C1</fail>
+		<fail unless="${file::exists('out')}">#C2</fail>
+		<loadfile file="out" property="out" />
+		<property name="list.dir" value="${path::combine(project::get-base-directory(),'list')}" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<echo></echo>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' successfully added to the cache') != -1}">#C3</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C4</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en-US/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C5</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' successfully added to the cache') == -1}">#C6</fail>
+				<fail unless="${string::index-of(out, 'Failed to add assembly ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' to the cache:   The system cannot find the file specified.') != -1}">#C7</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/fr-FR/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C8</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 5') != -1}">#C9</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed = 4') != -1}">#C10</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 1') != -1}">#C11</fail>
+			</when>
+			<otherwise>
+				<echo>${'Installed ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' into the cache'}</echo>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' into the gac') != -1}">#C3</fail>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/en/Lang.resources.dll') + ' into the gac') != -1}">#C4</fail>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/en-US/Lang.resources.dll') + ' into the gac') != -1}">#C5</fail>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' into the gac') == -1}">#C6</fail>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' to the cache: The system cannot find the file specified.') != -1}">#C7</fail>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/fr-FR/Lang.resources.dll') + ' into the gac') != -1}">#C8</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 5') != -1}">#C9</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed = 4') != -1}">#C10</fail>
+				<fail unless="${string::index-of(out, 'Failures = 1') != -1}">#C11</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3a" />
+		</exec>
+		<fail if="${file::exists('out')}">#C12</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list1" />
+		</exec>
+		<fail unless="${file::exists('out')}">#C20</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C21</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C22</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C23</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C24</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C25</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C26</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C27</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C28</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 4') != -1}">#C29</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 4') != -1}">#C30</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#C31</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 4') != -1}">#C29</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 4') != -1}">#C30</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#C31</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="test3a" />
+		</exec>
+		<fail if="${int::parse(gacutil.exitcode) == 0}">#C32</fail>
+		<fail unless="${file::exists('out')}">#C33</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'FileNotFoundException') != -1}">#C34</fail>
+		
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list2" />
+		</exec>
+		<fail if="${int::parse(gacutil.exitcode) == 0}">#C40</fail>
+		<fail unless="${file::exists('out')}">#C41</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C42</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C43</fail>
+		<fail unless="${string::index-of(out, 'Assembly: DoesNotExist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C44</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'No assemblies found matching: DoesNotExist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C45</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=2.5.0.0') != -1}">#C46</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang, Version=2.5.0.0') != -1}">#C47</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 3') != -1}">#C48</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#C49</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 2') != -1}">#C50</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: DoesNotExist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#C45</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=2.5.0.0') != -1}">#C46</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: Lang, Version=2.5.0.0') != -1}">#C47</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 3') != -1}">#C48</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 1') != -1}">#C49</fail>
+				<fail unless="${string::index-of(out, 'Failures = 2') != -1}">#C50</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3b" />
+		</exec>
+		<fail if="${file::exists('out')}">#C50</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3a" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list3" />
+		</exec>
+		<fail if="${int::parse(gacutil.exitcode) == 0}">#C60</fail>
+		<fail unless="${file::exists('out')}">#C61</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en') != -1}">#C62</fail>
+				<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en') != -1}">#C63</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.1') != -1}">#C64</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang.resources, Version=1.0.0.1') != -1}">#C65</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR') != -1}">#C66</fail>
+				<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR') != -1}">#C67</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=fr-FR') != -1}">#C68</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang, Version=1.0.0.0, Culture=fr-FR') != -1}">#C69</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.1') != -1}">#C70</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang, Version=1.0.0.1') != -1}">#C71</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 5') != -1}">#C72</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 2') != -1}">#C73</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 3') != -1}">#C74</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en') != -1}">#C62</fail>
+				<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en') != -1}">#C63</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.1') != -1}">#C64</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: Lang.resources, Version=1.0.0.1') != -1}">#C65</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR') != -1}">#C66</fail>
+				<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR') != -1}">#C67</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=fr-FR') != -1}">#C68</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: Lang, Version=1.0.0.0, Culture=fr-FR') != -1}">#C69</fail>
+				<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.1') != -1}">#C70</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: Lang, Version=1.0.0.1') != -1}">#C71</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 5') != -1}">#C72</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 2') != -1}">#C73</fail>
+				<fail unless="${string::index-of(out, 'Failures = 3') != -1}">#C74</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3c" />
+		</exec>
+		<fail if="${file::exists('out')}">#C75</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3a" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list4" />
+		</exec>
+		<fail unless="${file::exists('out')}">#C80</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources') != -1}">#C81</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources') != -1}">#C82</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 1') != -1}">#C83</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#C84</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#C85</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 1') != -1}">#C83</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 1') != -1}">#C84</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#C85</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3d" />
+		</exec>
+		<fail if="${file::exists('out')}">#C86</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list5" />
+		</exec>
+		<fail if="${int::parse(gacutil.exitcode) == 0}">#C90</fail>
+		<fail unless="${file::exists('out')}">#C91</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Assembly: ShouldNeverExist, Culture=nl-BE') != -1}">#C92</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: ShouldNeverExist, Culture=nl-BE') != -1}">#C93</fail>
+				<fail unless="${string::index-of(out, 'Assembly: ShallNeverExist, Culture=en-US') != -1}">#C94</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found matching: ShallNeverExist, Culture=en-US') != -1}">#C95</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 2') != -1}">#C96</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#C97</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 2') != -1}">#C98</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assembly: ShouldNeverExist, Culture=nl-BE') != -1}">#C92</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: ShouldNeverExist, Culture=nl-BE') != -1}">#C93</fail>
+				<fail unless="${string::index-of(out, 'Assembly: ShallNeverExist, Culture=en-US') != -1}">#C94</fail>
+				<fail unless="${string::index-of(out, 'No assemblies found that match: ShallNeverExist, Culture=en-US') != -1}">#C95</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 2') != -1}">#C96</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 0') != -1}">#C97</fail>
+				<fail unless="${string::index-of(out, 'Failures = 2') != -1}">#C98</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test4" depends="clean">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/il" />
+			<arg file="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#D1</fail>
+		<fail unless="${file::exists('out')}">#D2</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Failed to open assemblies list file ' + path::get-full-path('doesnotexist') + '.') != -1}">#D3</fail>
+
+		<delete file="out" />
+		
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/silent" />
+			<arg value="/il" />
+			<arg file="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#D4</fail>
+		<fail if="${file::exists('out')}">#D5</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/il" />
+			<arg value="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#D6</fail>
+		<fail unless="${file::exists('out')}">#D7</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Failed to open assemblies list file doesnotexist.') != -1}">#D8</fail>
+	</target>
+
+	<target name="run-test5" depends="clean">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/ul" />
+			<arg file="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#E1</fail>
+		<fail unless="${file::exists('out')}">#E2</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Failed to open assemblies list file ' + path::get-full-path('doesnotexist') + '.') != -1}">#E3</fail>
+
+		<delete file="out" />
+		
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/silent" />
+			<arg value="/ul" />
+			<arg file="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#E4</fail>
+		<fail if="${file::exists('out')}">#E5</fail>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/ul" />
+			<arg value="doesnotexist" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#E6</fail>
+		<fail unless="${file::exists('out')}">#E7</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Failed to open assemblies list file doesnotexist.') != -1}">#E8</fail>
+	</target>
+
+	<target name="run-test6" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+		<fail unless="${file::exists('out')}">#F1</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Assembly successfully added to the cache') != -1}">#F2</fail>
+				<fail unless="${string::index-of(out, 'Lang.dll') == -1}">#F3</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed') == -1}">#F4</fail>
+				<fail unless="${string::index-of(out, 'Number of failures') == -1}">#F5</fail>
+			</when>
+			<otherwise>
+				<property name="dir" value="${path::combine(project::get-base-directory(),'tempV1')}" />
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(dir,'Lang.dll') + ' into the gac') != -1}">#F2</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed') == -1}">#F3</fail>
+				<fail unless="${string::index-of(out, 'Failures') == -1}">#F4</fail>
+			</otherwise>
+		</choose>
+
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test6" />
+		</exec>
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+		<fail unless="${file::exists('out')}">#F6</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Assembly successfully added to the cache') != -1}">#F7</fail>
+				<fail unless="${string::index-of(out, 'Lang.dll') == -1}">#F8</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed') == -1}">#F9</fail>
+				<fail unless="${string::index-of(out, 'Number of failures') == -1}">#F10</fail>
+			</when>
+			<otherwise>
+				<property name="dir" value="${path::combine(project::get-base-directory(),'tempV1')}" />
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(dir,'Lang.dll') + ' into the gac') != -1}">#F7</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed') == -1}">#F8</fail>
+				<fail unless="${string::index-of(out, 'Failures') == -1}">#F9</fail>
+			</otherwise>
+		</choose>
+
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test6" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/silent" />
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+		<fail if="${file::exists('out')}">#F11</fail>
+
+		<delete file="out" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test6" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out"  failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/i" />
+			<arg file="tempV1/DoesNotExist.dll" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#F12</fail>
+		<fail unless="${file::exists('out')}">#F13</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'The system cannot find the file specified.') != -1}">#F14</fail>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out"  failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/silent" />
+			<arg value="/i" />
+			<arg file="tempV1/DoesNotExist.dll" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#F14</fail>
+		<fail if="${file::exists('out')}">#F15</fail>
+	</target>
+
+	<target name="run-test7" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang" />
+		</exec>
+		<fail unless="${file::exists('out')}">#G1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G2</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G3</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#G4</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G5</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G6</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 1') != -1}">#G4</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#G5</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#G6</fail>
+			</otherwise>
+		</choose>
+
+		<delete file="out" />
+
+		<exec program="test.exe" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="test3a" />
+		</exec>
+		<fail if="${int::parse(gacutil.exitcode) == 0}">#G7</fail>
+		<fail unless="${file::exists('out')}">#G8</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'FileNotFoundException') != -1}">#G8</fail>
+
+		<delete file="out" />
+		
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/silent" />
+			<arg value="/u" />
+			<arg value="Lang" />
+		</exec>
+		<fail if="${file::exists('out')}">#G9</fail>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources" />
+		</exec>
+		<fail unless="${file::exists('out')}">#G10</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G11</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G12</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G13</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G14</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G15</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G16</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 3') != -1}">#G17</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G18</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G19</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 3') != -1}">#G17</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#G18</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#G19</fail>
+			</otherwise>
+		</choose>
+		
+		<exec program="test.exe" managed="true">
+			<arg value="test6" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources, Culture=fr-FR" />
+		</exec>
+		<fail unless="${file::exists('out')}">#G20</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G21</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G22</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#G23</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G24</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G25</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 1') != -1}">#G23</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#G24</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#G25</fail>
+			</otherwise>
+		</choose>
+
+		<exec program="test.exe" managed="true">
+			<arg value="test7" />
+		</exec>
+	</target>
+
+	<target name="run-test8" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list3" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources, Culture=en" />
+		</exec>
+		<fail unless="${file::exists('out')}">#H1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H2</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H3</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=en, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H4</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=en, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H5</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 2') != -1}">#H6</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H7</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H8</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 2') != -1}">#H6</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#H7</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#H8</fail>
+			</otherwise>
+		</choose>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources, Version=1" />
+		</exec>
+		<fail unless="${file::exists('out')}">#H9</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H10</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=en-US, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H11</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H12</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H13</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=en-US, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H14</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=en-US, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H15</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H16</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H17</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 4') != -1}">#H18</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H19</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H20</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 4') != -1}">#H18</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#H19</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#H20</fail>
+			</otherwise>
+		</choose>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list1" />
+		</exec>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true">
+			<arg value="/il" />
+			<arg file="list/install-list3" />
+		</exec>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources, Version=2" />
+		</exec>
+		<fail unless="${file::exists('out')}">#H21</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#H22</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H23</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H24</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 0') != -1}">#H22</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#H23</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#H24</fail>
+			</otherwise>
+		</choose>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang.resources, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa" />
+		</exec>
+		<fail unless="${file::exists('out')}">#H25</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H26</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H27</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#H28</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H29</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H30</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 1') != -1}">#H28</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#H29</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#H30</fail>
+			</otherwise>
+		</choose>
+
+		<delete file="out" />
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/u" />
+			<arg value="Lang" />
+		</exec>
+		<fail unless="${file::exists('out')}">#H31</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H32</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#H33</fail>
+		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.2.0, Culture=neutral, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H34</fail>
+		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.2.0, Culture=neutral, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H35</fail>
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 2') != -1}">#H36</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H37</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H38</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 2') != -1}">#H36</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#H37</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed') == -1}">#H38</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test9" depends="clean">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/ul" />
+			<arg file="list/uninstall-list6" />
+		</exec>
+		<fail unless="${file::exists('out')}">#I1</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 0') != -1}">#I2</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#I3</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#I4</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 0') != -1}">#I2</fail>
+				<fail unless="${string::index-of(out, 'Assemblies uninstalled = 0') != -1}">#I3</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#I4</fail>
+			</otherwise>
+		</choose>
+
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out">
+			<arg value="/il" />
+			<arg file="list/install-list4" />
+		</exec>
+		<fail unless="${file::exists('out')}">#I10</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 0') != -1}">#I11</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed = 0') != -1}">#I12</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#I13</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 0') != -1}">#I11</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed = 0') != -1}">#I12</fail>
+				<fail unless="${string::index-of(out, 'Failures = 0') != -1}">#I13</fail>
+			</otherwise>
+		</choose>
+	</target>
+</project>
