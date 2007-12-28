@@ -1,0 +1,62 @@
+<project name="bug345627" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="test.exe" />
+				<include name="out" />
+			</fileset>
+		</delete>
+		<delete>
+			<fileset basedir="Lang">
+				<include name="en/**" />
+				<include name="en-US/**" />
+				<include name="fr-FR/**" />
+				<include name="Lang.dll" />
+			</fileset>
+		</delete>
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Lang.resources" culture="en" />
+				<assembly name="Lang.resources" culture="en-US" />
+				<assembly name="Lang.resources" culture="fr-FR" />
+			</assemblies>
+		</gac-uninstall>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="Lang/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Lang">
+				<include name="Lang.cs" />
+			</sources>
+			<resources basedir="Lang" prefix="Lang">
+				<include name="*.resx" />
+			</resources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references basedir="Lang">
+				<include name="Lang.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<gac-install>
+			<assemblies basedir="Lang">
+				<include name="en/Lang.resources.dll" />
+				<include name="en-US/Lang.resources.dll" />
+				<include name="fr-FR/Lang.resources.dll" />
+				<include name="Lang.dll" />
+			</assemblies>
+		</gac-install>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
