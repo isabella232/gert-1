@@ -1,0 +1,51 @@
+<project name="bug315057" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="liba.dll" />
+				<include name="libb.dll" />
+				<include name="libc.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" output="liba.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc keyfile="test.snk" target="library" output="libb.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
+		<csc keyfile="test.snk" target="library" output="libc.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="libc.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="liba.dll" />
+				<include name="libb.dll" />
+				<include name="libc.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
