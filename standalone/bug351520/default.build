@@ -1,0 +1,35 @@
+<project name="bug351520" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="libhello.so" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<exec program="g++">
+			<arg value="--shared" />
+			<arg value="-fpic" />
+			<arg value="-o" />
+			<arg file="libhello.so" />
+			<arg file="hello.cpp" />
+		</exec>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+	</target>
+</project>
