@@ -1,0 +1,129 @@
+<project name="bug350958" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<script language="C#" prefix="x509">
+		<references basedir="${framework::get-assembly-directory('mono-1.0')}">
+			<include name="Mono.Security.dll" />
+		</references>
+		<imports>
+			<import namespace="System.Net" />
+			<import namespace="System.Globalization" />
+			<import namespace="System.IO" />
+			<import namespace="System.Text" />
+			<import namespace="Mono.Security.X509" />
+		</imports>
+		<code>
+			<![CDATA[
+				[Function("get-cert-hash")]
+				public string GetCertHash (string file)
+				{
+					string absolute = Project.GetFullPath (file);
+
+					using (FileStream fs = File.OpenRead (absolute)) {
+						byte[] data = new byte [fs.Length];
+						fs.Read (data, 0, data.Length);
+						X509Certificate x509 = new X509Certificate (data);
+
+						byte [] input = x509.Hash;
+						StringBuilder sb = new StringBuilder (input.Length * 2);
+						foreach (byte b in input)
+							sb.Append (b.ToString ("X2", CultureInfo.InvariantCulture));
+						return sb.ToString ();
+					}
+				}
+			]]>
+		</code>
+	</script>
+	
+	<target name="mono-1.0-init">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory(framework::get-target-framework())}" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test.exe.bak" />
+				<include name="yourcert.crt" />
+				<include name="yourkeypair.pvk" />
+				<include name="yourspc.spc" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="add-trust" depends="compile">
+		<!-- create certificate -->
+		<exec program="${sdk.dir}/makecert.exe" managed="true">
+			<arg value="-n" />
+			<arg value="CN=your name" />
+			<arg value="-sv" />
+			<arg file="yourkeypair.pvk" />
+			<arg file="yourcert.crt" />
+		</exec>
+
+		<!-- install certificate into Trust store -->
+		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+			<arg value="-add" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg file="yourcert.crt" />
+		</exec>
+	</target>
+
+	<target name="remove-trust">
+		<!-- remove root CA certificate from Trust store -->
+		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+			<arg value="-del" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg value="${x509::get-cert-hash('yourcert.crt')}" />
+		</exec>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<trycatch>
+			<try>
+				<call target="add-trust" />
+				<exec program="${sdk.dir}/cert2spc.exe" managed="true">
+					<arg file="yourcert.crt" />
+					<arg file="yourspc.spc" />
+				</exec>
+				<exec program="${sdk.dir}/signcode.exe" managed="true">
+					<arg value="-v" />
+					<arg file="yourkeypair.pvk" />
+					<arg value="-spc" />
+					<arg file="yourspc.spc" />
+					<arg value="-t" />
+					<arg value="http://timestamp.verisign.com/scripts/timstamp.dll" />
+					<arg file="test.exe" />
+				</exec>
+				<exec program="${sdk.dir}/chktrust.exe" managed="true">
+					<arg file="test.exe" />
+				</exec>
+				<exec program="test.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</try>
+			<finally>
+				<sleep milliseconds="1000" />
+				<call target="remove-trust" />
+			</finally>
+		</trycatch>
+	</target>
+</project>
