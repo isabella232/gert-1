@@ -53,6 +53,8 @@
 				<include name="out" />
 				<include name="test.exe" />
 				<include name="test.exe.bak" />
+				<include name="root.key" />
+				<include name="root.cer" />
 				<include name="yourcert.crt" />
 				<include name="yourkeypair.pvk" />
 				<include name="yourspc.spc" />
@@ -61,8 +63,22 @@
 	</target>
 
 	<target name="add-trust" depends="compile">
+		<!-- create private key for CA -->
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
+			<arg value="-r" />
+			<arg value="-n" />
+			<arg value="CN=Mono Test CA" />
+			<arg value="-sv" />
+			<arg file="root.key" />
+			<arg file="root.cer" />
+		</exec>
+		
 		<!-- create certificate -->
-		<exec program="${sdk.dir}/makecert.exe" managed="true">
+		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
+			<arg value="-iv" />
+			<arg file="root.key" />
+			<arg value="-ic" />
+			<arg file="root.cer" />
 			<arg value="-n" />
 			<arg value="CN=your name" />
 			<arg value="-sv" />
@@ -70,22 +86,22 @@
 			<arg file="yourcert.crt" />
 		</exec>
 
-		<!-- install certificate into Trust store -->
-		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+		<!-- install root CA certificate into Trust store -->
+		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 			<arg value="-add" />
 			<arg value="-c" />
 			<arg value="Trust" />
-			<arg file="yourcert.crt" />
+			<arg file="root.cer" />
 		</exec>
 	</target>
 
 	<target name="remove-trust">
 		<!-- remove root CA certificate from Trust store -->
-		<exec program="${sdk.dir}/certmgr.exe" managed="true">
+		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 			<arg value="-del" />
 			<arg value="-c" />
 			<arg value="Trust" />
-			<arg value="${x509::get-cert-hash('yourcert.crt')}" />
+			<arg value="${x509::get-cert-hash('root.cer')}" />
 		</exec>
 	</target>
 
@@ -101,11 +117,11 @@
 		<trycatch>
 			<try>
 				<call target="add-trust" />
-				<exec program="${sdk.dir}/cert2spc.exe" managed="true">
+				<exec program="${framework::get-tool-path('cert2spc.exe')}" managed="true">
 					<arg file="yourcert.crt" />
 					<arg file="yourspc.spc" />
 				</exec>
-				<exec program="${sdk.dir}/signcode.exe" managed="true">
+				<exec program="${framework::get-tool-path('signcode.exe')}" managed="true">
 					<arg value="-v" />
 					<arg file="yourkeypair.pvk" />
 					<arg value="-spc" />
@@ -114,7 +130,7 @@
 					<arg value="http://timestamp.verisign.com/scripts/timstamp.dll" />
 					<arg file="test.exe" />
 				</exec>
-				<exec program="${sdk.dir}/chktrust.exe" managed="true">
+				<exec program="${framework::get-tool-path('chktrust.exe')}" managed="true">
 					<arg file="test.exe" />
 				</exec>
 				<exec program="test.exe" managed="true" output="out" />
