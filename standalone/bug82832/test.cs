@@ -15,6 +15,7 @@ class Program
 		Test4 ();
 		Test5 ();
 		Test6 ();
+		Test7 ();
 	}
 
 	static void Test1 ()
@@ -274,6 +275,42 @@ class Program
 			Assert.IsNotNull (ex.Message, "#F4");
 			Assert.IsNull (ex.ParamName, "#F4");
 		}
+
+		File.Delete (assemblyFile);
+	}
+
+	static void Test7 ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib";
+
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib.dll");
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// AssemblyVersion
+		Type attrType = typeof (AssemblyVersionAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		CustomAttributeBuilder cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		ab.DefineVersionInfoResource ();
+		ab.Save ("lib.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual (" ", fvi.CompanyName, "#F1");
+		Assert.AreEqual (" ", fvi.ProductName, "#F2");
+		Assert.AreEqual (" ", fvi.ProductVersion, "#F3");
+		Assert.AreEqual (" ", fvi.LegalCopyright, "#F4");
+		Assert.AreEqual (" ", fvi.LegalTrademarks, "#F5");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#F6");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#F7");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#F8");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#F9");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#F10");
 
 		File.Delete (assemblyFile);
 	}
