@@ -1,0 +1,22 @@
+<project name="bug348076" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,mono-3.5,net-2.0,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<csc target="library" define="${csc.defines}" output="test.dll" unsafe="true" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+</project>
