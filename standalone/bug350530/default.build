@@ -1,0 +1,44 @@
+<project name="bug350530" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="a.exe" />
+				<include name="b.dll" />
+				<include name="c.dll" />
+				<include name="log" />
+				<include name="temp" />
+				<include name="test.exe" />
+				<include name="out" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="a.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="a.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="b.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="b.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<echo file="c.dll">WHATEVER</echo>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
