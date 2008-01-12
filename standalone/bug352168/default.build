@@ -13,7 +13,7 @@
 	</target>
 
 	<target name="run-test" depends="init">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="false" warninglevel="4">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
