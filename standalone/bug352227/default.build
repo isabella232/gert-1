@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="bug352227" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+	
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="sfc.exe" />
+				<include name="sfremoting.dll" />
+				<include name="sfs.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="sfremoting.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="IController.cs" />
+				<include name="ISession.cs" />
+				<include name="RemotingTypeCache.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="sfs.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Service.cs" />
+			</sources>
+			<references>
+				<include name="sfremoting.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="sfc.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Client.cs" />
+			</sources>
+			<references>
+				<include name="sfremoting.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="sfs.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="1000" />
+		<exec program="sfc.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="sfc.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#2</fail>
+		<exec program="sfc.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#3</fail>
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
