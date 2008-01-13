@@ -63,7 +63,7 @@
 	</target>
 
 	<target name="add-trust" depends="compile">
-		<!-- create private key for CA -->
+		<!-- create private key for test root CA -->
 		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
 			<arg value="-r" />
 			<arg value="-n" />
@@ -86,7 +86,15 @@
 			<arg file="yourcert.crt" />
 		</exec>
 
-		<!-- install root CA certificate into Trust store -->
+		<!-- install timestamping root CA certificate into Trust store -->
+		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
+			<arg value="-add" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg file="thawte-timestamping-ca.cer" />
+		</exec>
+
+		<!-- install test root CA certificate into Trust store -->
 		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 			<arg value="-add" />
 			<arg value="-c" />
@@ -96,7 +104,15 @@
 	</target>
 
 	<target name="remove-trust">
-		<!-- remove root CA certificate from Trust store -->
+		<!-- remove timestamping root CA certificate from Trust store -->
+		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
+			<arg value="-del" />
+			<arg value="-c" />
+			<arg value="Trust" />
+			<arg value="${x509::get-cert-hash('thawte-timestamping-ca.cer')}" />
+		</exec>
+
+		<!-- remove test root CA certificate from Trust store -->
 		<exec program="${framework::get-tool-path('certmgr.exe')}" managed="true">
 			<arg value="-del" />
 			<arg value="-c" />
