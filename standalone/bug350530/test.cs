@@ -124,7 +124,7 @@ class Program
 			AppDomain.Unload (dI);
 		}
 
-#if NET_2_0
+#if NET_2_0 && !MONO // bug #353537
 		AppDomain dJ = AppDomain.CreateDomain ("New App Domain 2");
 		try {
 			dJ.ExecuteAssemblyByName ("c");
