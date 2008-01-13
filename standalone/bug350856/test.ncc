@@ -1,0 +1,21 @@
+public abstract class A[T]
+{
+    protected a : T
+}
+
+public abstract class B[T] : A[T]
+{
+}
+
+public class C : B[int]
+{
+    public F() : int
+    {
+        a
+    }
+
+    public static Main() : int
+    {
+        0
+    }
+}

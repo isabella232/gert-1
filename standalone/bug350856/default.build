@@ -1,0 +1,28 @@
+<project name="bug350856" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<exec program="ncc.exe" managed="true" output="out">
+			<arg value="-o" />
+			<arg file="test.exe" />
+			<arg file="test.ncc" />
+		</exec>
+		<fail if="${file::exists('out')}">#1</fail>
+	</target>
+	
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">"#2</fail>
+	</target>
+</project>
