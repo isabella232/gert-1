@@ -47,20 +47,20 @@ public class G<T>  // this class is going to be defined in instance()
 
 public class Entry
 {
-	public static int Main ()
+	static int Main ()
 	{
 		Instance ();
 		Reference ();
 		Constrained ();
 
-		return 100;
+		return 0;
 	}
 
 	public static void Instance ()
 	{
 		AssemblyName name = new AssemblyName ("Instance");
 		AssemblyBuilder asmbuild = System.Threading.Thread.GetDomain ().DefineDynamicAssembly (name, AssemblyBuilderAccess.RunAndSave);
-		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Instance.exe");
+		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Instance.dll");
 
 		TypeBuilder G = mod.DefineType ("G", TypeAttributes.Public);
 		Type T = G.DefineGenericParameters ("T") [0];
@@ -103,7 +103,7 @@ public class Entry
 			il.Emit (OpCodes.Ldnull);
 			il.EmitCall (OpCodes.Call, GObjFoo, null);
 
-			il.Emit (OpCodes.Newobj, Ctor);  // new G<T>()          
+			il.Emit (OpCodes.Newobj, Ctor);  // new G<T>()
 			il.Emit (OpCodes.Pop);
 
 			il.Emit (OpCodes.Newobj, GObjCtor); // new G<object>()
@@ -158,7 +158,7 @@ public class Entry
 
 		Type rtG = G.CreateType ();
 
-		asmbuild.Save ("Instance.exe");
+		asmbuild.Save ("Instance.dll");
 
 		object target = Activator.CreateInstance (rtG.MakeGenericType (typeof (object)), null);
 		rtG.MakeGenericType (typeof (object)).InvokeMember ("Foo", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, target, null);
@@ -170,7 +170,7 @@ public class Entry
 	{
 		AssemblyName name = new AssemblyName ("Reference");
 		AssemblyBuilder asmbuild = System.Threading.Thread.GetDomain ().DefineDynamicAssembly (name, AssemblyBuilderAccess.RunAndSave);
-		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Reference.exe");
+		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Reference.dll");
 
 		TypeBuilder H = mod.DefineType ("H", TypeAttributes.Public);
 		Type U = H.DefineGenericParameters ("U") [0];
@@ -244,7 +244,7 @@ public class Entry
 
 		Type rtH = H.CreateType ();
 
-		asmbuild.Save ("Reference.exe");
+		asmbuild.Save ("Reference.dll");
 
 		rtH.MakeGenericType (typeof (object)).InvokeMember ("Baz", BindingFlags.Public | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, null);
 	}
@@ -253,7 +253,7 @@ public class Entry
 	{
 		AssemblyName name = new AssemblyName ("Constrained");
 		AssemblyBuilder asmbuild = System.Threading.Thread.GetDomain ().DefineDynamicAssembly (name, AssemblyBuilderAccess.RunAndSave);
-		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Constrained.exe");
+		ModuleBuilder mod = asmbuild.DefineDynamicModule ("Constrained.dll");
 
 		TypeBuilder IFoo = mod.DefineType ("IFoo", TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract);
 		MethodBuilder IFooM = IFoo.DefineMethod ("IFooM", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Abstract);
@@ -279,7 +279,7 @@ public class Entry
 		Type rtIFoo = IFoo.CreateType ();
 		Type rtG = G.CreateType ();
 
-		asmbuild.Save ("Constrained.exe");
+		asmbuild.Save ("Constrained.dll");
 
 		rtG.MakeGenericType (rtIFoo).InvokeMember ("Foo", BindingFlags.Public | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, null);
 	}
