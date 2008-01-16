@@ -136,9 +136,12 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
 			"1. Click the Popup button.{0}{0}" +
+			"2. Press the Tab key.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The Popup button is no longer visible.{0}{0}" +
-			"2. None of the buttons have focus.",
+			"1. On step 1:{0}{0}" +
+			"   * The Popup button is no longer visible.{0}" +
+			"   * None of the buttons have focus.{0}{0}" +
+			"2. On step 2, the Quit button has focus.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -150,7 +153,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 170);
+		ClientSize = new Size (300, 230);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #341314";
@@ -160,4 +163,3 @@ public class InstructionsForm : Form
 	private TabControl _tabControl;
 	private TabPage _tabPage1;
 }
-
