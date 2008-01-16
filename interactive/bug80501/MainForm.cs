@@ -76,8 +76,7 @@ class MainForm : Form
 			"tab #2.{0}" +
 			"   * Focus rectangle is drawn around the LinkLabel control.{0}{0}" +
 			"3. On step 4:{0}{0}" +
-			"   * Focus rectangle is no longer drawn inside the leaf of " +
-			"tab #2.{0}" +
+			"   * Focus rectangle is drawn inside the leaf of tab #2.{0}" +
 			"   * Focus rectangle is no longer drawn around the LinkLabel " +
 			"control.{0}{0}" + 
 			"4. The following events have fired;{0}{0}" +
