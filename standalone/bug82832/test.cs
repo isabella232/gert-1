@@ -34,6 +34,7 @@ class Program
 			Verify8 ();
 			Verify9 ();
 			Verify10 ();
+			Verify11 ();
 			break;
 		default:
 			Console.Error.WriteLine ("Unsupported action.");
@@ -438,5 +439,82 @@ class Program
 		Assert.AreEqual (2, fvi.FileMajorPart, "#J8b");
 		Assert.AreEqual (4, fvi.FileMinorPart, "#J9b");
 		Assert.AreEqual (8, fvi.FilePrivatePart, "#J10b");
+	}
+
+	static void Verify11 ()
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib11a.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+#if NET_2_0
+		Assert.IsNull (fvi.CompanyName, "#K1a");
+#else
+		Assert.AreEqual ("", fvi.CompanyName, "#K1a");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductName, "#K2a");
+#else
+		Assert.AreEqual ("", fvi.ProductName, "#K2a");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductVersion, "#K3a");
+#else
+		Assert.AreEqual ("", fvi.ProductVersion, "#K3a");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.LegalCopyright, "#K4a");
+#else
+		Assert.AreEqual ("", fvi.LegalCopyright, "#K4a");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.LegalTrademarks, "#K5a");
+#else
+		Assert.AreEqual ("", fvi.LegalTrademarks, "#K5a");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductName, "#K6a");
+#else
+		Assert.AreEqual ("", fvi.FileVersion, "#K6a");
+#endif
+		Assert.AreEqual (0, fvi.FileBuildPart, "#K7a");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#K8a");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#K9a");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#K10a");
+
+		assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib11b.dll");
+
+		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+#if NET_2_0
+		Assert.IsNull (fvi.CompanyName, "#K1b");
+#else
+		Assert.AreEqual ("", fvi.CompanyName, "#K1b");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductName, "#K2b");
+#else
+		Assert.AreEqual ("", fvi.ProductName, "#K2b");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductVersion, "#K3b");
+#else
+		Assert.AreEqual ("", fvi.ProductVersion, "#K3b");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.LegalCopyright, "#K4b");
+#else
+		Assert.AreEqual ("", fvi.LegalCopyright, "#K4b");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.LegalTrademarks, "#K5b");
+#else
+		Assert.AreEqual ("", fvi.LegalTrademarks, "#K5b");
+#endif
+#if NET_2_0
+		Assert.IsNull (fvi.ProductName, "#K6b");
+#else
+		Assert.AreEqual ("", fvi.FileVersion, "#K6b");
+#endif
 	}
 }

@@ -1,6 +1,22 @@
 <project name="bug82832" default="rebuild">
 	<include buildfile="../../build/common.build" />
-	
+
+	<target name="mono-1.0-init">
+		<property name="verify.framework" value="net-1.1" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="verify.framework" value="net-2.0" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="verify.framework" value="mono-1.0" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="verify.framework" value="mono-2.0" />
+	</target>
+
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
 	<target name="clean">
@@ -19,6 +35,8 @@
 				<include name="lib9b.dll" />
 				<include name="lib10a.dll" />
 				<include name="lib10b.dll" />
+				<include name="lib11a.dll" />
+				<include name="lib11b.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -62,6 +80,16 @@
 				<include name="libb.cs" />
 			</sources>
 		</csc>
+		<csc target="library" define="${csc.defines}" output="lib11a.dll" warnaserror="true" warninglevel="4" win32res="lib11.res">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib11b.dll" warnaserror="true" warninglevel="4" win32res="lib11.res">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
@@ -74,12 +102,12 @@
 		</exec>
 		<fail if="${file::exists('out')}">#2</fail>
 
-		<if test="${framework::exists('net-2.0') and framework::get-target-framework()!='net-2.0'}">
+		<if test="${framework::exists(verify.framework) and framework::get-target-framework()!=verify.framework}">
 			<!-- save original target framework -->
 			<property name="original.verify.framework" value="${framework::get-target-framework()}" />
 
 			<!-- change target framework to .NET 2.0 -->
-			<property name="nant.settings.currentframework" value="net-2.0" />
+			<property name="nant.settings.currentframework" value="${verify.framework}" />
 
 			<exec program="test.exe" managed="strict" output="out">
 				<arg value="verify" />
@@ -90,5 +118,4 @@
 			<property name="nant.settings.currentframework" value="${original.verify.framework}" />
 		</if>
 	</target>
-
 </project>
