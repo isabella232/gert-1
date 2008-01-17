@@ -6,7 +6,19 @@
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="lib.dll" />
+				<include name="lib1.dll" />
+				<include name="lib2.dll" />
+				<include name="lib3.dll" />
+				<include name="lib4.dll" />
+				<include name="lib5.dll" />
+				<include name="lib6.dll" />
+				<include name="lib7.dll" />
+				<include name="lib8a.dll" />
+				<include name="lib8b.dll" />
+				<include name="lib9a.dll" />
+				<include name="lib9b.dll" />
+				<include name="lib10a.dll" />
+				<include name="lib10b.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -20,10 +32,63 @@
 				<include name="test.cs" />
 			</sources>
 		</csc>
+		<csc target="library" define="${csc.defines}" output="lib8a.dll" warnaserror="true" warninglevel="4" win32res="lib8.res">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib8b.dll" warnaserror="true" warninglevel="4" win32res="lib8.res">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib9a.dll" warnaserror="true" warninglevel="4" win32res="lib9.res">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib9b.dll" warnaserror="true" warninglevel="4" win32res="lib9.res">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib10a.dll" warnaserror="true" warninglevel="4" win32res="lib10.res">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib10b.dll" warnaserror="true" warninglevel="4" win32res="lib10.res">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="create" />
+		</exec>
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="verify" />
+		</exec>
+		<fail if="${file::exists('out')}">#2</fail>
+
+		<if test="${framework::exists('net-2.0') and framework::get-target-framework()!='net-2.0'}">
+			<!-- save original target framework -->
+			<property name="original.verify.framework" value="${framework::get-target-framework()}" />
+
+			<!-- change target framework to .NET 2.0 -->
+			<property name="nant.settings.currentframework" value="net-2.0" />
+
+			<exec program="test.exe" managed="strict" output="out">
+				<arg value="verify" />
+			</exec>
+			<fail if="${file::exists('out')}">#3</fail>
+
+			<!-- restore original target framework -->
+			<property name="nant.settings.currentframework" value="${original.verify.framework}" />
+		</if>
 	</target>
+
 </project>
