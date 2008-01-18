@@ -45,6 +45,8 @@
 				<include name="lib14b.dll" />
 				<include name="lib15a.dll" />
 				<include name="lib15b.dll" />
+				<include name="lib16a.dll" />
+				<include name="lib16b.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>

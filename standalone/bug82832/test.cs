@@ -31,6 +31,8 @@ class Program
 			Create14b ();
 			Create15a ();
 			Create15b ();
+			Create16a ();
+			Create16b ();
 			break;
 		case "verify":
 			Verify1 ();
@@ -47,6 +49,7 @@ class Program
 			Verify13 ();
 			Verify14 ();
 			Verify15 ();
+			Verify16 ();
 			break;
 		default:
 			Console.Error.WriteLine ("Unsupported action.");
@@ -391,12 +394,12 @@ class Program
 			"lib9a.dll");
 
 		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#I1a");
-		Assert.AreEqual ("", fvi.ProductName, "#I2a");
-		Assert.AreEqual ("", fvi.ProductVersion, "#I3a");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#I4a");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#I5a");
-		Assert.AreEqual ("", fvi.FileVersion, "#I6a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#I1a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#I2a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#I3a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#I4a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#I5a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#I6a");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#I7a");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#I8a");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#I9a");
@@ -406,12 +409,12 @@ class Program
 			"lib9b.dll");
 
 		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#I1b");
-		Assert.AreEqual ("", fvi.ProductName, "#I2b");
-		Assert.AreEqual ("", fvi.ProductVersion, "#I3b");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#I4b");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#I5b");
-		Assert.AreEqual ("", fvi.FileVersion, "#I6b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#I1b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#I2b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#I3b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#I4b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#I5b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#I6b");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#I7b");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#I8b");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#I9b");
@@ -424,12 +427,12 @@ class Program
 			"lib10a.dll");
 
 		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#J1a");
-		Assert.AreEqual ("", fvi.ProductName, "#J2a");
-		Assert.AreEqual ("", fvi.ProductVersion, "#J3a");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#J4a");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#J5a");
-		Assert.AreEqual ("", fvi.FileVersion, "#J6a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#J1a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#J2a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#J3a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#J4a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#J5a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#J6a");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#J7a");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#J8a");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#J9a");
@@ -439,12 +442,12 @@ class Program
 			"lib10b.dll");
 
 		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#J1b");
-		Assert.AreEqual ("", fvi.ProductName, "#J2b");
-		Assert.AreEqual ("", fvi.ProductVersion, "#J3b");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#J4b");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#J5b");
-		Assert.AreEqual ("", fvi.FileVersion, "#J6b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#J1b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#J2b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#J3b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#J4b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#J5b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#J6b");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#J7b");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#J8b");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#J9b");
@@ -460,32 +463,32 @@ class Program
 #if NET_2_0
 		Assert.IsNull (fvi.CompanyName, "#K1a");
 #else
-		Assert.AreEqual ("", fvi.CompanyName, "#K1a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#K1a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#K2a");
 #else
-		Assert.AreEqual ("", fvi.ProductName, "#K2a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#K2a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductVersion, "#K3a");
 #else
-		Assert.AreEqual ("", fvi.ProductVersion, "#K3a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#K3a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalCopyright, "#K4a");
 #else
-		Assert.AreEqual ("", fvi.LegalCopyright, "#K4a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#K4a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalTrademarks, "#K5a");
 #else
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#K5a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#K5a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#K6a");
 #else
-		Assert.AreEqual ("", fvi.FileVersion, "#K6a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#K6a");
 #endif
 		Assert.AreEqual (0, fvi.FileBuildPart, "#K7a");
 		Assert.AreEqual (0, fvi.FileMajorPart, "#K8a");
@@ -499,32 +502,32 @@ class Program
 #if NET_2_0
 		Assert.IsNull (fvi.CompanyName, "#K1b");
 #else
-		Assert.AreEqual ("", fvi.CompanyName, "#K1b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#K1b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#K2b");
 #else
-		Assert.AreEqual ("", fvi.ProductName, "#K2b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#K2b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductVersion, "#K3b");
 #else
-		Assert.AreEqual ("", fvi.ProductVersion, "#K3b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#K3b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalCopyright, "#K4b");
 #else
-		Assert.AreEqual ("", fvi.LegalCopyright, "#K4b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#K4b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalTrademarks, "#K5b");
 #else
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#K5b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#K5b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#K6b");
 #else
-		Assert.AreEqual ("", fvi.FileVersion, "#K6b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#K6b");
 #endif
 	}
 
@@ -699,12 +702,12 @@ class Program
 			"lib13a.dll");
 
 		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#M1a");
-		Assert.AreEqual ("", fvi.ProductName, "#M2a");
-		Assert.AreEqual ("", fvi.ProductVersion, "#M3a");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#M4a");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#M5a");
-		Assert.AreEqual ("", fvi.FileVersion, "#M6a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#M1a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#M2a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#M3a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#M4a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#M5a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#M6a");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#M7a");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#M8a");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#M9a");
@@ -714,12 +717,12 @@ class Program
 			"lib13b.dll");
 
 		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#M1b");
-		Assert.AreEqual ("", fvi.ProductName, "#M2b");
-		Assert.AreEqual ("", fvi.ProductVersion, "#M3b");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#M4b");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#M5b");
-		Assert.AreEqual ("", fvi.FileVersion, "#M6b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#M1b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#M2b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#M3b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#M4b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#M5b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#M6b");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#M7b");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#M8b");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#M9b");
@@ -798,12 +801,12 @@ class Program
 			"lib14a.dll");
 
 		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#N1a");
-		Assert.AreEqual ("", fvi.ProductName, "#N2a");
-		Assert.AreEqual ("", fvi.ProductVersion, "#N3a");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#N4a");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#N5a");
-		Assert.AreEqual ("", fvi.FileVersion, "#N6a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#N1a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#N2a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#N3a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#N4a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#N5a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#N6a");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#N7a");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#N8a");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#N9a");
@@ -813,12 +816,12 @@ class Program
 			"lib14b.dll");
 
 		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("", fvi.CompanyName, "#N1b");
-		Assert.AreEqual ("", fvi.ProductName, "#N2b");
-		Assert.AreEqual ("", fvi.ProductVersion, "#N3b");
-		Assert.AreEqual ("", fvi.LegalCopyright, "#N4b");
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#N5b");
-		Assert.AreEqual ("", fvi.FileVersion, "#N6b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#N1b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#N2b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#N3b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#N4b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#N5b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#N6b");
 		Assert.AreEqual (1, fvi.FileBuildPart, "#N7b");
 		Assert.AreEqual (6, fvi.FileMajorPart, "#N8b");
 		Assert.AreEqual (9, fvi.FileMinorPart, "#N9b");
@@ -900,32 +903,32 @@ class Program
 #if NET_2_0
 		Assert.IsNull ( fvi.CompanyName, "#O1a");
 #else
-		Assert.AreEqual ("", fvi.CompanyName, "#O1a");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#O1a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#O2a");
 #else
-		Assert.AreEqual ("", fvi.ProductName, "#O2a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#O2a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductVersion, "#O3a");
 #else
-		Assert.AreEqual ("", fvi.ProductVersion, "#O3a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#O3a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalCopyright, "#O4a");
 #else
-		Assert.AreEqual ("", fvi.LegalCopyright, "#O4a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#O4a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalTrademarks, "#O5a");
 #else
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#O5a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#O5a");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.FileVersion, "#O6a");
 #else
-		Assert.AreEqual ("", fvi.FileVersion, "#O6a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#O6a");
 #endif
 		Assert.AreEqual (0, fvi.FileBuildPart, "#O7a");
 		Assert.AreEqual (0, fvi.FileMajorPart, "#O8a");
@@ -940,36 +943,115 @@ class Program
 #if NET_2_0
 		Assert.IsNull ( fvi.CompanyName, "#O1b");
 #else
-		Assert.AreEqual ("", fvi.CompanyName, "#O1b");
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#O1b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductName, "#O2b");
 #else
-		Assert.AreEqual ("", fvi.ProductName, "#O2b");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#O2b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.ProductVersion, "#O3b");
 #else
-		Assert.AreEqual ("", fvi.ProductVersion, "#O3b");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#O3b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalCopyright, "#O4b");
 #else
-		Assert.AreEqual ("", fvi.LegalCopyright, "#O4b");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#O4b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.LegalTrademarks, "#O5b");
 #else
-		Assert.AreEqual ("", fvi.LegalTrademarks, "#O5b");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#O5b");
 #endif
 #if NET_2_0
 		Assert.IsNull (fvi.FileVersion, "#O6b");
 #else
-		Assert.AreEqual ("", fvi.FileVersion, "#O6b");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#O6b");
 #endif
 		Assert.AreEqual (0, fvi.FileBuildPart, "#O7b");
 		Assert.AreEqual (0, fvi.FileMajorPart, "#O8b");
 		Assert.AreEqual (0, fvi.FileMinorPart, "#O9b");
 		Assert.AreEqual (0, fvi.FilePrivatePart, "#O10b");
+	}
+
+	static void Create16a ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib16a";
+		aname.Version = new Version ("3.5.7.9");
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// AssemblyVersion
+		Type attrType = typeof (AssemblyVersionAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		CustomAttributeBuilder cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		ab.DefineVersionInfoResource ();
+		ab.Save ("lib16a.dll");
+	}
+
+	static void Create16b ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib16b";
+		aname.Version = new Version ("3.5.7.9");
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// AssemblyVersion
+		Type attrType = typeof (AssemblyVersionAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		CustomAttributeBuilder cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyFileVersion
+		attrType = typeof (AssemblyFileVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "2.4.6.8" });
+		ab.SetCustomAttribute (cab);
+
+		ab.DefineVersionInfoResource ();
+		ab.Save ("lib16b.dll");
+	}
+
+	static void Verify16 ()
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib16a.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual (" ", fvi.CompanyName, "#P1a");
+		Assert.AreEqual (" ", fvi.ProductName, "#P2a");
+		Assert.AreEqual (" ", fvi.ProductVersion, "#P3a");
+		Assert.AreEqual (" ", fvi.LegalCopyright, "#P4a");
+		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P5a");
+		Assert.AreEqual ("3.5.7.9", fvi.FileVersion, "#P6a");
+		Assert.AreEqual (7, fvi.FileBuildPart, "#P7a");
+		Assert.AreEqual (3, fvi.FileMajorPart, "#P8a");
+		Assert.AreEqual (5, fvi.FileMinorPart, "#P9a");
+		Assert.AreEqual (9, fvi.FilePrivatePart, "#P10a");
+
+		assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib16b.dll");
+
+		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual (" ", fvi.CompanyName, "#P1b");
+		Assert.AreEqual (" ", fvi.ProductName, "#P2b");
+		Assert.AreEqual (" ", fvi.ProductVersion, "#P3b");
+		Assert.AreEqual (" ", fvi.LegalCopyright, "#P4b");
+		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P5b");
+		Assert.AreEqual ("2.4.6.8", fvi.FileVersion, "#P6b");
+		Assert.AreEqual (6, fvi.FileBuildPart, "#P7b");
+		Assert.AreEqual (2, fvi.FileMajorPart, "#P8b");
+		Assert.AreEqual (4, fvi.FileMinorPart, "#P9b");
+		Assert.AreEqual (8, fvi.FilePrivatePart, "#P10b");
 	}
 }
