@@ -2,19 +2,19 @@
 	<include buildfile="../../build/common.build" />
 
 	<target name="mono-1.0-init">
-		<property name="verify.framework" value="net-1.1" />
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
 	<target name="mono-2.0-init">
-		<property name="verify.framework" value="net-2.0" />
+		<property name="verify.framework" value="mono-2.0,net-2.0" />
 	</target>
 
 	<target name="net-1.1-init">
-		<property name="verify.framework" value="mono-1.0" />
+		<property name="verify.framework" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
 	<target name="net-2.0-init">
-		<property name="verify.framework" value="mono-2.0" />
+		<property name="verify.framework" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -97,25 +97,24 @@
 			<arg value="create" />
 		</exec>
 		<fail if="${file::exists('out')}">#1</fail>
-		<exec program="test.exe" managed="true" output="out">
+
+		<property name="original.verify.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="framework" item="String" in="${verify.framework}" delim=",">
+			<if test="${framework::exists(framework)}">
+				<property name="nant.settings.currentframework" value="${framework}" />
+				<delete file="test.exe" />
+				<call target="verify" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.verify.targetframework}" />
+	</target>
+
+	<target name="verify" depends="compile">
+		<exec program="test.exe" managed="strict" output="out">
 			<arg value="verify" />
 		</exec>
-		<fail if="${file::exists('out')}">#2</fail>
-
-		<if test="${framework::exists(verify.framework) and framework::get-target-framework()!=verify.framework}">
-			<!-- save original target framework -->
-			<property name="original.verify.framework" value="${framework::get-target-framework()}" />
-
-			<!-- change target framework to .NET 2.0 -->
-			<property name="nant.settings.currentframework" value="${verify.framework}" />
-
-			<exec program="test.exe" managed="strict" output="out">
-				<arg value="verify" />
-			</exec>
-			<fail if="${file::exists('out')}">#3</fail>
-
-			<!-- restore original target framework -->
-			<property name="nant.settings.currentframework" value="${original.verify.framework}" />
-		</if>
+		<fail if="${file::exists('out')}">#2: ${framework::get-target-framework()}</fail>
 	</target>
 </project>
