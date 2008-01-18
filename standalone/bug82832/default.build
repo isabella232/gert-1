@@ -14,7 +14,7 @@
 	</target>
 
 	<target name="net-2.0-init">
-		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+		<property name="verify.frameworks" value="net-1.1,net-2.0" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -25,7 +25,8 @@
 				<include name="lib1.dll" />
 				<include name="lib2.dll" />
 				<include name="lib3.dll" />
-				<include name="lib4.dll" />
+				<include name="lib4a.dll" />
+				<include name="lib4b.dll" />
 				<include name="lib5.dll" />
 				<include name="lib6.dll" />
 				<include name="lib7.dll" />
@@ -47,6 +48,7 @@
 				<include name="lib15b.dll" />
 				<include name="lib16a.dll" />
 				<include name="lib16b.dll" />
+				<include name="lib16c.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>

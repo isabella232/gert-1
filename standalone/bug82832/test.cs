@@ -19,7 +19,8 @@ class Program
 			Create1 ();
 			Create2 ();
 			Create3 ();
-			Create4 ();
+			Create4a ();
+			Create4b ();
 			Create5 ();
 			Create6 ();
 			Create7 ();
@@ -33,6 +34,7 @@ class Program
 			Create15b ();
 			Create16a ();
 			Create16b ();
+			Create16c ();
 			break;
 		case "verify":
 			Verify1 ();
@@ -128,6 +130,7 @@ class Program
 	{
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib3";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave,
@@ -193,10 +196,10 @@ class Program
 		Assert.AreEqual (8, fvi.FilePrivatePart, "#C10");
 	}
 
-	static void Create4 ()
+	static void Create4a ()
 	{
 		AssemblyName aname = new AssemblyName ();
-		aname.Name = "lib4";
+		aname.Name = "lib4a";
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave,
@@ -241,25 +244,92 @@ class Program
 		ab.SetCustomAttribute (cab);
 
 		ab.DefineVersionInfoResource ("AAA", "2.0", "BBB", "CCC", "DDD");
-		ab.Save ("lib4.dll");
+		ab.Save ("lib4a.dll");
+	}
+
+	static void Create4b ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib4b";
+		aname.Version = new Version (3, 5, 7, 9);
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// CompanyName
+		Type attrType = typeof (AssemblyCompanyAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (
+			new Type [] { typeof (String) });
+		CustomAttributeBuilder cab =
+			new CustomAttributeBuilder (ci, new object [1] { "Mono Team" });
+		ab.SetCustomAttribute (cab);
+
+		// ProductName
+		attrType = typeof (AssemblyProductAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Mono Runtime" });
+		ab.SetCustomAttribute (cab);
+
+		// LegalCopyright
+		attrType = typeof (AssemblyCopyrightAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Copyright 2007 Mono Hackers" });
+		ab.SetCustomAttribute (cab);
+
+		// LegalTrademarks
+		attrType = typeof (AssemblyTrademarkAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Registered to All" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyVersion
+		attrType = typeof (AssemblyVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyFileVersion
+		attrType = typeof (AssemblyFileVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "2.4.6.8" });
+		ab.SetCustomAttribute (cab);
+
+		ab.DefineVersionInfoResource ("AAA", "2.0", "BBB", "CCC", "DDD");
+		ab.Save ("lib4b.dll");
 	}
 
 	static void Verify4 ()
 	{
 		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
-			"lib4.dll");
+			"lib4a.dll");
 
 		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
-		Assert.AreEqual ("BBB", fvi.CompanyName, "#D1");
-		Assert.AreEqual ("AAA", fvi.ProductName, "#D2");
-		Assert.AreEqual ("2.0", fvi.ProductVersion, "#D3");
-		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D4");
-		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D5");
-		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#D6");
-		Assert.AreEqual (0, fvi.FileBuildPart, "#D7");
-		Assert.AreEqual (0, fvi.FileMajorPart, "#D8");
-		Assert.AreEqual (0, fvi.FileMinorPart, "#D9");
-		Assert.AreEqual (0, fvi.FilePrivatePart, "#D10");
+		Assert.AreEqual ("BBB", fvi.CompanyName, "#D1a");
+		Assert.AreEqual ("AAA", fvi.ProductName, "#D2a");
+		Assert.AreEqual ("2.0", fvi.ProductVersion, "#D3a");
+		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D4a");
+		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D5a");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#D6a");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#D7a");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#D8a");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#D9a");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#D10a");
+
+		assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib4b.dll");
+
+		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual ("BBB", fvi.CompanyName, "#D1b");
+		Assert.AreEqual ("AAA", fvi.ProductName, "#D2b");
+		Assert.AreEqual ("2.0", fvi.ProductVersion, "#D3b");
+		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D4b");
+		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D5b");
+		Assert.AreEqual ("3.5.7.9", fvi.FileVersion, "#D6b");
+		Assert.AreEqual (7, fvi.FileBuildPart, "#D7b");
+		Assert.AreEqual (3, fvi.FileMajorPart, "#D8b");
+		Assert.AreEqual (5, fvi.FileMinorPart, "#D9b");
+		Assert.AreEqual (9, fvi.FilePrivatePart, "#D10b");
 	}
 
 	static void Create5 ()
@@ -537,6 +607,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib12a";
+		aname.Version = new Version (9, 0, 3, 0);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -589,6 +660,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib12b";
+		aname.Version = new Version (9, 0, 3 ,0);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -636,6 +708,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib13a";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -688,6 +761,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib13b";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -735,6 +809,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib14a";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -787,6 +862,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib14b";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -834,6 +910,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib15a";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -886,6 +963,7 @@ class Program
 
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib15b";
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave, basedir);
@@ -980,7 +1058,7 @@ class Program
 	{
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib16a";
-		aname.Version = new Version ("3.5.7.9");
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave,
@@ -1000,7 +1078,7 @@ class Program
 	{
 		AssemblyName aname = new AssemblyName ();
 		aname.Name = "lib16b";
-		aname.Version = new Version ("3.5.7.9");
+		aname.Version = new Version (3, 5, 7, 9);
 
 		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
 			aname, AssemblyBuilderAccess.RunAndSave,
@@ -1020,6 +1098,32 @@ class Program
 
 		ab.DefineVersionInfoResource ();
 		ab.Save ("lib16b.dll");
+	}
+
+	static void Create16c ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib16c";
+		aname.Version = new Version (3, 5, 7, 9);
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// AssemblyVersion
+		Type attrType = typeof (AssemblyVersionAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		CustomAttributeBuilder cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyFileVersion
+		attrType = typeof (AssemblyFileVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "0.0.0.0" });
+		ab.SetCustomAttribute (cab);
+
+		ab.DefineVersionInfoResource ();
+		ab.Save ("lib16c.dll");
 	}
 
 	static void Verify16 ()
@@ -1053,5 +1157,20 @@ class Program
 		Assert.AreEqual (2, fvi.FileMajorPart, "#P8b");
 		Assert.AreEqual (4, fvi.FileMinorPart, "#P9b");
 		Assert.AreEqual (8, fvi.FilePrivatePart, "#P10b");
+
+		assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib16c.dll");
+
+		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual (" ", fvi.CompanyName, "#P1c");
+		Assert.AreEqual (" ", fvi.ProductName, "#P2c");
+		Assert.AreEqual (" ", fvi.ProductVersion, "#P3c");
+		Assert.AreEqual (" ", fvi.LegalCopyright, "#P4c");
+		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P5c");
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#P6c");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#P7c");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#P8c");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#P9c");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#P10c");
 	}
 }
