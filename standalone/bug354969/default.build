@@ -27,7 +27,7 @@
 				<include name="liba.cs" />
 			</sources>
 		</csc>
-		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="libb.dll" warnaserror="true" warninglevel="4">
+		<csc target="library" define="${csc.defines}" output="libb.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="libb.cs" />
 			</sources>
