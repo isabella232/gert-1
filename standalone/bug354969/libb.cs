@@ -1,7 +1,8 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyVersion ("9.7.5.3")]
+[assembly: AssemblyVersion ("5.2.1.4")]
+[assembly: AssemblyCulture ("nl-BE")]
 [assembly: AssemblyFileVersion ("3.2.3.2")]
 [assembly: AssemblyProduct ("libB")]
 [assembly: AssemblyTitle ("libB title")]

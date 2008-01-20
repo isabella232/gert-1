@@ -48,10 +48,10 @@ class Program
 		Assembly a = Assembly.LoadFrom (Path.Combine (dir, "libb.dll"));
 		AssemblyName an = a.GetName ();
 
-		Assert.AreEqual (CultureInfo.InvariantCulture, an.CultureInfo, "#A1");
+		Assert.AreEqual ("nl-BE", an.CultureInfo.Name, "#A1");
 		Assert.IsNotNull (an.EscapedCodeBase, "#A2");
 		Assert.AreEqual (AssemblyNameFlags.PublicKey | AssemblyNameFlags.Retargetable, an.Flags, "#A3");
-		Assert.AreEqual ("libb, Version=9.7.5.3, Culture=neutral, PublicKeyToken=null, Retargetable=Yes", an.FullName, "#A4");
+		Assert.AreEqual ("libb, Version=5.2.1.4, Culture=nl-BE, PublicKeyToken=null, Retargetable=Yes", an.FullName, "#A4");
 		Assert.AreEqual (new byte [0], an.GetPublicKey (), "#A5");
 		Assert.IsNull (an.GetPublicKeyToken (), "#A6");
 		Assert.AreEqual (AssemblyHashAlgorithm.SHA1, an.HashAlgorithm, "#A7");
@@ -61,19 +61,20 @@ class Program
 		Assert.AreEqual (ProcessorArchitecture.MSIL, an.ProcessorArchitecture, "#A10");
 #endif
 		Assert.AreEqual (an.FullName, an.ToString (), "#A11");
-		Assert.AreEqual (new Version (9, 7, 5, 3), an.Version, "#A12");
+		Assert.AreEqual (new Version (5, 2, 1, 4), an.Version, "#A12");
 		Assert.AreEqual (AssemblyVersionCompatibility.SameMachine,
 			an.VersionCompatibility, "#A13");
 
 		Type type = a.GetType ("Foo");
 		Assert.IsNotNull (type, "#B1");
 		Assert.AreEqual ("Foo", type.FullName, "#B2");
-		Assert.AreEqual ("Foo, libb, Version=9.7.5.3, Culture=neutral, PublicKeyToken=null, Retargetable=Yes",
+		Assert.AreEqual ("Foo, libb, Version=5.2.1.4, Culture=nl-BE, PublicKeyToken=null, Retargetable=Yes",
 			type.AssemblyQualifiedName, "#B3");
 	}
 
 	static void TestLibC ()
 	{
+#if !MONO
 		try {
 			Assembly.Load ("libc, Version=9.7.5.3, Culture=neutral, PublicKeyToken=5ca3085bccb6d96f, Retargetable=Yes");
 			Assert.Fail ("#A1");
@@ -83,6 +84,7 @@ class Program
 			Assert.IsNull (ex.InnerException, "#A4");
 			Assert.IsNotNull (ex.Message, "#A5");
 		}
+#endif
 
 		Assembly a = Assembly.Load ("libc, Version=9.7.5.3, Culture=neutral, PublicKeyToken=5ca3085bccb6d96f");
 		AssemblyName an = a.GetName ();
