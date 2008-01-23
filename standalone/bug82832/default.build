@@ -5,16 +5,32 @@
 		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
+	<target name="mono-1.0-runtime">
+		<property name="clr.version" value="1.1" />
+	</target>
+
 	<target name="mono-2.0-init">
 		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
+	<target name="mono-2.0-runtime">
+		<property name="clr.version" value="2.0" />
+	</target>
+
 	<target name="net-1.1-init">
-		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+		<property name="verify.frameworks" value="net-1.1,net-2.0" />
+	</target>
+
+	<target name="net-1.1-runtime">
+		<property name="clr.version" value="1.1" />
 	</target>
 
 	<target name="net-2.0-init">
 		<property name="verify.frameworks" value="net-1.1,net-2.0" />
+	</target>
+
+	<target name="net-2.0-runtime">
+		<property name="clr.version" value="2.0" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -49,6 +65,9 @@
 				<include name="lib16a.dll" />
 				<include name="lib16b.dll" />
 				<include name="lib16c.dll" />
+				<include name="lib17a.dll" />
+				<include name="lib17b.dll" />
+				<include name="lib18.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -105,11 +124,23 @@
 				<include name="libb.cs" />
 			</sources>
 		</csc>
+		<csc target="library" define="${csc.defines}" output="lib17a.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="liba.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib17b.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="libb.cs" />
+			</sources>
+		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
+		<call target="${nant.settings.currentframework}-runtime" />
 		<exec program="test.exe" managed="true" output="out">
 			<arg value="create" />
+			<arg value="${clr.version}" />
 		</exec>
 		<fail if="${file::exists('out')}">#1</fail>
 
@@ -129,6 +160,7 @@
 	<target name="verify" depends="compile-runner">
 		<exec program="test.exe" managed="strict" output="out">
 			<arg value="verify" />
+			<arg value="${clr.version}" />
 		</exec>
 		<fail if="${file::exists('out')}">#2: ${framework::get-target-framework()}</fail>
 	</target>

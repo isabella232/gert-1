@@ -9,8 +9,8 @@ class Program
 {
 	static int Main (string [] args)
 	{
-		if (args.Length == 0) {
-			Console.Error.WriteLine ("Please specify the action.");
+		if (args.Length != 2) {
+			Console.Error.WriteLine ("Please specify the action and the CLR version.");
 			return 1;
 		}
 
@@ -35,6 +35,7 @@ class Program
 			Create16a ();
 			Create16b ();
 			Create16c ();
+			Create18 ();
 			break;
 		case "verify":
 			Verify1 ();
@@ -52,6 +53,8 @@ class Program
 			Verify14 ();
 			Verify15 ();
 			Verify16 ();
+			Verify17 (args [1]);
+			Verify18 ();
 			break;
 		default:
 			Console.Error.WriteLine ("Unsupported action.");
@@ -1173,4 +1176,152 @@ class Program
 		Assert.AreEqual (0, fvi.FileMinorPart, "#P9c");
 		Assert.AreEqual (0, fvi.FilePrivatePart, "#P10c");
 	}
+
+	static void Verify17 (string clr_version)
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib17a.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual ("liba company", fvi.CompanyName, "#Q1a");
+		Assert.AreEqual ("liba", fvi.ProductName, "#Q2a");
+		Assert.AreEqual ("7.2.4.3", fvi.ProductVersion, "#Q3a");
+		Assert.AreEqual ("liba copyright", fvi.LegalCopyright, "#Q4a");
+		Assert.AreEqual ("liba trademark", fvi.LegalTrademarks, "#Q5a");
+		Assert.AreEqual ("3.2.3.2", fvi.FileVersion, "#Q6a");
+		Assert.AreEqual (3, fvi.FileBuildPart, "#Q8a");
+		Assert.AreEqual (3, fvi.FileMajorPart, "#Q8a");
+		Assert.AreEqual (2, fvi.FileMinorPart, "#Q9a");
+		Assert.AreEqual (2, fvi.FilePrivatePart, "#Q10a");
+		Assert.AreEqual ("liba description", fvi.Comments, "#Q11a");
+		Assert.AreEqual ("liba title", fvi.FileDescription, "#Q12a");
+		Assert.AreEqual (assemblyFile, fvi.FileName, "#Q13a");
+		Assert.AreEqual ("lib17a.dll", fvi.InternalName, "#Q14a");
+		Assert.AreEqual ("lib17a.dll", fvi.OriginalFilename, "#Q15a");
+		Assert.AreEqual (string.Empty, fvi.PrivateBuild, "#Q16a");
+		Assert.AreEqual (4, fvi.ProductBuildPart, "#Q17a");
+		Assert.AreEqual (7, fvi.ProductMajorPart, "#Q18a");
+		Assert.AreEqual (2, fvi.ProductMinorPart, "#Q19a");
+		Assert.AreEqual (3, fvi.ProductPrivatePart, "#Q20a");
+		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#Q21a");
+
+		assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib17b.dll");
+
+		fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+
+		switch (clr_version) {
+		case "2.0":
+			Assert.AreEqual (string.Empty, fvi.CompanyName, "#Q1b");
+			Assert.AreEqual (string.Empty, fvi.ProductName, "#Q2b");
+			Assert.AreEqual ("0.0.0.0", fvi.ProductVersion, "#Q3b");
+			Assert.AreEqual (" ", fvi.LegalCopyright, "#Q4b");
+			Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#Q5b");
+			Assert.AreEqual (string.Empty, fvi.Comments, "#Q11b");
+			break;
+		case "1.1":
+			Assert.AreEqual (" ", fvi.CompanyName, "#Q1b");
+			Assert.AreEqual (" ", fvi.ProductName, "#Q2b");
+			Assert.AreEqual ("0.0.0.0", fvi.ProductVersion, "#Q3b");
+			Assert.AreEqual (" ", fvi.LegalCopyright, "#Q4b");
+			Assert.AreEqual (" ", fvi.LegalTrademarks, "#Q5b");
+			Assert.AreEqual (" ", fvi.Comments, "#Q11b");
+			break;
+		}
+		Assert.AreEqual ("0.0.0.0", fvi.FileVersion, "#Q6b");
+		Assert.AreEqual (0, fvi.FileBuildPart, "#Q7b");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#Q8b");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#Q9b");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#Q10b");
+		Assert.AreEqual (" ", fvi.FileDescription, "#Q12b");
+		Assert.AreEqual (assemblyFile, fvi.FileName, "#Q13b");
+		Assert.AreEqual ("lib17b.dll", fvi.InternalName, "#Q14b");
+		Assert.AreEqual ("lib17b.dll", fvi.OriginalFilename, "#Q15b");
+		Assert.AreEqual (string.Empty, fvi.PrivateBuild, "#Q16b");
+		Assert.AreEqual (0, fvi.ProductBuildPart, "#Q17b");
+		Assert.AreEqual (0, fvi.ProductMajorPart, "#Q18b");
+		Assert.AreEqual (0, fvi.ProductMinorPart, "#Q19b");
+		Assert.AreEqual (0, fvi.ProductPrivatePart, "#Q20b");
+		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#Q21b");
+	}
+
+	static void Create18 ()
+	{
+		AssemblyName aname = new AssemblyName ();
+		aname.Name = "lib18";
+		aname.Version = new Version (3, 5, 7, 9);
+
+		AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly (
+			aname, AssemblyBuilderAccess.RunAndSave,
+			AppDomain.CurrentDomain.BaseDirectory);
+
+		// CompanyName
+		Type attrType = typeof (AssemblyCompanyAttribute);
+		ConstructorInfo ci = attrType.GetConstructor (
+			new Type [] { typeof (String) });
+		CustomAttributeBuilder cab =
+			new CustomAttributeBuilder (ci, new object [1] { "Mono Team" });
+		ab.SetCustomAttribute (cab);
+
+		// ProductName
+		attrType = typeof (AssemblyProductAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Mono Runtime" });
+		ab.SetCustomAttribute (cab);
+
+		// LegalCopyright
+		attrType = typeof (AssemblyCopyrightAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Copyright 2007 Mono Hackers" });
+		ab.SetCustomAttribute (cab);
+
+		// LegalTrademarks
+		attrType = typeof (AssemblyTrademarkAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "Registered to All" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyVersion
+		attrType = typeof (AssemblyVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "1.2.3.4" });
+		ab.SetCustomAttribute (cab);
+
+		// AssemblyFileVersion
+		attrType = typeof (AssemblyFileVersionAttribute);
+		ci = attrType.GetConstructor (new Type [] { typeof (String) });
+		cab = new CustomAttributeBuilder (ci, new object [1] { "2.4.6.8" });
+		ab.SetCustomAttribute (cab);
+
+		ab.Save ("lib18.dll");
+	}
+
+	static void Verify18 ()
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib18.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+#if NET_2_0
+		Assert.IsNull (fvi.CompanyName, "#R1a");
+		Assert.IsNull (fvi.ProductName, "#R2a");
+		Assert.IsNull (fvi.ProductVersion, "#R3a");
+		Assert.IsNull (fvi.LegalCopyright, "#R4a");
+		Assert.IsNull (fvi.LegalTrademarks, "#R5a");
+		Assert.IsNull (fvi.FileVersion, "#R6a");
+#else
+		Assert.AreEqual (string.Empty, fvi.CompanyName, "#R1a");
+		Assert.AreEqual (string.Empty, fvi.ProductName, "#R2a");
+		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#R3a");
+		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#R4a");
+		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#R5a");
+		Assert.AreEqual (string.Empty, fvi.FileVersion, "#R6a");
+#endif
+		Assert.AreEqual (0, fvi.FileBuildPart, "#R7a");
+		Assert.AreEqual (0, fvi.FileMajorPart, "#R8a");
+		Assert.AreEqual (0, fvi.FileMinorPart, "#R9a");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#R10a");
+	}
+
+
 }
