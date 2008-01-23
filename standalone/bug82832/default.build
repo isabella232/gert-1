@@ -18,7 +18,7 @@
 	</target>
 
 	<target name="net-1.1-init">
-		<property name="verify.frameworks" value="net-1.1,net-2.0" />
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
 	<target name="net-1.1-runtime">
@@ -26,7 +26,7 @@
 	</target>
 
 	<target name="net-2.0-init">
-		<property name="verify.frameworks" value="net-1.1,net-2.0" />
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	</target>
 
 	<target name="net-2.0-runtime">
