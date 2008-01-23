@@ -10,7 +10,7 @@ class Assert
 		if ((x == null || y == null) || !x.Equals (y))
 			throw new Exception (string.Format (CultureInfo.InvariantCulture,
 				"Expected: {0}, but was: {1}. {2}",
-				x, y, msg));
+				x == null ? "<null>" : x, y == null ? "<null>" : y, msg));
 	}
 
 	public static void AreEqual (object x, object y, string msg)
