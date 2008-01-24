@@ -1,0 +1,31 @@
+<project name="bug355408" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<vbc target="winexe" define="${csc.defines}" output="test.exe" warnaserror="true">
+			<sources>
+				<include name="*.vb" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+				<include name="System.Windows.Forms.dll" />
+			</references>
+		</vbc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
