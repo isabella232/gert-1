@@ -1,0 +1,58 @@
+<project name="bug325233" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-1.0-init">
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="verify.frameworks" value="mono-2.0,net-2.0" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="verify.frameworks" value="mono-2.0,net-2.0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="MainForm.resources" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<resgen input="MainForm.resx" output="MainForm.resources" />
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="System.Drawing.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<property name="original.verify.framework" value="${framework::get-target-framework()}" />
+
+		<foreach property="verify.framework" item="String" in="${verify.frameworks}" delim=",">
+			<if test="${framework::exists(verify.framework)}">
+				<property name="nant.settings.currentframework" value="${verify.framework}" />
+				<exec program="test.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.verify.framework}" />
+	</target>
+</project>
