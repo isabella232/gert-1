@@ -17,7 +17,11 @@ namespace Mono
 				BindingFlags.Instance);
 
 			Assert.AreEqual (1, methods.Length, "#B1");
+#if ONLY_1_1
 			Assert.AreEqual ("Mono.Bar+IMarshal.Release", methods [0].Name, "#B2");
+#else
+			Assert.AreEqual ("Mono.Bar.IMarshal.Release", methods [0].Name, "#B2");
+#endif
 		}
 	}
 
