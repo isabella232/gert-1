@@ -40,6 +40,7 @@ class MainForm : Form
 		Location = new Point (250, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "bug #353310";
+		Load += new EventHandler (MainForm_Load);
 		Closing += new CancelEventHandler (MainForm_Closing);
 	}
 
@@ -47,6 +48,12 @@ class MainForm : Form
 	static void Main ()
 	{
 		Application.Run (new MainForm ());
+	}
+
+	void MainForm_Load (object sender, EventArgs e)
+	{
+		InstructionsForm instructionsForm = new InstructionsForm ();
+		instructionsForm.Show ();
 	}
 
 	void MainForm_Closing (object sender, CancelEventArgs e)
@@ -134,7 +141,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (300, 200);
+		ClientSize = new Size (320, 250);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #353310";
