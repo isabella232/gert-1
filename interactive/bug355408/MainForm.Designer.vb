@@ -200,9 +200,9 @@ Public Class InstructionsForm
 		_bugDescriptionText1.Dock = DockStyle.Fill
 		_bugDescriptionText1.Multiline = true
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture, _
-			"Steps to execute:{0}{0}" & _
-			"1. The textboxes for Title, Name, Municipality, ZipCode and " & _
-			"Countrylabels are displayed.", _
+			"Expected result on start-up:{0}{0}" & _
+			"1. The textboxes for the Title, Name, Municipality, ZipCode " & _
+			"and Country labels are displayed.", _
 			Environment.NewLine)
 		' 
 		' _tabPage1
