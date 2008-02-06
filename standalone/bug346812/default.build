@@ -132,7 +132,6 @@
 		</exec>
 
 		<property name="hostname" value="${x509::create-common-name()}" />
-		<echo>${hostname}</echo>
 		
 		<!-- create private key and certifate signed by CA -->
 		<exec program="${framework::get-tool-path('makecert.exe')}" managed="true">
