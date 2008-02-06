@@ -13,7 +13,7 @@ class Program
 		ResourceManager rm = new ResourceManager ("MyClass", asm);
 
 		Assert.AreEqual ("System information", rm.GetObject ("SystemInformation", new CultureInfo ("en-US")), "#1");
-		Assert.AreEqual ("Informació del sistema", rm.GetObject ("SystemInformation", new CultureInfo ("ca-ES")), "#2");
+		Assert.AreEqual ("InformaciÃ³ del sistema", rm.GetObject ("SystemInformation", new CultureInfo ("ca-ES")), "#2");
 		Assert.AreEqual ("Systeeminformatie", rm.GetObject ("SystemInformation", new CultureInfo ("nl-BE")), "#3");
 	}
 }
