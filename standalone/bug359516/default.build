@@ -1,0 +1,42 @@
+<project name="bug359516" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-1.0-init">
+		<property name="debug.filename" value="test.exe.mdb" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="debug.filename" value="test.exe.mdb" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="debug.filename" value="test.pdb" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="debug.filename" value="test.pdb" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test.exe.mdb" />
+				<include name="test.pdb" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<ilasm target="exe" output="test.exe" debug="true">
+			<sources>
+				<include name="test.il" />
+			</sources>
+		</ilasm>
+		<fail unless="${file::exists('test.exe')}">#1</fail>
+		<fail unless="${file::exists(debug.filename)}">#2</fail>
+	</target>
+</project>
