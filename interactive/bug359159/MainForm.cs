@@ -13,6 +13,7 @@ public class MainForm : Form
 		// 
 		_propertyGrid = new PropertyGrid ();
 		_propertyGrid.Dock = DockStyle.Fill;
+		_propertyGrid.Height = 100;
 		Controls.Add (_propertyGrid);
 		// 
 		// MainForm
@@ -20,7 +21,7 @@ public class MainForm : Form
 		ClientSize = new Size (300, 240);
 		Location = new Point (250, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #359159";
+		Text = "bug #359830";
 		Load += new EventHandler (MainForm_Load);
 	}
 
@@ -35,7 +36,7 @@ public class MainForm : Form
 		InstructionsForm instructionsForm = new InstructionsForm ();
 		instructionsForm.Show ();
 
-		_propertyGrid.SelectedObject = new Config ();
+		_propertyGrid.SelectedObject = new Config (_propertyGrid);
 	}
 
 	private PropertyGrid _propertyGrid;
@@ -44,16 +45,21 @@ public class MainForm : Form
 public class Config
 {
 	private string _name;
-	private DateTime _startDate;
+	private readonly PropertyGrid _propertyGrid;
+
+	public Config (PropertyGrid propertyGrid)
+	{
+		_propertyGrid = propertyGrid;
+	}
 
 	public string Name {
 		get { return _name; }
 		set { _name = value; }
 	}
 
-	public DateTime StartDate {
-		get { return _startDate; }
-		set { _startDate = value; }
+	public DockStyle Dock {
+		get { return _propertyGrid.Dock; }
+		set { _propertyGrid.Dock = value; }
 	}
 }
 
@@ -75,11 +81,9 @@ public class InstructionsForm : Form
 		_bugDescriptionText1.Multiline = true;
 		_bugDescriptionText1.Text = string.Format (CultureInfo.InvariantCulture,
 			"Steps to execute:{0}{0}" +
-			"1. Click on the StartDate item.{0}{0}" +
-			"2. Drop down the DateTimePicker.{0}{0}" +
-			"3. Close the DateTimePicker without selecting a date.{0}{0}" +
+			"1. Modify the value of the Dock item.{0}{0}" +
 			"Expected result:{0}{0}" +
-			"1. The value of the StartDate item remains empty.",
+			"1. The dockstyle of the propertygrid changes.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -94,7 +98,7 @@ public class InstructionsForm : Form
 		ClientSize = new Size (320, 200);
 		Location = new Point (600, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #359159";
+		Text = "Instructions - bug #359830";
 	}
 
 	private TextBox _bugDescriptionText1;
