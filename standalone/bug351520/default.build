@@ -1,7 +1,7 @@
 <project name="bug351520" default="rebuild">
 	<include buildfile="../../build/common.build" />
 	
-	<property name="frameworks" value="mono-2.0,net-2.0" />
+	<property name="frameworks" value="mono-2.0" />
 
 	<target name="clean">
 		<delete>
@@ -30,6 +30,11 @@
 
 	<target name="run-test" depends="compile">
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail unless="${file::exists('out')}">#1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Not doing anything!') != -1}">#2</fail>
+		<fail unless="${string::index-of(out,'In GetCallbackI!') != -1}">#3</fail>
+		<fail unless="${string::index-of(out,'Hello, World!') != -1}">#4</fail>
+		<fail unless="${string::index-of(out,'In GetCallbackII!') != -1}">#5</fail>
 	</target>
 </project>
