@@ -28,6 +28,7 @@
 				<include name="DropDownList.aspx.cs" />
 			</sources>
 			<references>
+				<include name="System.Data.dll" />
 				<include name="System.Web.dll" />
 			</references>
 		</csc>
