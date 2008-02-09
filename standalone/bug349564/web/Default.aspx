@@ -24,8 +24,10 @@
 			throw new Exception ("#B4:" + cookie.Expires.ToString ("dd/MM/yyyy HH:mm:ss"));
 		if (cookie.HasKeys)
 			throw new Exception ("#B5");
+#if NET_2_0
 		if (cookie.HttpOnly)
 			throw new Exception ("#B6");
+#endif
 		if (cookie.Name != "DOESNOTEXIST")
 			throw new Exception ("#B7");
 		if (cookie.Path != "/")
@@ -55,8 +57,10 @@
 			throw new Exception ("#D4:" + cookie.Expires.ToString ("dd/MM/yyyy HH:mm:ss"));
 		if (cookie.HasKeys)
 			throw new Exception ("#D5");
+#if NET_2_0
 		if (cookie.HttpOnly)
 			throw new Exception ("#D6");
+#endif
 		if (cookie.Name != "NEVEREXISTED")
 			throw new Exception ("#D7");
 		if (cookie.Path != "/")
