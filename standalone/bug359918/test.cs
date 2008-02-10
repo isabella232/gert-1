@@ -12,7 +12,8 @@ class Program
 			counters [idx]++;
 		}
 
-		for (int i = 0; i < 11; i++)
+		for (int i = 0; i < 10; i++)
 			Assert.IsTrue (counters [i] > 0, "#" + (i - 5).ToString () + ":" + counters [i]);
+		Assert.AreEqual (0, counters [10], "#5:" + counters [10]);
 	}
 }
