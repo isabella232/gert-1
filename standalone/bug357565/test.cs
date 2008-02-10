@@ -38,7 +38,10 @@ class Program
 			return 1;
 		}
 
-		File.Create (Path.Combine (webDir, "app_offline.htm")).Close ();
+		using (StreamWriter sw = new StreamWriter (Path.Combine (webDir, "app_offline.htm"), false, Encoding.UTF8)) {
+			sw.Write ("<p>Out for lunch</p>");
+		}
+
 		Thread.Sleep (500);
 		Assert.IsTrue (File.Exists (Path.Combine (webDir, "app_start")), "#B1");
 		Assert.IsTrue (File.Exists (Path.Combine (webDir, "app_end")), "#B2");
@@ -54,6 +57,10 @@ class Program
 			Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#C1");
 			Assert.IsNotNull (response, "#C2");
 			Assert.AreEqual (HttpStatusCode.NotFound, response.StatusCode, "#C3");
+
+			using (StreamReader sr = new StreamReader (response.GetResponseStream ())) {
+				Assert.AreEqual ("<p>Out for lunch</p>", sr.ReadToEnd (), "#C4");
+			}
 		}
 
 		File.Delete (Path.Combine (webDir, "app_start"));
