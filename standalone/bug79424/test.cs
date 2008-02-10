@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Remoting;
 
-public class bug76757Test
+class Program
 {
 	static int Main ()
 	{
@@ -42,9 +42,7 @@ public class bug76757Test
 		}
 	}
 
-#if MONO
-	private const string expectedFileName = "library, Version=1.2.3.4, Culture=neutral";
-#elif NET_2_0
+#if NET_2_0 || MONO
 	private const string expectedFileName = "library, Version=1.2.3.4, Culture=neutral, PublicKeyToken=null";
 #else
 	private const string expectedFileName = "library";
