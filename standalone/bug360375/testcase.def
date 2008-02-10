@@ -1,0 +1,4 @@
+LIBRARY	"testcase"
+
+EXPORTS
+	test
