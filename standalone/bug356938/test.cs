@@ -27,7 +27,11 @@ class Program
 		types = modules [0].GetTypes ();
 		Assert.AreEqual (0, types.Length, "#A3");
 		types = modules [0].GetTypes ();
+#if NET_2_0
 		Assert.AreEqual ("myDynamicModule.dll", modules [1].Name, "#A4");
+#else
+		Assert.IsTrue (string.Compare (modules [1].Name, "myDynamicModule.dll", true) == 0, "#A4");
+#endif
 		types = modules [1].GetTypes ();
 		Assert.AreEqual (1, types.Length, "#A5");
 		Assert.AreEqual ("myDynamicModuleType", types [0].FullName, "#A6");
@@ -40,17 +44,27 @@ class Program
 		modules = a.GetModules ();
 
 		Assert.AreEqual (2, modules.Length, "#B1");
-		Assert.IsNotNull (modules [0].Name, "#B2");
-		types = modules [0].GetTypes ();
-		Assert.AreEqual (0, types.Length, "#B3");
-		types = modules [0].GetTypes ();
-		Assert.IsNotNull (modules [1].Name, "#B4");
-		types = modules [1].GetTypes ();
-		Assert.AreEqual (1, types.Length, "#B5");
-		Assert.AreEqual ("myDynamicModuleType", types [0].FullName, "#B6");
-		methods = types [0].GetMethods (BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static);
-		Assert.AreEqual (1, methods.Length, "#B7");
-		Assert.AreEqual ("testDynamic", methods [0].Name, "#B8");
+
+		bool foundModule = false;
+
+		for (int i = 0; i < modules.Length; i++) {
+			Assert.IsNotNull (modules [i].Name, "#B2");
+			types = modules [i].GetTypes ();
+
+			if (types.Length > 0) {
+				Assert.IsFalse (foundModule, "#B3");
+				Assert.AreEqual (1, types.Length, "#B4");
+				Assert.AreEqual ("myDynamicModuleType", types [0].FullName, "#B5");
+				methods = types [0].GetMethods (BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static);
+				Assert.AreEqual (1, methods.Length, "#B6");
+				Assert.AreEqual ("testDynamic", methods [0].Name, "#B7");
+				foundModule = true;
+			} else {
+				Assert.AreEqual (0, types.Length, "#B8");
+			}
+		}
+
+		Assert.IsTrue (foundModule, "#C");
 	}
 }
 
@@ -100,7 +114,7 @@ class CreateDynamicAssembly
 			newName, AssemblyBuilderAccess.RunAndSave);
 
 		ModuleBuilder newModule = asmBuilder.DefineDynamicModule (
-			"myDynamicModule1", "myDynamicModule" + ".dll", true);
+			"myDynamicModule1", "myDynamicModule.dll", true);
 
 		TypeBuilder myTypeBld = newModule.DefineType ("myDynamicModuleType",
 			TypeAttributes.Public);
