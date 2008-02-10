@@ -19,7 +19,7 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.GetEncoding ("iso-8859-1"), true)) {
 				string result = sr.ReadToEnd ();
-				if (result.IndexOf ("<p>Umlaute: öäü</p>") == -1) {
+				if (result.IndexOf ("<p>Umlaute: Ã¶Ã¤Ã¼</p>") == -1) {
 					Console.WriteLine (result);
 					return 1;
 				}
