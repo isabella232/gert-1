@@ -56,7 +56,11 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) ex.Response;
 			Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#C1");
 			Assert.IsNotNull (response, "#C2");
+#if MONO
+			Assert.AreEqual (HttpStatusCode.ServiceUnavailable, response.StatusCode, "#C3");
+#else
 			Assert.AreEqual (HttpStatusCode.NotFound, response.StatusCode, "#C3");
+#endif
 
 			using (StreamReader sr = new StreamReader (response.GetResponseStream ())) {
 				Assert.AreEqual ("<p>Out for lunch</p>", sr.ReadToEnd (), "#C4");
