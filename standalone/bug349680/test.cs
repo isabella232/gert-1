@@ -11,7 +11,7 @@ class Program
 	static void Main ()
 	{
 		// allow only one instance of the process
-		Mutex onlyOne = new Mutex (true, Process.GetCurrentProcess ().ProcessName);
+		Mutex onlyOne = new Mutex (true, "bug349680");
 
 		if (onlyOne.WaitOne (0, false)) {
 			try {
