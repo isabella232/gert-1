@@ -17,9 +17,6 @@
 			<sources>
 				<include name="test.cs" />
 			</sources>
-			<references>
-				<include name="System.Data.dll" />
-			</references>
 		</csc>
 	</target>
 
