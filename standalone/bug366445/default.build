@@ -1,0 +1,54 @@
+<project name="bug366445" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="client.exe" />
+				<include name="common.dll" />
+				<include name="out" />
+				<include name="server.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="common.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="common.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="client.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="client.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="common.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="server.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="server.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="common.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="200" />
+		<exec program="client.exe" managed="true" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+	</target>
+</project>
