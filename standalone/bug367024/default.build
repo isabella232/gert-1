@@ -1,0 +1,57 @@
+<project name="bug367024" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,mono-3.5,net-2.0,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test.il" />
+				<include name="test.res" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="disassemble" depends="compile">
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='mono'}">
+				<choose>
+					<when test="${platform::is-unix()}">
+						<property name="monodis.tool" value="monodis" />
+					</when>
+					<otherwise>
+						<property name="monodis.tool" value="monodis.exe" />
+					</otherwise>
+				</choose>
+				<exec program="${framework::get-tool-path(monodis.tool)}">
+					<arg value="--output=${path::get-full-path('test.il')}" />
+					<arg file="test.exe" />
+				</exec>
+			</when>
+			<otherwise>
+				<ildasm input="test.exe" output="test.il" />
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test" depends="disassemble">
+		<delete file="test.exe" />
+		<ilasm target="exe" output="test.exe">
+			<sources>
+				<include name="test.il" />
+			</sources>
+		</ilasm>
+		<exec program="test.exe" output="out" managed="true" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
