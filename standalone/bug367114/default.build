@@ -1,0 +1,22 @@
+<project name="bug367114" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,mono-3.5,net-2.0,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<ilasm target="exe" output="test.exe">
+			<sources>
+				<include name="test.il" />
+			</sources>
+		</ilasm>
+	</target>
+</project>
