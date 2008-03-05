@@ -25,7 +25,7 @@
 		<mkdir dir="web/bin" />
 		<csc target="library" define="${csc.defines}" output="web/bin/Mono.WebTest.dll" warnaserror="true" warninglevel="4">
 			<sources basedir="web">
-				<include name="*.cs" />
+				<include name="*.cS" />
 			</sources>
 			<references>
 				<include name="System.Web.dll" />
