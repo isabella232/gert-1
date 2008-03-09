@@ -1,0 +1,42 @@
+<project name="bug368294" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,mono-3.5,net-2.0,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="mscorlib.dll" />
+				<include name="mylib.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<ilasm target="dll" output="mylib.dll">
+			<sources>
+				<include name="mylib.il" />
+			</sources>
+		</ilasm>
+		<ilasm target="dll" output="mscorlib.dll">
+			<sources>
+				<include name="mscorlib.il" />
+			</sources>
+		</ilasm>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" output="out" managed="true">
+			<arg file="mylib.dll" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
