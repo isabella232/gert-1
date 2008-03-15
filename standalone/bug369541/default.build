@@ -1,0 +1,46 @@
+<project name="bug369541" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="bin/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Lang" />
+			</assemblies>
+		</gac-uninstall>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="bin" />
+		<csc target="library" define="${csc.defines}" keyfile="test.snk" output="bin/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Lang.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<gac-install>
+			<assemblies>
+				<include name="bin/Lang.dll" />
+			</assemblies>
+		</gac-install>
+		
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
