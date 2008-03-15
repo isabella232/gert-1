@@ -1,0 +1,31 @@
+<project name="bug368829" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="echo/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile" if="${platform::is-unix()}">
+		<mkdir dir="echo" />
+		<exec program="test.exe" output="out" managed="true" />
+		<fail unless="${file::exists('out')}">#1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'Mono Rocks!') != -1}">#2</fail>
+	</target>
+</project>
