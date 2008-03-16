@@ -36,7 +36,7 @@
 				<include name="Bag.cs" />
 			</sources>
 		</csc>
-		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.dll" warnaserror="true" warninglevel="4">
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.UI.dll" warnaserror="true" warninglevel="4">
 			<sources basedir="web">
 				<include name="Default.aspx.cs" />
 			</sources>
