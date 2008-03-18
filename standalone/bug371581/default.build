@@ -22,7 +22,7 @@
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="web/Web.config" />
+				<include name="web/global.asax" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>

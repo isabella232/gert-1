@@ -4,6 +4,6 @@
 		<title>bug #371581</title>
 	</head>
 	<body>
-		<p>ok</p>
+		<p>1-ok</p>
 	</body>
 </html>
