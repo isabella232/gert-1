@@ -67,7 +67,7 @@ class Program
 		request.Method = "GET";
 
 		try {
-			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
+			request.GetResponse ();
 			Assert.Fail ("#C1");
 		} catch (WebException ex) {
 			HttpWebResponse response = (HttpWebResponse) ex.Response;
