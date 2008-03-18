@@ -8,17 +8,17 @@ using System.Resources;
 class Program
 {
 	[STAThread]
-	static int Main ()
+	static void Main ()
 	{
 		AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler (CurrentDomain_AssemblyResolve);
 
 		try {
 			Assembly a = Assembly.GetExecutingAssembly ();
 			a.GetSatelliteAssembly (new CultureInfo ("ja-JP"), new Version ("3.0"));
-			return 1;
+			Assert.Fail ("#A1");
 		} catch (FileNotFoundException) {
-			if (_AssemblyResolves.Count != 1)
-				return 2;
+			Assert.AreEqual (1, _AssemblyResolves.Count, "#A2");
+			Assert.AreEqual ("test.resources, Version=3.0, Culture=ja-JP, PublicKeyToken=null", _AssemblyResolves [0], "#A3");
 		}
 
 		_AssemblyResolves.Clear ();
@@ -26,17 +26,11 @@ class Program
 		try {
 			ResourceManager rm = new ResourceManager ("foo", Assembly.GetExecutingAssembly ());
 			rm.GetObject ("bar", new CultureInfo ("fr-FR"));
-
-			return 3;
+			Assert.Fail ("#B1");
 		} catch (MissingManifestResourceException) {
-#if NET_2_0
-			if (_AssemblyResolves.Count != 0)
-				return 4;
-#else
-			if (_AssemblyResolves.Count != 2)
-				return 4;
-#endif
-			return 0;
+			Assert.AreEqual (2, _AssemblyResolves.Count, "#B2");
+			Assert.AreEqual ("test.resources, Version=0.0.0.0, Culture=fr-FR, PublicKeyToken=null", _AssemblyResolves [0], "#B3");
+			Assert.AreEqual ("test.resources, Version=0.0.0.0, Culture=fr, PublicKeyToken=null", _AssemblyResolves [1], "#B4");
 		}
 	}
 
