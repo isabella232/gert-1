@@ -26,19 +26,6 @@ class Program
 			cmd.ExecuteNonQuery ();
 
 			cmd = new OdbcCommand (insert_data, conn);
-
-			OdbcParameter paramId = cmd.CreateParameter();
-			paramId.ParameterName = "id";
-			paramId.DbType = DbType.Int32;
-			paramId.Value = 5;
-			cmd.Parameters.Add (paramId);
-
-			OdbcParameter paramName = cmd.CreateParameter ();
-			paramName.ParameterName = "name";
-			paramName.DbType = DbType.String;
-			paramName.Value = "aфbиcсdвeуfа";
-			cmd.Parameters.Add (paramName);
-
 			cmd.ExecuteNonQuery ();
 			cmd.Dispose ();
 
@@ -130,10 +117,10 @@ class Program
 		CREATE TABLE bug364430
 		(
 			id int,
-			name nvarchar (20)
+			name nvarchar (31)
 		)";
 
 	const string select_data = @"SELECT * FROM bug364430";
-	const string insert_data = @"INSERT INTO bug364430 (id, name) VALUES (?, ?)";
+	const string insert_data = @"INSERT INTO bug364430 (id, name) VALUES (5, N'aфbиcсdвeуfа')";
 	const string delete_data = @"DELETE FROM bug364430";
 }
