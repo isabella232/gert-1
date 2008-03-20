@@ -41,7 +41,11 @@ class Program
 			reader = cmd.ExecuteReader ();
 			Assert.IsFalse (reader.Read (), "#A1");
 			Assert.IsNull (paramTown.Value, "#A2");
+#if NET_2_0
 			Assert.AreEqual ("whatever", paramCountry.Value, "#A3");
+#else
+			Assert.IsNull (paramCountry.Value, "#A3");
+#endif
 			reader.Close ();
 			Assert.AreEqual ("aфbиcсdвeуfа", paramTown.Value, "#A4");
 			Assert.AreEqual ("aфв", paramCountry.Value, "#A5");
