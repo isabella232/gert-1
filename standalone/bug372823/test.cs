@@ -32,11 +32,36 @@ class Program
 			cmd = new OdbcCommand (select_data, conn);
 			reader = cmd.ExecuteReader ();
 			Assert.IsTrue (reader.Read (), "#A1");
-			Assert.AreEqual (2, reader.FieldCount, "#A2");
-			Assert.AreEqual ("int", reader.GetDataTypeName (0), "#A3");
-			Assert.AreEqual ("nvarchar", reader.GetDataTypeName (1), "#A4");
-			Assert.AreEqual (5, reader.GetValue (0), "#A5");
-			Assert.AreEqual ("aфbиcсdвeуfа", reader.GetValue (1), "#A6");
+			Assert.AreEqual (7, reader.FieldCount, "#A2");
+
+			Assert.AreEqual ("int", reader.GetDataTypeName (0), "#B1");
+			Assert.AreEqual ("id", reader.GetName (0), "#B2");
+			Assert.AreEqual (5, reader.GetValue (0), "#B3");
+
+			Assert.AreEqual ("nvarchar", reader.GetDataTypeName (1), "#C1");
+			Assert.AreEqual ("nфme", reader.GetName (1), "#C2");
+			Assert.AreEqual ("aфbиcсdвeуfа", reader.GetValue (1), "#C3");
+
+			Assert.AreEqual ("varchar", reader.GetDataTypeName (2), "#D1");
+			Assert.AreEqual ("firstName", reader.GetName (2), "#D2");
+			Assert.AreEqual ("Eric", reader.GetValue (2), "#D3");
+
+			Assert.AreEqual ("nchar", reader.GetDataTypeName (3), "#E1");
+			Assert.AreEqual ("initials", reader.GetName (3), "#E2");
+			Assert.AreEqual ("вeуf ", reader.GetValue (3), "#E3");
+
+			Assert.AreEqual ("ntext", reader.GetDataTypeName (4), "#F1");
+			Assert.AreEqual ("comment", reader.GetName (4), "#F2");
+			Assert.AreEqual ("some long text that does not meфn a thing", reader.GetValue (4), "#F3");
+
+			Assert.AreEqual ("char", reader.GetDataTypeName (5), "#G1");
+			Assert.AreEqual ("town", reader.GetName (5), "#G2");
+			Assert.AreEqual ("Hasselt   ", reader.GetValue (5), "#G3");
+
+			Assert.AreEqual ("text", reader.GetDataTypeName (6), "#H1");
+			Assert.AreEqual ("description", reader.GetName (6), "#H2");
+			Assert.AreEqual ("more text without any meaning", reader.GetValue (6), "#H3");
+
 			reader.Close ();
 			cmd.Dispose ();
 		} finally {
@@ -117,10 +142,18 @@ class Program
 		CREATE TABLE bug372823
 		(
 			id int,
-			name nvarchar (12)
+			nфme nvarchar (12),
+			firstName varchar (10),
+			initials nchar (5),
+			comment ntext,
+			town char (10),
+			description text
 		)";
 
 	const string select_data = @"SELECT * FROM bug372823";
-	const string insert_data = @"INSERT INTO bug372823 (id, name) VALUES (5, N'aфbиcсdвeуfа')";
+	const string insert_data = @"INSERT INTO bug372823 (id, nфme, firstName, " +
+		"initials, comment, town, description) VALUES (5, N'aфbиcсdвeуfа', " +
+		"'Eric', N'вeуf', N'some long text that does not meфn a thing', " +
+		"'Hasselt', 'more text without any meaning')";
 	const string delete_data = @"DELETE FROM bug372823";
 }

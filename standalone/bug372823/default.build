@@ -13,7 +13,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+		<csc target="exe" codepage="65001" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
