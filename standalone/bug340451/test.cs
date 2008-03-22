@@ -18,7 +18,26 @@ class Program
 		string dbName = Environment.GetEnvironmentVariable ("MONO_TESTS_SQL_DB");
 		Assert.AreEqual (dbName, conn.Database, "#1");
 
-		conn.Dispose ();
+		OdbcCommand cmd = new OdbcCommand ("CREATE DATABASE aфbиc", conn);
+		cmd.ExecuteNonQuery ();
+		cmd.Dispose ();
+
+		try {
+			Assert.AreEqual (dbName, conn.Database, "#2");
+			conn.ChangeDatabase ("aфbиc");
+			Assert.AreEqual ("aфbиc", conn.Database, "#3");
+			conn.ChangeDatabase (dbName);
+			Assert.AreEqual (dbName, conn.Database, "#4");
+		} finally {
+			conn.Dispose ();
+
+			conn = new OdbcConnection (CreateOdbcConnectionString ());
+			conn.Open ();
+
+			cmd = new OdbcCommand ("DROP DATABASE aфbиc", conn);
+			cmd.ExecuteNonQuery ();
+			cmd.Dispose ();
+		}
 	}
 
 	static string CreateOdbcConnectionString ()
