@@ -1,7 +1,7 @@
-<project name="bug345627" default="rebuild">
+<project name="bug347191" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
-	<property name="frameworks" value="mono-1.0,mono-2.0,net-2.0,net-3.5" />
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0,net-3.5" />
 
 	<target name="clean" depends="init">
 		<delete>
@@ -98,6 +98,11 @@
 		<fail unless="${file::exists('out')}">#B1</fail>
 		<loadfile file="out" property="out" />
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'No assemblies found that match: DoesNotExist') != -1}">#B2</fail>
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 0') != -1}">#B3</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#B4</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'No assemblies found matching: DoesNotExist') != -1}">#B2</fail>
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#B3</fail>
@@ -133,6 +138,10 @@
 		<fail unless="${file::exists('out')}">#B7</fail>
 		<loadfile file="out" property="out" />
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 0') != -1}">#B8</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#B9</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'No assemblies found matching: Lang') == -1}">#B8</fail>
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#B9</fail>
@@ -158,8 +167,18 @@
 		<loadfile file="out" property="out" />
 		<property name="list.dir" value="${path::combine(project::get-base-directory(),'list')}" />
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' successfully added to the cache') != -1}">#C3</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C4</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en-US/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C5</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' successfully added to the cache') == -1}">#C6</fail>
+				<fail unless="${string::index-of(out, 'Failed to add assembly ' + path::combine(list.dir, '../tempV1/en-US/DoesNotExist.dll') + ' to the cache: 	The system cannot find the file specified.') != -1}">#C7</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/fr-FR/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C8</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 5') != -1}">#C9</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed = 4') != -1}">#C10</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 1') != -1}">#C11</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
-				<echo></echo>
 				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' successfully added to the cache') != -1}">#C3</fail>
 				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C4</fail>
 				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, '../tempV1/en-US/Lang.resources.dll') + ' successfully added to the cache') != -1}">#C5</fail>
@@ -171,7 +190,6 @@
 				<fail unless="${string::index-of(out, 'Number of failures = 1') != -1}">#C11</fail>
 			</when>
 			<otherwise>
-				<echo>${'Installed ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' into the cache'}</echo>
 				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/Lang.dll') + ' into the gac') != -1}">#C3</fail>
 				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/en/Lang.resources.dll') + ' into the gac') != -1}">#C4</fail>
 				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, '../tempV1/en-US/Lang.resources.dll') + ' into the gac') != -1}">#C5</fail>
@@ -417,7 +435,14 @@
 		<fail unless="${int::parse(gacutil.exitcode) == 1}">#E1</fail>
 		<fail unless="${file::exists('out')}">#E2</fail>
 		<loadfile file="out" property="out" />
-		<fail unless="${string::index-of(out, 'Failed to open assemblies list file ' + path::get-full-path('doesnotexist') + '.') != -1}">#E3</fail>
+		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Fail to open assemblies list file ' + path::get-full-path('doesnotexist') + '.') != -1}">#E3</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Failed to open assemblies list file ' + path::get-full-path('doesnotexist') + '.') != -1}">#E3</fail>
+			</otherwise>
+		</choose>
 
 		<delete file="out" />
 		
@@ -438,7 +463,15 @@
 		<fail unless="${int::parse(gacutil.exitcode) == 1}">#E6</fail>
 		<fail unless="${file::exists('out')}">#E7</fail>
 		<loadfile file="out" property="out" />
-		<fail unless="${string::index-of(out, 'Failed to open assemblies list file doesnotexist.') != -1}">#E8</fail>
+		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Fail to open assemblies list file doesnotexist.') != -1}">#E8</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Failed to open assemblies list file doesnotexist.') != -1}">#E8</fail>
+			</otherwise>
+		</choose>
+
 	</target>
 
 	<target name="run-test6" depends="clean,compile">
@@ -541,6 +574,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G2</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G3</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 1') != -1}">#G4</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G5</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G6</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#G4</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G5</fail>
@@ -595,6 +633,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G15</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G16</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 3') != -1}">#G17</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G18</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G19</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 3') != -1}">#G17</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G18</fail>
@@ -625,6 +668,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G21</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.0.0, Culture=fr-FR, PublicKeyToken=8dcf90ebde298dcd') != -1}">#G22</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 1') != -1}">#G23</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G24</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#G25</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#G23</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#G24</fail>
@@ -664,6 +712,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=en, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H4</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=en, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H5</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 2') != -1}">#H6</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H7</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H8</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 2') != -1}">#H6</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H7</fail>
@@ -693,6 +746,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H16</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H17</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 4') != -1}">#H18</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H19</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H20</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 4') != -1}">#H18</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H19</fail>
@@ -724,6 +782,11 @@
 		<fail unless="${file::exists('out')}">#H21</fail>
 		<loadfile file="out" property="out" />
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 0') != -1}">#H22</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H23</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H24</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 0') != -1}">#H22</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H23</fail>
@@ -747,6 +810,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H26</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang.resources, Version=1.0.2.0, Culture=fr-FR, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H27</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 1') != -1}">#H28</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H29</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H30</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 1') != -1}">#H28</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H29</fail>
@@ -772,6 +840,11 @@
 		<fail unless="${string::index-of(out, 'Assembly: Lang, Version=1.0.2.0, Culture=neutral, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H34</fail>
 		<fail unless="${string::index-of(out, 'Uninstalled: Lang, Version=1.0.2.0, Culture=neutral, PublicKeyToken=3b47cdc4d234fdfa') != -1}">#H35</fail>
 		<choose>
+			<when test="${framework::get-target-framework()=='net-1.1'}">
+				<fail unless="${string::index-of(out, 'Number of items uninstalled = 2') != -1}">#H36</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H37</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed') == -1}">#H38</fail>
+			</when>
 			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
 				<fail unless="${string::index-of(out, 'Number of assemblies uninstalled = 2') != -1}">#H36</fail>
 				<fail unless="${string::index-of(out, 'Number of failures = 0') != -1}">#H37</fail>
