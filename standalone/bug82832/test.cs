@@ -44,9 +44,7 @@ class Program
 			Verify4 ();
 			Verify5 ();
 			Verify7 ();
-#if !MONO
 			Verify8 ();
-#endif
 			Verify9 ();
 			Verify10 ();
 			Verify11 ();
@@ -101,9 +99,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#A13");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#A14");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#A15");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#A16");
-#endif
 		Assert.AreEqual ("DDD", fvi.LegalCopyright, "#A17");
 		Assert.AreEqual ("EEE", fvi.LegalTrademarks, "#A18");
 		Assert.AreEqual ("lib1.dll", fvi.OriginalFilename, "#A19");
@@ -150,9 +146,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#B13");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#B14");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#B15");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#B16");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#B17");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#B18");
 		Assert.AreEqual ("lib2.dll", fvi.OriginalFilename, "#B19");
@@ -239,9 +233,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#C13");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#C14");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#C15");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#C16");
-#endif
 		Assert.AreEqual ("Copyright 2007 Mono Hackers", fvi.LegalCopyright, "#C17");
 		Assert.AreEqual ("Registered to All", fvi.LegalTrademarks, "#C18");
 		Assert.AreEqual ("lib3.dll", fvi.OriginalFilename, "#C19");
@@ -379,9 +371,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#D13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#D14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#D15a");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#D16a");
-#endif
 		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D17a");
 		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D18a");
 		Assert.AreEqual ("lib4a.dll", fvi.OriginalFilename, "#D19a");
@@ -413,9 +403,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#D13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#D14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#D15b");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#D16b");
-#endif
 		Assert.AreEqual ("CCC", fvi.LegalCopyright, "#D17b");
 		Assert.AreEqual ("DDD", fvi.LegalTrademarks, "#D18b");
 		Assert.AreEqual ("lib4b.dll", fvi.OriginalFilename, "#D19b");
@@ -462,9 +450,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#E13");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#E14");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#E15");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#E16");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#E17");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#E18");
 		Assert.AreEqual ("lib5.dll", fvi.OriginalFilename, "#E19");
@@ -539,9 +525,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#G13");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#G14");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#G15");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#G16");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#G17");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#G18");
 		Assert.AreEqual ("lib7.dll", fvi.OriginalFilename, "#G19");
@@ -555,7 +539,6 @@ class Program
 		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#G27");
 	}
 
-#if !MONO
 	static void Verify8 ()
 	{
 		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
@@ -622,7 +605,6 @@ class Program
 		Assert.AreEqual ("N 4,2,1,7", fvi.ProductVersion, "#H26b");
 		Assert.AreEqual ("N SPEC", fvi.SpecialBuild, "#H27b");
 	}
-#endif
 
 	static void Verify9 ()
 	{
@@ -1600,9 +1582,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#P13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#P14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#P15a");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#P16a");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#P17a");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P18a");
 		Assert.AreEqual ("lib16a.dll", fvi.OriginalFilename, "#P19a");
@@ -1634,9 +1614,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#P13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#P14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#P15b");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#P16b");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#P17b");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P18b");
 		Assert.AreEqual ("lib16b.dll", fvi.OriginalFilename, "#P19b");
@@ -1668,9 +1646,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#P13c");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#P14c");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#P15c");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#P16c");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#P17c");
 		Assert.AreEqual (" ", fvi.LegalTrademarks, "#P18c");
 		Assert.AreEqual ("lib16c.dll", fvi.OriginalFilename, "#P19c");
