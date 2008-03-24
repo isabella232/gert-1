@@ -1,0 +1,42 @@
+<project name="bug372780" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-2.0,mono-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="lib.XmlSerializers.dll" />
+				<include name="test.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" output="lib.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="lib.cs" />
+			</sources>
+		</csc>
+		<exec program="${framework::get-tool-path('sgen.exe')}" managed="strict">
+			<arg file="lib.dll" />
+		</exec>
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="lib.dll" />
+				<include name="lib.XmlSerializers.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<setenv name="MONO_XMLSERIALIZER_THS" value="0,nofallback" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
