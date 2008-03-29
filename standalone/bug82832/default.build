@@ -68,6 +68,7 @@
 				<include name="lib17a.dll" />
 				<include name="lib17b.dll" />
 				<include name="lib18.dll" />
+				<include name="lib19.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -132,6 +133,11 @@
 		<csc target="library" define="${csc.defines}" output="lib17b.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="libb.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib19.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="libc.cs" />
 			</sources>
 		</csc>
 	</target>

@@ -55,6 +55,7 @@ class Program
 			Verify16 ();
 			Verify17 (args [1]);
 			Verify18 ();
+			Verify19 ();
 			break;
 		default:
 			Console.Error.WriteLine ("Unsupported action.");
@@ -1677,7 +1678,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#Q13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#Q14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#Q15a");
-		Assert.AreEqual ("Dutch (Belgium)", fvi.Language, "#Q16a");
+		Assert.AreEqual ("Language Neutral", fvi.Language, "#Q16a");
 		Assert.AreEqual ("liba copyright", fvi.LegalCopyright, "#Q17a");
 		Assert.AreEqual ("liba trademark", fvi.LegalTrademarks, "#Q18a");
 		Assert.AreEqual ("lib17a.dll", fvi.OriginalFilename, "#Q19a");
@@ -1869,5 +1870,40 @@ class Program
 		Assert.AreEqual (string.Empty, fvi.ProductVersion, "#R26a");
 		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#R27a");
 #endif
+	}
+
+	static void Verify19 ()
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib19.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual ("libc description", fvi.Comments, "#S1a");
+		Assert.AreEqual ("libc company", fvi.CompanyName, "#S2a");
+		Assert.AreEqual (3, fvi.FileBuildPart, "#S3a");
+		Assert.AreEqual ("libc title", fvi.FileDescription, "#S4a");
+		Assert.AreEqual (3, fvi.FileMajorPart, "#S5a");
+		Assert.AreEqual (2, fvi.FileMinorPart, "#S6a");
+		Assert.AreEqual (assemblyFile, fvi.FileName, "#S7a");
+		Assert.AreEqual (2, fvi.FilePrivatePart, "#S8a");
+		Assert.AreEqual ("3.2.3.2", fvi.FileVersion, "#S9a");
+		Assert.AreEqual ("lib19.dll", fvi.InternalName, "#S10a");
+		Assert.IsFalse (fvi.IsDebug, "#S11a");
+		Assert.IsFalse (fvi.IsPatched, "#S12a");
+		Assert.IsFalse (fvi.IsPreRelease, "#S13a");
+		Assert.IsFalse (fvi.IsPrivateBuild, "#S14a");
+		Assert.IsFalse (fvi.IsSpecialBuild, "#S15a");
+		Assert.AreEqual ("Language Neutral", fvi.Language, "#S16a");
+		Assert.AreEqual ("libc copyright", fvi.LegalCopyright, "#S17a");
+		Assert.AreEqual ("libc trademark", fvi.LegalTrademarks, "#S18a");
+		Assert.AreEqual ("lib19.dll", fvi.OriginalFilename, "#S19a");
+		Assert.AreEqual (string.Empty, fvi.PrivateBuild, "#S20a");
+		Assert.AreEqual (4, fvi.ProductBuildPart, "#S21a");
+		Assert.AreEqual (7, fvi.ProductMajorPart, "#S22a");
+		Assert.AreEqual (2, fvi.ProductMinorPart, "#S23a");
+		Assert.AreEqual ("libc", fvi.ProductName, "#S24a");
+		Assert.AreEqual (3, fvi.ProductPrivatePart, "#S25a");
+		Assert.AreEqual ("7.2.4.3", fvi.ProductVersion, "#S26a");
+		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#S27a");
 	}
 }
