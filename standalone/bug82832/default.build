@@ -69,6 +69,7 @@
 				<include name="lib17b.dll" />
 				<include name="lib18.dll" />
 				<include name="lib19.dll" />
+				<include name="lib20.dll" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
@@ -138,6 +139,14 @@
 		<csc target="library" define="${csc.defines}" output="lib19.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="libc.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="lib20.dll" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="1607" />
+			</nowarn>
+			<sources>
+				<include name="libd.cs" />
 			</sources>
 		</csc>
 	</target>

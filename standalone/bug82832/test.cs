@@ -56,6 +56,7 @@ class Program
 			Verify17 (args [1]);
 			Verify18 ();
 			Verify19 ();
+			Verify20 ();
 			break;
 		default:
 			Console.Error.WriteLine ("Unsupported action.");
@@ -1905,5 +1906,40 @@ class Program
 		Assert.AreEqual (3, fvi.ProductPrivatePart, "#S25a");
 		Assert.AreEqual ("7.2.4.3", fvi.ProductVersion, "#S26a");
 		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#S27a");
+	}
+
+	static void Verify20 ()
+	{
+		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
+			"lib20.dll");
+
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (assemblyFile);
+		Assert.AreEqual (" ", fvi.Comments, "#T1a");
+		Assert.AreEqual (" ", fvi.CompanyName, "#T2a");
+		Assert.AreEqual (3, fvi.FileBuildPart, "#T3a");
+		Assert.AreEqual (" ", fvi.FileDescription, "#T4a");
+		Assert.AreEqual (1, fvi.FileMajorPart, "#T5a");
+		Assert.AreEqual (2, fvi.FileMinorPart, "#T6a");
+		Assert.AreEqual (assemblyFile, fvi.FileName, "#T7a");
+		Assert.AreEqual (0, fvi.FilePrivatePart, "#T8a");
+		Assert.AreEqual ("1.2.3.0", fvi.FileVersion, "#T9a");
+		Assert.AreEqual ("lib20.dll", fvi.InternalName, "#T10a");
+		Assert.IsFalse (fvi.IsDebug, "#T11a");
+		Assert.IsFalse (fvi.IsPatched, "#T12a");
+		Assert.IsFalse (fvi.IsPreRelease, "#T13a");
+		Assert.IsFalse (fvi.IsPrivateBuild, "#T14a");
+		Assert.IsFalse (fvi.IsSpecialBuild, "#T15a");
+		Assert.AreEqual ("Language Neutral", fvi.Language, "#T16a");
+		Assert.AreEqual (" ", fvi.LegalCopyright, "#T17a");
+		Assert.AreEqual (" ", fvi.LegalTrademarks, "#T18a");
+		Assert.AreEqual ("lib20.dll", fvi.OriginalFilename, "#T19a");
+		Assert.AreEqual (string.Empty, fvi.PrivateBuild, "#T20a");
+		Assert.AreEqual (3, fvi.ProductBuildPart, "#T21a");
+		Assert.AreEqual (1, fvi.ProductMajorPart, "#T22a");
+		Assert.AreEqual (2, fvi.ProductMinorPart, "#T23a");
+		Assert.AreEqual (" ", fvi.ProductName, "#T24a");
+		Assert.AreEqual (0, fvi.ProductPrivatePart, "#T25a");
+		Assert.AreEqual ("1.2.3.0", fvi.ProductVersion, "#T26a");
+		Assert.AreEqual (string.Empty, fvi.SpecialBuild, "#T27a");
 	}
 }
