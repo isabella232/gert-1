@@ -48,9 +48,7 @@ class Program
 			Verify9 ();
 			Verify10 ();
 			Verify11 ();
-#if !MONO
 			Verify12 ();
-#endif
 			Verify13 ();
 			Verify14 ();
 			Verify15 ();
@@ -945,7 +943,6 @@ class Program
 		ab.Save ("lib12b.dll");
 	}
 
-#if !MONO
 	static void Verify12 ()
 	{
 		string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory,
@@ -1012,7 +1009,6 @@ class Program
 		Assert.AreEqual ("N 4,2,1,7", fvi.ProductVersion, "#L26b");
 		Assert.AreEqual ("N SPEC", fvi.SpecialBuild, "#L27b");
 	}
-#endif
 
 	static void Create13a ()
 	{
@@ -1681,9 +1677,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#Q13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#Q14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#Q15a");
-#if !MONO
-		Assert.AreEqual ("Language Neutral", fvi.Language, "#Q16a");
-#endif
+		Assert.AreEqual ("Dutch (Belgium)", fvi.Language, "#Q16a");
 		Assert.AreEqual ("liba copyright", fvi.LegalCopyright, "#Q17a");
 		Assert.AreEqual ("liba trademark", fvi.LegalTrademarks, "#Q18a");
 		Assert.AreEqual ("lib17a.dll", fvi.OriginalFilename, "#Q19a");
@@ -1726,9 +1720,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#Q13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#Q14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#Q15b");
-#if !MONO
 		Assert.AreEqual ("Language Neutral", fvi.Language, "#Q16b");
-#endif
 		Assert.AreEqual (" ", fvi.LegalCopyright, "#Q17b");
 		switch (clr_version) {
 		case "2.0":

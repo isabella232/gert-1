@@ -10,6 +10,7 @@ using System.Reflection;
 [assembly: AssemblyCopyright ("liba copyright")]
 [assembly: AssemblyCompany ("liba company")]
 [assembly: AssemblyTrademark ("liba trademark")]
+[assembly: AssemblyCulture ("nl-BE")]
 
 class Foo
 {
