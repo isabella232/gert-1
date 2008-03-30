@@ -1,0 +1,71 @@
+<project name="bug375222" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="libtestcase.so" />
+				<include name="testcase.dll" />
+				<include name="testcase.exp" />
+				<include name="testcase.lib" />
+				<include name="testcase.o" />
+				<include name="testcase.obj" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<choose>
+			<when test="${platform::is-unix()}">
+				<exec program="gcc">
+					<arg value="-c" />
+					<arg value="-fPIC" />
+					<arg file="testcase.c" />
+					<arg value="-o" />
+					<arg file="testcase.o" />
+				</exec>
+
+				<exec program="gcc">
+					<arg value="-shared" />
+					<arg value="-o" />
+					<arg value="libtestcase.so" />
+					<arg file="testcase.o" />
+				</exec>
+			</when>
+			<otherwise>
+				<cl outputdir=".">
+					<defines>
+						<define name="_WINDLL" />
+						<define name="_MBCS" />
+					</defines>
+					<sources>
+						<include name="testcase.c" />
+					</sources>
+				</cl>
+				<link output="testcase.dll" moduledefinition="testcase.def">
+					<sources>
+						<include name="testcase.obj" />
+					</sources>
+					<arg value="/DLL" />
+					<arg value="/MACHINE:X86" />
+				</link>
+			</otherwise>
+		</choose>
+		
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
