@@ -7,8 +7,14 @@ class Program
 {
 	static void Main ()
 	{
-		string url = "ftp://users.telenet.be/mono/" +
-			Guid.NewGuid ().ToString ("N") + ".tmp";
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_FTP") == null)
+			return;
+
+		string site = Environment.GetEnvironmentVariable ("MONO_TESTS_FTP_URI");
+		if (site == null)
+			throw CreateEnvironmentVariableNotSetException ("MONO_TESTS_FTP_URI");
+
+		string url = site + Guid.NewGuid ().ToString ("N") + ".tmp";
 
 		UploadFile (url);
 		DownloadFile (url);
@@ -45,9 +51,7 @@ class Program
 		FtpWebResponse resp = (FtpWebResponse) req.GetResponse ();
 		Stream rs = resp.GetResponseStream ();
 		using (StreamReader sr = new StreamReader (rs, Encoding.UTF8, true)) {
-			string content = sr.ReadToEnd ();
-			if (content != expected)
-				throw new Exception ("#1:" + content);
+			Assert.AreEqual (expected, sr.ReadToEnd (), "#A");
 		}
 		rs.Close ();
 	}
@@ -60,8 +64,7 @@ class Program
 
 		FtpWebResponse resp = (FtpWebResponse) req.GetResponse ();
 		try {
-			if (resp.StatusCode != FtpStatusCode.FileActionOK)
-				throw new Exception ("#1:" +resp.StatusCode.ToString ());
+			Assert.AreEqual (FtpStatusCode.FileActionOK, resp.StatusCode, "#B");
 		} finally {
 			resp.Close ();
 		}
@@ -75,13 +78,11 @@ class Program
 
 		try {
 			req.GetResponse ();
-			throw new Exception ("#1");
+			Assert.Fail ("#C1");
 		} catch (WebException ex) {
 			FtpWebResponse resp = ex.Response as FtpWebResponse;
-			if (resp == null)
-				throw new Exception ("#2");
-			if (resp.StatusCode != FtpStatusCode.ActionNotTakenFileUnavailable)
-				throw new Exception ("#3:" + resp.StatusCode);
+			Assert.IsNotNull (resp, "#C2");
+			Assert.AreEqual (FtpStatusCode.ActionNotTakenFileUnavailable, resp.StatusCode, "#C3");
 		}
 	}
 
