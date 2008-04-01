@@ -1,0 +1,38 @@
+PREREQUISITES
+=============
+
+The following software is required to run the test suite:
+
+* NAnt 		0.86 Beta 1 or higher
+* NAntContrib 	0.86 Beta 2 or higher
+
+
+STANDALONE tests
+================
+
+The following environment variables control which tests are executed:
+
+	* MONO_TESTS_FTP: when set, FTP-related tests are executed.
+
+FTP
+===
+
+Configure the FTP-related tests using these environment variables:
+
+	* MONO_TESTS_FTP_URI
+
+	  An FTP-scheme URI pointing to a writable FTP site.
+
+	  Example:
+
+	  ftp://users.telenet.be/mono/
+
+	* MONO_TESTS_FTP_USER
+
+	  User name for connecting to FTP site.
+
+	* MONO_TESTS_FTP_PWD
+
+	  Password of user identified by MONO_TESTS_FTP_USER environment
+	  variable.
+
