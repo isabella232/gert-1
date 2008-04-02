@@ -29,7 +29,7 @@ class Program
 
 				StreamReader sr = new StreamReader (response.GetResponseStream ());
 				string result = sr.ReadToEnd ();
-				if (result.IndexOf ("HttpParseException") == -1) {
+				if (result.IndexOf ("ParseException") == -1) {
 					Console.WriteLine (result);
 					return 3;
 				}
