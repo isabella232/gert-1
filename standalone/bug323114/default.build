@@ -49,6 +49,15 @@
 		<exec program="server.exe" managed="true" pidproperty="server.pid" spawn="true" />
 		<sleep milliseconds="1000" />
 		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
+		<exec program="client.exe" managed="true" />
 		<kill pid="${server.pid}" />
 		<sleep milliseconds="200" />
 		<exec program="test.exe" managed="true" />
