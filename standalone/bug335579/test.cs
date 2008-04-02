@@ -45,7 +45,9 @@ class Program
 
 		ThreadIdentity i;
 		i = new ThreadIdentity (t.GetHashCode (), t.ManagedThreadId);
-		_threads.Add (i);
+		lock (_threads) {
+			_threads.Add (i);
+		}
 	}
 }
 
