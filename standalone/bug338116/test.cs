@@ -17,7 +17,7 @@ class Program
 			"web");
 
 		string binDir = args [0];
-		if (!IsCaseSensitive)
+		if (!IsRunningOnUnix)
 			binDir = args [0].ToLower (CultureInfo.InvariantCulture);
 		string fullBinDir = Path.Combine (webDir, binDir);
 
@@ -33,7 +33,7 @@ class Program
 				Console.WriteLine (result);
 				return 1;
 			}
-			if (!IsCaseSensitive && privateBinPaths.Length != 1) {
+			if (privateBinPaths.Length != 1) {
 				Console.WriteLine (result);
 				return 2;
 			}
@@ -90,15 +90,10 @@ class Program
 		return false;
 	}
 
-	static bool IsCaseSensitive
+	static bool IsRunningOnUnix
 	{
-		get {
-			return (Environment.GetEnvironmentVariable ("MONO_IOMAP") == null || !IsRunningOnUnix);
-		}
-	}
-
-	static bool IsRunningOnUnix {
-		get {
+		get
+		{
 			PlatformID pid = Environment.OSVersion.Platform;
 #if NET_2_0
 			return pid == PlatformID.Unix;
