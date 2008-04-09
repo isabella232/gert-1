@@ -1,7 +1,7 @@
 <project name="bug348076" default="rebuild">
 	<include buildfile="../../build/common.build" />
 	
-	<property name="frameworks" value="mono-1.0,mono-2.0,mono-3.5,net-2.0,net-3.5" />
+	<property name="frameworks" value="mono-2.0,mono-3.5,net-2.0,net-3.5" />
 
 	<target name="clean">
 		<delete>
