@@ -2,6 +2,7 @@
 	<script language="C#" prefix="x509">
 		<references basedir="${framework::get-assembly-directory('mono-1.0')}">
 			<include name="Mono.Security.dll" />
+			<include name="System.dll" />
 		</references>
 		<imports>
 			<import namespace="System.Net" />
@@ -118,6 +119,9 @@
 	</target>
 
 	<target name="add-trust" depends="compile">
+		<mkdir dir="crl" />
+		<mkdir dir="chain" />
+
 		<!-- download root CA certificate -->
 		<get src="http://secure.globalsign.net/cacert/ct_root.crt" dest="ct_root.crt" />
 
@@ -157,8 +161,7 @@
 		<mkdir dir="crl" />
 		<get src="http://www.public-trust.com/cgi-bin/CRL/2018/cdp.crl" dest="crl/cdp.crl" />
 		<get src="http://crl.microsoft.com/pki/mscorp/crl/mswww(3).crl" dest="crl/mswww(3).crl" />
-		<get src="http://crl.microsoft.com/pki/mscorp/crl/Microsoft%20Secure%20Server%20Authority(3).crl"
-			 dest="crl/Microsoft Secure Server Authority(3).crl" />
+		<get src="http://mscrl.microsoft.com/pki/mscorp/crl/Microsoft%20Secure%20Server%20Authority(4).crl" dest="crl/Microsoft Secure Server Authority(4).crl" />
 
 		<!-- add CRLs to CA store -->
 		<foreach item="File" property="crl.file">
@@ -178,7 +181,7 @@
 		</foreach>
 	</target>
 
-	<target name="remove-trust">
+	<target name="remove-trust" depends="init">
 		<!-- remove root CA certificate from Trust store -->
 		<exec program="${sdk.dir}/certmgr.exe" managed="true">
 			<arg value="-del" />
@@ -235,8 +238,6 @@
 	</target>
 
 	<target name="run-test" depends="compile">
-		<mkdir dir="crl" />
-		<mkdir dir="chain" />
 		<copy todir=".">
 			<fileset basedir="${framework::get-assembly-directory(framework::get-target-framework())}">
 				<include name="Mono.Security.dll" />
