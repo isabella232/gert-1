@@ -1,0 +1,126 @@
+<project name="bug376238" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0,net-3.5" />
+
+	<target name="clean" depends="init">
+		<delete>
+			<fileset>
+				<include name="tempV1/**" />
+				<include name="tempV2/**" />
+				<include name="test.exe" />
+				<include name="out" />
+			</fileset>
+		</delete>
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Lang" culture="neutral" />
+				<assembly name="Locale" culture="neutral" />
+			</assemblies>
+		</gac-uninstall>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="tempV1" />
+		<csc target="library" define="${csc.defines},V1" output="tempV1/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Lang">
+				<include name="Lang.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines},V1" keyfile="lang.snk" delaysign="true" output="tempV1/Locale.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Locale">
+				<include name="Locale.cs" />
+			</sources>
+		</csc>
+		<mkdir dir="tempV2" />
+		<csc target="library" define="${csc.defines},V2" keyfile="locale.snk" output="tempV2/Lang.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Lang">
+				<include name="Lang.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines},V2" keyfile="locale.snk" delaysign="true" output="tempV2/Locale.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Locale">
+				<include name="Locale.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test">
+		<call target="run-test1" />
+		<call target="run-test2" />
+		<call target="run-test3" />
+	</target>
+
+	<target name="run-test1" depends="clean,compile">
+		<property name="gacutil.exitcode" value="0" />
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" resultproperty="gacutil.exitcode" failonerror="false">
+			<arg value="/nologo" />
+			<arg value="/i" />
+			<arg file="tempV1/Lang.dll" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#A1</fail>
+		<fail unless="${file::exists('out')}">#A2</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Failure adding assembly to the cache: Attempt to install an assembly without a strong name') != -1}">#A3</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::get-full-path('tempV1/Lang.dll') + ' to the cache: Attempt to install an assembly without a strong name') != -1}">#A3</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test2" depends="clean,compile">
+		<property name="gacutil.exitcode" value="0" />
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" resultproperty="gacutil.exitcode" failonerror="false">
+			<arg value="/nologo" />
+			<arg value="/i" />
+			<arg file="tempV1/Locale.dll" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#B1</fail>
+		<fail unless="${file::exists('out')}">#B2</fail>
+		<loadfile file="out" property="out" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<fail unless="${string::index-of(out, 'Failure adding assembly to the cache: Strong name signature could not be verified.  Was the assembly built delay-signed?') != -1}">#B3</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::get-full-path('tempV1/Locale.dll') + ' to the cache: Strong name cannot be verified for delay-signed assembly') != -1}">#B3</fail>
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="run-test3" depends="clean,compile">
+		<exec program="${framework::get-tool-path('gacutil.exe')}" managed="true" output="out" failonerror="false" resultproperty="gacutil.exitcode">
+			<arg value="/il" />
+			<arg value="install-list" />
+		</exec>
+		<fail unless="${int::parse(gacutil.exitcode) == 1}">#C1</fail>
+		<fail unless="${file::exists('out')}">#C2</fail>
+		<loadfile file="out" property="out" />
+		<property name="list.dir" value="${project::get-base-directory()}" />
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework())=='net'}">
+				<echo>${path::combine(list.dir, 'tempV1/Lang.dll')}</echo>
+				<fail unless="${string::index-of(out, 'Failed to add assembly ' + path::combine(list.dir, 'tempV1/Lang.dll') + ' to the cache: Attempt to install an assembly without a strong name') != -1}">#C3</fail>
+				<fail unless="${string::index-of(out, 'Failed to add assembly ' + path::combine(list.dir, 'tempV1/Locale.dll') + ' to the cache: Strong name signature could not be verified.  Was the assembly built delay-signed?') != -1}">#C4</fail>
+				<fail unless="${string::index-of(out, 'Assembly ' + path::combine(list.dir, 'tempV2/Lang.dll') + ' successfully added to the cache') != -1}">#C5</fail>
+				<fail unless="${string::index-of(out, 'Failed to add assembly ' + path::combine(list.dir, 'tempV2/Locale.dll') + ' to the cache: Strong name signature could not be verified.  Was the assembly built delay-signed?') != -1}">#C6</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies processed = 4') != -1}">#C7</fail>
+				<fail unless="${string::index-of(out, 'Number of assemblies installed = 1') != -1}">#C8</fail>
+				<fail unless="${string::index-of(out, 'Number of failures = 3') != -1}">#C9</fail>
+			</when>
+			<otherwise>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::combine(list.dir, 'tempV1/Lang.dll') + ' to the cache: Attempt to install an assembly without a strong name') != -1}">#C3</fail>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::combine(list.dir, 'tempV1/Locale.dll') + ' to the cache: Strong name cannot be verified for delay-signed assembly') != -1}">#C4</fail>
+				<fail unless="${string::index-of(out, 'Installed ' + path::combine(list.dir, 'tempV2/Lang.dll') + ' into the gac') != -1}">#C5</fail>
+				<fail unless="${string::index-of(out, 'Failure adding assembly ' + path::combine(list.dir, 'tempV2/Locale.dll') + ' to the cache: Strong name cannot be verified for delay-signed assembly') != -1}">#C6</fail>
+				<fail unless="${string::index-of(out, 'Assemblies processed = 4') != -1}">#C7</fail>
+				<fail unless="${string::index-of(out, 'Assemblies installed = 1') != -1}">#C8</fail>
+				<fail unless="${string::index-of(out, 'Failures = 3') != -1}">#C9</fail>
+			</otherwise>
+		</choose>
+		<delete file="out" />
+	</target>
+</project>
