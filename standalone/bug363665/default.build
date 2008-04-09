@@ -23,7 +23,7 @@
 
 	<target name="compile" depends="init">
 		<mkdir dir="web/bin" />
-		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.dll" warnaserror="true" warninglevel="4">
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.UI.dll" warnaserror="true" warninglevel="4">
 			<sources basedir="web">
 				<include name="*.cs" />
 			</sources>
