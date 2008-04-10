@@ -1,0 +1,67 @@
+<project name="bug377934" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="server/bin/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="server/bin" />
+		<csc target="library" define="${csc.defines}" output="server/bin/Mono.Web.Services.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="server">
+				<include name="*.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.dll" />
+				<include name="System.Web.Services.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<mkdir dir="web/controls" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="server" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="client.pid">
+			<arg value="--root" />
+			<arg dir="client" />
+			<arg value="--port" />
+			<arg value="8082" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<kill pid="${client.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>

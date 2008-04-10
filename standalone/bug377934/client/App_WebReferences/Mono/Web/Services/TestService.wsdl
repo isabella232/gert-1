@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s0="http://tempuri.org/" name="MyTestService" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SayHello">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="name" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SayHelloResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="SayHelloResult" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dateTime" type="xs:dateTime" />
+    </xs:schema>
+  </types>
+  <message name="SayHelloSoapIn">
+    <part name="parameters" element="s0:SayHello" />
+  </message>
+  <message name="SayHelloSoapOut">
+    <part name="parameters" element="s0:SayHelloResponse" />
+  </message>
+  <message name="SayHelloHttpGetIn">
+    <part name="name" type="s:string" />
+  </message>
+  <message name="SayHelloHttpGetOut">
+    <part name="Body" element="s0:dateTime" />
+  </message>
+  <message name="SayHelloHttpPostIn">
+    <part name="name" type="s:string" />
+  </message>
+  <message name="SayHelloHttpPostOut">
+    <part name="Body" element="s0:dateTime" />
+  </message>
+  <portType name="MyTestServiceSoap">
+    <operation name="SayHello">
+      <input message="s0:SayHelloSoapIn" />
+      <output message="s0:SayHelloSoapOut" />
+    </operation>
+  </portType>
+  <portType name="MyTestServiceSoap12">
+    <operation name="SayHello">
+      <input message="s0:SayHelloSoapIn" />
+      <output message="s0:SayHelloSoapOut" />
+    </operation>
+  </portType>
+  <portType name="MyTestServiceHttpGet">
+    <operation name="SayHello">
+      <input message="s0:SayHelloHttpGetIn" />
+      <output message="s0:SayHelloHttpGetOut" />
+    </operation>
+  </portType>
+  <portType name="MyTestServiceHttpPost">
+    <operation name="SayHello">
+      <input message="s0:SayHelloHttpPostIn" />
+      <output message="s0:SayHelloHttpPostOut" />
+    </operation>
+  </portType>
+  <binding name="MyTestServiceSoap" type="s0:MyTestServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="SayHello">
+      <soap:operation soapAction="http://tempuri.org/SayHello" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="MyTestServiceSoap12" type="s0:MyTestServiceSoap12">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="SayHello">
+      <soap12:operation soapAction="http://tempuri.org/SayHello" style="document" />
+      <input>
+        <soap12:body use="literal" />
+      </input>
+      <output>
+        <soap12:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="MyTestServiceHttpGet" type="s0:MyTestServiceHttpGet">
+    <http:binding verb="GET" />
+    <operation name="SayHello">
+      <http:operation location="/SayHello" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="MyTestServiceHttpPost" type="s0:MyTestServiceHttpPost">
+    <http:binding verb="POST" />
+    <operation name="SayHello">
+      <http:operation location="/SayHello" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MyTestService">
+    <port name="MyTestServiceSoap" binding="s0:MyTestServiceSoap">
+      <soap:address location="http://localhost:8081/MyTestService.asmx" />
+    </port>
+    <port name="MyTestServiceSoap12" binding="s0:MyTestServiceSoap12">
+      <soap12:address location="http://localhost:8081/MyTestService.asmx" />
+    </port>
+    <port name="MyTestServiceHttpGet" binding="s0:MyTestServiceHttpGet">
+      <http:address location="http://localhost:8081/MyTestService.asmx" />
+    </port>
+    <port name="MyTestServiceHttpPost" binding="s0:MyTestServiceHttpPost">
+      <http:address location="http://localhost:8081/MyTestService.asmx" />
+    </port>
+  </service>
+</definitions>
