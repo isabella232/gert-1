@@ -34,9 +34,7 @@
 	</target>
 
 	<target name="run-test" depends="compile">
-		<exec program="test.exe" output="out" managed="true">
-			<arg file="mylib.dll" />
-		</exec>
+		<exec program="test.exe" output="out" managed="true" />
 		<fail if="${file::exists('out')}" />
 	</target>
 </project>

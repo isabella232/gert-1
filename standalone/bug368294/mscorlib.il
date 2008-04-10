@@ -9,7 +9,7 @@
 .subsystem 0x0003
 .corflags 0x00000001
 
-.class public auto ansi beforefieldinit System.Object extends [mscorlib] System.Object
+.class public auto ansi beforefieldinit System.Object
 {
 	.method public hidebysig specialname rtspecialname instance void .ctor() cil managed
 	{
