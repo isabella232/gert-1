@@ -44,7 +44,6 @@
 	</target>
 
 	<target name="run-test" depends="compile">
-		<mkdir dir="web/controls" />
 		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
 			<arg value="--root" />
 			<arg dir="server" />
