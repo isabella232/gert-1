@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+			<s:element name="SayHello">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SayHelloResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="SayHelloResult" type="s:dateTime" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="SayHelloSoapIn">
+		<wsdl:part name="parameters" element="tns:SayHello" />
+	</wsdl:message>
+	<wsdl:message name="SayHelloSoapOut">
+		<wsdl:part name="parameters" element="tns:SayHelloResponse" />
+	</wsdl:message>
+	<wsdl:portType name="MyTestServiceSoap">
+		<wsdl:operation name="SayHello">
+			<wsdl:input message="tns:SayHelloSoapIn" />
+			<wsdl:output message="tns:SayHelloSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MyTestServiceSoap" type="tns:MyTestServiceSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<wsdl:operation name="SayHello">
+			<soap:operation soapAction="http://tempuri.org/SayHello" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MyTestService">
+		<documentation xmlns="http://schemas.xmlsoap.org/wsdl/" />
+		<wsdl:port name="MyTestServiceSoap" binding="tns:MyTestServiceSoap">
+			<soap:address location="http://localhost:8081/MyTestService.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
