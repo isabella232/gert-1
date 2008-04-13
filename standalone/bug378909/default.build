@@ -1,0 +1,90 @@
+<project name="bug378909" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-1.0-init">
+		<property name="xsp.package" value="xsp" />
+		<property name="verify.frameworks" value="mono-1.0,net-1.1" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="xsp.package" value="xsp" />
+		<property name="verify.frameworks" value="mono-1.0,net-1.1" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+		<property name="verify.frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="web/bin/**" />
+				<include name="MyTestService.wsdl" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="web/bin" />
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.Services.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="web">
+				<include name="*.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.dll" />
+				<include name="System.Web.Services.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<get src="http://localhost:8081/MyTestService.asmx?WSDL" dest="MyTestService.wsdl" />
+		<call target="verify" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="compile-verify" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="System.Xml.dll" />
+			</references>
+		</csc>
+	</target>
+	
+	<target name="verify">
+		<property name="original.verify.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="verify.framework" item="String" in="${verify.frameworks}" delim=",">
+			<if test="${framework::exists(verify.framework)}">
+				<property name="nant.settings.currentframework" value="${verify.framework}" />
+				<delete file="test.exe" />
+				<call target="compile-verify" />
+				<exec program="test.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.verify.targetframework}" />
+	</target>
+</project>
