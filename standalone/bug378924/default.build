@@ -1,0 +1,32 @@
+<project name="bug378924	" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-2.0,moonlight-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<if test="${framework::exists('moonlight-2.0')}">
+			<exec program="test.exe" managed="true" output="out">
+				<arg value="${path::combine(framework::get-assembly-directory('moonlight-2.0'),'mscorlib.dll')}" />
+			</exec>
+			<fail if="${file::exists('out')}" />
+		</if>
+	</target>
+</project>
