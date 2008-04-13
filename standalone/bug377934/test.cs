@@ -9,10 +9,6 @@ class Program
 {
 	static int Main ()
 	{
-		string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-		string webDir = Path.Combine (baseDir, "web");
-		string controlsDir = Path.Combine (webDir, "controls");
-
 		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8082/Default.aspx");
 		request.Method = "GET";
 
