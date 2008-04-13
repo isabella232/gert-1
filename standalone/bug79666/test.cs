@@ -1,11 +1,11 @@
 using System;
 
 [Foo (StringValues = new string [] { "foo", "bar", "baz" }, ObjectValues = new object [] { 1, 'A', "B" }, EnumValues = new EnumType [] { EnumType.X, EnumType.Y }, Types = new Type [] { typeof (int), typeof (Type) })]
-class Test
+class Program
 {
-	public static int Main ()
+	static int Main ()
 	{
-		FooAttribute foo = (FooAttribute) typeof (Test)
+		FooAttribute foo = (FooAttribute) typeof (Program)
 			.GetCustomAttributes (false) [0];
 		if (foo.StringValues [0] != "foo"
 			|| foo.StringValues [1] != "bar"
@@ -27,7 +27,7 @@ enum EnumType
 {
 	X,
 	Y
-};
+}
 
 class FooAttribute : Attribute
 {
@@ -40,4 +40,3 @@ class FooAttribute : Attribute
 	{
 	}
 }
-
