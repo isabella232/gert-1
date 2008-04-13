@@ -14,6 +14,9 @@
 
 	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0649" />
+			</nowarn>
 			<sources>
 				<include name="test.cs" />
 			</sources>
