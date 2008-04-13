@@ -1,0 +1,53 @@
+<project name="bug377904" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-1.0-init">
+		<property name="xsp.package" value="xsp" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="xsp.package" value="xsp" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
