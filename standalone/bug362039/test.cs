@@ -12,7 +12,10 @@ class Program
 		Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 		Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
+		CookieContainer cookies = new CookieContainer ();
+
 		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Default.aspx");
+		request.CookieContainer = cookies;
 		request.Method = "GET";
 
 		try {
@@ -22,6 +25,37 @@ class Program
 
 				Assert.IsTrue (result.IndexOf ("Classifieds Online") != -1, "#A1:" + result);
 				Assert.IsTrue (result.IndexOf ("Browse all Categories") != -1, "#A2:" + result);
+				Assert.IsTrue (result.IndexOf ("Site Administration") == -1, "#A3:" + result);
+				Assert.IsTrue (result.IndexOf ("Post an Ad") != -1, "#A4:" + result);
+				Assert.IsTrue (result.IndexOf ("My Ads & Profile") != -1, "#A5:" + result);
+				Assert.IsTrue (result.IndexOf ("My Profile") == -1, "#A6:" + result);
+			}
+			response.Close ();
+		} catch (WebException ex) {
+			HttpWebResponse response = (HttpWebResponse) ex.Response;
+			if (response != null) {
+				using (StreamReader sr = new StreamReader (response.GetResponseStream ())) {
+					Console.WriteLine (sr.ReadToEnd ());
+				}
+			}
+			return 1;
+		}
+
+		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/ManagePhotos.aspx");
+		request.CookieContainer = cookies;
+		request.Method = "GET";
+
+		try {
+			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
+			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
+				string result = sr.ReadToEnd ();
+
+				Assert.IsTrue (result.IndexOf ("Classifieds Online") != -1, "#B1:" + result);
+				Assert.IsTrue (result.IndexOf ("Browse all Categories") != -1, "#B2:" + result);
+				Assert.IsTrue (result.IndexOf ("Site Administration") != -1, "#B3:" + result);
+				Assert.IsTrue (result.IndexOf ("Post an Ad") != -1, "#B4:" + result);
+				Assert.IsTrue (result.IndexOf ("My Ads & Profile") != -1, "#B5:" + result);
+				Assert.IsTrue (result.IndexOf ("My Profile") == -1, "#B6:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {
@@ -38,20 +72,22 @@ class Program
 		request.Method = "GET";
 
 		try {
-			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
+			request.GetResponse ();
+			Assert.Fail ("#C1");
+		} catch (WebException ex) {
+			Assert.AreEqual (typeof (WebException), ex.GetType (), "#C2");
+			Assert.IsNull (ex.InnerException, "#C3");
+			Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#C4");
+
+			HttpWebResponse response = (HttpWebResponse) ex.Response;
+			Assert.IsNotNull (response, "#C5");
+			Assert.AreEqual (HttpStatusCode.Found, response.StatusCode, "#C6");
+
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
-				Assert.IsTrue (result.IndexOf ("No photos have been uploaded for this Ad.") != -1, "#B1:" + result);
+				Assert.IsTrue (result.IndexOf ("<title>Object moved</title>") != -1, "#C7:" + result);
 			}
 			response.Close ();
-		} catch (WebException ex) {
-			HttpWebResponse response = (HttpWebResponse) ex.Response;
-			if (response != null) {
-				using (StreamReader sr = new StreamReader (response.GetResponseStream ())) {
-					Console.WriteLine (sr.ReadToEnd ());
-				}
-			}
-			return 3;
 		}
 
 		return 0;
