@@ -27,7 +27,7 @@
 	<target name="run-test" depends="compile">
 		<choose>
 			<when test="${platform::is-unix()}">
-				<property name="eventlog.dir" value="path::combine(path::get-temp-path(),'bug82436')}" />
+				<property name="eventlog.dir" value="${path::combine(path::get-temp-path(),'bug82436')}" />
 				<property name="eventlog.type" value="local:${eventlog.dir}" />
 			</when>
 			<otherwise>

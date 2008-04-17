@@ -243,27 +243,3 @@ class Tester
 
 	private ArrayList _entriesWritten;
 }
-
-class Assert
-{
-	public static void AreEqual (string a, string b, string msg)
-	{
-		if (a != b)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected {0} but was {1}: {2}", a, b, msg));
-	}
-
-	public static void AreEqual (int a, int b, string msg)
-	{
-		if (a != b)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected {0} but was {1}: {2}", a, b, msg));
-	}
-
-	public static void AreEqual (short a, short b, string msg)
-	{
-		if (a != b)
-			throw new Exception (string.Format (CultureInfo.InvariantCulture,
-				"Expected {0} but was {1}: {2}", a, b, msg));
-	}
-}
