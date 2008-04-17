@@ -5,10 +5,8 @@ using System.Windows.Forms;
 
 class Program
 {
-	static int Main ()
+	static void Main ()
 	{
-		if (Application.ProductVersion != "5.6.7.8")
-			return 1;
-		return 0;
+		Assert.AreEqual ("5.6.7.8", Application.ProductVersion, "#1");
 	}
 }

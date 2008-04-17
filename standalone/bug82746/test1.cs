@@ -7,10 +7,8 @@ using System.Windows.Forms;
 
 class Program
 {
-	static int Main ()
+	static void Main ()
 	{
-		if (Application.ProductVersion != "1.2.3.4")
-			return 1;
-		return 0;
+		Assert.AreEqual ("1.2.3.4", Application.ProductVersion, "#1");
 	}
 }
