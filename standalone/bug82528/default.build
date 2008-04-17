@@ -66,8 +66,8 @@
 				<fail if="${string::index-of(out,'error CS0407: ''void Program.ParseB(string, System.IFormatProvider)'' has the wrong return type') == -1}">#4</fail>
 			</when>
 			<when test="${compiler.version == 'MCS'}">
-				<fail if="${string::index-of(out,'error CS0407: The method `bool Program.ParseA(string, System.IFormatProvider)'' return type does not match delegate `object ParseFun(string, System.IFormatProvider)'' return type') == -1}">#3</fail>
-				<fail if="${string::index-of(out,'error CS0407: The method `void Program.ParseB(string, System.IFormatProvider)'' return type does not match delegate `object ParseFun(string, System.IFormatProvider)'' return type') == -1}">#4</fail>
+				<fail if="${string::index-of(out,'error CS0407: A method or delegate `bool Program.ParseA(string, System.IFormatProvider)'' return type does not match delegate `object ParseFun(string, System.IFormatProvider)'' return type') == -1}">#3</fail>
+				<fail if="${string::index-of(out,'error CS0407: A method or delegate `void Program.ParseB(string, System.IFormatProvider)'' return type does not match delegate `object ParseFun(string, System.IFormatProvider)'' return type') == -1}">#4</fail>
 			</when>
 		</choose>
 	</target>
