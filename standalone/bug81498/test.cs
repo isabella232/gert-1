@@ -17,9 +17,7 @@ class Program
 			type.GetCustomAttributes (true);
 			return 2;
 		} catch (FileNotFoundException ex) {
-#if MONO
-			if (ex.FileName != "libb, Version=0.0.0.0, Culture=neutral")
-#elif NET_2_0
+#if NET_2_0 || MONO
 			if (ex.FileName != "libb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
 #else
 			if (ex.FileName != "libb")
