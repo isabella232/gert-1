@@ -14,16 +14,11 @@ class Program
 			if (r.Name == "child1")
 				break;
 		}
+
 		XPathDocument d = new XPathDocument (r);
 		XPathNavigator n = d.CreateNavigator ();
-#if MONO
-		string expected = string.Format ("<nest1>{0}  <nest2>hello!</nest2>{0}</nest1>",
-			Environment.NewLine);
-#else
-		// https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=287614
 		string expected = string.Format ("<child1>{0}  <nest1>{0}    <nest2>hello!</nest2>{0}  </nest1>{0}</child1>{0}<child2 />{0}<child3 />",
 			Environment.NewLine);
-#endif
 
 		if (n.OuterXml != expected) {
 			Console.WriteLine ("Expected result:");
