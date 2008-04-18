@@ -10,7 +10,7 @@ class Program
 	[STAThread]
 	static int Main ()
 	{
-		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
+		if (Environment.GetEnvironmentVariable ("MONO_TESTS_ODBC") == null)
 			return 0;
 
 		Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
@@ -52,15 +52,6 @@ class Program
 		csb.Add ("Server", serverName);
 #else
 		sb.AppendFormat ("Server={0};", serverName);
-#endif
-
-		string dbName = Environment.GetEnvironmentVariable ("MONO_TESTS_SQL_DB");
-		if (dbName == null)
-			throw CreateEnvironmentVariableNotSetException ("MONO_TESTS_SQL_DB");
-#if NET_2_0
-		csb.Add ("Database", dbName);
-#else
-		sb.AppendFormat ("Database={0};", dbName);
 #endif
 
 		string userName = Environment.GetEnvironmentVariable ("MONO_TESTS_SQL_USER");
