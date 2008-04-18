@@ -627,9 +627,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#I13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#I14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#I15a");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#I16a");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#I17a");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#I18a");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#I19a");
@@ -661,9 +659,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#I13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#I14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#I15b");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#I16b");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#I17b");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#I18b");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#I19b");
@@ -698,9 +694,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#J13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#J14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#J15a");
-#if !MONO
 		Assert.AreEqual ("English (United States)", fvi.Language, "#J16a");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#J17a");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#J18a");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#J19a");
@@ -732,9 +726,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#J13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#J14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#J15b");
-#if !MONO
 		Assert.AreEqual ("English (United States)", fvi.Language, "#J16b");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#J17b");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#J18b");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#J19b");
@@ -1101,9 +1093,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#M13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#M14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#M15a");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#M16a");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#M17a");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#M18a");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#M19a");
@@ -1135,9 +1125,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#M13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#M14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#M15b");
-#if !MONO
 		Assert.AreEqual ("Invariant Language (Invariant Country)", fvi.Language, "#M16b");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#M17b");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#M18b");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#M19b");
@@ -1240,9 +1228,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#N13a");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#N14a");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#N15a");
-#if !MONO
 		Assert.AreEqual ("English (United States)", fvi.Language, "#N16a");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#N17a");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#N18a");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#N19a");
@@ -1274,9 +1260,7 @@ class Program
 		Assert.IsFalse (fvi.IsPreRelease, "#N13b");
 		Assert.IsFalse (fvi.IsPrivateBuild, "#N14b");
 		Assert.IsFalse (fvi.IsSpecialBuild, "#N15b");
-#if !MONO
 		Assert.AreEqual ("English (United States)", fvi.Language, "#N16b");
-#endif
 		Assert.AreEqual (string.Empty, fvi.LegalCopyright, "#N17b");
 		Assert.AreEqual (string.Empty, fvi.LegalTrademarks, "#N18b");
 		Assert.AreEqual (string.Empty, fvi.OriginalFilename, "#N19b");
