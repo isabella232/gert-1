@@ -13,6 +13,8 @@ STANDALONE tests
 The following environment variables control which tests are executed:
 
 	* MONO_TESTS_FTP: when set, FTP-related tests are executed.
+	* MONO_TESTS_ODBC: when set, ODBC-related tests are executed.
+	* MONO_TESTS_SQL: when set, SQL Server (Native Client)-related tests are executed.
 
 FTP
 ===
@@ -35,4 +37,35 @@ Configure the FTP-related tests using these environment variables:
 
 	  Password of user identified by MONO_TESTS_FTP_USER environment
 	  variable.
+
+SSL
+===
+
+Configure the SSL-related tests using these environment variables:
+
+	* MONO_TESTS_HOSTNAME
+
+	  Fully qualified domain name of the machine running the tests.
+
+	  Example:
+
+	  brother.home.be
+
+ODBC/SQL
+========
+
+Configure the ODBC/SQL-related tests using these environment variables:
+
+	* MONO_TESTS_SQL_HOST
+
+	  Name of the machine running SQL Server.
+
+	  Example:
+
+	  mother.home.be
+
+	* MONO_TESTS_SQL_USER
+
+	  The user ID to be used when connecting to SQL Server.
+
 
