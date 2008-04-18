@@ -60,12 +60,22 @@ Configure the ODBC/SQL-related tests using these environment variables:
 
 	  Name of the machine running SQL Server.
 
-	  Example:
-
-	  mother.home.be
-
 	* MONO_TESTS_SQL_USER
 
 	  The user ID to be used when connecting to SQL Server.
 
+	* MONO_TESTS_SQL_PWD
+	
+	  The password for the SQL Server account.
 
+	* MONO_TESTS_SQL_DB
+	
+	  The name of the database associated with the connection.
+
+Notes:
+
+	* Most tests actually create a Mono database, and drop it when the test has
+	  finished executing.
+
+	* Currently, the ODBC related tests assume that SQL Server is used as
+	  backend database.
