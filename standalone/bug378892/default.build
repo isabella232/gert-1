@@ -24,22 +24,22 @@
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}">#1</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#2</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#3</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#4</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#5</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#6</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#7</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#8</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#9</fail>
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('out')}">#10</fail>
 	</target>
 </project>
