@@ -22,6 +22,24 @@
 
 	<target name="run-test" depends="compile">
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
 	</target>
 </project>

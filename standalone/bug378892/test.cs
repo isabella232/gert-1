@@ -6,9 +6,9 @@ class Program
 {
 	static int Main (string [] args)
 	{
-		for (int i = 0; i < 1000; ++i) {
+		for (int i = 0; i < 250; ++i) {
 			Thread thread = new Thread (new ThreadStart (Test));
-			if (i != 500)
+			if (i != 200)
 				thread.CurrentCulture = new CultureInfo ("en-CA");
 			thread.Start ();
 		}
