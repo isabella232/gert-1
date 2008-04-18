@@ -5,12 +5,12 @@ class Program
 {
 	static int Main ()
 	{
-		LinkedList<string> ll = new LinkedList<string> ();
-		ll.AddLast ("hello");
-		ll.AddLast (",");
-		ll.AddLast (" ");
-		ll.AddLast ("world");
-		ll.AddLast ("!");
+		List<string> ll = new List<string> ();
+		ll.Add ("hello");
+		ll.Add (",");
+		ll.Add (" ");
+		ll.Add ("world");
+		ll.Add ("!");
 
 		foreach (string s in ll)
 			if (s == null)
