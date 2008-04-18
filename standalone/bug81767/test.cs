@@ -19,9 +19,9 @@ class Program
 			fs.Write (info, 0, info.Length);
 			fs.Write (info, 0, info.Length);
 		}
-		locker = 1;
 
 		using (FileStream fs = File.Open (path, FileMode.Open, FileAccess.ReadWrite, FileShare.Delete)) {
+			locker = 1;
 			byte [] b = new byte [10];
 			UTF8Encoding temp = new UTF8Encoding (true);
 
@@ -29,6 +29,9 @@ class Program
 				temp.GetString (b);
 				Thread.Sleep (1000);
 			}
+			
+			if (!File.Exists (path))
+				throw new Exception ("File should continue to exist until FileStream is closed.");
 		}
 		t.Join ();
 
@@ -43,6 +46,8 @@ class Program
 			Thread.Sleep (100);
 		}
 		File.Delete (path);
+		if (!File.Exists (path))
+			throw new Exception ("File should continue to exist until FileStream is closed.");
 	}
 
 	static byte locker;
