@@ -6,6 +6,7 @@
 	<target name="clean">
 		<delete>
 			<fileset>
+				<include name="file.backup" />
 				<include name="file.txt" />
 				<include name="out" />
 				<include name="test.exe" />
