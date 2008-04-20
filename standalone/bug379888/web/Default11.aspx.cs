@@ -8,7 +8,7 @@ using MonoTest;
 
 public class ConfigPage : System.Web.UI.Page
 {
-	private void Page_Load(object sender, System.EventArgs e)
+	void Page_Load(object sender, System.EventArgs e)
 	{
 		TestConfiguration config1 = (TestConfiguration) ConfigurationSettings.GetConfig ("system.web/MonoTest1");
 		Config1Value.Text = config1.Name;
@@ -22,10 +22,10 @@ public class ConfigPage : System.Web.UI.Page
 		InitializeComponent();
 		base.OnInit(e);
 	}
-		
-	private void InitializeComponent()
+
+	void InitializeComponent()
 	{
-		this.Load += new System.EventHandler(this.Page_Load);
+		Load += new EventHandler(Page_Load);
 	}
 
 	protected Literal Config1Value;
