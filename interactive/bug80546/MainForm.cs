@@ -38,7 +38,7 @@ class MainForm : Form
 		ClientSize = new Size (400, 400);
 		Location = new Point (200, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "bug #80546";
+		Text = "bug #323234";
 		Load += new EventHandler (MainForm_Load);
 	}
 
@@ -205,7 +205,7 @@ public class InstructionsForm : Form
 		ClientSize = new Size (400, 520);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
-		Text = "Instructions - bug #80546";
+		Text = "Instructions - bug #323234";
 	}
 
 	private TextBox _bugDescriptionText1;
