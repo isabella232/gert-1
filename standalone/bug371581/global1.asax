@@ -9,6 +9,7 @@
 
 	void Application_Init (object sender, EventArgs args)
 	{
+		throw new Exception ("Application_Init");
 	}
 	
 	void RewritePath (object sender, EventArgs args)

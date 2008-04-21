@@ -37,7 +37,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "global2.asax"), Path.Combine (webDir, "global.asax"), true);
-		Thread.Sleep (200);
+		Thread.Sleep (1000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Whatever.aspx");
 		request.Method = "GET";
@@ -47,7 +47,7 @@ class Program
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
 
-				Assert.IsTrue (result.IndexOf ("<p>1-ok</p>") != -1, "#B:" + result);
+				Assert.IsTrue (result.IndexOf ("<p>2-ok</p>") != -1, "#B:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {
@@ -61,7 +61,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "global3.asax"), Path.Combine (webDir, "global.asax"), true);
-		Thread.Sleep (200);
+		Thread.Sleep (1000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Whatever.aspx");
 		request.Method = "GET";
