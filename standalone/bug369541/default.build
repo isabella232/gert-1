@@ -39,8 +39,10 @@
 				<include name="bin/Lang.dll" />
 			</assemblies>
 		</gac-install>
-		
+
+		<setenv name="MONO_IOMAP" value="all" />
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
+		<setenv name="MONO_IOMAP" />
 	</target>
 </project>
