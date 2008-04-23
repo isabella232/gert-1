@@ -204,35 +204,3 @@ class Program
 			Name varchar(20),
 		)";
 }
-
-class Person
-{
-#if NET_2_0
-	public Person (string name, long? income)
-#else
-	public Person (string name, long income)
-#endif
-	{
-		_name = name;
-		_income = income;
-	}
-
-	public string Name {
-		get { return _name; }
-	}
-
-#if NET_2_0
-	public long? Income {
-#else
-	public long Income {
-#endif
-		get { return _income; }
-	}
-
-	private readonly string _name;
-#if NET_2_0
-	private readonly long? _income;
-#else
-	private readonly long _income;
-#endif
-}
