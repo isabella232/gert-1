@@ -1,4 +1,4 @@
-<project name="bug362039" default="rebuild">
+<project name="bug380131" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
 	<target name="mono-2.0-init">
