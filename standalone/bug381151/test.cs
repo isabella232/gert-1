@@ -64,56 +64,103 @@ class Program
 		cmd.ExecuteNonQuery ();
 		cmd.Dispose ();
 
-		start = DateTime.Now;
-
-		cmd = new SqlCommand ("waitfor delay '00:00:10'", conn);
-		cmd.CommandTimeout = 2;
-		try {
-			cmd.ExecuteNonQuery ();
-			return 1;
-		} catch (SqlException) {
-		}
-
-		executionTime = DateTime.Now - start;
-		Assert.IsTrue (executionTime.TotalSeconds >= 2, "#A1");
-		Assert.IsTrue (executionTime.TotalSeconds < 4, "#A2");
-
-		start = DateTime.Now;
-
-		SqlDataAdapter dta = new SqlDataAdapter (cmd);
-		try {
-			dta.Fill (new DataSet ());
-			return 2;
-		} catch (SqlException) {
-		}
-
-		executionTime = DateTime.Now - start;
-		Assert.IsTrue (executionTime.TotalSeconds >= 2, "#B1");
-		Assert.IsTrue (executionTime.TotalSeconds < 4, "#B2");
-
-		cmd = new SqlCommand ("SELECT * FROM bug381151", conn);
-		using (SqlDataReader dr = cmd.ExecuteReader ()) {
-			Assert.IsTrue (dr.Read (), "#C1");
-			Assert.AreEqual ("Mono", dr.GetString (0), "#C2");
-			Assert.IsFalse (dr.Read (), "#C3");
-			cmd.Dispose ();
-		}
-
-		conn.Close ();
-
-		start = DateTime.Now;
+		Thread tlock = null;
 
 		try {
-			dta.Fill (new DataSet ());
-			return 3;
-		} catch (SqlException) {
-		}
+			tlock = new Thread (new ThreadStart (TableLock));
+			tlock.Start ();
 
-		executionTime = DateTime.Now - start;
-		Assert.IsTrue (executionTime.TotalSeconds >= 2, "#D1");
-		Assert.IsTrue (executionTime.TotalSeconds < 4, "#D2");
+			Thread.Sleep (100);
+
+			start = DateTime.Now;
+
+			cmd = new SqlCommand ("SELECT * FROM bug381151", conn);
+			cmd.CommandTimeout = 2;
+			try {
+				cmd.ExecuteNonQuery ();
+				return 1;
+			} catch (SqlException) {
+			}
+
+			executionTime = DateTime.Now - start;
+			Assert.IsTrue (executionTime.TotalSeconds >= 2, "#A1");
+			Assert.IsTrue (executionTime.TotalSeconds < 4, "#A2");
+			start = DateTime.Now;
+
+			SqlDataAdapter dta = new SqlDataAdapter (cmd);
+			try {
+				dta.Fill (new DataSet ());
+				return 2;
+			} catch (SqlException) {
+			}
+
+			executionTime = DateTime.Now - start;
+			Assert.IsTrue (executionTime.TotalSeconds >= 2, "#B1");
+			Assert.IsTrue (executionTime.TotalSeconds < 4, "#B2");
+			start = DateTime.Now;
+
+			try {
+				cmd.ExecuteReader ();
+				return 3;
+			} catch (SqlException) {
+			}
+
+			executionTime = DateTime.Now - start;
+			Assert.IsTrue (executionTime.TotalSeconds >= 2, "#C1");
+			Assert.IsTrue (executionTime.TotalSeconds < 4, "#C2");
+			start = DateTime.Now;
+
+			try {
+				cmd.ExecuteNonQuery ();
+				return 3;
+			} catch (SqlException) {
+			}
+
+			executionTime = DateTime.Now - start;
+			Assert.IsTrue (executionTime.TotalSeconds >= 2, "#D1");
+			Assert.IsTrue (executionTime.TotalSeconds < 4, "#D2");
+			start = DateTime.Now;
+
+			tlock.Join ();
+
+			cmd = new SqlCommand ("SELECT * FROM bug381151", conn);
+			cmd.CommandTimeout = 2;
+			using (SqlDataReader dr = cmd.ExecuteReader ()) {
+				Assert.IsTrue (dr.Read (), "#E1");
+				Assert.AreEqual ("Mono", dr.GetString (0), "#E2");
+				Assert.IsFalse (dr.Read (), "#E3");
+				cmd.Dispose ();
+			}
+
+			conn.Close ();
+
+			start = DateTime.Now;
+
+			DataSet ds = new DataSet ();
+			dta.Fill (ds);
+			Assert.AreEqual (1, ds.Tables.Count, "#F1");
+			Assert.AreEqual (1, ds.Tables [0].Rows.Count, "#F2");
+			Assert.AreEqual ("Mono", ds.Tables [0].Rows [0] [0], "#F3");
+		} finally {
+			if (tlock.ThreadState != ThreadState.Stopped)
+				tlock.Join ();
+		}
 
 		return 0;
+	}
+
+	static void TableLock ()
+	{
+		using (SqlConnection conn = new SqlConnection (CreateConnectionString ("Mono"))) {
+			conn.Open ();
+
+			SqlTransaction trans = conn.BeginTransaction (IsolationLevel.Serializable);
+			SqlCommand cmd = new SqlCommand ("UPDATE bug381151 SET Name = Name",
+				trans.Connection, trans);
+			cmd.ExecuteNonQuery ();
+
+			Thread.Sleep (15000);
+		}
 	}
 
 	static string CreateConnectionString (string dbName)
