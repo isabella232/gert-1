@@ -1,0 +1,10 @@
+<%@ Master Language="C#" AutoEventWireup="true" %>
+<%@ Register Src="temptest.ascx" TagName="temptest" TagPrefix="uc1" %>
+
+<html>
+	<body>
+		<p>Master Page Text</p>
+		<uc1:temptest ID="control1" runat="server" />
+		<asp:ContentPlaceHolder ID="cphBody" runat="server" />
+	</body>
+</html>
