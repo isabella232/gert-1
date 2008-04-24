@@ -1,4 +1,4 @@
-<project name="bug81767" default="rebuild">
+<project name="bug381224" default="rebuild">
 	<include buildfile="../../build/common.build" />
 	
 	<property name="frameworks" value="mono-2.0,net-2.0" />
