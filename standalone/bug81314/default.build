@@ -1,4 +1,4 @@
-<project name="bug81314" default="rebuild">
+<project name="bug323994" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
 	<property name="frameworks" value="mono-2.0,net-2.0" />
@@ -16,6 +16,7 @@
 	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
+				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
 			<references>
