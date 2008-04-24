@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 
@@ -8,7 +9,8 @@ namespace TestExecute
 	{
 		protected override void OnLoad (System.EventArgs e)
 		{
-			Console.WriteLine ("Hello from other");
+			string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+			File.Create (Path.Combine (baseDir, "Other.executed")).Close ();
 		}
 	}
 }
