@@ -25,6 +25,7 @@
 		</csc>
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
+				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
 			<references>

@@ -40,103 +40,61 @@ class TinyHost : MarshalByRefObject
 
 		h.Execute ("root.ashx", sw);
 		result = sw.ToString ();
-		if (result.IndexOf ("Hello from ROOT handler") == -1) {
-			Console.WriteLine (result);
-			return 1;
-		}
+		Assert.IsTrue (result.IndexOf ("Hello from ROOT handler") != -1, "#A:" + result);
 
 		sw.GetStringBuilder ().Length = 0;
 		h = CreateHost ();
 		h.Execute (Path.Combine ("whatever", "root.ashx"), sw);
 		result = sw.ToString ();
-#if NET_2_0 || MONO
-		if (result.IndexOf ("Hello from ROOT handler") == -1) {
-			Console.WriteLine (result);
-			return 2;
-		}
+#if NET_2_0
+		Assert.IsTrue (result.IndexOf ("Hello from ROOT handler") != -1, "#B:" + result);
 #else
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 2;
-		}
-		if (result.IndexOf (@"/whatever\root.ashx") == -1) {
-			Console.WriteLine (result);
-			return 2;
-		}
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#B1:" + result);
+		Assert.IsTrue (result.IndexOf (@"/whatever\root.ashx") != -1, "#B2:" + result);
 #endif
 
 		sw.GetStringBuilder ().Length = 0;
 		h = CreateHost ();
 		h.Execute (Path.DirectorySeparatorChar + Path.Combine ("doc", "index.html"), sw);
 		result = sw.ToString ();
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 3;
-		}
-#if NET_2_0 || MONO
-		if (result.IndexOf ("/doc/index.html") == -1) {
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#C1:" + result);
+#if NET_2_0
+		Assert.IsTrue (result.IndexOf ("/doc/index.html") != -1, "#C2:" + result);
 #else
-		if (result.IndexOf (@"/\doc\index.html") == -1) {
+		Assert.IsTrue (result.IndexOf (@"/\doc\index.html") != -1, "#C2:" + result);
 #endif
-			Console.WriteLine (result);
-			return 3;
-		}
 
 		sw.GetStringBuilder ().Length = 0;
 		h = CreateHost ();
 		h.Execute (Path.Combine ("doc", "index.html"), sw);
 		result = sw.ToString ();
-#if NET_2_0 || MONO
-		if (result != "<html><head><title>index</title></head></html>") {
-			Console.WriteLine (result);
-			return 4;
-		}
+#if NET_2_0
+		Assert.AreEqual ("<html><head><title>index</title></head></html>", result, "#D");
 #else
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 4;
-		}
-		if (result.IndexOf (@"/doc\index.html") == -1) {
-			Console.WriteLine (result);
-			return 4;
-		}
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#D1:" + result);
+		Assert.IsTrue (result.IndexOf (@"/doc\index.html") != -1, "#D2:" + result);
 #endif
 
 		sw.GetStringBuilder ().Length = 0;
 		h = CreateHost ();
 		h.Execute (Path.DirectorySeparatorChar + Path.Combine ("doc", "root.ashx"), sw);
 		result = sw.ToString ();
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 5;
-		}
-#if NET_2_0 || MONO
-		if (result.IndexOf ("/doc/root.ashx") == -1) {
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#E1:" + result);
+#if NET_2_0
+		Assert.IsTrue (result.IndexOf ("/doc/root.ashx") != -1, "#E2:" + result);
 #else
-		if (result.IndexOf (@"/\doc\root.ashx") == -1) {
+		Assert.IsTrue (result.IndexOf (@"/\doc\root.ashx") != -1, "#E2:" + result);
 #endif
-			Console.WriteLine (result);
-			return 5;
-		}
 
 		sw.GetStringBuilder ().Length = 0;
 		h = CreateHost ();
 		h.Execute (Path.Combine ("doc", "root.ashx"), sw);
 		result = sw.ToString ();
-#if NET_2_0 || MONO
-		if (result.IndexOf ("Hello from ROOT handler") == -1) {
-			Console.WriteLine (result);
-			return 6;
-		}
+#if NET_2_0
+		Assert.IsTrue (result.IndexOf ("Hello from ROOT handler") != -1, "#F:" + result);
 #else
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 6;
-		}
-		if (result.IndexOf (@"/doc\root.ashx") == -1) {
-			Console.WriteLine (result);
-			return 6;
-		}
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#F1:" + result);
+		Assert.IsTrue (result.IndexOf (@"/doc\root.ashx") != -1, "#F2:" + result);
 #endif
 
 		sw.GetStringBuilder ().Length = 0;
@@ -144,19 +102,10 @@ class TinyHost : MarshalByRefObject
 		h.Execute (Path.Combine ("doc", "subdir.ashx"), sw);
 		result = sw.ToString ();
 #if NET_2_0
-		if (result.IndexOf ("Hello from Subdir handler") == -1) {
-			Console.WriteLine (result);
-			return 7;
-		}
+		Assert.IsTrue (result.IndexOf ("Hello from Subdir handler") != -1, "#G:" + result);
 #else
-		if (result.IndexOf ("The resource cannot be found.") == -1) {
-			Console.WriteLine (result);
-			return 7;
-		}
-		if (result.IndexOf (@"/doc\subdir.ashx") == -1) {
-			Console.WriteLine (result);
-			return 7;
-		}
+		Assert.IsTrue (result.IndexOf ("The resource cannot be found.") != -1, "#G1:" + result);
+		Assert.IsTrue (result.IndexOf (@"/doc\subdir.ashx") != -1, "#G2:" + result);
 #endif
 
 		return 0;
