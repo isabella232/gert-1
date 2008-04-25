@@ -14,6 +14,6 @@ public partial class _Default : System.Web.UI.Page
 	{
 		Mono.Web.Services.MyTestService svc = new Mono.Web.Services.MyTestService ();
 		Label1.Text = svc.SayHello ("Mono").ToString ("dd/MM/yyyy");
-		Label2.Text = TestMDWS.WSCall.GetResult ().ToString ("dd/MM/yyyy");
+		Label2.Text = TestMDWS.WSCall.GetResult ();
 	}
 }
