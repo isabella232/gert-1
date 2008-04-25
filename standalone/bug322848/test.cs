@@ -38,7 +38,7 @@ class TinyHost : MarshalByRefObject
 		Assert.IsTrue (result.IndexOf ("<p>default</p>") != -1, "#2:" + result);
 		Assert.IsTrue (File.Exists (Path.Combine (baseDir, "Default.executed")), "#3");
 		Assert.IsTrue (result.IndexOf ("<p>other</p>") != -1, "#4:" + result);
-#if NET_2_0
+#if NET_2_0 || MONO
 		Assert.IsTrue (File.Exists (Path.Combine (baseDir, "Other.executed")), "#5");
 #else
 		Assert.IsFalse (File.Exists (Path.Combine (baseDir, "Other.executed")), "#5");
