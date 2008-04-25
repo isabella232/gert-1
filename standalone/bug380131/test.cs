@@ -13,7 +13,7 @@ class Program
 		Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
 		CookieContainer cookies = new CookieContainer ();
-
+		/*
 		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Default.aspx");
 		request.CookieContainer = cookies;
 		request.Method = "GET";
@@ -40,8 +40,9 @@ class Program
 			}
 			return 2;
 		}
+		*/
 
-		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/ManagePhotos.aspx");
+		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/ManagePhotos.aspx");
 		request.CookieContainer = cookies;
 		request.Method = "GET";
 
@@ -55,7 +56,8 @@ class Program
 
 			HttpWebResponse response = (HttpWebResponse) ex.Response;
 			Assert.IsNotNull (response, "#B5");
-			Assert.AreEqual (HttpStatusCode.InternalServerError, response.StatusCode, "#B6");
+			/*
+			Assert.AreEqual (HttpStatusCode.InternalServerError, response.StatusCode, "#B6");*/
 
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
@@ -82,7 +84,7 @@ class Program
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
 				Assert.IsTrue (result.IndexOf ("<title>Object moved</title>") != -1, "#C7:" + result);
-				Assert.IsTrue (result.IndexOf ("<a href=\"/login.aspx?ReturnUrl=%2fManagePhotos.aspx\">here</a>") != -1, "#C8:" + result);
+				Assert.IsTrue (result.IndexOf ("<a href=\"/Login.aspx?ReturnUrl=%2fManagePhotos.aspx\">here</a>") != -1, "#C8:" + result);
 			}
 
 			response.Close ();
