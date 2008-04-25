@@ -31,7 +31,7 @@
 				<include name="test.cs" />
 			</sources>
 			<pkg-references>
-				<package name="cecil" />
+				<package name="mono-cecil" />
 			</pkg-references>
 		</csc>
 	</target>
