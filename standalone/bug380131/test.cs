@@ -13,7 +13,7 @@ class Program
 		Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
 		CookieContainer cookies = new CookieContainer ();
-		/*
+
 		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Default.aspx");
 		request.CookieContainer = cookies;
 		request.Method = "GET";
@@ -40,9 +40,8 @@ class Program
 			}
 			return 2;
 		}
-		*/
 
-		HttpWebRequest request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/ManagePhotos.aspx");
+		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/ManagePhotos.aspx");
 		request.CookieContainer = cookies;
 		request.Method = "GET";
 
