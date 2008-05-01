@@ -30,7 +30,7 @@ class TinyHost : MarshalByRefObject
 	static int Main ()
 	{
 		Thread.CurrentThread.CurrentCulture = new CultureInfo ("fr-BE");
-		Thread.CurrentThread.CurrentUICulture = new CultureInfo ("fr-BE");
+		Thread.CurrentThread.CurrentUICulture = new CultureInfo ("de-DE");
 
 		TinyHost h = CreateHost ();
 		StringWriter sw = new StringWriter ();
@@ -40,6 +40,15 @@ class TinyHost : MarshalByRefObject
 			Console.WriteLine (result);
 			return 1;
 		}
+
+		sw.GetStringBuilder ().Length = 0;
+		h.Execute ("WebForm2.aspx", sw);
+		result = sw.ToString ();
+		if (result.IndexOf (">lun.</") == -1) {
+			Console.WriteLine (result);
+			return 2;
+		}
+
 		return 0;
 	}
 }
