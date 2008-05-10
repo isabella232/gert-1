@@ -1,0 +1,103 @@
+<project name="bug388425" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="xsp.package" value="xsp-2" />
+	</target>
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="build/**" />
+				<include name="web/bin/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Mono.Web.Test" />
+			</assemblies>
+		</gac-uninstall>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="build/v1" />
+		<csc target="library" define="${csc.defines};V1" keyfile="test.snk" output="build/v1/Mono.Web.Test.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="lib.cs" />
+			</sources>
+		</csc>
+		<mkdir dir="build/v2" />
+		<csc target="library" define="${csc.defines};V2" keyfile="test.snk" output="build/v2/Mono.Web.Test.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="lib.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="test1" depends="compile">
+		<gac-install>
+			<assemblies basedir="build/v2">
+				<include name="Mono.Web.Test.dll" />
+			</assemblies>
+		</gac-install>
+
+		<mkdir dir="web/bin" />
+		<copy file="build/v1/Mono.Web.Test.dll" todir="web/bin" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<fail if="${file::exists('out')}">#1</fail>
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="test2" depends="compile">
+		<gac-uninstall>
+			<assemblies>
+				<assembly name="Mono.Web.Test" />
+			</assemblies>
+		</gac-uninstall>
+
+		<mkdir dir="web/bin" />
+		<copy file="build/v1/Mono.Web.Test.dll" todir="web/bin" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<fail if="${file::exists('out')}">#2</fail>
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test" depends="test1, test2" />
+</project>
