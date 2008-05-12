@@ -14,8 +14,7 @@ class Program
 			p.StartInfo.Arguments = "fork";
 			p.Start ();
 			p.WaitForExit ();
-			if (p.ExitCode != 666)
-				return 1;
+			Assert.AreEqual (0, p.ExitCode, "exit code");
 		} else if (args.Length == 1) {
 			if (args [0] != "fork") {
 				Process p = new Process ();
@@ -23,16 +22,15 @@ class Program
 				p.StartInfo.Arguments = Path.Combine (basedir, "test.exe") + " fork";
 				p.Start ();
 				p.WaitForExit ();
-				if (p.ExitCode != 666)
-					return 1;
+				Assert.AreEqual (0, p.ExitCode, "exit code");
 			} else {
 				Process p = Process.GetCurrentProcess ();
 				if (p.ProcessName == null)
 					return 1;
-				return 666;
+				return 0;
 			}
 		} else {
-			return 1;
+			return 2;
 		}
 
 		return 0;
