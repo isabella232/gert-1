@@ -1,0 +1,46 @@
+<project name="bug388977" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="VI.Utils.dll" />
+				<include name="VI.Utils.il" />
+				<include name="VimVmomi.dll" />
+				<include name="VimVmomi.il" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<unzip zipfile="il.zip" />
+		<ilasm target="dll" output="VI.Utils.dll">
+			<sources>
+				<include name="VI.Utils.il" />
+			</sources>
+		</ilasm>
+		<ilasm target="dll" output="VimVmomi.dll">
+			<sources>
+				<include name="VimVmomi.il" />
+			</sources>
+		</ilasm>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="VI.Utils.dll" />
+				<include name="VimVmomi.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
