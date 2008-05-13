@@ -13,9 +13,6 @@ class Program
 		Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-US");
 		Thread.CurrentThread.CurrentUICulture = new CultureInfo ("en-US");
 
-		string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-		string webDir = Path.Combine (baseDir, "web");
-
 		TestWebService svc = new TestWebService ();
 		Assert.AreEqual ("Hello World", svc.HelloWorld (), "#A");
 
