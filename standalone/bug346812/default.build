@@ -1,10 +1,11 @@
 <project name="bug346812" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
 	<script language="C#" prefix="x509">
 		<references basedir="${framework::get-assembly-directory('mono-1.0')}">
 			<include name="Mono.Security.dll" />
 		</references>
 		<imports>
-			<import namespace="System.Net" />
 			<import namespace="System.Globalization" />
 			<import namespace="System.IO" />
 			<import namespace="System.Text" />
@@ -51,42 +52,31 @@
 		</code>
 	</script>
 	
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	<target name="mono-1.0-init">
 		<property name="sdk.dir" value="${framework::get-sdk-directory(framework::get-target-framework())}" />
 		<property name="xsp.package" value="xsp" />
 		<property name="certmgr" value="Mono" />
 	</target>
 
-	<target name="mono-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	<target name="mono-2.0-init">
 		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
 		<property name="xsp.package" value="xsp-2" />
 		<property name="certmgr" value="Mono" />
 	</target>
 
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+	<target name="net-1.1-init">
 		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
 		<property name="xsp.package" value="xsp" />
 		<property name="certmgr" value="MS" />
 	</target>
 
-	<target name="net-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	<target name="net-2.0-init">
 		<property name="sdk.dir" value="${framework::get-sdk-directory('mono-1.0')}" />
 		<property name="xsp.package" value="xsp-2" />
 		<property name="certmgr" value="MS" />
 	</target>
 	
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
-
-	<target name="init">
-		<if test="${not target::exists(nant.settings.currentframework)}">
-			<fail>Framework '${nant.settings.currentframework}' is not supported.</fail>
-		</if>
-		<call target="${nant.settings.currentframework}" />
-	</target>
 
 	<target name="clean">
 		<delete>
@@ -98,21 +88,6 @@
 				<include name="test.exe" />
 			</fileset>
 		</delete>
-	</target>
-
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="${nant.settings.currentframework}" />
-				<call target="run-test" />
-				<call target="clean" />
-			</if>
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
 	</target>
 
 	<target name="keygen">
@@ -205,20 +180,6 @@
 		-->
 	</target>
 
-	<target name="xsp">
-		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
-			<arg value="--root" />
-			<arg dir="web" />
-			<arg value="--port" />
-			<arg value="4443" />
-			<arg value="--https" />
-			<arg value="--p12file" />
-			<arg file="localhost.p12" />
-			<arg value="--pkpwd" />
-			<arg value="s3kr3t" />
-		</exec>
-	</target>
-	
 	<target name="run-test" depends="compile">
 		<trycatch>
 			<try>
@@ -249,6 +210,4 @@
 			</finally>
 		</trycatch>
 	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>
