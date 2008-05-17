@@ -75,7 +75,6 @@ class Program
 		using (SqlDataReader dr = cmd.ExecuteReader ()) {
 			Assert.IsTrue (dr.Read (), "#A1");
 			Assert.AreEqual ("Atsushi", dr.GetString (0), "#A2");
-			Console.WriteLine (dr.GetDataTypeName (1));
 			Assert.AreEqual (5554444523L, dr.GetValue (1), "#A3");
 		}
 
