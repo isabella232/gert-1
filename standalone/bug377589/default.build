@@ -1,0 +1,38 @@
+<project name="bug377589" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="client.exe" />
+				<include name="out" />
+				<include name="server.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" output="client.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="client.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" output="server.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="server.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="server.exe" managed="true" pidproperty="server.pid" spawn="true" />
+		<sleep milliseconds="200" />
+		<exec program="client.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="200" />
+	</target>
+</project>
