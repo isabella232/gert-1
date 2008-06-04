@@ -1,0 +1,41 @@
+<project name="bug393406" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="Client.exe" />
+				<include name="out" />
+				<include name="Server.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="Client.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="Client.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.Services.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Server.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="Server.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="Server.exe" managed="true" pidproperty="server.pid" spawn="true" />
+		<sleep milliseconds="500" />
+		<exec program="Client.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="500" />
+	</target>
+</project>
