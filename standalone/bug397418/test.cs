@@ -19,6 +19,8 @@ class Program
 
 				Assert.IsTrue (result.IndexOf ("<span id=\"Label1\">DataSet2</span>") != -1, "#1:" + result);
 				Assert.IsTrue (result.IndexOf ("<span id=\"Label2\">DataSet1</span>") != -1, "#2:" + result);
+				Assert.IsTrue (result.IndexOf ("<span id=\"Label3\">DataSet2</span>") != -1, "#3:" + result);
+				Assert.IsTrue (result.IndexOf ("<span id=\"Label4\">DataSet1</span>") != -1, "#4:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {

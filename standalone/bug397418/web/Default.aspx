@@ -8,6 +8,8 @@
 		<form id="Form1" method="post" runat="server">
 			<asp:Label ID="Label1" runat="server" />
 			<asp:Label ID="Label2" runat="server" />
+			<asp:Label ID="Label3" runat="server" />
+			<asp:Label ID="Label4" runat="server" />
 		</form>
 	</body>
 </html>
