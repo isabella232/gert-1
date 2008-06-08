@@ -1,0 +1,28 @@
+<%@ Master %>
+<script runat="server">
+	void Page_Load (object o, EventArgs e)
+	{
+		SiteMapNode root = SiteMap.RootNode;
+		SiteMapNode cur = SiteMap.CurrentNode;
+		CurPage.Text = (cur != null ? cur.Title : "-- none --");
+
+		Nav.DataSource = SiteMap.RootNode.ChildNodes;
+		Nav.DataBind();
+	}
+</script>
+<html>
+	<body>
+		<p>Current Page: <asp:Literal id="CurPage" runat="server" /></p>
+		<br /><br />
+		<asp:Repeater id="Nav" runat="server">
+			<ItemTemplate>
+				<a href='<%# Eval("Url") %>' runat="server"><%# Eval("Title") %></a><br />
+				<asp:Repeater dataSource='<%# Eval("ChildNodes") %>' runat="server">
+					<ItemTemplate>
+					&nbsp;&nbsp;&nbsp;<a href='<%# Eval("Url") %>' runat="server"><%# Eval("Title") %></a><br />
+					</ItemTemplate>
+				</asp:Repeater>
+			</ItemTemplate>
+		</asp:Repeater>
+	</body>
+</html>
