@@ -37,7 +37,9 @@ class Program
 		for (int i = 0; i < threads.Length; i++) {
 			Thread t = threads [i];
 			t.Join ();
+		}
 
+		for (int i = 0; i < threads.Length; i++) {
 			string file = "started_" + (i + 1).ToString (CultureInfo.InvariantCulture);
 			Assert.IsTrue (File.Exists (file), file);
 		}
