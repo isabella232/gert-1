@@ -58,9 +58,7 @@
 			<arg value="8081" />
 		</exec>
 		<sleep milliseconds="1000" />
-		<exec program="test.exe" managed="true" output="out">
-			<arg value="test1" />
-		</exec>
+		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}">#1</fail>
 		<kill pid="${server.pid}" />
 		<sleep milliseconds="1000" />
