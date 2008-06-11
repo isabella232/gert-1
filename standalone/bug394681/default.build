@@ -18,9 +18,6 @@
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
-			<references>
-				<include name="System.Windows.Forms.dll" />
-			</references>
 		</csc>
 	</target>
 
