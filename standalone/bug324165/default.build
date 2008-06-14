@@ -1,0 +1,48 @@
+<project name="bug324165" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="nunit_Reflection.dll" />
+				<include name="nunit_Reflection.Missing.dll" />
+				<include name="out" />
+				<include name="test.dll" />
+				<include name="TestResult.xml" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="nunit_Reflection.Missing.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="MissingClass.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="nunit_Reflection.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="InheritingClass.cs" />
+			</sources>
+			<references>
+				<include name="nunit_Reflection.Missing.dll" />
+			</references>
+		</csc>
+		<delete file="nunit_Reflection.Missing.dll" />
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="${nant::scan-probing-paths('nunit.framework.dll')}" />
+			</references>
+		</csc>
+	</target>
+	
+	<target name="run-test" depends="compile">
+		<exec program="${nant::scan-probing-paths('nunit-console.exe')}" managed="strict">
+			<arg file="test.dll" />
+		</exec>
+	</target>
+</project>
