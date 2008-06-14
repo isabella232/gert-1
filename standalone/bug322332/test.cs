@@ -25,11 +25,17 @@ class Program
 
 		Type type;
 
-#if !MONO && NET_2_0
-		// https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=351042
-		type = a.GetType ("Bar");
-		Assert.IsNotNull (type, "#C1");
-		Assert.AreEqual ("Bar", type.FullName, "#C2");
+#if NET_2_0
+		if (!IsMono) {
+			// https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=351042
+			type = a.GetType ("Bar");
+			Assert.IsNotNull (type, "#C1");
+			Assert.AreEqual ("Bar", type.FullName, "#C2");
+		} else {
+			type = a.GetType ("Foo+Bar");
+			Assert.IsNotNull (type, "#C1");
+			Assert.AreEqual ("Foo+Bar", type.FullName, "#C2");
+		}
 #else
 		type = a.GetType ("Foo+Bar");
 		Assert.IsNotNull (type, "#C1");
@@ -70,6 +76,12 @@ class Program
 				Assert.Fail ("Unexpected module '" + mod.Name + "'.");
 				break;
 			}
+		}
+	}
+
+	static bool IsMono {
+		get {
+			return (Type.GetType ("System.MonoType", false) != null);
 		}
 	}
 }
