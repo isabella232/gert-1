@@ -1,0 +1,44 @@
+<project name="bug322332" default="rebuild">
+	<include buildfile="../../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="Bar.netmodule" />
+				<include name="Foo.netmodule" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="module" define="${csc.defines}" output="Bar.netmodule" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="bar.cs" />
+			</sources>
+		</csc>
+		<csc target="module" define="${csc.defines}" output="Foo.netmodule" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="foo.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<modules>
+				<include name="Bar.netmodule" />
+				<include name="Foo.netmodule" />
+			</modules>
+		</csc>
+	</target>
+	
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
