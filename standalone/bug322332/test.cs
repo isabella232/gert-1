@@ -10,6 +10,7 @@ class Program
 	static void Main ()
 	{
 		Assembly a = Assembly.GetExecutingAssembly ();
+		object [] attrs;
 
 		AssemblyFileVersionAttribute fv = (AssemblyFileVersionAttribute)
 			Attribute.GetCustomAttribute (a,
@@ -65,12 +66,27 @@ class Program
 			switch (mod.Name.ToLower (CultureInfo.InvariantCulture)) {
 			case "bar.netmodule":
 				Assert.AreEqual ("ModB", cat.Category, "#H2:" + mod.Name);
+				attrs = mod.GetCustomAttributes (true);
+				Assert.AreEqual (1, attrs.Length, "#H3:" + mod.Name);
+				cat = attrs [0] as CategoryAttribute;
+				Assert.IsNotNull (cat, "#H4:" + mod.Name);
+				Assert.AreEqual ("ModB", cat.Category, "#H5:" + mod.Name);
 				break;
 			case "foo.netmodule":
 				Assert.AreEqual ("ModA", cat.Category, "#H2:" + mod.Name);
+				attrs = mod.GetCustomAttributes (true);
+				Assert.AreEqual (1, attrs.Length, "#H3:" + mod.Name);
+				cat = attrs [0] as CategoryAttribute;
+				Assert.IsNotNull (cat, "#H4:" + mod.Name);
+				Assert.AreEqual ("ModA", cat.Category, "#H5:" + mod.Name);
 				break;
 			case "test.exe":
 				Assert.AreEqual ("ModTest", cat.Category, "#H2:" + mod.Name);
+				attrs = mod.GetCustomAttributes (true);
+				Assert.AreEqual (1, attrs.Length, "#H3:" + mod.Name);
+				cat = attrs [0] as CategoryAttribute;
+				Assert.IsNotNull (cat, "#H4:" + mod.Name);
+				Assert.AreEqual ("ModTest", cat.Category, "#H5:" + mod.Name);
 				break;
 			default:
 				Assert.Fail ("Unexpected module '" + mod.Name + "'.");
@@ -79,9 +95,11 @@ class Program
 		}
 	}
 
+#if NET_2_0
 	static bool IsMono {
 		get {
 			return (Type.GetType ("System.MonoType", false) != null);
 		}
 	}
+#endif
 }
