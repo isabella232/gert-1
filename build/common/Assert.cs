@@ -77,4 +77,10 @@ class Assert
 		if (value != null)
 			throw new Exception (msg);
 	}
+
+	public static void AreSame (object x, object y, string msg)
+	{
+		if (!object.ReferenceEquals (x, y))
+			throw new Exception (msg);
+	}
 }
