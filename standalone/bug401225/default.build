@@ -1,0 +1,30 @@
+<project name="bug401225" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="fork" />
+			<arg value="${framework::get-runtime-engine(framework::get-target-framework())}" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
