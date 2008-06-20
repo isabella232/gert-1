@@ -17,7 +17,11 @@ class Program
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
 
+#if MONO
+				Assert.IsTrue (result.IndexOf ("<link href=\"/App_Themes/Default/StyleSheet.css\" type=\"text/css\" rel=\"stylesheet\" />") != -1, "#1:" + result);
+#else
 				Assert.IsTrue (result.IndexOf ("<link href=\"App_Themes/Default/StyleSheet.css\" type=\"text/css\" rel=\"stylesheet\" />") != -1, "#1:" + result);
+#endif
 				Assert.IsTrue (result.IndexOf ("bug #397187") != -1, "#2:" + result);
 			}
 			response.Close ();
