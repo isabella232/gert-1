@@ -19,36 +19,24 @@ class Program
 		watcher.Deleted += new FileSystemEventHandler (Deleted);
 		watcher.Changed += new FileSystemEventHandler (Changed);
 		watcher.Renamed += new RenamedEventHandler (Renamed);
-		watcher.EnableRaisingEvents = true;
-
-		FileSystemEventArgs fileArgs;
-		RenamedEventArgs renamedArgs;
 
 		File.Create (Path.Combine (watch_dir, "tmp")).Close ();
+
+		watcher.EnableRaisingEvents = true;
+		Thread.Sleep (200);
+
 		File.Move (Path.Combine (watch_dir, "tmp"), Path.Combine (watch_dir, "tmp2"));
-		File.Delete (Path.Combine (watch_dir, "tmp2"));
+		Thread.Sleep (200);
 
-		Assert.AreEqual (3, _events.Count, "#A1");
+		Assert.AreEqual (1, _events.Count, "#A");
 
-		fileArgs = _events [0] as FileSystemEventArgs;
-		Assert.IsNotNull (fileArgs, "#B1");
-		Assert.AreEqual (WatcherChangeTypes.Created, fileArgs.ChangeType, "#B2");
-		Assert.AreEqual (Path.Combine (watch_dir, "tmp"), fileArgs.FullPath, "#B3");
-		Assert.AreEqual ("tmp", fileArgs.Name, "#B4");
-
-		renamedArgs = _events [1] as RenamedEventArgs;
-		Assert.IsNotNull (fileArgs, "#C1");
-		Assert.AreEqual (WatcherChangeTypes.Renamed, renamedArgs.ChangeType, "#C2");
-		Assert.AreEqual (Path.Combine (watch_dir, "tmp2"), renamedArgs.FullPath, "#C3");
-		Assert.AreEqual ("tmp2", renamedArgs.Name, "#C4");
-		Assert.AreEqual (Path.Combine (watch_dir, "tmp"), renamedArgs.OldFullPath, "#C5");
-		Assert.AreEqual ("tmp", renamedArgs.OldName, "#C6");
-
-		fileArgs = _events [2] as FileSystemEventArgs;
-		Assert.IsNotNull (fileArgs, "#D1");
-		Assert.AreEqual (WatcherChangeTypes.Deleted, fileArgs.ChangeType, "#D2");
-		Assert.AreEqual (Path.Combine (watch_dir, "tmp2"), fileArgs.FullPath, "#D3");
-		Assert.AreEqual ("tmp2", fileArgs.Name, "#D4");
+		RenamedEventArgs renamedArgs = _events [0] as RenamedEventArgs;
+		Assert.IsNotNull (renamedArgs, "#B1");
+		Assert.AreEqual (WatcherChangeTypes.Renamed, renamedArgs.ChangeType, "#B2");
+		Assert.AreEqual (Path.Combine (watch_dir, "tmp2"), renamedArgs.FullPath, "#B3");
+		Assert.AreEqual ("tmp2", renamedArgs.Name, "#B4");
+		Assert.AreEqual (Path.Combine (watch_dir, "tmp"), renamedArgs.OldFullPath, "#B5");
+		Assert.AreEqual ("tmp", renamedArgs.OldName, "#B6");
 	}
 
 	static void Created (object sender, FileSystemEventArgs args)
