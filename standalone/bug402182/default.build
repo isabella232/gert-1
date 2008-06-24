@@ -1,0 +1,47 @@
+<project name="bug402182" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="business.dll" />
+				<include name="extension.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="extension.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="extension.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="business.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="business.cs" />
+			</sources>
+			<references>
+				<include name="extension.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="business.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<delete file="extension.dll" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
