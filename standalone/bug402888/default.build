@@ -1,0 +1,40 @@
+<project name="bug402888" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-3.5,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+
+		<property name="original.test.framework" value="${framework::get-target-framework()}" />
+
+		<if test="${framework::exists('net-3.5')}">
+			<property name="nant.settings.currentframework" value="net-3.5" />
+			<exec program="${framework::get-tool-path('peverify.exe')}">
+				<arg value="/nologo" />
+				<arg file="test.exe" />
+			</exec>
+		</if>
+
+		<property name="nant.settings.currentframework" value="${original.test.framework}" />
+	</target>
+</project>
