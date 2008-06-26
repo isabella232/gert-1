@@ -1,0 +1,54 @@
+<project name="bug402888" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="*.txt" />
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test.exe.config" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="System.Configuration.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<copy file="test1.config" tofile="test.exe.config" overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+
+		<copy file="test2.config" tofile="test.exe.config" overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+
+		<copy file="test3.config" tofile="test.exe.config" overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+
+		<copy file="test4.config" tofile="test.exe.config" overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test4" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
