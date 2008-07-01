@@ -3,6 +3,22 @@
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
+	<target name="mono-1.0-init">
+		<property name="test.frameworks" value="mono-1.0,net-1.1" />
+	</target>
+
+	<target name="mono-2.0-init">
+		<property name="test.frameworks" value="mono-2.0,net-2.0" />
+	</target>
+
+	<target name="net-1.1-init">
+		<property name="test.frameworks" value="mono-1.0,net-1.1" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="test.frameworks" value="mono-2.0,net-2.0" />
+	</target>
+
 	<target name="clean">
 		<delete>
 			<fileset>
@@ -45,8 +61,18 @@
 		<exec program="server.exe" managed="true" pidproperty="server.pid" spawn="true" />
 		<sleep milliseconds="200" />
 
-		<exec program="client.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<property name="original.test.framework" value="${framework::get-target-framework()}" />
+
+		<foreach property="test.framework" item="String" in="${test.frameworks}" delim=",">
+			<if test="${framework::exists(test.framework)}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<exec program="client.exe" managed="strict" output="out" />
+				<fail if="${file::exists('out')}" />
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.test.framework}" />
+
 		<sleep milliseconds="200" />
 		<kill pid="${server.pid}" />
 	</target>
