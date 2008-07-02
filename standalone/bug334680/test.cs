@@ -11,7 +11,12 @@ class Program
 			ConfigurationManager.GetSection ("system.windows.forms");
 		Assert.IsTrue (section.JitDebugging, "#1");
 #else
-		Assert.IsNotNull (ConfigurationSettings.GetConfig ("system.windows.forms"), "#1");
+		object config = ConfigurationSettings.GetConfig ("system.windows.forms");
+#if MONO
+		Assert.IsNull (config, "#1");
+#else
+		Assert.IsNotNull (config, "#1");
+#endif
 #endif
 	}
 }
