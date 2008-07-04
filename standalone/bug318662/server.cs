@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 class server
 {
@@ -26,11 +27,13 @@ class server
 		string msg = Encoding.ASCII.GetString (buffer, 0, bytesRec);
 		if (msg != "hello") {
 			string dir = AppDomain.CurrentDomain.BaseDirectory;
-			using (StreamWriter sw = File.CreateText (Path.Combine (dir, "out"))) {
+			using (StreamWriter sw = File.CreateText (Path.Combine (dir, "error"))) {
 				sw.WriteLine (msg);
 			}
 		}
 
 		handler.Close ();
+
+		Thread.Sleep (200);
 	}
 }

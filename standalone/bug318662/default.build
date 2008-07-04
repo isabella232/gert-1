@@ -7,6 +7,7 @@
 		<delete>
 			<fileset>
 				<include name="client.exe" />
+				<include name="error" />
 				<include name="out" />
 				<include name="server.exe" />
 			</fileset>
@@ -32,6 +33,7 @@
 		<exec program="client.exe" managed="true" output="out" />
 		<waitforexit pid="${server.pid}" />
 		<sleep milliseconds="1000" />
-		<fail if="${file::exists('out')}" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<fail if="${file::exists('error')}">#2</fail>
 	</target>
 </project>
