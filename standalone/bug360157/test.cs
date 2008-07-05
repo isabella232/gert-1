@@ -10,6 +10,8 @@ class Program
 
 		string connectionString = CreateConnectionString ();
 
+		DateTime start = DateTime.Now;
+
 		try {
 			using (SqlConnection sqlConnection = new SqlConnection (connectionString)) {
 				sqlConnection.Open ();
@@ -25,6 +27,10 @@ class Program
 			return 2;
 		} catch (SqlException) {
 		}
+
+		TimeSpan elapsed = DateTime.Now - start;
+		if (elapsed.TotalMilliseconds > 5000)
+			return 3;
 
 		return 0;
 	}
@@ -44,7 +50,7 @@ class Program
 			throw new ArgumentException ("The MONO_TESTS_SQL_PWD environment variable is not set.");
 
 		return string.Format ("Server={0};Database=DoesNotExist;Pooling=true;" +
-			"Connection Lifetime=60;Max Pool Size=1;UID={1};" +
+			"Connection Lifetime=60;Connect Timeout=500;Max Pool Size=1;UID={1};" +
 			"Password={2}", server, user, pwd);
 	}
 }
