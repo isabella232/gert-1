@@ -18,7 +18,8 @@ class Program
 
 				string basedir = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "web");
 				string config = Path.Combine (basedir, "web.config");
-				Assert.IsTrue (result.IndexOf ("<span id=\"ConfigPath\">" + config + "</span>") != -1, "#1:" + result);
+				Assert.IsTrue (result.IndexOf ("<span id=\"Path1\">" + config + "</span>", StringComparison.InvariantCultureIgnoreCase) != -1, "#1:" + result);
+				Assert.IsTrue (result.IndexOf ("<span id=\"Path2\">" + config + "</span>", StringComparison.InvariantCultureIgnoreCase) != -1, "#2:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {

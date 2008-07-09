@@ -3,7 +3,8 @@
 <script runat="server">
 	public void Page_Load (object sender, EventArgs e)
 	{
-		ConfigPath.Text = Mono.Web.UI.Action.GetConfigPath ();
+		Path1.Text = Mono.Web.UI.Action.GetConfigPath ();
+		Path2.Text = (string) ConfigurationManager.GetSection ("Test");
 	}
 </script>
 <html>
@@ -12,7 +13,8 @@
 	</head>
 	<body>
 		<form id="form1" runat="server">
-			<asp:Label id="ConfigPath" runat="server" />
+			<asp:Label id="Path1" runat="server" />
+			<asp:Label id="Path2" runat="server" />
 		</form>
 	</body>
 </html>

@@ -26,6 +26,7 @@
 		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.UI.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="Action.cs" />
+				<include name="TestConfigurationSectionHandler.cs" />
 			</sources>
 			<references>
 				<include name="System.Configuration.dll" />
