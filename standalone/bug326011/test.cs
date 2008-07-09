@@ -11,13 +11,12 @@ class Program
 		if (Environment.GetEnvironmentVariable ("MONO_TESTS_SQL") == null)
 			return;
 
-		SqlConnection conn = null;
 		SqlCommand cmd;
 
-		try {
-			conn = new SqlConnection (CreateConnectionString ());
-			conn.Open ();
+		SqlConnection conn = new SqlConnection (CreateConnectionString ());
+		conn.Open ();
 
+		try {
 			cmd = new SqlCommand (drop_table, conn);
 			cmd.ExecuteNonQuery ();
 
@@ -40,10 +39,10 @@ class Program
 				conn.Dispose ();
 		}
 
-		try {
-			conn = new SqlConnection (CreateConnectionString ());
-			conn.Open ();
+		conn = new SqlConnection (CreateConnectionString ());
+		conn.Open ();
 
+		try {
 			cmd = new SqlCommand (drop_table, conn);
 			cmd.ExecuteNonQuery ();
 
