@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dialog>
+  <title>Betriebsprämie</title>
+  <rowInfo>
+    <procedure>
+		<execute>Aufzurufende Prozedur</execute>
+		<parameter>test</parameter>
+	</procedure>
+  </rowInfo>
+  <tabInfo>
+    <procedure>
+		<execute>Aufzurufende Prozedur</execute>
+		<parameter>test1</parameter>
+		<parameter>test2</parameter>
+	</procedure>
+  </tabInfo>
+  <table>
+    <select>"Select-Statement für Datenbankabfrage"</select>
+  </table>
+  <buttons>
+    <button>
+      <name>Button 1</name>
+      <id>btn1</id>
+      <procedure>
+	  	<execute>Aufzurufende Prozedur</execute>
+		<parameter>test1</parameter>
+		<parameter>test2</parameter>
+	  </procedure>
+    </button>
+    <button>
+	<name>Button 5</name>
+	<id>btn2</id>
+	<procedure>
+		<execute>Aufzurufende Prozedur</execute>
+	</procedure>
+    </button>
+    <okbutton>
+      <procedure>
+	  	<execute>Aufzurufende Prozedur</execute>
+		<parameter>test1</parameter>
+		<parameter>test2</parameter>
+	  </procedure>
+    </okbutton>
+    <cancelbutton>
+      <procedure>
+	  	<execute>Aufzurufende Prozedur</execute>
+		<parameter>test1</parameter>
+		<parameter>test2</parameter>
+	  </procedure>
+    </cancelbutton>
+  </buttons>
+</dialog>
