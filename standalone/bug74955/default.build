@@ -1,15 +1,5 @@
 <project name="bug74955" default="rebuild">
-	<target name="mono-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-	</target>
-
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
-	</target>
-
-	<target name="net-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
-	</target>
+	<include buildfile="../../build/common.build" />
 
 	<property name="frameworks" value="mono-2.0,net-1.1,net-2.0" />
 
@@ -23,22 +13,7 @@
 		</delete>
 	</target>
 
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="${nant.settings.currentframework}" />
-				<call target="compile" />
-				<call target="clean" />
-			</if>
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
-	</target>
-
-	<target name="compile">
+	<target name="run-test" depends="init">
 		<vbc target="winexe" output="Form1.exe" main="Form1">
 			<sources>
 				<include name="Form1.vb" />
@@ -68,6 +43,4 @@
 		<loadfile file="out" property="out" />
 		<fail unless="${string::index-of(out,'30420:') != -1}">#4</fail>
 	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>
