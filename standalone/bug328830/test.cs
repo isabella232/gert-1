@@ -50,31 +50,3 @@ class BkgndWkr1 : Form
 	private BackgroundWorker bkgndWkr = new BackgroundWorker ();
 	private Exception m_doWorkException;
 }
-
-class Assert
-{
-	public static void Report (string message)
-	{
-		Console.Out.WriteLine (message);
-		Environment.Exit (1);
-	}
-
-	public static void AreEqual (object expected, object value, string message)
-	{
-		if (!expected.Equals (value)) {
-			Report ("Assert AreEqual failed at: " + message + Environment.NewLine
-				+ "expected: " + expected + Environment.NewLine
-				+ "     was: " + value);
-		}
-	}
-
-	public static void IsFalse (bool value, string message)
-	{
-		AreEqual (false, value, message);
-	}
-
-	public static void Fail (string message)
-	{
-		Report ("Assert Fail at: " + message);
-	}
-}
