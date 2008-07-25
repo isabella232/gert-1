@@ -1,0 +1,52 @@
+<project name="bug385765" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-1.0,mono-2.0" />
+
+	<target name="clean" if="${platform::is-unix()}">
+		<delete>
+			<fileset>
+				<include name="fileB.txt" />
+			</fileset>
+		</delete>
+		<delete>
+			<fileset>
+				<include name="dirB/**" />
+			</fileset>
+		</delete>
+		<delete>
+			<fileset>
+				<include name="test/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile" if="${platform::is-unix()}">
+		<mkdir dir="test/dirA" />
+		<echo file="test/dirA/fileA.tmp" />
+		<echo file="test/fileB.tmp" />
+		<exec program="ln">
+			<arg value="-s" />
+			<arg file="test/dirA" />
+			<arg file="dirB" />
+		</exec>
+		<exec program="ln">
+			<arg value="-s" />
+			<arg file="test/fileB.tmp" />
+			<arg file="fileB.txt" />
+		</exec>
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
