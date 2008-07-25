@@ -15,9 +15,10 @@ class Program
 		dirs = di.GetDirectories ();
 		files = di.GetFiles ();
 
-		Assert.AreEqual (2, dirs.Length, "#A1");
-		Assert.AreEqual ("dirB", dirs [0].Name, "#A2");
-		Assert.AreEqual ("test", dirs [1].Name, "#A3");
+		Assert.AreEqual (3, dirs.Length, "#A1");
+		Assert.AreEqual (".svn", dirs [0].Name, "#A2");
+		Assert.AreEqual ("dirB", dirs [1].Name, "#A3");
+		Assert.AreEqual ("test", dirs [2].Name, "#A4");
 
 		Assert.AreEqual (4, files.Length, "#B1");
 		Assert.AreEqual ("default.build", files [0].Name, "#B2");
