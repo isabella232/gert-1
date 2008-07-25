@@ -37,7 +37,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "global2.asax"), Path.Combine (webDir, "global.asax"), true);
-		Thread.Sleep (1000);
+		Thread.Sleep (2000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Whatever.aspx");
 		request.Method = "GET";
@@ -61,7 +61,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "global3.asax"), Path.Combine (webDir, "global.asax"), true);
-		Thread.Sleep (1000);
+		Thread.Sleep (2000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Whatever.aspx");
 		request.Method = "GET";
