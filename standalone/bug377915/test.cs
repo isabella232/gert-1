@@ -40,7 +40,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "MyControl_v2.ascx"), Path.Combine (controlsDir, "MyControl.ascx"), true);
-		Thread.Sleep (200);
+		Thread.Sleep (1000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Index.aspx");
 		request.Method = "GET";
@@ -65,7 +65,7 @@ class Program
 		}
 
 		File.Copy (Path.Combine (baseDir, "Index_v2.aspx"), Path.Combine (webDir, "Index.aspx"), true);
-		Thread.Sleep (200);
+		Thread.Sleep (1000);
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Index.aspx");
 		request.Method = "GET";
