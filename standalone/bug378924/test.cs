@@ -5,7 +5,7 @@ class Program
 {
 	static void Main (string [] args)
 	{
-		AssemblyName an = AssemblyName.GetAssemblyName (args [0]);
-		Assert.AreEqual ("mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", an.FullName, "#1");
+		AssemblyName aname = AssemblyName.GetAssemblyName (args [0]);
+		Assert.AreEqual ("mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e", aname.FullName, "#1");
 	}
 }

@@ -3,6 +3,14 @@
 
 	<property name="frameworks" value="mono-2.0,net-2.0" />
 
+	<target name="mono-2.0-init">
+		<property name="sl.frameworks" value="moonlight-2.0,silverlight-2.0" />
+	</target>
+
+	<target name="net-2.0-init">
+		<property name="sl.frameworks" value="moonlight-2.0,silverlight-2.0" />
+	</target>
+	
 	<target name="clean">
 		<delete>
 			<fileset>
@@ -22,11 +30,13 @@
 	</target>
 
 	<target name="run-test" depends="compile">
-		<if test="${framework::exists('moonlight-2.0')}">
-			<exec program="test.exe" managed="true" output="out">
-				<arg value="${path::combine(framework::get-assembly-directory('moonlight-2.0'),'mscorlib.dll')}" />
-			</exec>
-			<fail if="${file::exists('out')}" />
-		</if>
+		<foreach property="sl.framework" item="String" in="${sl.frameworks}" delim=",">
+			<if test="${framework::exists(sl.framework)}">
+				<exec program="test.exe" managed="true" output="out">
+					<arg value="${path::combine(framework::get-assembly-directory(sl.framework),'mscorlib.dll')}" />
+				</exec>
+				<fail if="${file::exists('out')}" />
+			</if>
+		</foreach>
 	</target>
 </project>
