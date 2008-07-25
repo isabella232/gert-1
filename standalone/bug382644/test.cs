@@ -51,8 +51,8 @@ class Program
 				break;
 		}
 
-		Assert.IsTrue (totalSessionTime.TotalSeconds > 60, "#C1");
-		Assert.IsTrue (totalSessionTime.TotalSeconds < 150, "#C2");
+		Assert.IsTrue (totalSessionTime.TotalSeconds > 60, "#C1:" + totalSessionTime.TotalSeconds);
+		Assert.IsTrue (totalSessionTime.TotalSeconds < 150, "#C2:" + totalSessionTime.TotalSeconds);
 
 		return 0;
 	}
