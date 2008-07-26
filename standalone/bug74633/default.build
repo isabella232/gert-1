@@ -12,8 +12,8 @@
 		</delete>
 	</target>
 
-	<target name="run-test" depends="init>
-		<csc target="exe" output="test.exe" doc="test.xml" warnaserror="true" warninglevel="4">
+	<target name="run-test" depends="init">
+		<csc target="exe" output="test.exe" define="${csc.defines}" doc="test.xml" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
