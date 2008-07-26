@@ -42,6 +42,5 @@
 	<target name="run-test" depends="compile">
 		<delete file="extension.dll" />
 		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
 	</target>
 </project>
