@@ -1,23 +1,15 @@
 <project name="bug409492" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
-	<target name="mono-1.0-init">
-		<property name="xsp.package" value="xsp" />
-	</target>
-
 	<target name="mono-2.0-init">
 		<property name="xsp.package" value="xsp-2" />
-	</target>
-
-	<target name="net-1.1-init">
-		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="net-2.0-init">
 		<property name="xsp.package" value="xsp-2" />
 	</target>
 
-	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	<property name="frameworks" value="mono-2.0,net-2.0" />
 
 	<target name="clean">
 		<delete>
