@@ -18,6 +18,4 @@
 			</sources>
 		</csc>
 	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>
