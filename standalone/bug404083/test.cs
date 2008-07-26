@@ -47,14 +47,14 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string cache_control = response.Headers ["Cache-Control"];
-				Assert.IsNotNull (cache_control, "#A1");
-				Assert.AreEqual ("private", cache_control, "#A2");
+				Assert.IsNotNull (cache_control, "#D1");
+				Assert.AreEqual ("private", cache_control, "#D2");
 
 				string expires = response.Headers ["Expires"];
-				Assert.IsNull (expires, "#B");
+				Assert.IsNull (expires, "#E:" + expires);
 
 				string result = sr.ReadToEnd ();
-				Assert.IsTrue (result.IndexOf ("<title>bug #404083</title>") != -1, "#C:" + result);
+				Assert.IsTrue (result.IndexOf ("<title>bug #404083</title>") != -1, "#F:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {
@@ -64,7 +64,7 @@ class Program
 					Console.WriteLine (sr.ReadToEnd ());
 				}
 			}
-			return 1;
+			return 2;
 		}
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/start.aspx");
@@ -74,14 +74,14 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string cache_control = response.Headers ["Cache-Control"];
-				Assert.IsNotNull (cache_control, "#A1");
-				Assert.AreEqual ("private", cache_control, "#A2");
+				Assert.IsNotNull (cache_control, "#G1");
+				Assert.AreEqual ("private", cache_control, "#G2");
 
 				string expires = response.Headers ["Expires"];
-				Assert.IsNull (expires, "#B");
+				Assert.IsNull (expires, "#H:" + expires);
 
 				string result = sr.ReadToEnd ();
-				Assert.IsTrue (result.IndexOf ("<title>bug #404083</title>") != -1, "#C:" + result);
+				Assert.IsTrue (result.IndexOf ("<title>bug #404083</title>") != -1, "#I:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {
@@ -91,7 +91,7 @@ class Program
 					Console.WriteLine (sr.ReadToEnd ());
 				}
 			}
-			return 1;
+			return 3;
 		}
 
 		return 0;
