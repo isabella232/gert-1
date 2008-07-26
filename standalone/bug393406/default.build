@@ -35,7 +35,6 @@
 		<sleep milliseconds="500" />
 		<exec program="Client.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
-		<kill pid="${server.pid}" />
 		<sleep milliseconds="500" />
 	</target>
 </project>
