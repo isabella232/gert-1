@@ -136,7 +136,11 @@ class Program
 			Assert.IsFalse (dr.IsDBNull (5), "#P3");
 
 			Assert.AreEqual ("decimal", dr.GetDataTypeName (6), "#Q1");
+#if MONO
+			Assert.AreEqual (66678L, dr.GetValue (6), "#Q2");
+#else
 			Assert.AreEqual (66678m, dr.GetValue (6), "#Q2");
+#endif
 			Assert.IsFalse (dr.IsDBNull (6), "#Q3");
 
 			Assert.AreEqual ("decimal", dr.GetDataTypeName (7), "#R1");
