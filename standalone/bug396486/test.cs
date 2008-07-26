@@ -10,8 +10,10 @@ class Program
 		X509Certificate cert = X509Certificate.CreateFromCertFile ("cert.pem");
 #if NET_2_0
 		Assert.AreEqual (issuer, cert.Issuer, "#1");
+		Assert.AreEqual (issuer, cert.Subject, "#2");
 #else
 		Assert.AreEqual (issuer, cert.GetIssuerName (), "#1");
+		Assert.AreEqual (issuer, cert.GetName (), "#2");
 #endif
 	}
 }
