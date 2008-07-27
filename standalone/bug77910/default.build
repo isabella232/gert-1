@@ -1,4 +1,6 @@
 <project name="bug77910" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 
 	<target name="clean">
@@ -9,27 +11,11 @@
 		</delete>
 	</target>
 
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="compile" />
-				<call target="clean" />
-			</if>
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
-	</target>
-
-	<target name="compile">
+	<target name="run-test" depends="init">
 		<resgen>
 			<resources>
 				<include name="*.resx" />
 			</resources>
 		</resgen>
 	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>

@@ -1,22 +1,7 @@
 <project name="bug77736" default="rebuild">
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
-	</target>
+	<include buildfile="../../build/common.build" />
 
-	<target name="mono-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
-	</target>
-
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
-	</target>
-
-	<target name="net-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
-	</target>
-
-	<property name="mono.frameworks" value="mono-1.0,mono-2.0"/>
-	<property name="net.frameworks" value="net-1.1,net-2.0"/>
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
 	
 	<target name="clean">
 		<delete>
@@ -27,20 +12,7 @@
 		</delete>
 	</target>
 
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${property::get-value(framework::get-family(framework::get-target-framework()) + '.frameworks')}" delim=",">
-			<property name="nant.settings.currentframework" value="${framework}" />
-			<call target="${nant.settings.currentframework}" />
-			<call target="run" />
-			<call target="clean" />
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
-	</target>
-
-	<target name="compile">
+	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test1.exe" warnaserror="true">
 			<sources>
 				<include name="test1.cs" />
@@ -53,10 +25,8 @@
 		</csc>
 	</target>
 
-	<target name="run" depends="compile">
+	<target name="run-test" depends="compile">
 		<exec program="test1.exe" managed="true" />
 		<exec program="test2.exe" managed="true" />
 	</target>
-
-	<target name="rebuild" depends="clean, build" />
 </project>
