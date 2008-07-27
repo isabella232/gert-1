@@ -28,6 +28,9 @@ class TinyHost : MarshalByRefObject
 
 	static int Main ()
 	{
+		if (RunningOnUnix)
+			return 0;
+
 		TinyHost h = CreateHost ("/");
 		StringWriter sw = new StringWriter ();
 		h.Execute ("Default.aspx", sw);
@@ -71,5 +74,15 @@ class TinyHost : MarshalByRefObject
 #endif
 
 		return 0;
+	}
+
+	static bool RunningOnUnix {
+		get {
+#if NET_2_0
+			return Environment.OSVersion.Platform == PlatformID.Unix;
+#else
+			return (int) Environment.OSVersion.Platform == 128;
+#endif
+		}
 	}
 }
