@@ -1,18 +1,20 @@
 <project name="bug66025" default="rebuild">
-	<target name="mono-1.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+	<include buildfile="../../build/common.build" />
+
+	<target name="mono-1.0-init">
+		<property name="test.framework" value="net-1.1" />
 	</target>
 
-	<target name="mono-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+	<target name="mono-2.0-init">
+		<property name="test.framework" value="net-2.0" />
 	</target>
 
-	<target name="net-1.1">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+	<target name="net-1.1-init">
+		<property name="test.framework" value="net-1.1" />
 	</target>
 
-	<target name="net-2.0">
-		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+	<target name="net-2.0-init">
+		<property name="test.framework" value="net-2.0" />
 	</target>
 
 	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
@@ -25,29 +27,24 @@
 		</delete>
 	</target>
 
-	<target name="build">
-		<property name="original.targetframework" value="${nant.settings.currentframework}" />
-
-		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="${nant.settings.currentframework}" />
-				<call target="compile" />
-				<call target="clean" />
-			</if>
-		</foreach>
-
-		<property name="nant.settings.currentframework" value="${original.targetframework}" />
-	</target>
-
-	<target name="compile">
+	<target name="compile" depends="init">
 		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="test.cs" />
 			</sources>
 		</csc>
-		<echo message="Now use MS.NET peverify on the generated assembly." />
 	</target>
 
-	<target name="rebuild" depends="clean, build" />
+	<target name="run-test" depends="compile">
+		<if test="${framework::exists(test.framework)}">
+			<property name="original.test.framework" value="${nant.settings.currentframework}" />
+
+			<property name="nant.settings.currentframework" value="${test.framework}" />
+			<exec program="${framework::get-tool-path('peverify.exe')}">
+				<arg file="test.exe" />
+			</exec>
+
+			<property name="nant.settings.currentframework" value="${original.test.framework}" />
+		</if>
+	</target>
 </project>
