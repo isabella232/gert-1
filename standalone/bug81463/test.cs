@@ -11,7 +11,11 @@ class Program
 		try {
 			a.GetExportedTypes ();
 			return 2;
+#if MONO
+		} catch (ReflectionTypeLoadException) {
+#else
 		} catch (FileNotFoundException) {
+#endif
 			return 0;
 		}
 	}
