@@ -1,0 +1,29 @@
+<project name="bug412477" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<ilasm target="exe" output="test.exe">
+			<sources>
+				<include name="test.il" />
+			</sources>
+		</ilasm>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail unless="${file::exists('out')}">#1</fail>
+		<loadfile file="out" property="out" />
+		<fail if="${string::index-of(out,'Finalize called') != -1}" >#2</fail>
+	</target>
+</project>
