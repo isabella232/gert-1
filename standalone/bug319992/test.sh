@@ -1,3 +1,4 @@
 #!/bin/sh
-sleep 30&
+sleep 5&
 echo $!
+
