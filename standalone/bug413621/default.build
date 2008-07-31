@@ -1,0 +1,57 @@
+<project name="bug399048" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="libcomplex.o" />
+				<include name="libcomplex.so" />
+				<include name="out" />
+				<include name="NativeD.exe" />
+				<include name="NativeF.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile-libcomplex" if="${platform::is-unix()}">
+		<exec program="g++">
+			<arg value="-g" />
+			<arg value="-c" />
+			<arg value="-fPIC" />
+			<arg file="complex.cc" />
+		</exec>
+		<exec program="g++">
+			<arg value="-shared" />
+			<arg value="-o" />
+			<arg file="libcomplex.so" />
+			<arg file="libcomplex.o" />
+		</exec>
+	</target>
+
+	<target name="compile-natived" depends="init,compile-libcomplex" if="${platform::is-unix()}">
+		<csc target="exe" define="${csc.defines}" output="NativeD.exe" unsafe="true" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="NativeD.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="compile-nativef" depends="init,compile-libcomplex" if="${platform::is-unix()}">
+		<csc target="exe" define="${csc.defines}" output="NativeF.exe" unsafe="true" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="NativeF.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="compile" depends="compile-natived,compile-nativef" />
+
+	<target name="run-test" depends="compile" if="${platform::is-unix()}">
+		<exec program="NativeD.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
+		<exec program="NativeF.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
