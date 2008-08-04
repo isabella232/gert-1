@@ -1,0 +1,49 @@
+<project name="bug414310" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="mini.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" output="mini.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources basedir="MiniFoundation">
+				<include name="dLightWeightScheduledProcessBase.cs" />
+				<include name="dLightWeightProcessThread.cs" />
+				<include name="dLightWeightProcessBase.cs" />
+				<include name="dThreadSafeQueue.cs" />
+				<include name="MPCList.cs" />
+				<include name="MPCQueue.cs" />
+				<include name="SPCList.cs" />
+				<include name="TQueueNode.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="mini.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile" unless="${platform::is-unix()}">
+		<property name="start.ticks" value="${datetime::get-ticks(datetime::now())}" />
+
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+
+		<property name="end.ticks" value="${datetime::get-ticks(datetime::now())}" />
+		<fail if="${timespan::get-total-milliseconds(timespan::from-ticks(long::parse(end.ticks) - long::parse(start.ticks))) > 3000}">#2</fail>
+	</target>
+</project>
