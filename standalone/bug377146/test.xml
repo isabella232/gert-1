@@ -1,0 +1,49 @@
+<LrtData>
+	<LrtTable>
+		<Dummy>99</Dummy>
+		<FuncXml>
+			<Func Name="CUT_IntPassiveIn()" Direction="PASSIVE_MOCK">
+				<Param Name="paramLen" Type="int" Len="1" InOut="IN" Union="FALSE"
+		Callback="" CSharpType="int" Value="" ExpectedValue="1" IsExpGetRef=""
+		IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1" HandleInput="DEC"
+		Enum="">
+				</Param>
+				<Param Name="single" Type="int" Len="1" InOut="IN" Union="FALSE"
+		Callback="" CSharpType="int" Value="" ExpectedValue="16" IsExpGetRef=""
+		IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1" HandleInput="DEC"
+		Enum="">
+				</Param>
+				<Param Name="arraySizeParam" Type="int*" Len="4" InOut="IN"
+		Union="FALSE" Callback="" CSharpType="int" Value="" ExpectedValue=""
+		IsExpGetRef="" IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1"
+		HandleInput="HEX" Enum="">
+					<Param1 Name="arraySizeParam0" Type="int" Len="0" InOut="IN"
+		  Union="FALSE" Callback="" CSharpType="int" Value="" ExpectedValue="1"
+		  IsExpGetRef="" IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1"
+		  HandleInput="DEC" Enum="">
+					</Param1>
+					<Param1 Name="arraySizeParam1" Type="int" Len="0" InOut="IN"
+		  Union="FALSE" Callback="" CSharpType="int" Value="" ExpectedValue=""
+		  IsExpGetRef="" IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1"
+		  HandleInput="HEX" Enum="">
+					</Param1>
+					<Param1 Name="arraySizeParam2" Type="int" Len="0" InOut="IN"
+		  Union="FALSE" Callback="" CSharpType="int" Value="" ExpectedValue=""
+		  IsExpGetRef="" IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1"
+		  HandleInput="HEX" Enum="">
+					</Param1>
+					<Param1 Name="arraySizeParam3" Type="int" Len="0" InOut="IN"
+		  Union="FALSE" Callback="" CSharpType="int" Value="" ExpectedValue=""
+		  IsExpGetRef="" IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1"
+		  HandleInput="HEX" Enum="">
+					</Param1>
+				</Param>
+				<Return Name="retVal" Type="int" Len="1" InOut="OUT" Union="FALSE"
+		Callback="" CSharpType="int" Value="1" ExpectedValue="" IsExpGetRef=""
+		IsGetRef="" IsSetRef="" ChildSelected="FALSE" UnionIndex="-1" HandleInput="DEC"
+		Enum="">
+				</Return>
+			</Func>
+		</FuncXml>
+	</LrtTable>
+</LrtData>
