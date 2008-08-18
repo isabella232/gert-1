@@ -48,13 +48,33 @@
 		<property name="original.targetframework" value="${nant.settings.currentframework}" />
 
 		<foreach property="framework" item="String" in="${frameworks}" delim=",">
-			<if test="${framework::exists(framework)}">
-				<property name="nant.settings.currentframework" value="${framework}" />
-				<call target="run-test" />
-				<call target="clean" />
+			<if test="${framework::exists(framework) and target::exists(framework)}">
+				<!-- check if framework is excluded -->
+				<property name="excluded" value="false" />
+				<if test="${property::exists('frameworks.excluded') and frameworks.excluded!=''}">
+					<foreach property="exclude" item="String" in="${frameworks.excluded}" delim=",">
+						<if test="${framework == exclude}">
+							<property name="excluded" value="true" />
+						</if>
+					</foreach>
+				</if>
+
+				<if test="${not bool::parse(excluded)}">
+					<property name="nant.settings.currentframework" value="${framework}" />
+					<call target="run-test" />
+					<call target="clean" />
+				</if>
 			</if>
 		</foreach>
 
+		<!--
+			reset value of frameworks.exclude to ensure excludes from one build
+			file do not affect another
+		-->
+		<property name="frameworks.exclude" value="" />
+		<!--
+			restore original target framework
+		-->
 		<property name="nant.settings.currentframework" value="${original.targetframework}" />
 	</target>
 
