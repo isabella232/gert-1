@@ -25,6 +25,24 @@ public class MainForm : Form
 		_groupBoxA.MouseDown += new MouseEventHandler (GroupBoxA_MouseDown);
 		Controls.Add (_groupBoxA);
 		// 
+		// _dragOverALabel
+		// 
+		_dragOverALabel = new Label ();
+		_dragOverALabel.AutoSize = true;
+		_dragOverALabel.Location = new Point (8, 118);
+		_dragOverALabel.Text = "DragOver:";
+		Controls.Add (_dragOverALabel);
+		// 
+		// _dragOverACount
+		// 
+		_dragOverACount = new TextBox ();
+		_dragOverACount.Enabled = false;
+		_dragOverACount.Location = new Point (88, 115);
+		_dragOverACount.Size = new Size (80, 20);
+		_dragOverACount.Text = "0";
+		_dragOverACount.TextAlign = HorizontalAlignment.Right;
+		Controls.Add (_dragOverACount);
+		// 
 		// _groupBoxB
 		// 
 		_groupBoxB = new GroupBox ();
@@ -41,17 +59,35 @@ public class MainForm : Form
 		_groupBoxB.MouseDown += new MouseEventHandler (GroupBoxB_MouseDown);
 		Controls.Add (_groupBoxB);
 		// 
+		// _dragOverBLabel
+		// 
+		_dragOverBLabel = new Label ();
+		_dragOverBLabel.AutoSize = true;
+		_dragOverBLabel.Location = new Point (203, 118);
+		_dragOverBLabel.Text = "DragOver:";
+		Controls.Add (_dragOverBLabel);
+		// 
+		// _dragOverBCount
+		// 
+		_dragOverBCount = new TextBox ();
+		_dragOverBCount.Enabled = false;
+		_dragOverBCount.Location = new Point (280, 115);
+		_dragOverBCount.Size = new Size (80, 20);
+		_dragOverBCount.Text = "0";
+		_dragOverBCount.TextAlign = HorizontalAlignment.Right;
+		Controls.Add (_dragOverBCount);
+		// 
 		// _eventsText
 		// 
 		_eventsText = new TextBox ();
 		_eventsText.Dock = DockStyle.Bottom;
-		_eventsText.Height = 150;
+		_eventsText.Height = 180;
 		_eventsText.Multiline = true;
 		Controls.Add (_eventsText);
 		// 
 		// MainForm
 		// 
-		ClientSize = new Size (400, 265);
+		ClientSize = new Size (400, 325);
 		Location = new Point (200, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "bug #381876";
@@ -92,8 +128,10 @@ public class MainForm : Form
 
 	void GroupBoxA_DragOver (object sender, DragEventArgs e)
 	{
-		_eventsText.AppendText ("GroupBoxA => DragOver"
-			+ Environment.NewLine);
+		int current = int.Parse (_dragOverACount.Text,
+			CultureInfo.InvariantCulture);
+		_dragOverACount.Text = (++current).ToString (
+			CultureInfo.InvariantCulture);
 		e.Effect = DragDropEffects.Move;
 	}
 
@@ -122,8 +160,10 @@ public class MainForm : Form
 
 	void GroupBoxB_DragOver (object sender, DragEventArgs e)
 	{
-		_eventsText.AppendText ("GroupBoxB => DragOver"
-			+ Environment.NewLine);
+		int current = int.Parse (_dragOverBCount.Text,
+			CultureInfo.InvariantCulture);
+		_dragOverBCount.Text = (++current).ToString (
+			CultureInfo.InvariantCulture);
 		e.Effect = DragDropEffects.Move;
 	}
 
@@ -134,6 +174,10 @@ public class MainForm : Form
 
 	private GroupBox _groupBoxA;
 	private GroupBox _groupBoxB;
+	private Label _dragOverALabel;
+	private Label _dragOverBLabel;
+	private TextBox _dragOverACount;
+	private TextBox _dragOverBCount;
 	private TextBox _eventsText;
 }
 
@@ -163,9 +207,11 @@ public class InstructionsForm : Form
 			"1. On step 1, the following events have fired:{0}{0}" +
 			"   * GroupBoxA => DragEnter{0}" +
 			"   * GroupBoxA => DragLeave{0}{0}" +
+			"   and no DragOver events have fired.{0}{0}" +
 			"2. On step 2, the following events have fired:{0}{0}" +
 			"   * GroupBoxB => DragEnter{0}" +
-			"   * GroupBoxB => DragLeave",
+			"   * GroupBoxB => DragLeave{0}{0}" + 
+			"   and no DragOver events have fired.",
 			Environment.NewLine);
 		// 
 		// _tabPage1
@@ -177,7 +223,7 @@ public class InstructionsForm : Form
 		// 
 		// InstructionsForm
 		// 
-		ClientSize = new Size (360, 300);
+		ClientSize = new Size (360, 360);
 		Location = new Point (650, 100);
 		StartPosition = FormStartPosition.Manual;
 		Text = "Instructions - bug #381876";
