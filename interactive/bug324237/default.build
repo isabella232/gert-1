@@ -1,4 +1,4 @@
-<project name="bug81559" default="rebuild">
+<project name="bug324237" default="rebuild">
 	<include buildfile="../../build/common.build" />
 	
 	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
