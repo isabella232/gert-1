@@ -1,14 +1,17 @@
 <project name="common.build" default="rebuild">
 	<target name="mono-1.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1,MONO" />
+		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="mono-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0,MONO" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="mono-3.5">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_3_5,ONLY_3_5,MONO" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="moonlight-2.0">
@@ -21,14 +24,17 @@
 
 	<target name="net-1.1">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,ONLY_1_1" />
+		<property name="xsp.package" value="xsp" />
 	</target>
 
 	<target name="net-2.0">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,ONLY_2_0" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="net-3.5">
 		<property name="csc.defines" value="NET_1_0,NET_1_1,NET_2_0,NET_3_5,ONLY_3_5" />
+		<property name="xsp.package" value="xsp-2" />
 	</target>
 
 	<target name="silverlight-2.0">
