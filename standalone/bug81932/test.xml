@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<root>
+	<child1>
+		<nest1>
+			<nest2>hello!</nest2>
+		</nest1>
+	</child1>
+	<child2/>
+	<child3/>
+</root>

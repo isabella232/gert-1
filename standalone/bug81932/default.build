@@ -1,7 +1,8 @@
-<project name="bug81932" default="rebuild">
+<project name="bug324606" default="rebuild">
 	<include buildfile="../../build/common.build" />
-	
-	<property name="frameworks" value="mono-2.0,net-2.0" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
 
 	<target name="clean">
 		<delete>
@@ -15,6 +16,7 @@
 	<target name="compile" depends="init">
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
+				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
 		</csc>
