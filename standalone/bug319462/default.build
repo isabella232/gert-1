@@ -1,0 +1,68 @@
+<project name="bug319462" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="bar.dll" />
+				<include name="foo.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<csc target="library" define="${csc.defines}" output="foo.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="fooV1.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="bar.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="barV1.cs" />
+			</sources>
+			<references>
+				<include name="foo.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references>
+				<include name="foo.dll" />
+				<include name="bar.dll" />
+			</references>
+		</csc>
+
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<fail if="${file::exists('out')}">#1</fail>
+
+		<delete file="foo.dll" />
+		<delete file="bar.dll" />
+		<csc target="library" define="${csc.defines}" output="foo.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="fooV2.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="bar.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="barV2.cs" />
+			</sources>
+			<references>
+				<include name="foo.dll" />
+			</references>
+		</csc>
+
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<fail if="${file::exists('out')}">#2</fail>
+	</target>
+</project>
