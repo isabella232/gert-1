@@ -30,6 +30,7 @@ class Program
 		TypeBuilder tb2 = module.DefineType ("Program", TypeAttributes.Public);
 		MethodBuilder mb = tb2.DefineMethod ("Main", MethodAttributes.Static | MethodAttributes.Public);
 		ILGenerator ilgen = mb.GetILGenerator ();
+		ilgen.Emit (OpCodes.Volatile);
 		ilgen.Emit (OpCodes.Ldsfld, fi);
 		ilgen.EmitCall (OpCodes.Call, typeof (Console).GetMethod ("WriteLine", BindingFlags.Public | BindingFlags.Static, null, new Type [] { typeof (string) }, new ParameterModifier [0]), null);
 		ilgen.Emit (OpCodes.Nop);
@@ -39,5 +40,14 @@ class Program
 		tb1.CreateType ();
 
 		ab.Save ("bug424663.dll");
+
+		Assembly a = Assembly.LoadFile (Path.Combine (basedir, "bug424663.dll"));
+		genT = a.GetType ("Gen");
+		fi = genT.GetField ("str", BindingFlags.Static | BindingFlags.NonPublic);
+		Type [] reqcustommods = fi.GetRequiredCustomModifiers ();
+		Assert.AreEqual (1, reqcustommods.Length, "#1");
+		Assert.AreEqual (typeof (IsVolatile), reqcustommods [0], "#2");
+		Type [] optcustommods = fi.GetOptionalCustomModifiers ();
+		Assert.AreEqual (0, optcustommods.Length, "#3");
 	}
 }
