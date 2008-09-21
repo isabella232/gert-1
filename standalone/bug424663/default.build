@@ -10,28 +10,36 @@
 				<include name="bug424663.dll" />
 				<include name="bug424663.il" />
 				<include name="out" />
-				<include name="test.exe" />
+				<include name="test1.exe" />
+				<include name="test2.exe" />
+				<include name="test2.res" />
+				<include name="test2.il" />
 			</fileset>
 		</delete>
 	</target>
 
 	<target name="compile" depends="init">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" define="${csc.defines}" output="test1.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="../../build/common/Assert.cs" />
-				<include name="test.cs" />
+				<include name="test1.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test2.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test2.cs" />
 			</sources>
 		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
+		<exec program="test1.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}">#1</fail>
 
 		<choose>
 			<when test="${framework::get-family(framework::get-target-framework()) == 'net'}">
 				<ildasm input="bug424663.dll" output="bug424663.il" />
-				<loadfile file="bug424663.il" property="il" />
+				<ildasm input="test2.exe" output="test2.il" />
 			</when>
 			<otherwise>
 				<property name="monodis.tool" value="monodis" if="${platform::is-unix()}" />
@@ -40,9 +48,15 @@
 					<arg value="--output=${path::get-full-path('bug424663.il')}" />
 					<arg file="bug424663.dll" />
 				</exec>
+				<exec program="${framework::get-tool-path(monodis.tool)}">
+					<arg value="--output=${path::get-full-path('test2.il')}" />
+					<arg file="test2.exe" />
+				</exec>
 			</otherwise>
 		</choose>
-		<loadfile file="bug424663.il" property="il" />
-		<fail unless="${string::index-of(il, 'string modreq([mscorlib]System.Runtime.CompilerServices.IsVolatile) class Gen&lt;string&gt;::str') != -1}">#2:${il}</fail>
+		<loadfile file="bug424663.il" property="bug424663.il" />
+		<fail unless="${string::index-of(bug424663.il, 'string modreq([mscorlib]System.Runtime.CompilerServices.IsVolatile) class Gen&lt;string&gt;::str') != -1}">#2:${bug424663.il}</fail>
+		<loadfile file="test2.il" property="test2.il" />
+		<fail unless="${string::index-of(test2.il, 'string modreq([mscorlib]System.Runtime.CompilerServices.IsVolatile) class Gen`1&lt;string&gt;::str') != -1}">#3:${test2.il}</fail>
 	</target>
 </project>
