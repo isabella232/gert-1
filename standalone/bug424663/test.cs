@@ -30,7 +30,6 @@ class Program
 		TypeBuilder tb2 = module.DefineType ("Program", TypeAttributes.Public);
 		MethodBuilder mb = tb2.DefineMethod ("Main", MethodAttributes.Static | MethodAttributes.Public);
 		ILGenerator ilgen = mb.GetILGenerator ();
-		ilgen.DeclareLocal (typeof (string));
 		ilgen.Emit (OpCodes.Ldsfld, fi);
 		ilgen.EmitCall (OpCodes.Call, typeof (Console).GetMethod ("WriteLine", BindingFlags.Public | BindingFlags.Static, null, new Type [] { typeof (string) }, new ParameterModifier [0]), null);
 		ilgen.Emit (OpCodes.Nop);
