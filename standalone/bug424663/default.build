@@ -1,0 +1,48 @@
+<project name="bug424663" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="bug424663.dll" />
+				<include name="bug424663.il" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+
+		<choose>
+			<when test="${framework::get-family(framework::get-target-framework()) == 'net'}">
+				<ildasm input="bug424663.dll" output="bug424663.il" />
+				<loadfile file="bug424663.il" property="il" />
+			</when>
+			<otherwise>
+				<property name="monodis.tool" value="monodis" if="${platform::is-unix()}" />
+				<property name="monodis.tool" value="monodis.exe" if="${platform::is-win32()}" />
+				<exec program="${framework::get-tool-path(monodis.tool)}">
+					<arg value="--output=${path::get-full-path('bug424663.il')}" />
+					<arg file="bug424663.dll" />
+				</exec>
+			</otherwise>
+		</choose>
+		<loadfile file="bug424663.il" property="il" />
+		<fail unless="${string::index-of(il, 'string modreq([mscorlib]System.Runtime.CompilerServices.IsVolatile) class Gen&lt;string&gt;::str') != -1}">#2:${il}</fail>
+	</target>
+</project>
