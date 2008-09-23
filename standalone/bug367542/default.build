@@ -1,0 +1,29 @@
+<project name="bug367542" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0;net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<record name="out" action="Start" />
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4" failonerror="false">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+		<record name="out" action="Close" />
+		<fail if="${file::exists('test.exe')}">#1</fail>
+		<loadfile file="out" property="out" />
+		<fail unless="${string::index-of(out,'CS0119')!=-1}">#2</fail>
+		<fail if="${string::index-of(out,'Exception')!=-1}">#3</fail>
+	</target>
+</project>
