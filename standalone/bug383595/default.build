@@ -1,0 +1,22 @@
+<project name="bug383595" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0;net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="test.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+</project>
