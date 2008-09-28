@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Threading;
 
 class Program
 {
@@ -17,10 +18,12 @@ class Program
 
 				Assert.IsTrue (proc.HasExited, "#1:" + i);
 				Assert.AreEqual (0, proc.ExitCode, "#2:" + i);
+				Assert.AreEqual (1, _exitCount, "#3:" + i);
+
+				Thread.Sleep (50);
+				_exitCount = 0;
 			}
 		}
-
-		Assert.AreEqual (500, _exitCount, "#3");
 	}
 
 	static void Process_Exited (object sender, EventArgs e)
