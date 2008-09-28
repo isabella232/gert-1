@@ -14,11 +14,12 @@ class Program
 				proc.StartInfo.UseShellExecute = false;
 				proc.Exited += new EventHandler (Process_Exited);
 				proc.Start ();
-				proc.WaitForExit (2000);
+				bool exited = proc.WaitForExit (2000);
 
-				Assert.IsTrue (proc.HasExited, "#1:" + i);
-				Assert.AreEqual (0, proc.ExitCode, "#2:" + i);
-				Assert.AreEqual (1, _exitCount, "#3:" + i);
+				Assert.IsTrue (exited, "#1:" + i);
+				Assert.IsTrue (proc.HasExited, "#2:" + i);
+				Assert.AreEqual (0, proc.ExitCode, "#3:" + i);
+				Assert.AreEqual (1, _exitCount, "#4:" + i);
 
 				Thread.Sleep (50);
 				_exitCount = 0;
