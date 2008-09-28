@@ -29,7 +29,7 @@ class Program : MarshalByRefObject
 			throw new Exception ("Operation timed out");
 
 		Assert.AreEqual (10000, client.total, "#1");
-		Assert.IsTrue (stopwatch.Elapsed.TotalMilliseconds < 4000, "#2:" + stopwatch.Elapsed.TotalMilliseconds);
+		Assert.IsTrue (stopwatch.Elapsed.TotalMilliseconds < 10000, "#2:" + stopwatch.Elapsed.TotalMilliseconds);
 	}
 
 	public void CompletedHandler ()
