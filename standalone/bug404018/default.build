@@ -1,0 +1,65 @@
+<project name="bug404018" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="client.exe" />
+				<include name="interface.dll" />
+				<include name="out" />
+				<include name="server.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="interface.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="interface.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="client.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="client.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="interface.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="server.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="server.cs" />
+			</sources>
+			<references>
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="interface.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="200" />
+
+		<!-- save current target framework -->
+		<property name="original.test.targetframework" value="${framework::get-target-framework()}" />
+
+		<foreach property="test.framework" item="String" in="${test.frameworks}" delim=",">
+			<if test="${framework::exists(test.framework)}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<exec program="client.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}" />
+			</if>
+		</foreach>
+
+		<!-- restore original target framework -->
+		<property name="nant.settings.currentframework" value="${original.test.targetframework}" />
+
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
