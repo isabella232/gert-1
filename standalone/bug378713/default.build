@@ -1,0 +1,73 @@
+<project name="bug378713" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="Client/client.exe" />
+				<include name="Client/interface.dll" />
+				<include name="Interface/interface.dll" />
+				<include name="out" />
+				<include name="Server/error" />
+				<include name="Server/interface.dll" />
+				<include name="Server/server.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">	
+		<csc target="library" define="${csc.defines}" output="Interface/interface.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="Interface">
+				<include name="CommsInfo.cs" />
+				<include name="RemotingServerClient.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Client/client.exe" warnaserror="true" warninglevel="4">
+			<sources basedir="Client">
+				<include name="../../../build/common/Assert.cs" />
+				<include name="Client.cs" />
+			</sources>
+			<references basedir="Interface">
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="interface.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="Server/server.exe" warnaserror="true" warninglevel="4">
+			<sources basedir="Server">
+				<include name="Client.cs" />
+				<include name="Server.cs" />
+			</sources>
+			<references basedir="Interface">
+				<include name="System.Runtime.Remoting.dll" />
+				<include name="interface.dll" />
+			</references>
+		</csc>
+		<copy file="Interface/interface.dll" todir="Client" />
+		<copy file="Interface/interface.dll" todir="Server" />
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="Server/server.exe" managed="true" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="200" />
+
+		<!-- save current target framework -->
+		<property name="original.test.targetframework" value="${framework::get-target-framework()}" />
+
+		<foreach property="test.framework" item="String" in="${test.frameworks}" delim=",">
+			<if test="${framework::exists(test.framework)}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<exec program="Client/client.exe" managed="true" output="out" />
+				<fail if="${file::exists('out')}">#1</fail>
+				<fail if="${file::exists('Server/error')}">#2</fail>
+			</if>
+		</foreach>
+
+		<!-- restore original target framework -->
+		<property name="nant.settings.currentframework" value="${original.test.targetframework}" />
+
+		<kill pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
