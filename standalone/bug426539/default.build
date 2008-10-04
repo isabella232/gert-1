@@ -1,0 +1,84 @@
+<project name="bug426539" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="net-1.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="web/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="test1,test2,test3" />
+	
+	<target name="test1" depends="compile">
+		<mkdir dir="web" />
+		<copy file="web_V1.config" tofile="web/web.config" overwrite="true" />
+		<copy file="DecodeHandler_V1.ashx" tofile="web/DecodeHandler.ashx" overwrite="true" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="test2" depends="compile">
+		<mkdir dir="web" />
+		<copy file="web_V2.config" tofile="web/web.config" overwrite="true" />
+		<copy file="DecodeHandler_V2.ashx" tofile="web/DecodeHandler.ashx" overwrite="true" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="test3" depends="compile">
+		<mkdir dir="web" />
+		<copy file="web_V3.config" tofile="web/web.config" overwrite="true" />
+		<copy file="DecodeHandler_V3.ashx" tofile="web/DecodeHandler.ashx" overwrite="true" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
