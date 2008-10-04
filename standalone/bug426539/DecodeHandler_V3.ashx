@@ -36,13 +36,13 @@ public class DecodeHandler : IHttpHandler
 		context.Response.Write ("</t5>");
 
 		context.Response.Write ("<t6>");
-		context.Response.Write (context.Server.UrlDecode ("%a8%b9") == "\uB9A8");
+		context.Response.Write (context.Server.UrlDecode ("%fc%00") == "\u00FC");
 		context.Response.Write ("</t6>");
 
 		sw = new StringWriter ();
-		context.Server.UrlDecode ("%a8%b9", sw);
+		context.Server.UrlDecode ("%fc%00", sw);
 		context.Response.Write ("<t7>");
-		context.Response.Write (sw.ToString () == "\uB9A8");
+		context.Response.Write (sw.ToString () == "\u00FC");
 		context.Response.Write ("</t7>");
 	}
 }
