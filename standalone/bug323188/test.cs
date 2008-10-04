@@ -30,7 +30,8 @@ class Program
 
 		Thread.Sleep (200);
 
-		using (StreamReader sr = new StreamReader (temp_file, Encoding.UTF8, true)) {
+		using (FileStream fs = File.Open (temp_file, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+			StreamReader sr = new StreamReader (fs, Encoding.UTF8, true);
 			sr.ReadToEnd ();
 		}
 
@@ -39,6 +40,16 @@ class Program
 
 		Assert.AreEqual (0, _events.Count, "#A");
 
+		using (FileStream fs = File.Open (temp_file, FileMode.Open, FileAccess.ReadWrite, FileShare.Read)) {
+			StreamReader sr = new StreamReader (fs, Encoding.UTF8, true);
+			sr.ReadToEnd ();
+		}
+
+		// on Windows, Mono's FSW only checks for changes every 750 ms
+		Thread.Sleep (1000);
+
+		Assert.AreEqual (0, _events.Count, "#B");
+
 		StreamWriter writer = new StreamWriter (temp_file, false);
 		writer.Write ("delete me");
 		writer.Flush ();
@@ -46,24 +57,24 @@ class Program
 		// on Windows, Mono's FSW only checks for changes every 750 ms
 		Thread.Sleep (1000);
 
-		Assert.AreEqual (1, _events.Count, "#B1");
+		Assert.AreEqual (1, _events.Count, "#C1");
 		FileSystemEventArgs fileArgs = _events [0] as FileSystemEventArgs;
-		Assert.IsNotNull (fileArgs, "#B2");
-		Assert.AreEqual (WatcherChangeTypes.Changed, fileArgs.ChangeType, "#B3");
-		AssertPaths (temp_file, fileArgs.FullPath, "#B4");
-		AssertPaths ("Log.tmp", fileArgs.Name, "#B5");
+		Assert.IsNotNull (fileArgs, "#C2");
+		Assert.AreEqual (WatcherChangeTypes.Changed, fileArgs.ChangeType, "#C3");
+		AssertPaths (temp_file, fileArgs.FullPath, "#C4");
+		AssertPaths ("Log.tmp", fileArgs.Name, "#C5");
 
 		writer.Close ();
 
 		// on Windows, Mono's FSW only checks for changes every 750 ms
 		Thread.Sleep (1000);
 
-		Assert.AreEqual (2, _events.Count, "#C1");
+		Assert.AreEqual (2, _events.Count, "#D1");
 		fileArgs = _events [1] as FileSystemEventArgs;
-		Assert.IsNotNull (fileArgs, "#C2");
-		Assert.AreEqual (WatcherChangeTypes.Changed, fileArgs.ChangeType, "#C3");
-		AssertPaths (temp_file, fileArgs.FullPath, "#C4");
-		AssertPaths ("Log.tmp", fileArgs.Name, "#C5");
+		Assert.IsNotNull (fileArgs, "#D2");
+		Assert.AreEqual (WatcherChangeTypes.Changed, fileArgs.ChangeType, "#D3");
+		AssertPaths (temp_file, fileArgs.FullPath, "#D4");
+		AssertPaths ("Log.tmp", fileArgs.Name, "#D5");
 	}
 
 	static void AssertPaths (string x, string y, string msg)
