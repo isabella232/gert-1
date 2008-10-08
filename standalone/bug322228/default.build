@@ -1,0 +1,33 @@
+<project name="bug322228" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="testb.dll" />
+				<include name="a/**" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="a" />
+		<csc target="exe" define="${csc.defines}" output="a/testa.exe" debug="Full"  warnaserror="true">
+			<sources>
+				<include name="testa.cs" />
+			</sources>
+		</csc>
+		<csc target="library" output="testb.dll">
+			<sources>
+				<include name="testb.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="a/testa.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
