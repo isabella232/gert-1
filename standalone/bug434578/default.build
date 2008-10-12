@@ -1,0 +1,59 @@
+<project name="bug434578" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="net-1.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="web/Web.config" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>x
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="run-test1,run-test2" />
+
+	<target name="run-test1" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test2" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
