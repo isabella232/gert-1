@@ -1,0 +1,36 @@
+<project name="bug436291" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test1.exe" />
+				<include name="test2.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" output="test1.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test1.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" output="test2.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test2.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test1.exe" managed="true" output="out">
+			<arg value="${framework::get-runtime-engine(framework::get-target-framework())}" />
+		</exec>
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
