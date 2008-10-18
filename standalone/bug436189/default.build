@@ -1,7 +1,7 @@
 <project name="bug436189" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
-	<property name="frameworks" value="${framework::get-frameworks('installed mono')}" />
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop mono')}" />
 
 	<target name="clean">
 		<delete>
@@ -16,16 +16,25 @@
 
 	<target name="compile" depends="init">
 		<csc target="library" output="Common/loader/loader.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0618" />
+			</nowarn>
 			<sources basedir="Common/loader">
 				<include name="Loader.cs" />
 			</sources>
 		</csc>
 		<csc target="library" output="Common/test-object/test-object.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0618" />
+			</nowarn>
 			<sources basedir="Common/test-object">
 				<include name="TestObject.cs" />
 			</sources>
 		</csc>
 		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0618" />
+			</nowarn>
 			<sources>
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
