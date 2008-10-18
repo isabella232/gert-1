@@ -1,0 +1,47 @@
+<project name="bug436189" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed mono')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="Common/test-object/test-object.dll" />
+				<include name="Common/loader/loader.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" output="Common/loader/loader.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources basedir="Common/loader">
+				<include name="Loader.cs" />
+			</sources>
+		</csc>
+		<csc target="library" output="Common/test-object/test-object.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources basedir="Common/test-object">
+				<include name="TestObject.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+				<include name="ShowLogin.cs" />
+			</sources>
+			<references>
+				<include name="Common/test-object/test-object.dll" />
+				<include name="Common/loader/loader.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<setenv name="MONO_PATH" value="${path::combine(project::get-base-directory(), 'Common/loader')}" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+		<setenv name="MONO_PATH" />
+	</target>
+</project>
