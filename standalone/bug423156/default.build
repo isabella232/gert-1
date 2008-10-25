@@ -8,22 +8,31 @@
 		<delete>
 			<fileset>
 				<include name="out" />
-				<include name="test.exe" />
+				<include name="test1.exe" />
+				<include name="test2.exe" />
 			</fileset>
 		</delete>
 	</target>
 
 	<target name="compile" depends="init">
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" define="${csc.defines}" output="test1.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="../../build/common/Assert.cs" />
-				<include name="test.cs" />
+				<include name="test1.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test2.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test2.cs" />
 			</sources>
 		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
-		<exec program="test.exe" managed="true" output="out" />
-		<fail if="${file::exists('out')}" />
+		<exec program="test1.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#1</fail>
+		<exec program="test2.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}">#2</fail>
 	</target>
 </project>
