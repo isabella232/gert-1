@@ -1,0 +1,113 @@
+<project name="bug437691" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="net-1.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="web/bin/**" />
+				<include name="web/Global.asax.cs" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>x
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="web/bin" />
+		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.Test.dll" warnaserror="true" warninglevel="4">
+			<sources basedir="web">
+				<include name="*.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="run-test1,run-test2,run-test3,run-test4" />
+
+	<target name="run-test1">
+		<call target="clean" />
+		<copy file="Global_V1.asax.cs" tofile="web/Global.asax.cs" overwrite="true" />
+		<call target="compile" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test2">
+		<call target="clean" />
+		<copy file="Global_V2.asax.cs" tofile="web/Global.asax.cs" overwrite="true" />
+		<call target="compile" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test3">
+		<call target="clean" />
+		<copy file="Global_V3.asax.cs" tofile="web/Global.asax.cs" overwrite="true" />
+		<call target="compile" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test4">
+		<call target="clean" />
+		<copy file="Global_V4.asax.cs" tofile="web/Global.asax.cs" overwrite="true" />
+		<call target="compile" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test4" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
