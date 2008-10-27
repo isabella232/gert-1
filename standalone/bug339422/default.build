@@ -1,0 +1,46 @@
+<project name="bug339422" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test.exe.config" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<copy file="test_V1.exe.config" tofile="test.exe.config"
+			overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test1" />
+		</exec>
+		<fail if="${file::exists('out')}">#1</fail>
+
+		<copy file="test_V2.exe.config" tofile="test.exe.config"
+			overwrite="true" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test2" />
+		</exec>
+		<fail if="${file::exists('out')}">#2</fail>
+
+		<delete file="test.exe.config" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test3" />
+		</exec>
+		<fail if="${file::exists('out')}">#3</fail>
+	</target>
+</project>
