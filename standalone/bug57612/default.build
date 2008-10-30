@@ -1,12 +1,13 @@
-<project name="bug57612" default="rebuild">
+<project name="bug314478" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
-	<property name="frameworks" value="mono-1.0,mono-2.0,net-1.1,net-2.0" />
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
 	
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="whatever/**" />
+				<include name="bar/**" />
+				<include name="foo/**" />
 				<include name="out" />
 				<include name="a.exe" />
 			</fileset>
@@ -14,18 +15,26 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<mkdir dir="whatever" />
-		<csc target="library" define="${csc.defines}" output="whatever/b.dll" warnaserror="true" warninglevel="4">
+		<mkdir dir="foo" />
+		<csc target="library" define="${csc.defines}" output="foo/b.dll" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="b.cs" />
 			</sources>
 		</csc>
+		<mkdir dir="bar" />
+		<csc target="library" define="${csc.defines}" output="bar/c.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="c.cs" />
+			</sources>
+		</csc>
 		<csc target="exe" define="${csc.defines}" output="a.exe" warnaserror="true" warninglevel="4">
 			<sources>
+				<include name="../../build/common/Assert.cs" />
 				<include name="a.cs" />
 			</sources>
-			<references basedir="whatever">
-				<include name="b.dll" />
+			<references>
+				<include name="foo/b.dll" />
+				<include name="bar/c.dll" />
 			</references>
 		</csc>
 	</target>

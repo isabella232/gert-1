@@ -1,13 +1,11 @@
-namespace a
+class Program
 {
-	class Program
+	static void Main ()
 	{
-		static int Main (string[] args)
-		{
-			b.SomeClass b = new b.SomeClass();
-			if (b.Test () != "ok b")
-				return 1;
-			return 0;
-		}
+		b.Foo b = new b.Foo ();
+		Assert.AreEqual ("ok b", b.Test (), "#1");
+
+		c.Bar c = new c.Bar ();
+		Assert.AreEqual ("ok c", c.Test (), "#2");
 	}
 }

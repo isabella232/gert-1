@@ -1,11 +1,7 @@
 namespace b
 {
-	public class SomeClass
+	public class Foo
 	{
-		public SomeClass()
-		{
-		}
-
 		public string Test()
 		{
 			return "ok b";
