@@ -27,20 +27,16 @@ class Program
 	{
 		CompareOptions options = CompareOptions.None;
 		
-		if (!RunningOnUnix)
+		if (RunningOnWindows)
 			options = CompareOptions.IgnoreCase;
 
 		CultureInfo culture = CultureInfo.InvariantCulture;
 		return culture.CompareInfo.IsPrefix (source, prefix, options);
 	}
 
-	static bool RunningOnUnix {
+	static bool RunningOnWindows {
 		get {
-#if NET_2_0
-			return (Environment.OSVersion.Platform == PlatformID.Unix);
-#else
-			return ((int) Environment.OSVersion.Platform == 128);
-#endif
+			return (Path.DirectorySeparatorChar == '\\');
 		}
 	}
 }
