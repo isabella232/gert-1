@@ -6,22 +6,34 @@
 	<target name="clean">
 		<delete>
 			<fileset>
+				<include name="sub/**" />
 				<include name="out" />
+				<include name="remote.dll" />
 				<include name="test.exe" />
 			</fileset>
 		</delete>
 	</target>
 
 	<target name="compile" depends="init">
+		<csc target="library" output="remote.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="remote.cs" />
+			</sources>
+		</csc>
 		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
+			<references>
+				<include name="remote.dll" />
+			</references>
 		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
+		<mkdir dir="sub" />
+
 		<exec program="test.exe" managed="true" output="out" />
 		<fail if="${file::exists('out')}" />
 	</target>
