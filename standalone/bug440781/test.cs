@@ -18,8 +18,9 @@ class Program
 		AppDomainSetup setup = new AppDomainSetup ();
 		setup.ApplicationBase = subdir;
 
-		AppDomain domain = AppDomain.CreateDomain ("test",
-			AppDomain.CurrentDomain.Evidence, setup);
+		AppDomain domain;
+
+		domain = AppDomain.CreateDomain ("test", AppDomain.CurrentDomain.Evidence, setup);
 		try {
 			RemoteTester remote = (RemoteTester) domain.CreateInstanceAndUnwrap (
 				typeof (RemoteTester).Assembly.FullName,
@@ -28,5 +29,16 @@ class Program
 		} finally {
 			AppDomain.Unload (domain);
 		}
+
+		domain = AppDomain.CreateDomain ("test", AppDomain.CurrentDomain.Evidence, null);
+		try {
+			RemoteTester remote = (RemoteTester) domain.CreateInstanceAndUnwrap (
+				typeof (RemoteTester).Assembly.FullName,
+				typeof (RemoteTester).FullName);
+			Assert.AreEqual (basedir, remote.GetBaseDirectory (), "#5");
+		} finally {
+			AppDomain.Unload (domain);
+		}
+
 	}
 }
