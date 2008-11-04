@@ -8,12 +8,12 @@ public class GlobalBase : System.Web.HttpApplication
 {
 	protected virtual void Application_Start (object sender, EventArgs e)
 	{
-		Counters.AppStart++;
+		Counters.AppStart |= 4;
 	}
 
 	protected void Session_Start (object sender, EventArgs e)
 	{
-		Counters.SessionStart++;
+		Counters.SessionStart |= 4;
 	}
 
 	protected virtual void Application_EndRequest (object sender, EventArgs e)
@@ -41,12 +41,12 @@ public class Global : GlobalBase
 {
 	protected override void Application_Start (object sender, EventArgs e)
 	{
-		Counters.AppStart += 2;
+		Counters.AppStart |= 2;
 	}
 
 	private void Application_BeginRequest (object sender, EventArgs e)
 	{
-		Counters.AppStart += 4;
+		Counters.AppStart |= 2;
 	}
 }
 

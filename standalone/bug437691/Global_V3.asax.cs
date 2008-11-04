@@ -8,12 +8,12 @@ public class GlobalBase : System.Web.HttpApplication
 {
 	internal void Application_Start (object sender, EventArgs e)
 	{
-		Counters.AppStart += 2;
+		Counters.AppStart |= 4;
 	}
 
 	private void Session_Start (object sender, EventArgs e)
 	{
-		Counters.SessionStart++;
+		Counters.SessionStart |= 4;
 	}
 
 	protected virtual void Application_EndRequest (object sender, EventArgs e)
@@ -41,7 +41,7 @@ public class Global : GlobalBase
 {
 	private void Application_BeginRequest (object sender, EventArgs e)
 	{
-		Counters.AppStart += 4;
+		Counters.AppStart |= 2;
 	}
 }
 
