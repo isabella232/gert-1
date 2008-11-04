@@ -18,6 +18,9 @@
 	<target name="compile" depends="init">
 		<mkdir dir="web/bin" />
 		<csc target="library" define="${csc.defines}" output="web/bin/Mono.Web.Test.dll" warnaserror="true" warninglevel="4">
+			<nowarn>
+				<warning number="0169" />
+			</nowarn>
 			<sources basedir="web">
 				<include name="*.cs" />
 			</sources>
