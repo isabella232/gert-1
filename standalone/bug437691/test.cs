@@ -26,6 +26,8 @@ class Program
 #endif
 		case "test4":
 			return RunTest ("9", "1");
+		case "test5":
+			return RunTest ("1", "1");
 		default:
 			Console.WriteLine ("Unsupported test '{0}'.", args [0]);
 			return 2;

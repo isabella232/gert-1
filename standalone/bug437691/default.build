@@ -36,7 +36,7 @@
 		</csc>
 	</target>
 
-	<target name="run-test" depends="run-test1,run-test2,run-test3,run-test4" />
+	<target name="run-test" depends="run-test1,run-test2,run-test3,run-test4,run-test5" />
 
 	<target name="run-test1">
 		<call target="clean" />
@@ -108,6 +108,25 @@
 		<sleep milliseconds="1000" />
 		<exec program="test.exe" managed="true" output="out">
 			<arg value="test4" />
+		</exec>
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+
+	<target name="run-test5">
+		<call target="clean" />
+		<copy file="Global_V5.asax.cs" tofile="web/Global.asax.cs" overwrite="true" />
+		<call target="compile" />
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="web" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="test5" />
 		</exec>
 		<kill pid="${server.pid}" />
 		<fail if="${file::exists('out')}" />
