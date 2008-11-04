@@ -1,0 +1,27 @@
+<project name="bug434892" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="AmazonSearchService.cs" />
+				<include name="AmazonSearchService.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="run-test" depends="init">
+		<wsdl path="AmazonSearch.wsdl" nologo="true" />
+		<csc target="library" output="AmazonSearchService.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="AmazonSearchService.cs" />
+			</sources>
+			<references>
+				<include name="System.Web.Services.dll" />
+			</references>
+		</csc>
+	</target>
+</project>
