@@ -26,9 +26,9 @@ class Program
 #endif
 			case "Global_V3.asax":
 #if NET_2_0
-				return RunTest ("2", "2", "1", "V1_3");
+				return RunTest ("2", "1", "1", "V1_3");
 #else
-				return RunTest ("1", "2", "1", "V1_3");
+				return RunTest ("1", "1", "1", "V1_3");
 #endif
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
@@ -41,7 +41,7 @@ class Program
 			case "Global_V2.asax":
 				return RunTest ("1", "0", "4", "V2_2");
 			case "Global_V3.asax":
-				return RunTest ("1", "0", "1", "V2_3");
+				return RunTest ("1", "1", "1", "V2_3");
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
 				return 2;
@@ -62,9 +62,9 @@ class Program
 #endif
 			case "Global_V3.asax":
 #if NET_2_0
-				return RunTest ("4", "2", "1", "V3_3");
+				return RunTest ("4", "1", "1", "V3_3");
 #else
-				return RunTest ("1", "2", "1", "V3_3");
+				return RunTest ("1", "1", "1", "V3_3");
 #endif
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
@@ -77,7 +77,7 @@ class Program
 			case "Global_V2.asax":
 				return RunTest ("1", "8", "0", "V4_2");
 			case "Global_V3.asax":
-				return RunTest ("1", "8", "1", "V4_3");
+				return RunTest ("1", "1", "1", "V4_3");
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
 				return 2;
@@ -89,7 +89,7 @@ class Program
 			case "Global_V2.asax":
 				return RunTest ("4", "4", "4", "V5_2");
 			case "Global_V3.asax":
-				return RunTest ("4", "4", "5", "V5_3");
+				return RunTest ("4", "1", "5", "V5_3");
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
 				return 2;
@@ -101,7 +101,7 @@ class Program
 			case "Global_V2.asax":
 				return RunTest ("4", "2", "6", "V6_2");
 			case "Global_V3.asax":
-				return RunTest ("4", "2", "7", "V6_3");
+				return RunTest ("4", "1", "7", "V6_3");
 			default:
 				Console.WriteLine ("Unsupported test '{0}|{1}'.", args [0], args [1]);
 				return 2;
