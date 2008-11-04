@@ -20,6 +20,9 @@
 			<sources>
 				<include name="FunkyTextBox.cs" />
 			</sources>
+			<references>
+				<include name="System.Web.dll" />
+			</references>
 		</csc>
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
