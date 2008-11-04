@@ -11,7 +11,7 @@ public class GlobalBase : System.Web.HttpApplication
 		Counters.AppStart |= 4;
 	}
 
-	protected virtual void Application_BeginRequest (object sender, EventArgs e)
+	public void Application_BeginRequest (object sender, EventArgs e)
 	{
 		Counters.AppBeginRequest |= 4;
 	}
@@ -24,4 +24,18 @@ public class GlobalBase : System.Web.HttpApplication
 
 public class Global : GlobalBase
 {
+	public new void Application_Start (object sender, EventArgs e)
+	{
+		Counters.AppStart |= 2;
+	}
+
+	public new void Application_BeginRequest (object sender, EventArgs e)
+	{
+		Counters.AppBeginRequest |= 2;
+	}
+
+	public new void Session_Start ()
+	{
+		Counters.SessionStart |= 2;
+	}
 }

@@ -63,14 +63,14 @@
 							<arg value="--port" />
 							<arg value="8081" />
 						</exec>
-						<sleep milliseconds="200" />
+						<sleep milliseconds="500" />
 						<exec program="test.exe" managed="true" output="out">
 							<arg value="${path::get-file-name(codebind.filename)}" />
 							<arg value="${path::get-file-name(asax.filename)}" />
 						</exec>
 						<kill pid="${server.pid}" />
 						<fail if="${file::exists('out')}" />
-						<sleep milliseconds="200" />
+						<sleep milliseconds="1000" />
 					</do>
 				</foreach>
 			</do>

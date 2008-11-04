@@ -7,6 +7,7 @@
 <body>
 	<form id="form1" runat="server">
 		<asp:Label ID="AppStart" runat="server" />
+		<asp:Label ID="AppBeginRequest" runat="server" />
 		<asp:Label ID="SessionStart" runat="server" />
 	</form>
 </body>
