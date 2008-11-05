@@ -2,7 +2,6 @@
 	<include buildfile="../../build/common.build" />
 
 	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
-	<property name="frameworks.excluded" value="net-1.0,net-1.1" />
 
 	<target name="clean">
 		<delete>
