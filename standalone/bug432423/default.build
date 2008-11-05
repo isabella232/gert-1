@@ -1,0 +1,44 @@
+<project name="bug432366" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="lib.dll" />
+				<include name="Mono.Cecil.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="lib.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="lib.cs" />
+			</sources>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+			<references basedir="../../build/lib">
+				<include name="Mono.Cecil.dll" />
+			</references>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<copy todir=".">
+			<fileset basedir="../../build/lib">
+				<include name="Mono.Cecil.dll" />
+			</fileset>
+		</copy>
+		<exec program="test.exe" managed="strict" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
