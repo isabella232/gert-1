@@ -1,0 +1,44 @@
+<project name="bugXXXXX" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="bar.dll" />
+				<include name="foo.dll" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" output="foo.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="foo.cs" />
+			</sources>
+		</csc>
+		<csc target="library" output="bar.dll" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="bar.cs" />
+			</sources>
+			<references>
+				<include name="foo.dll" />
+			</references>
+		</csc>
+		<csc target="exe" output="test.exe" define="${csc.defines}" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<delete file="foo.dll" />
+		<exec program="test.exe" managed="true" output="out" />
+		<fail if="${file::exists('out')}" />
+	</target>
+</project>
