@@ -6,7 +6,10 @@
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="lib.dll" />
+				<include name="libA.dll" />
+				<include name="libB.dll" />
+				<include name="libC.dll" />
+				<include name="libD.dll" />
 				<include name="Mono.Cecil.dll" />
 				<include name="out" />
 				<include name="test.exe" />
@@ -15,9 +18,24 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<csc target="library" define="${csc.defines}" output="lib.dll" warnaserror="false" warninglevel="4">
+		<csc target="library" define="${csc.defines}" output="libA.dll" warnaserror="false" warninglevel="4">
 			<sources>
-				<include name="lib.cs" />
+				<include name="libA.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="libB.dll" warnaserror="false" warninglevel="4">
+			<sources>
+				<include name="libB.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="libC.dll" warnaserror="false" warninglevel="4">
+			<sources>
+				<include name="libC.cs" />
+			</sources>
+		</csc>
+		<csc target="library" define="${csc.defines}" output="libD.dll" warnaserror="false" warninglevel="4">
+			<sources>
+				<include name="libD.cs" />
 			</sources>
 		</csc>
 		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
@@ -37,7 +55,15 @@
 				<include name="Mono.Cecil.dll" />
 			</fileset>
 		</copy>
+		<exec program="${framework::get-tool-path('sn.exe')}" managed="strict" if="${framework::get-family(framework::get-target-framework()) == 'net'}">
+			<arg value="-Vr" />
+			<arg file="libD.dll" />
+		</exec>
 		<exec program="test.exe" managed="strict" output="out" />
 		<fail if="${file::exists('out')}" />
+		<exec program="${framework::get-tool-path('sn.exe')}" managed="strict" if="${framework::get-family(framework::get-target-framework()) == 'net'}">
+			<arg value="-Vu" />
+			<arg file="libD.dll" />
+		</exec>
 	</target>
 </project>
