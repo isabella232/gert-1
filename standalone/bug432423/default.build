@@ -6,10 +6,7 @@
 	<target name="clean">
 		<delete>
 			<fileset>
-				<include name="libA.dll" />
-				<include name="libB.dll" />
-				<include name="libC.dll" />
-				<include name="libD.dll" />
+				<include name="lib?.dll" />
 				<include name="Mono.Cecil.dll" />
 				<include name="out" />
 				<include name="test.exe" />
