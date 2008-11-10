@@ -19,7 +19,7 @@ class Program
 			command = new SqlCommand (create_stored_procedure, myConnection);
 			command.ExecuteNonQuery ();
 
-			command = new SqlCommand ("bug66630", myConnection);
+			command = new SqlCommand ("bug316091", myConnection);
 			command.CommandType = CommandType.StoredProcedure;
 			command.Parameters.Add ("@UserAccountStatus", SqlDbType.SmallInt).Value = UserAccountStatus.ApprovalPending;
 			command.Prepare ();
@@ -41,11 +41,11 @@ class Program
 	}
 
 	const string drop_stored_procedure = @"
-		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug66630]') AND type in (N'P', N'PC'))
-			DROP PROCEDURE [dbo].[bug66630]";
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug316091]') AND type in (N'P', N'PC'))
+			DROP PROCEDURE [dbo].[bug316091]";
 
 	const string create_stored_procedure = @"
-			CREATE PROCEDURE bug66630
+			CREATE PROCEDURE bug316091
 			(
 				@UserAccountStatus smallint = 1
 			)
