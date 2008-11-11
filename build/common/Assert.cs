@@ -62,20 +62,19 @@ class Assert
 
 	public static void IsTrue (bool value, string msg)
 	{
-		if (!value)
-			throw new Exception (msg);
+		AreEqual (true, value, msg);
 	}
 
 	public static void IsNotNull (object value, string msg)
 	{
 		if (value == null)
-			throw new Exception (msg);
+			throw new Exception (string.Format (CultureInfo.InvariantCulture,
+				"Expected a non-null value. {0}", msg));
 	}
 
 	public static void IsNull (object value, string msg)
 	{
-		if (value != null)
-			throw new Exception (msg);
+		AreEqual ((object) null, value, msg);
 	}
 
 	public static void AreSame (object x, object y, string msg)
