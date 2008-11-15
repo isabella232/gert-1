@@ -39,5 +39,17 @@
 			<arg value="read2" />
 		</exec>
 		<fail if="${file::exists('out')}">#4</fail>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="write" />
+		</exec>
+		<fail if="${file::exists('out')}">#5</fail>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="delete" />
+		</exec>
+		<fail if="${file::exists('out')}">#6</fail>
+		<exec program="test.exe" managed="true" output="out">
+			<arg value="read3" />
+		</exec>
+		<fail if="${file::exists('out')}">#7</fail>
 	</target>
 </project>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 
 class Program
 {
@@ -17,6 +18,11 @@ class Program
 			Settings.Default.FirstNames = null;
 			Settings.Default.Address = null;
 			Settings.Default.Save ();
+			break;
+		case "delete":
+			Configuration config = ConfigurationManager.OpenExeConfiguration (
+				ConfigurationUserLevel.PerUserRoamingAndLocal);
+			File.Delete (config.FilePath);
 			break;
 		case "write":
 			StringCollection firstNames = new StringCollection ();
@@ -42,6 +48,11 @@ class Program
 			break;
 		case "read2":
 			Assert.AreEqual (string.Empty, Settings.Default.Name, "#1");
+			Assert.IsNull (Settings.Default.FirstNames, "#2");
+			Assert.IsNull (Settings.Default.Address, "#3");
+			break;
+		case "read3":
+			Assert.IsNull (Settings.Default.Name, "#1");
 			Assert.IsNull (Settings.Default.FirstNames, "#2");
 			Assert.IsNull (Settings.Default.Address, "#3");
 			break;
