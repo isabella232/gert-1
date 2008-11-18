@@ -13,7 +13,7 @@ class Program
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/Default.aspx");
 		request.Method = "GET";
-		/*
+
 		try {
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
@@ -29,7 +29,7 @@ class Program
 				}
 			}
 			return 1;
-		}*/
+		}
 
 		request = (HttpWebRequest) WebRequest.Create ("http://localhost:8081/registertest.aspx");
 		request.Method = "GET";
