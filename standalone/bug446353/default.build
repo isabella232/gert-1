@@ -10,6 +10,7 @@
 				<include name="cache/**" />
 				<include name="appdomain.exe" />
 				<include name="out" />
+				<include name="result" />
 				<include name="test.exe" />
 			</fileset>
 		</delete>
@@ -21,7 +22,7 @@
 				<include name="appdomain.cs" />
 			</sources>
 		</csc>
-		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+		<csc target="exe" debug="full" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
 			<sources>
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
