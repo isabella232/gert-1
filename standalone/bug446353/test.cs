@@ -168,7 +168,11 @@ class Program
 
 			string location = sr.ReadToEnd ();
 			Assert.IsTrue (StartsWith (location, Path.Combine (cache_dir, setup.ApplicationName)), "#D8:" + location);
+#if NET_2_0
+			Assert.IsTrue (EndsWith (location, "appdomain.exe", RunningOnWindows), "#D9:" + location);
+#else
 			Assert.IsTrue (location.EndsWith ("appdomain.exe"), "#D9:" + location);
+#endif
 		}
 
 		File.Delete (resultFile);
@@ -209,7 +213,11 @@ class Program
 			string location = sr.ReadToEnd ();
 			if (RunningOnWindows)
 				Assert.IsTrue (StartsWith (location, localAppData), "#E8:" + location);
+#if NET_2_0
+			Assert.IsTrue (EndsWith (location, "appdomain.exe", RunningOnWindows), "#E9:" + location);
+#else
 			Assert.IsTrue (location.EndsWith ("appdomain.exe"), "#E9:" + location);
+#endif
 		}
 
 		File.Delete (resultFile);
@@ -251,7 +259,11 @@ class Program
 			string location = sr.ReadToEnd ();
 			if (RunningOnWindows)
 				Assert.IsTrue (StartsWith (location, localAppData), "#F8:" + location);
+#if NET_2_0
+			Assert.IsTrue (EndsWith (location, "appdomain.exe", RunningOnWindows), "#F9:" + location);
+#else
 			Assert.IsTrue (location.EndsWith ("appdomain.exe"), "#F9:" + location);
+#endif
 			Assert.IsTrue (IndexOf (location, setup.ApplicationName) == -1, "#F10:" + location);
 		}
 	}
@@ -265,6 +277,17 @@ class Program
 
 		CultureInfo culture = CultureInfo.InvariantCulture;
 		return culture.CompareInfo.IsPrefix (source, prefix, options);
+	}
+
+	static bool EndsWith (string source, string prefix, bool ignoreCase)
+	{
+		CompareOptions options = CompareOptions.None;
+
+		if (ignoreCase)
+			options = CompareOptions.IgnoreCase;
+
+		CultureInfo culture = CultureInfo.InvariantCulture;
+		return culture.CompareInfo.IsSuffix (source, prefix, options);
 	}
 
 	static int IndexOf (string source, string prefix)
