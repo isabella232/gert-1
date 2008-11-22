@@ -1,4 +1,4 @@
-using System;
+gh jklm§ using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -207,7 +207,8 @@ class Program
 			string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
 			string location = sr.ReadToEnd ();
-			Assert.IsTrue (StartsWith (location, localAppData), "#E8:" + location);
+			if (RunningOnWindows)
+				Assert.IsTrue (StartsWith (location, localAppData), "#E8:" + location);
 			Assert.IsTrue (location.EndsWith ("appdomain.exe"), "#E9:" + location);
 		}
 
