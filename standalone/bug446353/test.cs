@@ -249,7 +249,8 @@ class Program
 			string localAppData = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
 
 			string location = sr.ReadToEnd ();
-			Assert.IsTrue (StartsWith (location, localAppData), "#F8:" + location);
+			if (RunningOnWindows)
+				Assert.IsTrue (StartsWith (location, localAppData), "#F8:" + location);
 			Assert.IsTrue (location.EndsWith ("appdomain.exe"), "#F9:" + location);
 			Assert.IsTrue (IndexOf (location, setup.ApplicationName) == -1, "#F10:" + location);
 		}
