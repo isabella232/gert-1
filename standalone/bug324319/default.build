@@ -1,0 +1,46 @@
+<project name="bug324319" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.dll" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="library" define="${csc.defines}" output="test.dll" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<foreach item="String" in="${test.frameworks}" delim="," property="test.framework">
+			<if test="${framework::exists(test.framework) and framework::get-family(test.framework) == 'net'}">
+				<!-- save original target framework -->
+				<property name="original.test.framework" value="${framework::get-target-framework()}" />
+
+				<!-- change target framework -->
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<call target="${framework::get-target-framework()}" />
+
+				<!-- verify IL -->
+				<exec program="${framework::get-tool-path('peverify.exe')}" managed="true">
+					<arg value="/NOLOGO" />
+					<arg file="test.dll" />
+				</exec>
+
+				<!-- restore original target framework -->
+				<property name="nant.settings.currentframework" value="${original.test.framework}" />
+				<call target="${framework::get-target-framework()}" />
+			</if>
+		</foreach>
+	</target>
+</project>
