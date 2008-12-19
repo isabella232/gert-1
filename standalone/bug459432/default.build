@@ -1,0 +1,63 @@
+<project name="bug459432" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="net-1.0,net-1.1,mono-1.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="client.exe" />
+				<include name="finish-server.tmp" />
+				<include name="server.exe" />
+				<include name="stop-server.tmp" />
+				<include name="failure-server.tmp" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="server.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="server.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="server.exe" managed="strict" spawn="true" pidproperty="server.pid" />
+		<sleep milliseconds="1000" />
+
+		<echo>${nant.settings.currentframework} !!!</echo>
+
+		<!-- save original target framework -->
+		<property name="original.test.targetframework" value="${nant.settings.currentframework}" />
+
+		<foreach property="test.framework" item="String" in="${frameworks}" delim=",">
+			<if test="${framework::exists(test.framework) and target::exists(test.framework)}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<call target="init" />
+				<csc target="exe" define="${csc.defines}" output="client.exe" warnaserror="true" warninglevel="4">
+					<sources>
+						<include name="../../build/common/Assert.cs" />
+						<include name="client.cs" />
+					</sources>
+				</csc>
+				<exec program="client.exe" managed="strict" output="out" />
+				<fail if="${file::exists('out')}">#1</fail>
+			</if>
+		</foreach>
+
+		<!-- force server to stop -->
+		<echo file="stop-server.tmp" />
+
+		<!-- restore original target framework -->
+		<property name="nant.settings.currentframework" value="${original.test.targetframework}" />
+
+		<waitforexit pid="${server.pid}" />
+		<sleep milliseconds="1000" />
+		<fail if="${file::exists('failure-server.tmp')}">#2</fail>
+		<fail unless="${file::exists('finish-server.tmp')}">#3</fail>
+	</target>
+</project>
