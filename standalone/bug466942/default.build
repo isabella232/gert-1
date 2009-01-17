@@ -1,0 +1,40 @@
+<project name="bug466942" default="rebuild">
+	<include buildfile="../../build/common.build" />
+	
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<property name="original.testframework" value="${nant.settings.currentframework}" />
+		
+		<foreach property="test.framework" item="String" in="${test.frameworks}" delim=",">
+			<if test="${framework::exists(test.framework) and framework::get-family(test.framework)=='net'}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<exec program="${framework::get-tool-path('peverify.exe')}" managed="strict">
+					<arg value="/nologo" />
+					<arg file="test.exe" />
+				</exec>
+			</if>
+		</foreach>
+		
+		<property name="nant.settings.currentframework" value="${original.testframework}" />
+	</target>
+</project>
