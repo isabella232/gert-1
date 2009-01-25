@@ -8,6 +8,7 @@
 		<delete>
 			<fileset>
 				<include name="web/nested.sitemap" />
+				<include name="web/Web.sitemap" />
 				<include name="out" />
 				<include name="test.exe" />
 			</fileset>
