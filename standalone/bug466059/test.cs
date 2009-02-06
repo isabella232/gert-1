@@ -17,7 +17,8 @@ class Program
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse ();
 			using (StreamReader sr = new StreamReader (response.GetResponseStream (), Encoding.UTF8, true)) {
 				string result = sr.ReadToEnd ();
-				Assert.IsTrue (result.IndexOf ("<p>test data</p>") != -1, "#A1:" + result);
+				Assert.IsTrue (result.IndexOf ("<p1>test data</p1>") != -1, "#A1:" + result);
+				Assert.IsTrue (result.IndexOf ("<p2>test data</p2>") != -1, "#A2:" + result);
 			}
 			response.Close ();
 		} catch (WebException ex) {
