@@ -13,7 +13,7 @@ namespace test
 	{
 		public static void Main (string [] args)
 		{
-#if NET_2_0
+#if NET_2_0 && !MONO
 			ServicePointManager.ServerCertificateValidationCallback =
 				new RemoteCertificateValidationCallback (ValidateServerCertificate);
 #else
@@ -90,11 +90,11 @@ namespace test
 			hwResponse = (HttpWebResponse) hwRequest.GetResponse ();
 			using (StreamReader sr = new StreamReader (hwResponse.GetResponseStream ())) {
 				string body = sr.ReadToEnd ();
-				Assert.IsTrue (body.IndexOf ("<title>Gmail - Inbox</title>") != -1, body);
+				Assert.IsTrue (body.IndexOf ("<title>Google Mobile</title>") != -1, body);
 			}
 		}
 
-#if NET_2_0
+#if NET_2_0 && !MONJO
 		public static bool ValidateServerCertificate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
 			return true;
@@ -103,7 +103,7 @@ namespace test
 	}
 }
 
-#if ONLY_1_1
+#if ONLY_1_1 || MONO
 internal class AllowAllCertificatePolicy : ICertificatePolicy
 {
 	public bool CheckValidationResult (ServicePoint point, X509Certificate certificate, WebRequest request, int certificateProblem)
