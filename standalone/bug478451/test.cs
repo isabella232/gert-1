@@ -25,7 +25,8 @@ namespace BasicFTPClientNamespace
 
 			FtpWebResponse resp = (FtpWebResponse) req.GetResponse ();
 			try {
-				Assert.AreEqual (FtpStatusCode.FileActionOK, resp.StatusCode, "#B");
+				Assert.AreEqual (FtpStatusCode.FileActionOK,
+					resp.StatusCode, "Failed to delete '" + remotePath + "'.");
 			} finally {
 				resp.Close ();
 			}
@@ -120,12 +121,70 @@ namespace BasicFTPClientNamespace
 					Assert.AreEqual ("Mono Webclient FTP 2", sr.ReadToEnd (), "#B");
 				}
 
+				// upload zero-length data
 				receive = client.UploadData ("bug478451-3", new byte [0]);
 				Assert.IsNotNull (receive, "#C1");
 				Assert.AreEqual (0, receive.Length, "#C2");
 				receive = client.DownloadData ("bug478451-3");
 				Assert.IsNotNull (receive, "#C3");
 				Assert.AreEqual (0, receive.Length, "#C4");
+
+				// upload data -remote dir does not exist
+				try {
+					receive = client.UploadData ("doesnotexist/bug478451-4",
+						new byte [0]);
+					Assert.Fail ("#D1");
+				} catch (WebException ex) {
+					Assert.IsNotNull (ex.Response, "#D2");
+					Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#D3");
+
+					FtpWebResponse response = ex.Response as FtpWebResponse;
+					Assert.IsNotNull (response, "#D4");
+					Assert.AreEqual (FtpStatusCode.ActionNotTakenFileUnavailable, response.StatusCode, "#D5");
+				}
+
+				// upload file -remote dir does not exist
+				try {
+					receive = client.UploadFile ("doesnotexist/bug478451-5",
+						Path.Combine (tmpDir, "bug478451-2"));
+					Assert.Fail ("#E1");
+				} catch (WebException ex) {
+					Assert.IsNotNull (ex.Response, "#E2");
+					Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#E3");
+
+					FtpWebResponse response = ex.Response as FtpWebResponse;
+					Assert.IsNotNull (response, "#E4");
+					Assert.AreEqual (FtpStatusCode.ActionNotTakenFileUnavailable, response.StatusCode, "#E5");
+				}
+
+				// download file - file does not exist
+				try {
+					receive = client.DownloadData ("doesnotexist");
+					Assert.Fail ("#F1");
+				} catch (WebException ex) {
+					Assert.IsNotNull (ex.Response, "#F2");
+					Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#F3");
+
+					FtpWebResponse response = ex.Response as FtpWebResponse;
+					Assert.IsNotNull (response, "#F4");
+					Assert.AreEqual (FtpStatusCode.ActionNotTakenFileUnavailable, response.StatusCode, "#F5");
+				}
+
+				// download file - file does not exist
+				try {
+					client.DownloadFile ("doesnotexist",
+						Path.Combine (tmpDir, "bug478451-7-receive"));
+					Assert.Fail ("#G1");
+				} catch (WebException ex) {
+					Assert.IsNotNull (ex.Response, "#G2");
+					Assert.AreEqual (WebExceptionStatus.ProtocolError, ex.Status, "#G3");
+
+					FtpWebResponse response = ex.Response as FtpWebResponse;
+					Assert.IsNotNull (response, "#G4");
+					Assert.AreEqual (FtpStatusCode.ActionNotTakenFileUnavailable, response.StatusCode, "#G5");
+
+					Assert.IsFalse (File.Exists (Path.Combine (tmpDir, "bug478451-7-receive")), "#G6");
+				}
 
 				return 0;
 			} finally {
