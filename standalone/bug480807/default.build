@@ -1,0 +1,29 @@
+<project name="bug480807" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="repro/**" />
+				<include name="bug480807.zip" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<get
+			src="http://bugzilla.novell.com/attachment.cgi?id=276232"
+			dest="bug480807.zip"
+			usetimestamp="true" />
+		<unzip zipfile="bug480807.zip" todir="." />
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="repro/Moq.Tests.exe" managed="strict" />
+	</target>
+</project>
