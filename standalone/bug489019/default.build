@@ -1,0 +1,40 @@
+<project name="bug489019" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="caller" />
+				<include name="out" />
+				<include name="test.exe" />
+				<include name="test-file.log" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init" if="${platform::is-unix()}">
+		<exec program="gcc">
+			<arg value="-o" />
+			<arg file="caller" />
+			<arg file="caller.c" />
+		</exec>
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile" if="${platform::is-unix()}">
+		<exec program="caller">
+			<arg file="${framework::get-runtime-engine(framework::get-target-framework())}" />
+			<arg file="test.exe" />
+		</exec>
+		<fail unless="${file::exists('test-file.log')}">#1</fail>
+		<loadfile file="test-file.log" property="log" />
+		<fail if="${log != 'Hello world'}">#2</fail>
+	</target>
+</project>
