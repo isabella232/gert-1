@@ -13,6 +13,10 @@ class Program
 		string base_dir = AppDomain.CurrentDomain.BaseDirectory;
 		string watch_dir = Path.Combine (base_dir, "watch");
 
+		if (Directory.Exists (watch_dir))
+			Directory.Delete (watch_dir, true);
+		Directory.CreateDirectory (watch_dir);
+
 		FileSystemWatcher watcher = new FileSystemWatcher ();
 		watcher.Path = watch_dir;
 		watcher.NotifyFilter |= NotifyFilters.Size;
