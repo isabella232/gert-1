@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+* Copyright (c) 2008 Yamaha Corporation
+* All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*     * Redistributions of source code must retain the above copyright
+*       notice, this list of conditions and the following disclaimer.
+*     * Redistributions in binary form must reproduce the above copyright
+*       notice, this list of conditions and the following disclaimer in the
+*       documentation and/or other materials provided with the distribution.
+*     * Neither the name of the <organization> nor the
+*       names of its contributors may be used to endorse or promote products
+*       derived from this software without specific prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY YAMAHA CORPORATION ''AS IS'' AND ANY
+* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL YAMAHA CORPORATION BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:osfm="http://www.yamaha.co.uk/osf/manifest/0.9" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.yamaha.co.uk/osf/manifest/0.9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"/>
+	<xs:element name="manifest">
+		<xs:annotation>
+			<xs:documentation>
+Manifest for an OSF Package. The manifest records information for each file in the
+package besides container.xml and manifest.xml, such as location, format type and 
+data associated with any (optional) signature for the package and its assets.  
+		   </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="assets">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="asset" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name" type="xs:anyURI" use="required">
+										<xs:annotation>
+											<xs:documentation>
+													IRI (as defined in RFC3987) of the file relative to the root of the package									
+												</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="media-type" type="xs:anyURI" use="required">
+										<xs:annotation>
+											<xs:documentation>
+													Internet Media Type (MIME-Type)  as defined by RFC2046
+												</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="size" type="xs:integer" use="optional">
+										<xs:annotation>
+											<xs:documentation>
+													Size of file (optional). Used when files are encrypted with a block cypher and padded may
+													have needed to have been applied.
+												</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="Id" type="xs:ID"/>
+									<xs:attribute name="signed" type="xs:boolean" use="optional">
+										<xs:annotation>
+											<xs:documentation>
+													The asset should be included in the digital signature for the package.
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="c14n" type="xs:boolean" use="optional">
+										<xs:annotation>
+											<xs:documentation>
+													The asset should be canonicalized before signing.
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="asset-group" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>
+										A group of assets in the package. Typically a group of assets share a bulk encyption key, are 
+										processed together by the security tool. An asset can only ever belong in one asset group
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence maxOccurs="unbounded">
+										<xs:element name="asset-reference">
+											<xs:complexType>
+												<xs:attribute name="ref" type="xs:anyURI" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:anyURI" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" type="xs:anyURI" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="ds:KeyInfo" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							Public key used to sign package. Beneath here should be a X509Data element containing an  BASE64 encoded
+							X.509 certicate bearing the key. Whilst the schema can't apply this limitation, the OSF validation tool probably will.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="ds:Signature" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							XML-SIG signature of and asset digests
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<!-- cross reference and key uniqueness tests -->
+		<xs:key name="asset">
+			<xs:annotation>
+				<xs:documentation>
+					Enforce unique asset names.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="osfm:assets/osfm:asset"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="asset-group-name">
+			<xs:annotation>
+				<xs:documentation>
+					Enforce unique asset-group names. 
+				</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="osfm:assets/osfm:asset-group"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:keyref name="asset-group" refer="osfm:asset">
+			<xs:annotation>
+				<xs:documentation>
+					Ensure that asset-ref corresponds to asset
+				</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="osfm:assets/osfm:asset-group/osfm:asset-reference"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:unique name="asseet-reference">
+			<xs:annotation>
+				<xs:documentation>
+					Assets can only be referenced in one asset group
+					</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="osfm:assets/osfm:asset-group/osfm:asset-reference"/>
+			<xs:field xpath="@ref"/>
+		</xs:unique>
+		<!-- cross references  checks  between things in the manifest that can be signed and references to them -->
+		<xs:key name="signable-object">
+			<xs:annotation>
+				<xs:documentation>
+					Any object to which a digital signature can be applied (see xs:signature element).
+					This contains assets and the assets element
+				</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="osfm:assets/osfm:asset|osfm:assets"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:keyref name="signature-ref" refer="osfm:signable-object">
+			<xs:annotation>
+				<xs:documentation>
+					Ensure that all references in xs:Signature references are either package assets declared in the 
+					manifest or the assets element
+				</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="ds:Signature/ds:SignedInfo/ds:Reference"/>
+			<xs:field xpath="@URI"/>
+		</xs:keyref>
+	</xs:element>
+</xs:schema>
