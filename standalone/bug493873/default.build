@@ -1,0 +1,45 @@
+<project name="bug493873" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="precomp.tar.gz" />
+				<include name="precomp/**" />
+				<include name="out" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<get
+			src="http://bugzilla.novell.com/attachment.cgi?id=285185"
+			dest="precomp.tar.gz"
+			usetimestamp="true" />
+		<untar src="precomp.tar.gz" compression="gzip" />
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
+			<arg value="--root" />
+			<arg dir="precomp" />
+			<arg value="--port" />
+			<arg value="8081" />
+		</exec>
+		<sleep milliseconds="1000" />
+		<exec program="test.exe" managed="true" output="out" />
+		<kill pid="${server.pid}" />
+		<fail if="${file::exists('out')}" />
+		<sleep milliseconds="1000" />
+	</target>
+</project>
