@@ -7,11 +7,19 @@ namespace SettingsTest
 		public static void Main(string[] args)
 		{
 			Settings.Default.Reload ();
-			Assert.AreEqual ("Local", Settings.Default.SteamGamePage, "#1");
+			Assert.AreEqual (5, Settings.Default.ConnectionLimit, "#A1");
+			Assert.AreEqual ("Local", Settings.Default.SteamGamePage, "#A2");
+			Assert.IsNull (Settings.Default.UserName, "#A3");
+			Settings.Default.ConnectionLimit = 7;
 			Settings.Default.SteamGamePage = "Mono";
-			Assert.AreEqual ("Mono", Settings.Default.SteamGamePage, "#2");
+			Settings.Default.UserName = "drieseng";
+			Assert.AreEqual (7, Settings.Default.ConnectionLimit, "#B1");
+			Assert.AreEqual ("Mono", Settings.Default.SteamGamePage, "#B2");
+			Assert.AreEqual ("drieseng", Settings.Default.UserName, "#B3");
 			Settings.Default.Reload();
-			Assert.AreEqual ("Local", Settings.Default.SteamGamePage, "#3");
+			Assert.AreEqual (5, Settings.Default.ConnectionLimit, "#C1");
+			Assert.AreEqual ("Local", Settings.Default.SteamGamePage, "#C2");
+			Assert.IsNull (Settings.Default.UserName, "#C3");
 		}
 	}
 
@@ -36,6 +44,29 @@ namespace SettingsTest
 			}
 			set {
 				this ["SteamGamePage"] = value;
+			}
+		}
+
+		[global::System.Configuration.ApplicationScopedSettingAttribute ()]
+		[global::System.Diagnostics.DebuggerNonUserCodeAttribute ()]
+		[global::System.Configuration.DefaultSettingValueAttribute ("5")]
+		public int ConnectionLimit {
+			get {
+				return ((int) (this ["ConnectionLimit"]));
+			}
+			set {
+				this ["ConnectionLimit"] = value;
+			}
+		}
+
+		[global::System.Configuration.ApplicationScopedSettingAttribute ()]
+		[global::System.Diagnostics.DebuggerNonUserCodeAttribute ()]
+		public string UserName {
+			get {
+				return ((string) (this ["UserName"]));
+			}
+			set {
+				this ["UserName"] = value;
 			}
 		}
 	}
