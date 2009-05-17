@@ -1,0 +1,38 @@
+<project name="bug504085" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="mono-3.5,net-3.5" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="test.netmodule" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="module" define="${csc.defines}" output="test.netmodule" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<property name="original.test.framework" value="${framework::get-target-framework()}" />
+
+		<foreach property="test.framework" item="String" in="${test.frameworks}" delim=",">
+			<if test="${framework::exists(test.framework) and framework::get-family(test.framework)=='net'}">
+				<property name="nant.settings.currentframework" value="${test.framework}" />
+				<exec program="${framework::get-tool-path('peverify.exe')}" managed="strict">
+					<arg value="/MD" />
+					<arg value="/nologo" />
+					<arg file="test.netmodule" />
+				</exec>
+			</if>
+		</foreach>
+
+		<property name="nant.settings.currentframework" value="${original.test.framework}" />
+	</target>
+</project>
