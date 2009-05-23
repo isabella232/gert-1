@@ -1,5 +1,7 @@
 <project name="bug504886" default="run-test">
 	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
 	
 	<target name="clean">
 		<delete>
