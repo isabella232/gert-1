@@ -6,7 +6,9 @@ using System.Xml;
 class Program
 {
 	static int assembly_resolve_level = 0;
+#if NET_2_0
 	static int reflection_assembly_resolve_level = 0;
+#endif
 
 	static void Main ()
 	{
@@ -16,7 +18,9 @@ class Program
 		AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler (AppDomain_AssemblyResolve);
 		assembly = Assembly.Load ("abc");
 		Assert.AreEqual (typeof (int).Assembly, assembly, "#A1");
+#if NET_2_0
 		Assert.IsFalse (assembly.ReflectionOnly, "#A2");
+#endif
 		Assert.AreEqual (3, assembly_resolve_level, "#A3");
 
 		assembly_resolve_level = 0;
@@ -30,6 +34,7 @@ class Program
 			Assert.AreEqual (0, assembly_resolve_level, "#B2");
 		}
 
+#if NET_2_0
 		assembly_resolve_level = 3;
 		reflection_assembly_resolve_level = 0;
 
@@ -44,20 +49,7 @@ class Program
 		assembly.GetType ("CB");
 		Assert.AreEqual (3, assembly_resolve_level, "#C5");
 		Assert.AreEqual (2, reflection_assembly_resolve_level, "#C6");
-	}
-
-	static Assembly AppDomain_ReflectionOnlyAssemblyResolve (object sender, ResolveEventArgs args)
-	{
-		reflection_assembly_resolve_level++;
-
-		switch (reflection_assembly_resolve_level) {
-		case 1:
-			return null;
-		case 2:
-			return Assembly.ReflectionOnlyLoadFrom (Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "B_org.dll"));
-		default:
-			return null;
-		}
+#endif
 	}
 
 	static Assembly AppDomain_AssemblyResolve (object sender, ResolveEventArgs args)
@@ -77,4 +69,20 @@ class Program
 			return typeof (Uri).Assembly;
 		}
 	}
+
+#if NET_2_0
+	static Assembly AppDomain_ReflectionOnlyAssemblyResolve (object sender, ResolveEventArgs args)
+	{
+		reflection_assembly_resolve_level++;
+
+		switch (reflection_assembly_resolve_level) {
+		case 1:
+			return null;
+		case 2:
+			return Assembly.ReflectionOnlyLoadFrom (Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "B_org.dll"));
+		default:
+			return null;
+		}
+	}
+#endif
 }
