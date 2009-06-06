@@ -1,15 +1,8 @@
 <project name="bug381715" default="rebuild">
 	<include buildfile="../../build/common.build" />
 
-	<target name="mono-2.0-init">
-		<property name="xsp.package" value="xsp-2" />
-	</target>
-
-	<target name="net-2.0-init">
-		<property name="xsp.package" value="xsp-2" />
-	</target>
-
-	<property name="frameworks" value="mono-2.0,net-2.0" />
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1" />
 
 	<target name="clean">
 		<delete>
@@ -26,14 +19,11 @@
 				<include name="../../build/common/Assert.cs" />
 				<include name="test.cs" />
 			</sources>
-			<references>
-				<include name="System.Web.dll" />
-			</references>
 		</csc>
 	</target>
 
 	<target name="run-test" depends="compile">
-		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="true" spawn="true" pidproperty="server.pid">
+		<exec program="${pkg-config::get-variable(xsp.package,'Executable')}" managed="strict" spawn="true" pidproperty="server.pid">
 			<arg value="--root" />
 			<arg dir="web" />
 			<arg value="--port" />
