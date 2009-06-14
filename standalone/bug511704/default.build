@@ -12,6 +12,7 @@
 				<include name="out" />
 				<include name="test1.exe" />
 				<include name="test2.exe" />
+				<include name="test3.exe" />
 			</fileset>
 		</delete>
 	</target>
@@ -52,6 +53,16 @@
 			</sources>
 			<references>
 				<include name="A.dll" />
+			</references>
+		</csc>
+		<csc target="exe" define="${csc.defines}" output="test3.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="test1.cs" />
+			</sources>
+			<references>
+				<include name="A.dll" />
+				<include name="B.dll" />
 			</references>
 		</csc>
 	</target>
