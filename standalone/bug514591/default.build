@@ -1,0 +1,47 @@
+<project name="bug514591" default="rebuild">
+	<include buildfile="../../build/common.build" />
+
+	<property name="frameworks" value="${framework::get-frameworks('installed desktop')}" />
+	<property name="frameworks.excluded" value="mono-1.0,net-1.0,net-1.1,net-2.0" />
+
+	<target name="clean">
+		<delete>
+			<fileset>
+				<include name="error" />
+				<include name="quit" />
+				<include name="test.exe" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<csc target="exe" define="${csc.defines}" output="test.exe" warnaserror="true" warninglevel="4">
+			<sources>
+				<include name="../../build/common/Assert.cs" />
+				<include name="../../build/common/NetworkConnection.cs" />
+				<include name="test.cs" />
+			</sources>
+		</csc>
+	</target>
+
+	<target name="run-test" depends="compile">
+		<exec program="test.exe" managed="strict">
+			<arg value="verify" />
+		</exec>
+		<delete file="quit" />
+		<foreach item="String" property="run" delim="," in="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20">
+			<exec program="test.exe" managed="strict" spawn="true" pidproperty="test${run}">
+				<arg value="test" />
+				<arg value="${run}" />
+			</exec>
+		</foreach>
+		<sleep milliseconds="5000" />
+		<exec program="test.exe" managed="strict">
+			<arg value="verify" />
+		</exec>
+		<foreach item="String" property="run" delim="," in="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20">
+			<waitforexit pid="${property::get-value('test' +run)}" />
+		</foreach>
+		<fail if="${file::exists('error')}" />
+	</target>
+</project>
