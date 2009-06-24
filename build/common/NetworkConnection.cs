@@ -38,7 +38,7 @@ class NetworkConnection
 	{
 		Process p = new Process ();
 		p.StartInfo.FileName = "netstat";
-		p.StartInfo.Arguments = "-an";
+		p.StartInfo.Arguments = "-n";
 		p.StartInfo.UseShellExecute = false;
 		p.StartInfo.RedirectStandardOutput = true;
 
@@ -61,7 +61,7 @@ class NetworkConnection
 		} else {
 			if (p.ExitCode != 0)
 				throw new Exception (string.Format (CultureInfo.InvariantCulture,
-					"Failure checking netwerk connections. Exit code '{0}'.",
+					"Failure checking network connections. Exit code '{0}'.",
 					p.ExitCode));
 		}
 
@@ -81,7 +81,6 @@ class NetworkConnection
 			if (line == null)
 				break;
 
-			// ensure only one thread writes to the log at any time
 			_output.Append (line);
 			_output.Append (Environment.NewLine);
 		}
@@ -89,15 +88,20 @@ class NetworkConnection
 
 	bool GrepOutput (string outFile)
 	{
+		if (!File.Exists (outFile))
+			throw new Exception ("Netstat output file does not exist.");
+
 		Process p = new Process ();
 		p.StartInfo.FileName = "grep";
 		p.StartInfo.Arguments = ep.ToString () + " \"" + outFile + "\"";
 		p.StartInfo.UseShellExecute = false;
-		p.StartInfo.RedirectStandardOutput = true;
+		p.StartInfo.CreateNoWindow = true;
 		p.Start ();
 
-		if (!p.WaitForExit (2000))
+		if (!p.WaitForExit (2000)) {
 			p.Kill ();
+			throw new Exception ("Failure checking netstat output.");
+		}
 
 		return (p.ExitCode == 0);
 	}
