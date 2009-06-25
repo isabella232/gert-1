@@ -44,11 +44,8 @@ class SocketResponder : IDisposable
 				throw new InvalidOperationException ("This instance is already started.");
 			_stopped = false;
 
-			listener = new Socket (0, SocketType.Stream, ProtocolType.Tcp);
+			listener = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			listener.Bind (_localEndPoint);
-			listener.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, 0);
-			listener.SetSocketOption (SocketOptionLevel.Socket, SocketOptionName.NoDelay, 1);
-			listener.SetSocketOption (SocketOptionLevel.Socket, SocketOptionName.KeepAlive, 0);
 			listener.Blocking = true;
 			listener.Listen (-1);
 			listenThread = new Thread (new ThreadStart (Listen));
