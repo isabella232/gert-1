@@ -32,8 +32,6 @@ class Program
 		string url = "http://" + ep.ToString () + "/test/";
 
 		using (SocketResponder responder = new SocketResponder (ep, new SocketRequestHandler (EchoRequestHandler))) {
-			responder.Start ();
-
 			HttpWebRequest req;
 			Stream rs;
 
@@ -66,6 +64,7 @@ class Program
 			rs.WriteByte (0x0d);
 			rs.WriteByte (0x0d);
 			rs.Close ();
+			req.Abort ();
 
 			responder.Stop ();
 		}
